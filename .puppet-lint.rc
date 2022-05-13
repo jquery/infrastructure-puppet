@@ -1,0 +1,3 @@
+# See also `puppet-lint --list-checks`
+#
+--no-140chars-check

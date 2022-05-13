@@ -1,0 +1,20 @@
+---
+# Docs:
+# https://puppet.com/docs/puppet/7/environments_creating.html
+# https://puppet.com/docs/puppet/7/hiera_config_yaml_5.html
+#
+# Note that on the puppetserver, there is also a "global layer"
+# of Hiera configured at /etc/puppetlabs/puppet/hiera.yaml, which on
+# production hosts will include an extra non-public layer for
+# secrets that override the public defaults. This way, our infra can
+# be open source and locally tested, but secrets kept private.
+version: 5
+defaults:
+  datadir: data
+  data_hash: yaml_data
+hierarchy:
+  - name: "Per-node data (yaml version)"
+    path: "nodes/%{::trusted.certname}.yaml"
+  - name: "Other YAML hierarchy levels"
+    paths:
+      - "common.yaml"
