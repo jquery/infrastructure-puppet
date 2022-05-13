@@ -13,8 +13,8 @@ defaults:
   datadir: data
   data_hash: yaml_data
 hierarchy:
-  - name: "Per-node data (yaml version)"
+  - name: "Per-node override"
     path: "nodes/%{::trusted.certname}.yaml"
-  - name: "Other YAML hierarchy levels"
+  - name: "Defaults"
     paths:
       - "common.yaml"

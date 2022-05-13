@@ -2,6 +2,10 @@
 
 Puppet configuration for jQuery Infrastructure servers.
 
+## Install
+
+This repository represents `/etc/puppetlabs/code/environments/production/` on a puppet server.
+
 ## Contributing
 
 ### Linting
