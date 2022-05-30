@@ -6,6 +6,4 @@ class role::codeorigin {
   package { 'nginx':
     ensure => present,
   }
-
-  realize(Jquery::Ssh_user['ori'])
 }

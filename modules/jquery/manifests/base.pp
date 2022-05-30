@@ -37,4 +37,5 @@ class jquery::base {
   # Global roots are realized here.
   # Local rools can be realized in individual roles.
   realize(Jquery::Ssh_user['krinkle'])
+  realize(Jquery::Ssh_user['ori'])
 }
