@@ -30,11 +30,16 @@
 #   Or alternatively, if on LibreSSL (like macOS) or an older OpenSSL,
 #   use PHP 7.4 or later `echo crypt('yourpass', '$6$'.bin2hex(random_bytes(4)));`
 #
+# == Optional parameters
+#
+# Boolean $root: If true, also add the key to the `root` user.
+#
 define jquery::ssh_user(
     $ensure,
     $key_type,
     $key,
     $password,
+    $root = false,
   ) {
     user { $name:
       ensure         => $ensure,
@@ -55,6 +60,15 @@ define jquery::ssh_user(
         user   => $name,
         type   => $key_type,
         key    => $key,
+      }
+
+      if $root == true {
+        ssh_authorized_key { "root_${name}_key":
+          ensure => $ensure,
+          user => 'root',
+          type => $key_type,
+          key  => $key,
+        }
       }
     }
 
