@@ -20,55 +20,45 @@
 #
 # String $key: SSH public key.
 #
-# String $password: Linux user password, in salted SHA-512 hash.
-#   You can generate this on Debian using the `mkpasswd` command
-#   as `mkpasswd --method=SHA-512 --stdin`.
-#
-#   Or elsewhere with OpenSSL 1.1.1 or later (specify your own random salt)
-#   as `openssl passwd -6 -salt xyzxyzxyz 'yourpass'`.
-#
-#   Or alternatively, if on LibreSSL (like macOS) or an older OpenSSL,
-#   use PHP 7.4 or later `echo crypt('yourpass', '$6$'.bin2hex(random_bytes(4)));`
-#
 # == Optional parameters
 #
-# Boolean $root: If true, also add the key to the `root` user.
+# Boolean $root: If true, add the user to the `sudo` group, and add their key to the `root` user.
 #
 define jquery::ssh_user(
     $ensure,
     $key_type,
     $key,
-    $password,
     $root = false,
   ) {
+
+    if $root == true {
+      $groups = ['sudo']
+    } else {
+      $groups = []
+    }
+
     user { $name:
       ensure         => $ensure,
+      password       => '*',
       managehome     => true,
       purge_ssh_keys => true,
-      groups         => ['wheel'],
-      require        => Group['wheel'],
+      groups         => $groups,
       shell          => '/bin/bash'
     }
 
-    if $ensure == 'present' {
-      User[$name] {
-        password => $password,
-      }
+    ssh_authorized_key { "${name}_key":
+      ensure => $ensure,
+      user   => $name,
+      type   => $key_type,
+      key    => $key,
+    }
 
-      ssh_authorized_key { "${name}_key":
+    if $root == true {
+      ssh_authorized_key { "root_${name}_key":
         ensure => $ensure,
-        user   => $name,
+        user   => 'root',
         type   => $key_type,
         key    => $key,
-      }
-
-      if $root == true {
-        ssh_authorized_key { "root_${name}_key":
-          ensure => $ensure,
-          user => 'root',
-          type => $key_type,
-          key  => $key,
-        }
       }
     }
 
