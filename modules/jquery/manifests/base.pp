@@ -1,10 +1,6 @@
 #
 #
 class jquery::base {
-  group { 'wheel':
-    ensure => absent,
-  }
-
   # https://voxpupuli.org/blog/2014/08/24/purging-ssh-authorized-keys/
   # https://github.com/jquery/infrastructure/issues/531
   user { 'root':
