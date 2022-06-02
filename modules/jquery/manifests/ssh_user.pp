@@ -25,10 +25,10 @@
 # Boolean $root: If true, add the user to the `sudo` group, and add their key to the `root` user.
 #
 define jquery::ssh_user(
-    $ensure,
-    $key_type,
-    $key,
-    $root = false,
+    Enum['present', 'absent'] $ensure,
+    String $key_type,
+    String $key,
+    Boolean $root = false,
   ) {
 
     if $root == true {
