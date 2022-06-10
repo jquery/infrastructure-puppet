@@ -5,7 +5,7 @@ class role::codeorigin {
   include nginx
 
   nginx::site { 'codeorigin':
-    source  => 'puppet:///modules/role/codeorigin.nginx',
-    notify  => Exec['nginx-reload'],
+    source => 'puppet:///modules/role/codeorigin.nginx',
+    notify => Exec['nginx-reload'],
   }
 }

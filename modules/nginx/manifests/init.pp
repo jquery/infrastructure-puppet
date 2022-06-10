@@ -31,8 +31,8 @@ class nginx {
   }
 
   file { '/etc/nginx/sites-available/00-status':
-    source  => 'puppet:///modules/nginx/status.nginx',
-    notify  => Exec['nginx-reload'],
+    source => 'puppet:///modules/nginx/status.nginx',
+    notify => Exec['nginx-reload'],
   }
 
   file { '/etc/nginx/sites-enabled/00-status':

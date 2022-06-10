@@ -1,0 +1,22 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  puppet-lint:
+    # https://github.com/actions/virtual-environments/blob/ubuntu20/20220605.1/images/linux/Ubuntu2004-Readme.md
+    #
+    # Includes Ruby 2.7 and RubyGems 3.1
+    name: puppet-lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install puppet-lint
+        run: |
+          sudo gem install puppet-lint -v '~> 2'
+
+      - name: Run puppet-lint
+        run: |
+          puppet-lint .
