@@ -17,4 +17,9 @@ class ssh::server () {
     ensure => running,
     enable => true,
   }
+
+  nftables::allow { 'ssh':
+    proto => 'tcp',
+    dport => 22,
+  }
 }
