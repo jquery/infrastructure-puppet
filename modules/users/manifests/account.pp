@@ -5,11 +5,11 @@
 # @param $key SSH public key.
 # @param $root If true, add the user to the `sudo` group, and add their key to the `root` user.
 define users::account(
-  Enum['present', 'absent'] $ensure,
-  Integer                   $uid,
-  String                    $key_type,
-  String                    $key,
-  Boolean                   $root = false,
+  Jqlib::Ensure $ensure,
+  Integer       $uid,
+  String        $key_type,
+  String        $key,
+  Boolean       $root = false,
 ) {
   if $root {
     $groups = ['sudo']
