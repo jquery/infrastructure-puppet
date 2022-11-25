@@ -1,6 +1,5 @@
-#
-#
-class jquery::base {
+# @summary manages the user accounts on this system
+class users {
   # https://voxpupuli.org/blog/2014/08/24/purging-ssh-authorized-keys/
   # https://github.com/jquery/infrastructure/issues/531
   user { 'root':
@@ -21,7 +20,7 @@ class jquery::base {
 
   # Declare user accounts
 
-  @jquery::ssh_user { 'krinkle':
+  @users::account { 'krinkle':
     ensure   => present,
     root     => true,
     # last changed in 2021
@@ -30,7 +29,7 @@ class jquery::base {
     uid      => 1200,
   }
 
-  @jquery::ssh_user { 'ori':
+  @users::account { 'ori':
     ensure   => present,
     root     => true,
     # last changed in 2021
@@ -39,7 +38,7 @@ class jquery::base {
     uid      => 1201,
   }
 
-  @jquery::ssh_user { 'taavi':
+  @users::account { 'taavi':
     ensure   => present,
     root     => true,
     key_type => 'ssh-ed25519',
@@ -48,8 +47,9 @@ class jquery::base {
   }
 
   # Global roots are realized here.
-  # Local rools can be realized in individual roles.
-  realize(Jquery::Ssh_user['krinkle'])
-  realize(Jquery::Ssh_user['ori'])
-  realize(Jquery::Ssh_user['taavi'])
+  # Local rools can be realized somewhere else.
+  # TODO: don't use virtual resources here
+  realize(Users::Account['krinkle'])
+  realize(Users::Account['ori'])
+  realize(Users::Account['taavi'])
 }
