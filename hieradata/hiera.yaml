@@ -1,0 +1,15 @@
+---
+# Docs:
+# https://puppet.com/docs/puppet/7/environments_creating.html
+# https://puppet.com/docs/puppet/7/hiera_config_yaml_5.html
+version: 5
+defaults:
+  datadir: /etc/puppetlabs/code/hieradata
+  data_hash: yaml_data
+hierarchy:
+  - name: "Public node data"
+    path: "nodes/%{::trusted.certname}.yaml"
+  - name: "Public environment data"
+    path: "environments/%{::environment}.yaml"
+  - name: "Public common data"
+    path: "common.yaml"
