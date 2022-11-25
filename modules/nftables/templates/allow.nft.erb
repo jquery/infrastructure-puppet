@@ -1,0 +1,3 @@
+<%- ['ip', 'ip6'].each do |proto| -%>
+add rule inet filter input <%= @proto %> ip protocol <%= @proto %> <%= @rule_port %> state new accept
+<%- end -%>
