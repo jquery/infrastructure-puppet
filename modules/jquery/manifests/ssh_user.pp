@@ -16,6 +16,8 @@
 #
 # Ensure $ensure: present or absent.
 #
+# Integer $uid: The numeric UID of this user.
+#
 # String $key_type: "ssh-rsa", "ssh-ed25519", or something else.
 #
 # String $key: SSH public key.
@@ -26,40 +28,47 @@
 #
 define jquery::ssh_user(
     Enum['present', 'absent'] $ensure,
-    String $key_type,
-    String $key,
-    Boolean $root = false,
+    Integer                   $uid,
+    String                    $key_type,
+    String                    $key,
+    Boolean                   $root = false,
   ) {
 
-    if $root == true {
+    if $root {
       $groups = ['sudo']
     } else {
       $groups = []
     }
 
-    user { $name:
+    group { $title:
+      ensure => $ensure,
+      gid    => $uid,
+    }
+
+    user { $title:
       ensure         => $ensure,
+      uid            => $uid,
+      gid            => $uid,
       password       => '*',
       managehome     => true,
       purge_ssh_keys => true,
       groups         => $groups,
-      shell          => '/bin/bash'
+      shell          => '/bin/bash',
     }
 
-    ssh_authorized_key { "${name}_key":
+    ssh_authorized_key { "${title}_key":
       ensure => $ensure,
-      user   => $name,
+      user   => $title,
       type   => $key_type,
       key    => $key,
     }
 
-    if $root == true {
-      ssh_authorized_key { "root_${name}_key":
+    if $root {
+      ssh_authorized_key { "root_${title}_key":
         ensure => $ensure,
         user   => 'root',
         type   => $key_type,
         key    => $key,
       }
     }
-
   }
