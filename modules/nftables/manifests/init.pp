@@ -24,9 +24,8 @@ class nftables () {
   }
 
   service { 'nftables':
-    enable => false,
-    #ensure => running,
-    #enable => true,
+    ensure => running,
+    enable => true,
   }
 
   File <| tag == 'nftables' |>
