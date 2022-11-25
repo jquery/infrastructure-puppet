@@ -9,7 +9,7 @@ class nftables () {
     owner  => 'root',
     group  => 'root',
     mode   => '0444',
-    source => 'puppet:///modules/nftables/main.nft',
+    source => 'puppet:///modules/nftables/init.nft',
     notify => Service['nftables'],
   }
 
