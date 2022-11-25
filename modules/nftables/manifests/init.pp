@@ -5,12 +5,12 @@ class nftables () {
   }
 
   file { '/etc/nftables.conf':
-    ensure  => file,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    content => 'puppet:///modules/nftables/main.nft',
-    notify  => Service['nftables'],
+    ensure => file,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0444',
+    source => 'puppet:///modules/nftables/main.nft',
+    notify => Service['nftables'],
   }
 
   file { '/etc/nftables/':
