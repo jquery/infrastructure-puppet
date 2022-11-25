@@ -1,0 +1,23 @@
+Port 22
+AddressFamily any
+ListenAddress 0.0.0.0
+ListenAddress ::
+
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+PermitRootLogin yes
+
+PubkeyAuthentication yes
+HostbasedAuthentication no
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+
+AuthorizedKeysFile .ssh/authorized_keys
+
+UsePAM yes
+PrintMotd no
+PrintLastLog yes
+
+AcceptEnv LANG LC_*
