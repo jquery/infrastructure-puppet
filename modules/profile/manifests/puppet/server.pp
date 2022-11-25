@@ -12,4 +12,9 @@ class profile::puppet::server () {
     ensure => running,
     enable => true,
   }
+
+  nftables::allow { 'puppetserver':
+    proto => 'tcp',
+    dport => 8140,
+  }
 }
