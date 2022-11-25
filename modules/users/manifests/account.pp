@@ -30,7 +30,24 @@ define users::account(
     managehome     => true,
     purge_ssh_keys => true,
     groups         => $groups,
+    home           => "/home/${title}",
     shell          => '/bin/bash',
+  }
+
+  if $ensure == 'present' {
+    file { "/home/${title}":
+      ensure       => directory,
+      source       => [
+        "puppet:///modules/users/home/${name}/",
+        'puppet:///modules/users/home/skel/',
+      ],
+      sourceselect => 'first',
+      recurse      => 'remote',
+      mode         => '0664',
+      owner        => $title,
+      group        => $title,
+      force        => true,
+    }
   }
 
   ssh_authorized_key { "${title}_key":
