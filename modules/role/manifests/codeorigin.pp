@@ -8,6 +8,4 @@ class role::codeorigin {
     source => 'puppet:///modules/role/codeorigin.nginx',
     notify => Exec['nginx-reload'],
   }
-
-  class { 'nftables': }
 }

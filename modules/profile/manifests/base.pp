@@ -2,6 +2,7 @@
 class profile::base () {
   include profile::puppet::agent
 
+  class { 'nftables': }
   class { 'ssh::server': }
   class { 'users': }
 
