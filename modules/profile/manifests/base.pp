@@ -4,4 +4,13 @@ class profile::base () {
 
   class { 'ssh::server': }
   class { 'users': }
+
+  # useful packages to install everywhere
+  package { [
+    'curl',
+    'git',
+    'tmux',
+  ]:
+    ensure => present,
+  }
 }
