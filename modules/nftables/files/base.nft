@@ -1,9 +1,13 @@
 table inet filter {
 	chain input {
-		type filter hook input priority 0;
+		type filter hook input priority 0; policy drop;
 
 		iif lo accept
 		ct state established,related accept
 		ip6 nexthdr icmpv6 icmpv6 type { nd-neighbor-solicit,  nd-router-advert, nd-neighbor-advert } accept
+	}
+
+	chain forward {
+		type filter hook forward priority 0; policy drop;
 	}
 }

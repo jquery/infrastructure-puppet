@@ -35,9 +35,4 @@ class nftables () {
     source   => 'puppet:///modules/nftables/base.nft',
     priority => 01,
   }
-
-  nftables::conf { 'base-end':
-    source   => 'puppet:///modules/nftables/base-end.nft',
-    priority => 99,
-  }
 }
