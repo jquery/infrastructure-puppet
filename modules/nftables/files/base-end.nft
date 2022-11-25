@@ -1,0 +1,1 @@
+add rule inet filter input counter comment "counter dropped packets"
