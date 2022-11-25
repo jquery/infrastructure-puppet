@@ -1,7 +1,7 @@
 #
 #
 class role::gruntjscom {
-  include jquery::base
+  include profile::base
 
   package { 'nodejs':
     ensure => present,

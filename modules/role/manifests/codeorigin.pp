@@ -1,7 +1,7 @@
 #
 #
 class role::codeorigin {
-  include jquery::base
+  include profile::base
   include nginx
 
   nginx::site { 'codeorigin':
