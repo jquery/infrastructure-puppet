@@ -8,6 +8,12 @@ Puppet configuration for jQuery Infrastructure servers.
 
 This repository represents `/etc/puppetlabs/code/` on a puppet server.
 
+## UID allocations
+
+Human users are assigned UIDs starting with 1200. These are all assigned via the `users` module.
+
+Statically assigned system UIDs and GIDs start from 600 and should be documented here.
+
 ## Contributing
 
 ### Linting

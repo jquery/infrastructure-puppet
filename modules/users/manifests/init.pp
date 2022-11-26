@@ -1,5 +1,9 @@
 # @summary manages the user accounts on this system
 class users {
+  class { 'users::config': }
+    # get the configuration added before packages get the chance to add new users
+    -> Package <| |>
+
   # https://voxpupuli.org/blog/2014/08/24/purging-ssh-authorized-keys/
   # https://github.com/jquery/infrastructure/issues/531
   user { 'root':
