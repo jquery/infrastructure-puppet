@@ -14,6 +14,10 @@ Human users are assigned UIDs starting with 1200. These are all assigned via the
 
 Statically assigned system UIDs and GIDs start from 600 and should be documented here.
 
+| UID | GID | name |
+|-----|-----|------|
+| - | 600 | gitpuppet
+
 ## Contributing
 
 ### Linting
