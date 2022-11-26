@@ -1,5 +1,5 @@
 # @summary manages the shared parts of puppet (apt repo and shared config)
-class profile::puppet::shared () {
+class profile::puppet::common () {
   file { '/etc/apt/keyrings/puppet.gpg':
     ensure => file,
     source => 'puppet:///modules/profile/puppet/common/keyring.gpg',
