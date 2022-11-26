@@ -12,10 +12,6 @@ class profile::codeorigin (
     group  => 'www-data',
   }
 
-  nginx::site { 'codeorigin':
-    content => template('profile/codeorigin/site.nginx.erb'),
-  }
-
   nftables::allow { 'codeorigin-http':
     proto => 'tcp',
     dport => 80,
@@ -23,5 +19,15 @@ class profile::codeorigin (
   nftables::allow { 'codeorigin-https':
     proto => 'tcp',
     dport => 443,
+  }
+
+  letsencrypt::certificate { 'codeorigin':
+    domains => $hostnames,
+    require => Nftables::Allow['codeorigin-http'],
+  }
+
+  nginx::site { 'codeorigin':
+    content => template('profile/codeorigin/site.nginx.erb'),
+    require => Letsencrypt::Certificate['codeorigin'],
   }
 }
