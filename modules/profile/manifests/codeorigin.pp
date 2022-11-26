@@ -12,6 +12,18 @@ class profile::codeorigin (
     group  => 'www-data',
   }
 
+  file { '/srv/codeorigin/.git/hooks/post-merge':
+    ensure => file,
+    source => 'puppet:///modules/profile/codeorigin/set-last-modified.sh',
+    mode   => '0555',
+    notify => Exec['codeorigin-set-last-modified-initial'],
+  }
+
+  exec { 'codeorigin-set-last-modified-initial':
+    command     => '/srv/codeorigin/.git/hooks/post-merge',
+    refreshonly => true,
+  }
+
   nftables::allow { 'codeorigin-http':
     proto => 'tcp',
     dport => 80,
