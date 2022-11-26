@@ -4,3 +4,5 @@
 # Documentation here: https://github.com/xorpaul/g10k
 
 moduledir 'vendor_modules'
+
+mod 'puppetlabs/stdlib', '8.5.0'
