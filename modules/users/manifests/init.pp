@@ -1,5 +1,12 @@
 # @summary manages the user accounts on this system
-class users {
+# @param $accounts all user account data
+# @param $groups all group data
+# @param $enabled_groups groups enabled on this host
+class users (
+  Hash[String, Hash] $accounts,
+  Array[String]      $enabled_groups,
+  Hash[String, Hash] $groups,
+) {
   class { 'users::config': }
     # get the configuration added before packages get the chance to add new users
     -> Package <| |>
@@ -9,48 +16,45 @@ class users {
   user { 'root':
     ensure         => present,
     home           => '/root',
-    uid            => '0',
+    uid            => 0,
     purge_ssh_keys => true,
   }
 
-  # Passwordless sudo for members of 'sudo' group.
-  sudo::rule { 'passwordless-sudo':
-    privileges => ['ALL=(ALL) NOPASSWD: ALL'],
-    target     => '%sudo',
+  $groups.each |String $name, Hash $data| {
+    if $name in $enabled_groups {
+      users::group { $name:
+        * => $data,
+      }
+    }
   }
 
-  # Declare user accounts
+  $accounts.each |String $username, Hash $account| {
+    $user_groups = $account['groups'].map |String $group| {
+      if 'include' in $groups[$group] {
+        [$group] + $groups[$group]['include']
+      } else {
+        [$group]
+      }
+    }.flatten.filter |String $group| {
+      $group in $enabled_groups
+    }
 
-  @users::account { 'krinkle':
-    ensure   => present,
-    root     => true,
-    # last changed in 2021
-    key_type => 'ssh-ed25519',
-    key      => 'AAAAC3NzaC1lZDI1NTE5AAAAIKlog28hp/12C14a64e/we2bHpjRCqgCA3//Li1HmaI6',
-    uid      => 1200,
+    $is_root = !$user_groups.filter |String $group| {
+      $groups[$group]['root']
+    }.empty
+
+    $posix_groups = $user_groups.map |String $group| {
+      if 'posix' in $groups[$group] {
+        $groups[$group]['posix']
+      } else {
+        $group
+      }
+    }
+
+    users::account { $username:
+      user_groups => $posix_groups,
+      root        => $is_root,
+      *           => $account,
+    }
   }
-
-  @users::account { 'ori':
-    ensure   => present,
-    root     => true,
-    # last changed in 2021
-    key_type => 'ssh-rsa',
-    key      => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDWmB7Tn7zcL5Q7FniKka8MlJN4SfCpCtCXvBd0BpXVEPh+AGlmvulArUJ1/i1Z9TVO3PoS7N+wahdxwsFv/Vx1K/xhEZ85jNvYDWaEokTAGuyE5I4R/+8XzX0Iy5s1cmLDwXNEYT7ManNN7YeWIl+D9XtPgyOhhEifX0JFb/ZxyX2Iy+Vfq5v7eA00wA8PXs5nxsZUZXOwusrALVfYPt9UyJzqyK7x82Dw+ZPkIfc9V2/gWk3xVOrdt0TvcjfTypP8CJ6qzD+fNQwmne+tRwQUVMu60s8Ra2b7e10bjw1bxpDqWltE7V5FaeKsQelfO4PgdE0otTVsfFXKX46zGzTWVI7XMX41loLCf5QpVesnW+sQDD9qdcuCeUZDirQ/WjjLRPM5o92dV3OFFff+tXaVGk1dKoQcLecXy/se+ViZnydXT0o4DytF4nLn1biiYcVSSASx3htJe70+sdALQ1cVEh8kB3UGeWB2MhAlzLULC0+nRha3Z3r+P1RUEBR3yzx4GTuGid6txQeeeXp7u3SJYonJutpw9CfZheEtU8CLJm4aj3/kxccsWf3Sr6jsp+1f0TSeMMYZCI9OUVwSF2WrFzJnScPTFjP7i3z922ajIB2ADvGUKsPiRhGinqLEWMhShOJTQehCQ4k+Q6ab38aBtph7O+BYMA/aJl4X6WaLCQ==',
-    uid      => 1201,
-  }
-
-  @users::account { 'taavi':
-    ensure   => present,
-    root     => true,
-    key_type => 'ssh-ed25519',
-    key      => 'AAAAC3NzaC1lZDI1NTE5AAAAIEbXQ4PFT2Or3t8Y1M0pvN4/9KAU39QupA/xu1/+x6n1',
-    uid      => 1202,
-  }
-
-  # Global roots are realized here.
-  # Local rools can be realized somewhere else.
-  # TODO: don't use virtual resources here
-  realize(Users::Account['krinkle'])
-  realize(Users::Account['ori'])
-  realize(Users::Account['taavi'])
 }

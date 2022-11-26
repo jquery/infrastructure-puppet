@@ -3,19 +3,23 @@
 # @param $uid The numeric UID of this user.
 # @param $key_type "ssh-rsa", "ssh-ed25519", or something else.
 # @param $key SSH public key.
+# @param $groups ignored
+# @param $user_groups the groups this user is in
 # @param $root If true, add the user to the `sudo` group, and add their key to the `root` user.
-define users::account(
+define users::account (
   Jqlib::Ensure $ensure,
   Integer       $uid,
   String        $key_type,
   String        $key,
-  Boolean       $root = false,
+  Array[String] $user_groups,
+  Array[String] $groups,
+  Boolean       $root,
 ) {
   if $root {
-    # sudo for full sudo access, adm for viewing logs and similar without sudo
-    $groups = ['sudo', 'adm']
+    # adm for viewing logs and similar without sudo
+    $adm_group = ['adm']
   } else {
-    $groups = []
+    $adm_group = []
   }
 
   group { $title:
@@ -30,7 +34,7 @@ define users::account(
     password       => '*',
     managehome     => true,
     purge_ssh_keys => true,
-    groups         => $groups,
+    groups         => $user_groups + $adm_group,
     home           => "/home/${title}",
     shell          => '/bin/bash',
   }

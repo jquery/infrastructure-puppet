@@ -10,7 +10,7 @@ This repository represents `/etc/puppetlabs/code/` on a puppet server.
 
 ## UID allocations
 
-Human users are assigned UIDs starting with 1200. These are all assigned via the `users` module.
+Human users are assigned UIDs starting with 1200. These are configured in `hieradata/common.yaml`.
 
 Statically assigned system UIDs and GIDs start from 600 and should be documented here.
 
