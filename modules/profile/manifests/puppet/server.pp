@@ -25,6 +25,14 @@ class profile::puppet::server (
     shared => true,
   }
 
+  file { '/usr/local/bin/puppet-merge':
+    ensure => file,
+    source => 'puppet:///modules/profile/puppet/server/puppet-merge.sh',
+    owner  => 'root',
+    group  => 'gitpuppet',
+    mode   => '0554',
+  }
+
   package { 'puppetserver':
     ensure => installed,
   }
