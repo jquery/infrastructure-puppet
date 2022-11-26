@@ -1,0 +1,8 @@
+Defaults env_reset
+Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/puppetlabs/bin"
+
+# Root can do anything, as expected
+root    ALL=(ALL:ALL) ALL
+
+# Include all sub rules
+#includedir /etc/sudoers.d

@@ -6,6 +6,7 @@ class profile::base () {
 
   class { 'nftables': }
   class { 'ssh::server': }
+  class { 'sudo': }
   class { 'users': }
 
   # useful packages to install everywhere
