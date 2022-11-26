@@ -12,8 +12,8 @@ define letsencrypt::certificate (
 
   # TODO: replace the cert if the domains change
   exec { "letsencrypt-request-${title}":
-    command => "${base_command} ${domains_command}",
-    creates => "/etc/letsencrypt/live/${title}",
+    command   => "${base_command} ${domains_command}",
+    creates   => "/etc/letsencrypt/live/${title}",
     logoutput => true,
   }
 }

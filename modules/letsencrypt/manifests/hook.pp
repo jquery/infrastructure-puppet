@@ -1,3 +1,4 @@
+# @summary run a command as a part of the lets encrypt renewal process
 define letsencrypt::hook (
   Jqlib::Ensure                 $ensure   = present,
   Integer[0, 99]                $priority = 50,
