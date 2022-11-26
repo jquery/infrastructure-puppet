@@ -63,7 +63,15 @@ class profile::puppet::server (
     ensure => installed,
   }
 
-  # TODO: manage config file
+  # TODO: manage config files
+  ['puppetserver.conf'].each |String $file| {
+    file { "/etc/puppetlabs/puppetserver/conf.d/${file}":
+      ensure  => file,
+      mode    => '0440',
+      content => template("profile/puppet/server/config/${file}.erb"),
+      notify  => Service['puppetserver'],
+    }
+  }
 
   file { '/etc/default/puppetserver':
     ensure  => file,
