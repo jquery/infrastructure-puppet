@@ -1,6 +1,7 @@
 # @summary configures the base system for all nodes
 class profile::base () {
   include profile::base::apt
+  include profile::base::digitalocean
   include profile::puppet::agent
 
   class { 'nftables': }
