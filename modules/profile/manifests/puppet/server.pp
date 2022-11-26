@@ -63,7 +63,15 @@ class profile::puppet::server (
     ensure => installed,
   }
 
-  # TODO: manage config files
+  concat::fragment { 'puppet-config-server':
+    target  => $::profile::puppet::common::config_file,
+    order   => '20',
+    content => template('profile/puppet/server/puppet.conf.erb'),
+  }
+
+  Concat::Fragment <| target == $::profile::puppet::common::config_file |> ~> Service['puppetserver']
+  Concat[$::profile::puppet::common::config_file] ~> Service['puppetserver']
+
   ['puppetserver.conf'].each |String $file| {
     file { "/etc/puppetlabs/puppetserver/conf.d/${file}":
       ensure  => file,

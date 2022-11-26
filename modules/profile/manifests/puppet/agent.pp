@@ -1,12 +1,21 @@
 # @summary configures the puppet agent
-class profile::puppet::agent () {
+class profile::puppet::agent (
+  Stdlib::Fqdn $puppet_server = lookup('profile::puppet::agent::puppet_server'),
+) {
   include ::profile::puppet::common
 
   package { 'puppet-agent':
     ensure => installed,
   }
 
-  # TODO: manage config file
+  concat::fragment { 'puppet-config-agent':
+    target  => $::profile::puppet::common::config_file,
+    order   => '10',
+    content => template('profile/puppet/agent/puppet.conf.erb'),
+  }
+
+  Concat::Fragment <| target == $::profile::puppet::common::config_file |> ~> Service['puppet']
+  Concat[$::profile::puppet::common::config_file] ~> Service['puppet']
 
   service { 'puppet':
     ensure => running,

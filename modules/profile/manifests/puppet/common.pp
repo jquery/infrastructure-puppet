@@ -11,4 +11,14 @@ class profile::puppet::common () {
     keyring  => '/etc/apt/keyrings/puppet.gpg',
     pin      => 150,
   }
+
+  $config_path = '/etc/puppetlabs/puppet'
+  $config_file = "${config_path}/puppet.conf"
+
+  concat { $config_file:
+    ensure => present,
+    mode   => '0444',
+    owner  => 'root',
+    group  => 'root',
+  }
 }
