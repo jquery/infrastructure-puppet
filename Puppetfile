@@ -6,3 +6,4 @@
 moduledir 'vendor_modules'
 
 mod 'puppetlabs/stdlib', '8.5.0'
+mod 'puppetlabs/apt', '9.0.0'
