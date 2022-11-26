@@ -30,14 +30,11 @@ class nginx {
     require => Package['nginx-full'],
   }
 
-  file { '/etc/nginx/sites-available/00-status':
+  nginx::site { '00-status':
     source => 'puppet:///modules/nginx/status.nginx',
-    notify => Exec['nginx-reload'],
   }
 
-  file { '/etc/nginx/sites-enabled/00-status':
-    ensure => 'link',
-    target => '/etc/nginx/sites-available/00-status',
-    notify => Exec['nginx-reload'],
+  nginx::site { '00-default':
+    source => 'puppet:///modules/nginx/default.nginx',
   }
 }

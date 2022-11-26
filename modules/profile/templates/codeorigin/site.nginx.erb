@@ -141,6 +141,10 @@ server {
   location = /50x.html {
     root /usr/share/nginx/html;
   }
+
+  location /.well-known/acme-challenge {
+    root /var/www/letsencrypt/;
+  }
 }
 
 # vim: ts=2 sw=2 et

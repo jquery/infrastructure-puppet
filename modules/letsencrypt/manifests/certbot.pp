@@ -9,4 +9,13 @@ class letsencrypt::certbot (
     command => "/usr/bin/certbot register --email ${email} --agree-tos --no-eff-email",
     creates => '/etc/letsencrypt/accounts'
   }
+
+  # shared directory for acme challenges
+  file { [
+    '/var/www/letsencrypt',
+    '/var/www/letsencrypt/.well-known',
+    '/var/www/letsencrypt/.well-known/acme-challenge/',
+  ]:
+    ensure => directory,
+  }
 }
