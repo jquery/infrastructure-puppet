@@ -33,7 +33,10 @@ class profile::puppet::server (
     mode   => '0554',
   }
 
-  package { 'puppetserver':
+  package { [
+    'puppetserver',
+    'g10k',
+  ]:
     ensure => installed,
   }
 
