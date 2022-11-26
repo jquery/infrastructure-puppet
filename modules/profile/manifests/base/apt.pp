@@ -43,9 +43,13 @@ class profile::base::apt (
 
   # configure default behaviour for config file updates: use the default specified by the package,
   # or fall back to the old file if no default has been specified
-  apt::conf { 'dpkg-options':
+  apt::conf { 'dpkg-options-confdef':
     priority => '00',
-    content  => 'Dpkg::Options:: "--force-confdef --force-confold";',
+    content  => 'Dpkg::Options:: "--force-confdef";',
+  }
+  apt::conf { 'dpkg-options-confold':
+    priority => '00',
+    content  => 'Dpkg::Options:: "--force-confold";',
   }
 
   ensure_packages(['unattended-upgrades'])
