@@ -9,11 +9,10 @@ class profile::base () {
   class { 'users': }
 
   # useful packages to install everywhere
-  package { [
+  ensure_packages([
     'curl',
     'git',
+    'jq',
     'tmux',
-  ]:
-    ensure => present,
-  }
+  ])
 }
