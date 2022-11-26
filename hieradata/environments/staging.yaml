@@ -1,2 +1,5 @@
 profile::puppet::agent::puppet_server: puppet-03.stage.ops.jquery.net
 profile::puppet::server::git_branch: main
+
+profile::codeorigin::hostnames:
+  - codeorigin-02.stage.ops.jquery.net

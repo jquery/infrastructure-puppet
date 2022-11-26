@@ -1,7 +1,8 @@
 # @summary code origin server
 # @summary $cdn_access_key cdn access key
 class profile::codeorigin (
-  String $cdn_access_key = lookup('profile::codeorigin::cdn_access_key'),
+  String                 $cdn_access_key = lookup('profile::codeorigin::cdn_access_key'),
+  Array[Stdlib::Fqdn, 1] $hostnames      = lookup('profile::codeorigin::hostnames'),
 ) {
   git::clone { 'codeorigin':
     path   => '/srv/codeorigin',
