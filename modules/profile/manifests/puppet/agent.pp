@@ -1,6 +1,6 @@
 # @summary configures the puppet agent
 class profile::puppet::agent () {
-  # TODO: manage the repository
+  # TODO: manage the apt repository
 
   package { 'puppet-agent':
     ensure => installed,
