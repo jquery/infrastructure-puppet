@@ -44,10 +44,10 @@ class profile::puppet::server (
   # TODO: manage config file
 
   file { '/etc/default/puppetserver':
-    ensure => file,
-    mode   => '0444',
-    source => template('profile/puppet/server/default.erb'),
-    notify => Service['puppetserver'],
+    ensure  => file,
+    mode    => '0444',
+    content => template('profile/puppet/server/default.erb'),
+    notify  => Service['puppetserver'],
   }
 
   service { 'puppetserver':
