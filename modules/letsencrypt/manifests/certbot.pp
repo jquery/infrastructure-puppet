@@ -18,4 +18,6 @@ class letsencrypt::certbot (
   ]:
     ensure => directory,
   }
+
+  File <| tag == 'letsencrypt-hook' |>
 }

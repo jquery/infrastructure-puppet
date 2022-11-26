@@ -37,4 +37,8 @@ class nginx {
   nginx::site { '00-default':
     source => 'puppet:///modules/nginx/default.nginx',
   }
+
+  letsencrypt::hook { 'nginx-reload':
+    content => "#!/bin/sh\nsystemctl reload nginx.service\n",
+  }
 }
