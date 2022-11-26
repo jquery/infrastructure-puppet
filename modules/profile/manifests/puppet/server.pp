@@ -63,6 +63,10 @@ class profile::puppet::server (
     ensure => installed,
   }
 
+  systemd::tmpfile { 'g10k-cache':
+    content => 'd /tmp/g10k 2775 root gitpuppet',
+  }
+
   concat::fragment { 'puppet-config-server':
     target  => $::profile::puppet::common::config_file,
     order   => '20',
