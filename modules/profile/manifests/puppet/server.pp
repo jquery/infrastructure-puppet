@@ -3,7 +3,7 @@ class profile::puppet::server (
   String $git_repository = lookup('profile::puppet::server::git_repository', {default_value => 'https://github.com/jquery/infrastructure-puppet'}),
   String $git_branch     = lookup('profile::puppet::server::git_branch'),
 ) {
-  # TODO: manage the apt repository
+  include profile::puppet::common
 
   systemd::sysuser { 'gitpuppet':
     source => 'puppet:///modules/profile/puppet/server/sysusers.conf',

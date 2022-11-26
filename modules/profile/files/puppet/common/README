@@ -1,0 +1,2 @@
+The keyring can be updated with:
+ curl -o keyring.gpg https://apt.puppet.com/keyring.gpg

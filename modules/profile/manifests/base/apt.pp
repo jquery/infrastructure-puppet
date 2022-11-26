@@ -14,6 +14,12 @@ class profile::base::apt (
     },
   }
 
+  file { '/etc/apt/keyrings':
+    ensure => directory,
+    purge   => true,
+    recurse => true,
+  }
+
   $codename = debian::codename()
 
   apt::source { 'main':
