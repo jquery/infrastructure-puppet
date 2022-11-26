@@ -40,4 +40,41 @@ class profile::base::apt (
       release  => "${codename}-security"
     }
   }
+
+  # configure default behaviour for config file updates: use the default specified by the package,
+  # or fall back to the old file if no default has been specified
+  apt::conf { 'dpkg-options':
+    priority => '00',
+    content  => 'Dpkg::Options:: "--force-confdef --force-confold";',
+  }
+
+  ensure_packages(['unattended-upgrades'])
+
+  apt::conf { 'auto-upgrades':
+    priority => '20',
+    content  => 'APT::Periodic::Update-Package-Lists "1";\nAPT::Periodic::Unattended-Upgrade "1";',
+  }
+
+  apt::conf { 'unattended-upgrades-updates':
+    priority => '30',
+    # lint:ignore:single_quote_string_with_variables
+    content => 'Unattended-Upgrade::Origins-Pattern:: "origin=${distro_id},codename=${distro_codename}-updates";',
+    # lint:endignore
+  }
+
+  apt::conf { 'unattended-upgrades-security':
+    priority => '30',
+    # lint:ignore:single_quote_string_with_variables
+    content => 'Unattended-Upgrade::Origins-Pattern:: "origin=${distro_id},codename=${distro_codename}-security";',
+    # lint:endignore
+  }
+
+  apt::conf { 'autoclean':
+    priority => '50',
+    content  => 'APT::Periodic::AutocleanInterval 14;',
+  }
+
+  file { '/etc/apt/apt.conf.d/50unattended-upgrades':
+    ensure => absent,
+  }
 }
