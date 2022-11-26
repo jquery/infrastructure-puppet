@@ -64,8 +64,10 @@ server {
     # https://stackoverflow.com/a/6475493/319266
     gzip_types text/plain text/xml application/xml text/css text/javascript application/javascript application/x-javascript text/x-component application/json application/xhtml+xml application/rss+xml application/atom+xml application/vnd.ms-fontobject image/svg+xml application/x-font-ttf font/opentype;
 
-    # Proxies must not mix up differently keyed responses
-    add_header Vary "x-cdn-access";
+    if ($origin_mode = 'key') {
+      # Proxies must not mix up differently keyed responses
+      add_header Vary "x-cdn-access";
+    }
 
     add_header Cache-Control "public";
     add_header Access-Control-Allow-Origin *;
