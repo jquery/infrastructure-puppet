@@ -29,10 +29,9 @@ map $origin_mode  $key_expect {
 }
 
 server {
-  listen         80;
-  listen         [::]:80;
-  server_name    <%= @hostnames[0] %>;
-  server_aliases <%= @hostnames.join(' ') %>;
+  listen       80;
+  listen       [::]:80;
+  server_name  <%= @hostnames.join(' ') %>;
 
   # Turn off access logs and ignore most errors (eg. files not found etc.)
   #
