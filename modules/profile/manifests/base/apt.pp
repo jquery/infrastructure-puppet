@@ -8,9 +8,9 @@ class profile::base::apt (
     },
     purge  => {
       'sources.list'   => true,
-      #'sources.list.d' => true,
-      #'preferences'    => true,
-      #'preferences.d'  => true,
+      'sources.list.d' => true,
+      'preferences'    => true,
+      'preferences.d'  => true,
     },
   }
 
