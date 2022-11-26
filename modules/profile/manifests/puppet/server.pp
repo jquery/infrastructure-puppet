@@ -2,6 +2,7 @@
 class profile::puppet::server (
   String $git_repository = lookup('profile::puppet::server::git_repository', {default_value => 'https://github.com/jquery/infrastructure-puppet'}),
   String $git_branch     = lookup('profile::puppet::server::git_branch'),
+  String $java_memory    = lookup('profile::puppet::server::java_memory', {default_value => '1g'}),
 ) {
   include profile::puppet::common
 
@@ -41,6 +42,13 @@ class profile::puppet::server (
   }
 
   # TODO: manage config file
+
+  file { '/etc/default/puppetserver':
+    ensure => file,
+    mode   => '0444',
+    source => template('profile/puppet/server/default.erb'),
+    notify => Service['puppetserver'],
+  }
 
   service { 'puppetserver':
     ensure => running,
