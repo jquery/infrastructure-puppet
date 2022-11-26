@@ -11,7 +11,7 @@ define systemd::sysuser (
 
   $safe_title = regsubst($title, '[\W_]', '-', 'G')
   file { "/etc/sysusers.d/${safe_title}.conf":
-    ensure  => $ensure,
+    ensure  => stdlib::ensure($ensure, 'file'),
     source  => $source,
     content => $content,
     owner   => 'root',

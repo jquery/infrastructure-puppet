@@ -26,33 +26,23 @@
 #  }
 #
 define nginx::site(
-  Enum['present', 'absent'] $ensure = 'present',
-  Optional[String] $content = undef,
-  Optional[String] $source  = undef,
+  Optional[Stdlib::Filesource] $source   = undef,
+  Optional[String]             $content  = undef,
+  Jqlib::Ensure                $ensure   = present,
 ) {
   include nginx
-
-  if $content == $source {
-    fail('Either \'$content\' or \'$source\' must be set (but not both).')
-  }
 
   $basename = regsubst($title, '[\W_]', '-', 'G')
 
   file { "/etc/nginx/sites-available/${basename}":
-    ensure  => $ensure,
+    ensure  => stdlib::ensure($ensure, 'file'),
     content => $content,
     source  => $source,
     notify  => Exec['nginx-reload'],
   }
 
-  if $ensure == 'present' {
-    $ensure_link = 'link'
-  } else {
-    $ensure_link = 'absent'
-  }
-
   file { "/etc/nginx/sites-enabled/${basename}":
-    ensure => $ensure_link,
+    ensure => stdlib::ensure($ensure, 'link'),
     target => "/etc/nginx/sites-available/${basename}",
   }
 }

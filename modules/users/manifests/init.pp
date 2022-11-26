@@ -15,7 +15,7 @@ class users {
 
   # Passwordless sudo for members of 'sudo' group.
   file { '/etc/sudoers.d/10-passwordless_sudo':
-    ensure  => present,
+    ensure  => file,
     owner   => 'root',
     group   => 'root',
     mode    => '0440',
