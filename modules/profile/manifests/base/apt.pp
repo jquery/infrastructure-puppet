@@ -15,7 +15,7 @@ class profile::base::apt (
   }
 
   file { '/etc/apt/keyrings':
-    ensure => directory,
+    ensure  => directory,
     purge   => true,
     recurse => true,
   }
