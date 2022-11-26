@@ -76,6 +76,7 @@ class profile::puppet::server (
     file { "/etc/puppetlabs/puppetserver/conf.d/${file}":
       ensure  => file,
       mode    => '0440',
+      group   => 'puppet',
       content => template("profile/puppet/server/config/${file}.erb"),
       notify  => Service['puppetserver'],
     }
