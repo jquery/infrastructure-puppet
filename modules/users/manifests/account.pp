@@ -12,7 +12,8 @@ define users::account(
   Boolean       $root = false,
 ) {
   if $root {
-    $groups = ['sudo']
+    # sudo for full sudo access, adm for viewing logs and similar without sudo
+    $groups = ['sudo', 'adm']
   } else {
     $groups = []
   }
