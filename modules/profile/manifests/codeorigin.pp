@@ -15,4 +15,13 @@ class profile::codeorigin (
   nginx::site { 'codeorigin':
     content => template('profile/codeorigin/site.nginx.erb'),
   }
+
+  nftables::allow { 'codeorigin-http':
+    proto => 'tcp',
+    dport => 80,
+  }
+  nftables::allow { 'codeorigin-https':
+    proto => 'tcp',
+    dport => 443,
+  }
 }
