@@ -11,7 +11,7 @@ class profile::puppet::server (
 
   exec { 'remove-old-code-dir':
     command => "/usr/bin/mv ${code_dir} ${code_dir}-old",
-    creates => "${code_dir}/old",
+    creates => "${code_dir}-old",
   }
 
   git::clone { 'puppet-code':
