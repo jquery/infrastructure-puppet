@@ -7,9 +7,20 @@ defaults:
   datadir: /etc/puppetlabs/code/hieradata
   data_hash: yaml_data
 hierarchy:
+  - name: "Private node data"
+    path: "nodes/%{::trusted.certname}.yaml"
+    datadir: /srv/git/puppet/private/hieradata
   - name: "Public node data"
     path: "nodes/%{::trusted.certname}.yaml"
+
+  - name: "Private environment data"
+    path: "environments/%{::environment}.yaml"
+    datadir: /srv/git/puppet/private/hieradata
   - name: "Public environment data"
     path: "environments/%{::environment}.yaml"
+
+  - name: "Private common data"
+    path: "common.yaml"
+    datadir: /srv/git/puppet/private/hieradata
   - name: "Public common data"
     path: "common.yaml"

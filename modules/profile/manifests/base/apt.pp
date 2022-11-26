@@ -58,14 +58,14 @@ class profile::base::apt (
   apt::conf { 'unattended-upgrades-updates':
     priority => '30',
     # lint:ignore:single_quote_string_with_variables
-    content => 'Unattended-Upgrade::Origins-Pattern:: "origin=${distro_id},codename=${distro_codename}-updates";',
+    content  => 'Unattended-Upgrade::Origins-Pattern:: "origin=${distro_id},codename=${distro_codename}-updates";',
     # lint:endignore
   }
 
   apt::conf { 'unattended-upgrades-security':
     priority => '30',
     # lint:ignore:single_quote_string_with_variables
-    content => 'Unattended-Upgrade::Origins-Pattern:: "origin=${distro_id},codename=${distro_codename}-security";',
+    content  => 'Unattended-Upgrade::Origins-Pattern:: "origin=${distro_id},codename=${distro_codename}-security";',
     # lint:endignore
   }
 

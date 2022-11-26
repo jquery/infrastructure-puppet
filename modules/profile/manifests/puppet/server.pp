@@ -10,7 +10,15 @@ class profile::puppet::server (
     source => 'puppet:///modules/profile/puppet/server/sysusers.conf',
   }
 
+  file { [
+    '/srv/git',
+    '/srv/git/puppet',
+  ]:
+    ensure => directory,
+  }
+
   $code_dir = '/etc/puppetlabs/code'
+  $private_repo_dir = '/srv/git/puppet/private'
 
   exec { 'remove-old-code-dir':
     command => "/usr/bin/mv ${code_dir} ${code_dir}-old",
@@ -32,6 +40,20 @@ class profile::puppet::server (
     owner  => 'root',
     group  => 'gitpuppet',
     mode   => '0554',
+  }
+
+  file { $private_repo_dir:
+    ensure => directory,
+    owner  => 'root',
+    group  => 'gitpuppet',
+    mode   => '2775',
+  }
+  exec { 'git-init-puppet-private':
+    command => "/usr/bin/git -c core.sharedRepository=group init ${private_repo_dir}",
+    creates => "${private_repo_dir}/.git",
+    user    => 'root',
+    group   => 'gitpuppet',
+    umask   => '002',
   }
 
   package { [
