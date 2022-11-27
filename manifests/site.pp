@@ -3,9 +3,9 @@
 # https://puppet.com/docs/puppet/7/roles_and_profiles_example.html
 
 node 'codeorigin-02.stage.ops.jquery.net' {
-  include role::codeorigin
+  role('codeorigin')
 }
 
 node 'puppet-03.stage.ops.jquery.net' {
-  include role::puppet
+  role('puppet')
 }
