@@ -3,4 +3,5 @@ class role::codeorigin {
   include profile::base
   include profile::certbot
   include profile::codeorigin
+  include profile::notifier
 }

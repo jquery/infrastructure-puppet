@@ -1,1 +1,2 @@
 profile::codeorigin::cdn_access_key: ''
+profile::notifier::webhook_secret: 'somesecret'

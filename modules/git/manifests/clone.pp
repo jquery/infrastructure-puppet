@@ -7,13 +7,13 @@
 # @param $shared true if the group should have write access
 # @param $ensure present or absent
 define git::clone (
-  String        $path,
-  String        $remote,
-  String        $branch,
-  String        $owner,
-  String        $group,
-  Boolean       $shared = false,
-  Jqlib::Ensure $ensure = present,
+  Stdlib::Unixpath $path,
+  String           $remote,
+  String           $branch,
+  String           $owner,
+  String           $group,
+  Boolean          $shared = false,
+  Jqlib::Ensure    $ensure = present,
 ) {
   if $ensure == 'present' {
     if $shared {
