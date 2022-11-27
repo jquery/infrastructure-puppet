@@ -58,6 +58,7 @@ class profile::puppet::server (
 
   package { [
     'puppetserver',
+    'puppetdb-termini',
     'g10k',
   ]:
     ensure => installed,
@@ -84,6 +85,20 @@ class profile::puppet::server (
       content => template("profile/puppet/server/config/${file}.erb"),
       notify  => Service['puppetserver'],
     }
+  }
+
+  file { '/etc/puppetlabs/puppet/routes.yaml':
+    ensure  => file,
+    mode    => '0444',
+    content => template('profile/puppet/server/routes.yaml.erb'),
+    notify  => Service['puppetserver'],
+  }
+
+  file { '/etc/puppetlabs/puppet/puppetdb.conf':
+    ensure  => file,
+    mode    => '0444',
+    content => template('profile/puppet/server/puppetdb.conf.erb'),
+    notify  => Service['puppetserver'],
   }
 
   file { '/etc/default/puppetserver':

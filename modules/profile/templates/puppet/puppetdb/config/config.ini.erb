@@ -1,0 +1,17 @@
+
+[global]
+# Store mq/db data in a custom directory
+vardir = /opt/puppetlabs/server/data/puppetdb
+
+# Use an external logback config file
+logging-config = /etc/puppetlabs/puppetdb/logback.xml
+
+[puppetdb]
+certificate-allowlist = /etc/puppetlabs/puppetdb/cert-allowlist
+
+[command-processing]
+# How many command-processing threads to use, defaults to (CPUs / 2)
+# threads = 4
+
+# How many threads can write to disk at once, defaults to min(CPUs / 2, 4)
+# concurrent-writes = 4

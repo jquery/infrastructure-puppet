@@ -2,7 +2,7 @@
 class profile::puppet::agent (
   Stdlib::Fqdn $puppet_server = lookup('profile::puppet::agent::puppet_server'),
 ) {
-  include ::profile::puppet::common
+  include profile::puppet::common
 
   package { 'puppet-agent':
     ensure => installed,

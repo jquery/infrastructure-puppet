@@ -1,2 +1,3 @@
 profile::codeorigin::cdn_access_key: ''
 profile::notifier::webhook_secret: 'somesecret'
+profile::puppet::puppetdb::postgresql_password: 'fakepass'
