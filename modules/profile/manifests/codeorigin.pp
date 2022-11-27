@@ -38,6 +38,8 @@ class profile::codeorigin (
     require => Nftables::Allow['codeorigin-http'],
   }
 
+  $tls_config = nginx::tls_config()
+
   nginx::site { 'codeorigin':
     content => template('profile/codeorigin/site.nginx.erb'),
     require => Letsencrypt::Certificate['codeorigin'],

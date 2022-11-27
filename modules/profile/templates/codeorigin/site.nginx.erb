@@ -38,6 +38,8 @@ server {
   ssl_certificate /etc/letsencrypt/live/codeorigin/fullchain.pem;
   ssl_certificate_key /etc/letsencrypt/live/codeorigin/privkey.pem;
 
+  <%= @tls_config.join("\n  ") %>
+
   server_name  <%= @hostnames.join(' ') %>;
 
   # Turn off access logs and ignore most errors (eg. files not found etc.)
