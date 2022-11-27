@@ -1,0 +1,9 @@
+# The Debian packages use logrotate instead.
+max-log-backups = 0
+
+# This should be fine for most use cases. The CDN keys might be an
+# exception, but its keys are handled separately.
+key-type = ecdsa
+
+authenticator = webroot
+webroot-path = /var/www/letsencrypt

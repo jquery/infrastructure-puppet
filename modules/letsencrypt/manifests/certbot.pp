@@ -19,5 +19,12 @@ class letsencrypt::certbot (
     ensure => directory,
   }
 
+  file { '/etc/letsencrypt/cli.ini':
+    ensure  => file,
+    mode    => '0444',
+    content => template('letsencrypt/cli.ini.erb'),
+    require => Exec['certbot-register'],
+  }
+
   File <| tag == 'letsencrypt-hook' |>
 }

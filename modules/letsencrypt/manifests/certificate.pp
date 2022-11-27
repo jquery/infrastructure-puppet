@@ -5,7 +5,7 @@ define letsencrypt::certificate (
 ) {
   require letsencrypt::certbot
 
-  $base_command = "/usr/bin/certbot certonly --cert-name ${title} --webroot --webroot-path /var/www/letsencrypt --non-interactive"
+  $base_command = "/usr/bin/certbot certonly --cert-name ${title} --non-interactive"
   $domains_command = $domains.map |Stdlib::Fqdn $domain| {
     "-d ${domain}"
   }.join(' ')
