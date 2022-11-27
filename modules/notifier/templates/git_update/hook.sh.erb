@@ -1,0 +1,12 @@
+#!/bin/bash
+set -euo pipefail
+
+echo "Checking out $1"
+
+sudo -u <%= @local_user %> /usr/bin/git -C <%= @local_path %> fetch -v origin
+sudo -u <%= @local_user %> /usr/bin/git -C <%= @local_path %> merge --ff-only "$1"
+<%- if @submodules -%>
+sudo -u <%= @local_user %> /usr/bin/git -C <%= @local_path %> submodule update --init --recursive
+<%- end -%>
+
+echo "Done!"

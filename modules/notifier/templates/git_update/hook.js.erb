@@ -1,0 +1,5 @@
+module.exports = function( server, exec ) {
+<%- if @listen_for.key? 'branch' -%>
+  server.on( "<%= @github_repository %>/push/heads/<%= @listen_for['branch'] %>", exec );
+<%- end -%>
+};
