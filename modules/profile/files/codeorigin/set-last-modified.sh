@@ -13,4 +13,5 @@
 # Cache-Control "max-age", it is already the case that a changed file will not
 # be seen by the CDN unless we purge it via the CDN API, and not seen by previous
 # browser clients until they clear their own caches.
+echo "Setting a constant file modification timestamp for all CDN assets"
 find /srv/codeorigin/cdn/ -type f -print0 | TZ=UTC xargs -0 -P 4 -n 50 touch --date='1991-10-18 12:00:00'
