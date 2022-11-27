@@ -26,5 +26,10 @@ class letsencrypt::certbot (
     require => Exec['certbot-register'],
   }
 
+  systemd::override { 'certbot-renew-no-quiet':
+    unit   => 'certbot.service',
+    source => 'puppet:///modules/letsencrypt/override-no-quiet.conf',
+  }
+
   File <| tag == 'letsencrypt-hook' |>
 }
