@@ -60,6 +60,9 @@ class profile::puppet::server (
     'puppetserver',
     'puppetdb-termini',
     'g10k',
+
+    # for the htpasswd tool
+    'apache2-utils',
   ]:
     ensure => installed,
   }

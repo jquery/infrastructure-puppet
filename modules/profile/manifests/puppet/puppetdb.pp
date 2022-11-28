@@ -1,6 +1,7 @@
 # @summary provisions a puppetdb server
 class profile::puppet::puppetdb (
-  String[1] $postgresql_password = lookup('profile::puppet::puppetdb::postgresql_password'),
+  String[1]        $postgresql_password    = lookup('profile::puppet::puppetdb::postgresql_password'),
+  Array[String[1]] $nginx_htpassword_users = lookup('profile::puppet::puppetdb::nginx_htpassword_users'),
 ) {
   include profile::puppet::common
 
@@ -34,5 +35,25 @@ class profile::puppet::puppetdb (
   service { 'puppetdb':
     ensure => running,
     enable => true,
+  }
+
+  # expose an authenticated version of the puppetdb api,
+  # so that octocatalog-diff can be used locally with facts loaded from puppetdb
+  $tls_config = nginx::tls_config()
+  nginx::site { 'puppetdb-external':
+    content => template('profile/puppet/puppetdb/site.nginx.erb'),
+  }
+
+  file { '/etc/nginx/puppetdb.htpasswd':
+    ensure  => file,
+    mode    => '0440',
+    group   => 'www-data',
+    content => "${nginx_htpassword_users.join("\n")}\n",
+    require => Package['nginx-full'],
+  }
+
+  nftables::allow { 'puppetdb-external':
+    proto => 'tcp',
+    dport => 8100,
   }
 }
