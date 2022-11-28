@@ -6,6 +6,17 @@ class profile::puppet::server (
 ) {
   include profile::puppet::common
 
+  package { [
+    'puppetserver',
+    'puppetdb-termini',
+    'g10k',
+
+    # for the htpasswd tool
+    'apache2-utils',
+  ]:
+    ensure => installed,
+  }
+
   systemd::sysuser { 'gitpuppet':
     source => 'puppet:///modules/profile/puppet/server/sysusers.conf',
   }
@@ -27,6 +38,13 @@ class profile::puppet::server (
     owner  => 'gitpuppet',
     group  => 'gitpuppet',
     shared => true,
+  }
+
+  exec { 'g10k-initial':
+    command => '/usr/bin/g10k -puppetfile',
+    user    => 'gitpuppet',
+    cwd     => $code_dir,
+    creates => "${code_dir}/vendor_modules",
   }
 
   file { '/usr/local/bin/puppet-merge':
@@ -63,17 +81,6 @@ class profile::puppet::server (
   file { '/etc/puppetlabs/hieradata/private':
     ensure => link,
     target => "${private_repo_dir}/hieradata",
-  }
-
-  package { [
-    'puppetserver',
-    'puppetdb-termini',
-    'g10k',
-
-    # for the htpasswd tool
-    'apache2-utils',
-  ]:
-    ensure => installed,
   }
 
   systemd::tmpfile { 'g10k-cache':
