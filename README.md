@@ -127,3 +127,12 @@ I, [2022-11-28T16:06:24.512213 #199545]  INFO -- : No differences
 
 By default, `octocatalog-diff` will show the difference between the
 current working tree and the last commit pushed to `origin`.
+
+`octocatalog-diff` requires a local installation of Puppet 7. On a
+Debian Bookworm (testing) setup, as of time of writing you need the
+following packages:
+```
+octocatalog-diff
+puppet-agent
+puppet-module-puppetlabs-sshkeys-core
+```
