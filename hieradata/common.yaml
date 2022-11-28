@@ -31,3 +31,5 @@ profile::base::groups:
     root: true
   gitpuppet:
     gid: 600
+
+profile::notifier::version: v3.0.0

@@ -1,10 +1,12 @@
 # @summary configures node-notifier and exposes it via tls
 class profile::notifier (
   String[1] $webhook_secret = lookup('profile::notifier::webhook_secret'),
+  String[1] $version        = lookup('profile::notifier::version'),
   String[1] $tls_key_name   = lookup('profile::notifier::tls_key_name'),
 ) {
   class { 'notifier':
     webhook_secret => $webhook_secret,
+    version        => $version,
   }
 
   nftables::allow { 'notifier-https':

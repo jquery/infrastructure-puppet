@@ -1,7 +1,10 @@
 # @summary configures node-notifier to receive github webhooks
 # @param $webhook_secret github webhook secret
+# @param $version git version to clone. note that the module doesn't
+#   currently auto update after changing thiois.
 class notifier (
   String[1] $webhook_secret,
+  String[1] $version,
 ) {
   ensure_packages(['nodejs', 'npm'])
 
@@ -22,7 +25,7 @@ class notifier (
     path    => $base_path,
     owner   => 'notifier',
     group   => 'notifier',
-    branch  => 'main',
+    branch  => $version,
     require => Systemd::Sysuser['notifier'],
   }
 
