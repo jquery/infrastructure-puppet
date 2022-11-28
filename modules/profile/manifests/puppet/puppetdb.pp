@@ -45,11 +45,12 @@ class profile::puppet::puppetdb (
   }
 
   file { '/etc/nginx/puppetdb.htpasswd':
-    ensure  => file,
-    mode    => '0440',
-    group   => 'www-data',
-    content => "${nginx_htpassword_users.join("\n")}\n",
-    require => Package['nginx-full'],
+    ensure    => file,
+    mode      => '0440',
+    group     => 'www-data',
+    content   => "${nginx_htpassword_users.join("\n")}\n",
+    require   => Package['nginx-full'],
+    show_diff => false,
   }
 
   nftables::allow { 'puppetdb-external':
