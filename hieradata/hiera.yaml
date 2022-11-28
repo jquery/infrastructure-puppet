@@ -29,6 +29,5 @@ hierarchy:
 
   - name: "Private common data"
     path: "private/common.yaml"
-    datadir: /srv/git/puppet/private/hieradata
   - name: "Public common data"
     path: "public/common.yaml"
