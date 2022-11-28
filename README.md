@@ -16,7 +16,7 @@ Statically assigned system UIDs and GIDs start from 600 and should be documented
 
 | UID | GID | name |
 |-----|-----|------|
-| - | 600 | gitpuppet
+| 600 | 600 | gitpuppet
 | 601 | 601 | notifier
 
 ## Contributing
