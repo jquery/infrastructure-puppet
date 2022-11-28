@@ -9,6 +9,8 @@ GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 echo " -- Fetching Git updates"
 git fetch origin -v
+
+echo " -- Comparing the changes"
 PAGER="" git diff "$GIT_BRANCH"..origin/"$GIT_BRANCH"
 
 while true; do

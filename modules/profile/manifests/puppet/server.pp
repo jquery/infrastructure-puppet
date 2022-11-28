@@ -17,19 +17,14 @@ class profile::puppet::server (
     ensure => directory,
   }
 
-  $code_dir = '/etc/puppetlabs/code'
+  $code_dir = '/srv/git/puppet/public'
   $private_repo_dir = '/srv/git/puppet/private'
-
-  exec { 'remove-old-code-dir':
-    command => "/usr/bin/mv ${code_dir} ${code_dir}-old",
-    creates => "${code_dir}-old",
-  }
 
   git::clone { 'puppet-code':
     path   => $code_dir,
     remote => $git_repository,
     branch => $git_branch,
-    owner  => 'root',
+    owner  => 'gitpuppet',
     group  => 'gitpuppet',
     shared => true,
   }
@@ -44,16 +39,30 @@ class profile::puppet::server (
 
   file { $private_repo_dir:
     ensure => directory,
-    owner  => 'root',
+    owner  => 'gitpuppet',
     group  => 'gitpuppet',
     mode   => '2775',
   }
   exec { 'git-init-puppet-private':
     command => "/usr/bin/git -c core.sharedRepository=group init ${private_repo_dir}",
     creates => "${private_repo_dir}/.git",
-    user    => 'root',
+    user    => 'gitpuppet',
     group   => 'gitpuppet',
     umask   => '002',
+  }
+
+  file { '/etc/puppetlabs/hieradata':
+    ensure => directory,
+  }
+
+  file { '/etc/puppetlabs/hieradata/public':
+    ensure => link,
+    target => "${code_dir}/hieradata",
+  }
+
+  file { '/etc/puppetlabs/hieradata/private':
+    ensure => link,
+    target => "${private_repo_dir}/hieradata",
   }
 
   package { [
@@ -68,7 +77,7 @@ class profile::puppet::server (
   }
 
   systemd::tmpfile { 'g10k-cache':
-    content => 'd /tmp/g10k 2775 root gitpuppet',
+    content => 'd /tmp/g10k 2775 gitpuppet gitpuppet',
   }
 
   concat::fragment { 'puppet-config-server':
