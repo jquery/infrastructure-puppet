@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-GIT_DIR="/etc/puppetlabs/code"
+GIT_DIR="/srv/git/puppet/public"
 cd "$GIT_DIR"
 
 GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
