@@ -4,6 +4,7 @@ class profile::codeorigin (
   String                 $cdn_access_key    = lookup('profile::codeorigin::cdn_access_key'),
   Array[Stdlib::Fqdn, 1] $certificate_names = lookup('profile::codeorigin::certificate_names'),
   Array[Stdlib::Fqdn, 1] $vhost_hostnames   = lookup('profile::codeorigin::vhost_hostnames'),
+  Boolean                $serve_plaintext   = lookup('profile::codeorigin::serve_plaintext', {default_value => false}),
 ) {
   git::clone { 'codeorigin':
     path   => '/srv/codeorigin',
@@ -32,10 +33,12 @@ class profile::codeorigin (
     local_user        => 'root',
   }
 
+  # http is still needed for let's encrypt certificates
   nftables::allow { 'codeorigin-http':
     proto => 'tcp',
     dport => 80,
   }
+
   nftables::allow { 'codeorigin-https':
     proto => 'tcp',
     dport => 443,

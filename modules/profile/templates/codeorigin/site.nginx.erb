@@ -29,8 +29,10 @@ map $origin_mode  $key_expect {
 }
 
 server {
+<%- if @serve_plaintext -%>
   listen 80;
   listen [::]:80;
+<%- end -%>
 
   listen 443 ssl;
   listen [::]:443 ssl;
