@@ -1,8 +1,9 @@
 # @summary code origin server
 # @param $cdn_access_key cdn access key
 class profile::codeorigin (
-  String                 $cdn_access_key = lookup('profile::codeorigin::cdn_access_key'),
-  Array[Stdlib::Fqdn, 1] $hostnames      = lookup('profile::codeorigin::hostnames'),
+  String                 $cdn_access_key    = lookup('profile::codeorigin::cdn_access_key'),
+  Array[Stdlib::Fqdn, 1] $certificate_names = lookup('profile::codeorigin::certificate_names'),
+  Array[Stdlib::Fqdn, 1] $vhost_hostnames   = lookup('profile::codeorigin::vhost_hostnames'),
 ) {
   git::clone { 'codeorigin':
     path   => '/srv/codeorigin',
@@ -41,7 +42,7 @@ class profile::codeorigin (
   }
 
   letsencrypt::certificate { 'codeorigin':
-    domains => $hostnames,
+    domains => $certificate_names,
     require => Nftables::Allow['codeorigin-http'],
   }
 

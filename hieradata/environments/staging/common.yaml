@@ -4,5 +4,8 @@ profile::puppet::server::git_branch: main
 # TODO: change me
 profile::certbot::email: jquery-letsencrypt@taavi.wtf
 
-profile::codeorigin::hostnames:
-  - codeorigin-02.stage.ops.jquery.net
+profile::codeorigin::vhost_hostnames:
+  - "%{::facts.fqdn}"
+
+profile::codeorigin::certificate_names:
+  - "%{::facts.fqdn}"
