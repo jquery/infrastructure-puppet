@@ -4,9 +4,10 @@ server {
   listen 127.0.0.1:8989;
   server_name localhost;
 
+  access_log off;
+
   location / {
     stub_status on;
-    access_log off;
     allow 127.0.0.1;
     deny all;
   }
