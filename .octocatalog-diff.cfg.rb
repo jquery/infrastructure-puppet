@@ -14,6 +14,7 @@ module OctocatalogDiff
 
       # provided manually
       # settings[:puppetdb_url] = 'https://puppetdb.yourcompany.com:8081'
+      settings[:puppetdb_ssl_ca] = '/etc/ssl/certs/ca-certificates.crt'
 
       # TODO: install once puppet-terminus-puppetdb migrates to testing
       settings[:storeconfigs] = false
