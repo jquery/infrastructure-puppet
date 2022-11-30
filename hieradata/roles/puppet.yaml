@@ -1,1 +1,8 @@
 profile::base::enabled_groups: [gitpuppet]
+
+profile::certbot::certificates:
+  puppet:
+    domains:
+      - "%{::facts.fqdn}"
+
+profile::puppet::puppetdb::nginx_certificate_name: puppet

@@ -1,6 +1,7 @@
 # @summary provisions a puppetdb server
 class profile::puppet::puppetdb (
   String[1]        $postgresql_password    = lookup('profile::puppet::puppetdb::postgresql_password'),
+  String[1]        $nginx_certificate_name = lookup('profile::puppet::puppetdb::nginx_certificate_name'),
   Array[String[1]] $nginx_htpassword_users = lookup('profile::puppet::puppetdb::nginx_htpassword_users'),
 ) {
   include profile::puppet::common
@@ -42,6 +43,7 @@ class profile::puppet::puppetdb (
   $tls_config = nginx::tls_config()
   nginx::site { 'puppetdb-external':
     content => template('profile/puppet/puppetdb/site.nginx.erb'),
+    require => Letsencrypt::Certificate[$nginx_certificate_name],
   }
 
   file { '/etc/nginx/puppetdb.htpasswd':

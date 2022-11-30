@@ -2,8 +2,8 @@ server {
   listen 8100 ssl;
   listen [::]:8100 ssl;
 
-  ssl_certificate /etc/puppetlabs/puppetdb/ssl/public.pem;
-  ssl_certificate_key /etc/puppetlabs/puppetdb/ssl/private.pem;
+  ssl_certificate /etc/letsencrypt/live/<%= @nginx_certificate_name %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= @nginx_certificate_name %>/privkey.pem;
   <%= @tls_config.join("\n  ") %>
 
   satisfy all;
