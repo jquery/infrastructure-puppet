@@ -1,7 +1,7 @@
 # @summary generates and maintains a certificate with the webroot hook
 # @param $domains certificate subjects
 define letsencrypt::certificate (
-  Array[Stdlib::Fqdn] $domains,
+  Array[Stdlib::Fqdn, 1] $domains,
 ) {
   require letsencrypt::certbot
 

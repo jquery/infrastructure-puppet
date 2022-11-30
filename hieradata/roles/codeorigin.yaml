@@ -1,1 +1,6 @@
 profile::notifier::tls_key_name: codeorigin
+
+profile::certbot::certificates:
+  codeorigin:
+    domains:
+      - "%{::facts.fqdn}"

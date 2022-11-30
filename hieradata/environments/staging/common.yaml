@@ -7,6 +7,3 @@ profile::certbot::email: jquery-letsencrypt@taavi.wtf
 profile::codeorigin::vhost_hostnames:
   - code2.jquery.com
   - "%{::facts.fqdn}"
-
-profile::codeorigin::certificate_names:
-  - "%{::facts.fqdn}"
