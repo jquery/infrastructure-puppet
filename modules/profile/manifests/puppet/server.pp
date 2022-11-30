@@ -41,7 +41,6 @@ class profile::puppet::server (
   }
 
   $g10k_deploy_base_path = '/etc/puppetlabs/code/environments'
-  $code_dir = '/srv/git/puppet/public'
   $private_repo_dir = '/srv/git/puppet/private'
 
   file { '/etc/puppetlabs/g10k.yaml':
@@ -59,22 +58,6 @@ class profile::puppet::server (
     refreshonly => true,
     logoutput   => true,
     require     => File['/etc/puppetlabs/code'],
-  }
-
-  git::clone { 'puppet-code':
-    path   => $code_dir,
-    remote => $git_repository,
-    branch => $git_branch,
-    owner  => 'gitpuppet',
-    group  => 'gitpuppet',
-    shared => true,
-  }
-
-  exec { 'g10k-initial':
-    command => '/usr/bin/g10k -puppetfile',
-    user    => 'gitpuppet',
-    cwd     => $code_dir,
-    creates => "${code_dir}/vendor_modules",
   }
 
   file { '/usr/local/bin/puppet-merge':
@@ -100,17 +83,10 @@ class profile::puppet::server (
   }
 
   file { '/etc/puppetlabs/hieradata':
-    ensure => directory,
-  }
-
-  file { '/etc/puppetlabs/hieradata/public':
-    ensure => link,
-    target => "${code_dir}/hieradata",
-  }
-
-  file { '/etc/puppetlabs/hieradata/private':
-    ensure => link,
-    target => "${private_repo_dir}/hieradata",
+    ensure  => absent,
+    recurse => true,
+    force   => true,
+    purge   => true,
   }
 
   systemd::tmpfile { 'g10k-cache':
