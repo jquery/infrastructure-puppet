@@ -58,6 +58,7 @@ class profile::puppet::server (
     user        => 'gitpuppet',
     refreshonly => true,
     logoutput   => true,
+    require     => File['/etc/puppetlabs/code'],
   }
 
   git::clone { 'puppet-code':
