@@ -8,10 +8,13 @@ PATH=/usr/bin:/bin
 export GIT_PAGER=less
 
 script_dir=$(dirname "$0")
-repo_dir="${script_dir}/../.git"
 
-if [ -d "$repo_dir" ]; then
-  git --git-dir "${repo_dir}" log -1 --pretty='(%h) %cn - %s'
-else
-  echo 'unknown'
-fi
+for repo_dir in "${script_dir}/../.git" /tmp/g10k/environments/jquery-puppet.git/
+do
+  if [ -d "$repo_dir" ]; then
+    git --git-dir "${repo_dir}" log -1 --pretty='(%h) %cn - %s'
+    exit 0
+  fi
+done
+
+echo 'unknown'
