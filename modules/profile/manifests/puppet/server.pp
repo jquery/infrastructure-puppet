@@ -21,6 +21,18 @@ class profile::puppet::server (
     source => 'puppet:///modules/profile/puppet/server/sysusers.conf',
   }
 
+  exec { 'remove-old-code-dir':
+    command => '/usr/bin/mv /etc/puppetlabs/code /etc/puppetlabs/code-old',
+    creates => '/etc/puppetlabs/code-old',
+  }
+
+  file { '/etc/puppetlabs/code':
+    ensure  => directory,
+    owner   => 'gitpuppet',
+    group   => 'gitpuppet',
+    require => Exec['remove-old-code-dir'],
+  }
+
   file { [
     '/srv/git',
     '/srv/git/puppet',
@@ -28,13 +40,17 @@ class profile::puppet::server (
     ensure => directory,
   }
 
-  $g10k_deploy_base_path = '/etc/puppetlabs/code'
+  $g10k_deploy_base_path = '/etc/puppetlabs/code/environments'
   $code_dir = '/srv/git/puppet/public'
   $private_repo_dir = '/srv/git/puppet/private'
 
   file { '/etc/puppetlabs/g10k.yaml':
     ensure  => file,
     content => template('profile/puppet/server/g10k.yaml.erb'),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    notify  => Exec['g10k'],
   }
 
   exec { 'g10k':
