@@ -29,7 +29,7 @@ class profile::codeorigin (
 
   notifier::git_update { 'codeorigin':
     github_repository => 'jquery/codeorigin.jquery.com',
-    listen_for        => { branch => 'main' },
+    listen_for        => [{ branch => 'main' }],
     local_path        => '/srv/codeorigin',
     local_user        => 'root',
   }

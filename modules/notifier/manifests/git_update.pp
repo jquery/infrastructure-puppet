@@ -1,10 +1,10 @@
 # @summary configures a node-notifier hook to update a local clone of a git repository
 define notifier::git_update (
-  String[1]           $github_repository,
-  Notifier::GitTarget $listen_for,
-  Stdlib::Unixpath    $local_path,
-  String[1]           $local_user,
-  Boolean             $submodules = false,
+  String[1]                  $github_repository,
+  Array[Notifier::GitTarget] $listen_for,
+  Stdlib::Unixpath           $local_path,
+  String[1]                  $local_user,
+  Boolean                    $submodules = false,
 ) {
   file { "/etc/notifier.d/${title}.js":
     ensure  => file,
