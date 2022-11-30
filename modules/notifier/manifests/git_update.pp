@@ -8,7 +8,7 @@ define notifier::git_update (
 ) {
   file { "/etc/notifier.d/${title}.js":
     ensure  => file,
-    content => template('notifier/git_update/hook.js.erb'),
+    content => template('notifier/hook.js.erb'),
     notify  => Service['notifier'],
   }
 

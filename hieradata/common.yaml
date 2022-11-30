@@ -31,7 +31,5 @@ profile::base::groups:
     root: true
   gitpuppet:
     gid: 600
-    sudo:
-      - "ALL=(gitpuppet) NOPASSWD: ALL"
 
 profile::notifier::version: v3.0.0

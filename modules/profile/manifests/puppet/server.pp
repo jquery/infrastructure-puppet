@@ -1,8 +1,7 @@
 # @summary provisions a puppet server
 class profile::puppet::server (
-  String $git_repository = lookup('profile::puppet::server::git_repository', {default_value => 'https://github.com/jquery/infrastructure-puppet'}),
-  String $git_branch     = lookup('profile::puppet::server::git_branch'),
-  String $java_memory    = lookup('profile::puppet::server::java_memory', {default_value => '1g'}),
+  String $git_branch  = lookup('profile::puppet::server::git_branch'),
+  String $java_memory = lookup('profile::puppet::server::java_memory', {default_value => '1g'}),
 ) {
   include profile::puppet::common
 
@@ -141,5 +140,18 @@ class profile::puppet::server (
   nftables::allow { 'puppetserver':
     proto => 'tcp',
     dport => 8140,
+  }
+
+  notifier::run_command { 'puppet-public':
+    github_repository => 'jquery/infrastructure-puppet',
+    listen_for        => [{ branch => 'staging' }, { branch => 'production' }],
+    source            => 'puppet:///modules/profile/puppet/server/puppet-merge.sh',
+  }
+
+  sudo::rule { 'notifier-g10k':
+    target     => 'notifier',
+    privileges => [
+      'ALL = (gitpuppet) NOPASSWD: /usr/bin/g10k -config /etc/puppetlabs/g10k.yaml',
+    ],
   }
 }
