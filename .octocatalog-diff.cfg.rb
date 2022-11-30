@@ -7,10 +7,9 @@ module OctocatalogDiff
       settings = {}
 
       settings[:hiera_config] = 'hiera.yaml'
-      settings[:hiera_path] = '../../test_data/hieradata'
-      settings[:preserve_environments] = true
+      settings[:hiera_path] = 'test_data/hieradata'
       settings[:environment] = 'staging'
-      settings[:create_symlinks] = ['bin', 'manifests', 'modules', 'test_data', 'vendor_modules']
+
       settings[:bootstrap_script] = 'test_data/bootstrap.sh'
 
       # provided manually
