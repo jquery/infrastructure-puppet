@@ -4,30 +4,35 @@
 # https://puppet.com/docs/puppet/7/hiera_config_yaml_5.html
 version: 5
 defaults:
-  datadir: /etc/puppetlabs/hieradata
+  datadir: hieradata
   data_hash: yaml_data
 hierarchy:
   - name: "Private node data"
-    path: "private/nodes/%{::trusted.certname}.yaml"
+    path: "nodes/%{::trusted.certname}.yaml"
+    datadir: /srv/git/puppet/private/hieradata
   - name: "Public node data"
-    path: "public/nodes/%{::trusted.certname}.yaml"
+    path: "nodes/%{::trusted.certname}.yaml"
 
   - name: "Private environment role data"
-    path: "private/environments/%{::environment}/roles/%{::_role}.yaml"
+    path: "environments/%{::environment}/roles/%{::_role}.yaml"
+    datadir: /srv/git/puppet/private/hieradata
   - name: "Public environment role data"
-    path: "public/environments/%{::environment}/roles/%{::_role}.yaml"
+    path: "environments/%{::environment}/roles/%{::_role}.yaml"
 
   - name: "Private environment data"
-    path: "private/environments/%{::environment}/common.yaml"
+    path: "environments/%{::environment}/common.yaml"
+    datadir: /srv/git/puppet/private/hieradata
   - name: "Public environment data"
-    path: "public/environments/%{::environment}/common.yaml"
+    path: "environments/%{::environment}/common.yaml"
 
   - name: "Private role data"
-    path: "private/roles/%{::_role}.yaml"
+    path: "roles/%{::_role}.yaml"
+    datadir: /srv/git/puppet/private/hieradata
   - name: "Public role data"
-    path: "public/roles/%{::_role}.yaml"
+    path: "roles/%{::_role}.yaml"
 
   - name: "Private common data"
-    path: "private/common.yaml"
+    path: "common.yaml"
+    datadir: /srv/git/puppet/private/hieradata
   - name: "Public common data"
-    path: "public/common.yaml"
+    path: "common.yaml"

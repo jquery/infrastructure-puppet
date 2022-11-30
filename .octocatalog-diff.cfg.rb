@@ -6,8 +6,8 @@ module OctocatalogDiff
     def self.config
       settings = {}
 
-      settings[:hiera_config] = 'hiera.yaml'
-      settings[:hiera_path] = 'test_data/hieradata'
+      settings[:hiera_config] = 'test_data/hiera.yaml'
+      settings[:hiera_path] = ''
       settings[:environment] = 'staging'
 
       settings[:bootstrap_script] = 'test_data/bootstrap.sh'

@@ -1,0 +1,33 @@
+---
+# Docs:
+# https://puppet.com/docs/puppet/7/environments_creating.html
+# https://puppet.com/docs/puppet/7/hiera_config_yaml_5.html
+version: 5
+defaults:
+  datadir: .
+  data_hash: yaml_data
+hierarchy:
+  - name: "Private node data"
+    path: "test_data/private/nodes/%{::trusted.certname}.yaml"
+  - name: "Public node data"
+    path: "hieradata/nodes/%{::trusted.certname}.yaml"
+
+  - name: "Private environment role data"
+    path: "test_data/private/hieradata/environments/%{::environment}/roles/%{::_role}.yaml"
+  - name: "Public environment role data"
+    path: "hieradata/environments/%{::environment}/roles/%{::_role}.yaml"
+
+  - name: "Private environment data"
+    path: "test_data/private/hieradata/environments/%{::environment}/common.yaml"
+  - name: "Public environment data"
+    path: "hieradata/environments/%{::environment}/common.yaml"
+
+  - name: "Private role data"
+    path: "test_data/private/hieradata/roles/%{::_role}.yaml"
+  - name: "Public role data"
+    path: "hieradata/roles/%{::_role}.yaml"
+
+  - name: "Private common data"
+    path: "test_data/private/hieradata/common.yaml"
+  - name: "Public common data"
+    path: "hieradata/common.yaml"
