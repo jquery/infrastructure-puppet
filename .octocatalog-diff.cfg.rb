@@ -28,7 +28,7 @@ module OctocatalogDiff
         break
       end
 
-      settings[:from_env] = 'origin/main'
+      settings[:from_env] = 'origin/staging'
 
       settings[:validate_references] = %w(before notify require subscribe)
       settings[:basedir] = Dir.pwd
