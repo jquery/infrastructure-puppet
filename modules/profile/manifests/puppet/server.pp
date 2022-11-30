@@ -28,8 +28,21 @@ class profile::puppet::server (
     ensure => directory,
   }
 
+  $g10k_deploy_base_path = '/etc/puppetlabs/code'
   $code_dir = '/srv/git/puppet/public'
   $private_repo_dir = '/srv/git/puppet/private'
+
+  file { '/etc/puppetlabs/g10k.yaml':
+    ensure  => file,
+    content => template('profile/puppet/server/g10k.yaml.erb'),
+  }
+
+  exec { 'g10k':
+    command     => '/usr/bin/g10k -config /etc/puppetlabs/g10k.yaml',
+    user        => 'gitpuppet',
+    refreshonly => true,
+    logoutput   => true,
+  }
 
   git::clone { 'puppet-code':
     path   => $code_dir,

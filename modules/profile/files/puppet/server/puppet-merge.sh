@@ -2,6 +2,14 @@
 
 set -euo pipefail
 
+if [ "$(whoami)" != "gitpuppet" ]
+then
+  exec sudo -u gitpuppet puppet-merge
+  exit 0
+fi
+
+g10k -config /etc/puppetlabs/g10k.yaml
+
 GIT_DIR="/srv/git/puppet/public"
 cd "$GIT_DIR"
 
@@ -9,22 +17,6 @@ GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 echo " -- Fetching Git updates"
 git fetch origin -v
-
-echo " -- Comparing the changes"
-PAGER="" git diff "$GIT_BRANCH"..origin/"$GIT_BRANCH"
-
-while true; do
-    read -rp " --- Approve the changes (y/n)? " choice
-    case "$choice" in
-        y|Y)
-            break
-            ;;
-        n|N)
-            echo "Aborted!"
-            exit 1
-            ;;
-    esac
-done
 
 ORIGINAL_PUPPETFILE_HASH=$(sha512sum Puppetfile)
 
