@@ -1,6 +1,7 @@
 # @summary provisions a puppet server
 class profile::puppet::server (
-  String $java_memory = lookup('profile::puppet::server::java_memory', {default_value => '1g'}),
+  String[1] $java_memory        = lookup('profile::puppet::server::java_memory', {default_value => '1g'}),
+  String[1] $g10k_branch_filter = lookup('profile::puppet::server::g10k_branch_filter'),
 ) {
   include profile::puppet::common
 
