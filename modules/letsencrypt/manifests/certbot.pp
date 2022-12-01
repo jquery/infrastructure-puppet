@@ -17,7 +17,8 @@ class letsencrypt::certbot (
     '/var/www/letsencrypt/.well-known',
     '/var/www/letsencrypt/.well-known/acme-challenge/',
   ]:
-    ensure => directory,
+    ensure  => directory,
+    require => Package['nginx-full'],
   }
 
   file { '/etc/letsencrypt/cli.ini':
