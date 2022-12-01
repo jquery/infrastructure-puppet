@@ -6,7 +6,7 @@ set -euo pipefail
 INSTANCE=$1
 ENVIRONMENT=$2
 
-PUPPET_SERVER=$(python3 -c "import sys, yaml; print(yaml.safe_load(sys.stdin)['profile::puppet::agent::puppet_server'])" < hieradata/environments/"$ENVIRONMENT".yaml)
+PUPPET_SERVER=$(python3 -c "import sys, yaml; print(yaml.safe_load(sys.stdin)['profile::puppet::agent::puppet_server'])" < hieradata/environments/"$ENVIRONMENT"/common.yaml)
 
 # https://wiki.debian.org/DebianRepository/UseThirdParty, not needed when Bookworm is out
 ssh root@"$INSTANCE" mkdir -p /etc/apt/keyrings
