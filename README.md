@@ -7,9 +7,8 @@ Puppet configuration for jQuery Infrastructure servers.
 ## Install
 
 This repository is installed onto Puppet servers using the
-`puppet::server` profile, applied via the `puppet` role. To apply
-updates to this repository, SSH to the Puppet server and run
-`puppet-merge` as your local user.
+`puppet::server` profile, applied via the `puppet` role. Updates to
+this repository are applied automatically.
 
 ## Provisioning new nodes
 
