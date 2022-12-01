@@ -26,6 +26,7 @@ class profile::base (
     'curl',
     'git',
     'jq',
+    'molly-guard',
     'tmux',
   ])
 }
