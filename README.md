@@ -118,11 +118,10 @@ private repository (and remember to commit that change).
 
 Then, run octocatalog-diff like so:
 ```shell
-$ export PUPPETDB_URL="https://username:password@puppet-03.stage.ops.jquery.net:8100/"
-$ octocatalog-diff -n puppet-03.stage.ops.jquery.net
-I, [2022-11-28T16:06:24.469527 #199545]  INFO -- : Catalogs compiled for puppet-03.stage.ops.jquery.net
-I, [2022-11-28T16:06:24.512173 #199545]  INFO -- : Diffs computed for puppet-03.stage.ops.jquery.net
-I, [2022-11-28T16:06:24.512213 #199545]  INFO -- : No differences
+$ export PUPPETDB_URL="https://username:password@puppet-03.ops.jquery.net:8100/"
+
+$ octocatalog-diff -n codeorigin-02.stage.ops.jquery.net
+$ octocatalog-diff --environment production -n puppet-03.ops.jquery.net
 ```
 
 By default, `octocatalog-diff` will show the difference between the
