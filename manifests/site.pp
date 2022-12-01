@@ -17,7 +17,3 @@ node 'puppet-03.ops.jquery.net' {
 node 'codeorigin-02.stage.ops.jquery.net' {
   role('codeorigin')
 }
-
-node 'puppet-03.stage.ops.jquery.net' {
-  role('puppet')
-}
