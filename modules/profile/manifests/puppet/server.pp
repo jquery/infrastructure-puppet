@@ -1,6 +1,5 @@
 # @summary provisions a puppet server
 class profile::puppet::server (
-  String $git_branch  = lookup('profile::puppet::server::git_branch'),
   String $java_memory = lookup('profile::puppet::server::java_memory', {default_value => '1g'}),
 ) {
   include profile::puppet::common
