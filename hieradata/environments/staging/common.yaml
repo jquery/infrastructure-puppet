@@ -1,8 +1,7 @@
-profile::puppet::agent::puppet_server: puppet-03.stage.ops.jquery.net
+profile::puppet::agent::puppet_server: puppet-03.ops.jquery.net
 profile::puppet::server::git_branch: staging
 
-# TODO: change me
-profile::certbot::email: jquery-letsencrypt@taavi.wtf
+profile::certbot::email: infrastructure-team@jquery.com
 
 profile::codeorigin::vhost_hostnames:
   - code2.jquery.com
