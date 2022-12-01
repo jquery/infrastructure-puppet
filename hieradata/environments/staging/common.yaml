@@ -1,5 +1,4 @@
 profile::puppet::agent::puppet_server: puppet-03.ops.jquery.net
-profile::puppet::server::git_branch: staging
 
 profile::certbot::email: infrastructure-team@jquery.com
 

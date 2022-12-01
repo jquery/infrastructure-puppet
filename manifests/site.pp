@@ -4,6 +4,10 @@
 
 # Production
 
+node 'codeorigin-02.ops.jquery.net' {
+  role('codeorigin')
+}
+
 node 'puppet-03.ops.jquery.net' {
   role('puppet')
 }
