@@ -33,5 +33,7 @@ class letsencrypt::certbot (
     source => 'puppet:///modules/letsencrypt/override-no-quiet.conf',
   }
 
-  File <| tag == 'letsencrypt-hook' |>
+  File <| tag == 'letsencrypt-hook' |> {
+    require => Package['certbot'],
+  }
 }
