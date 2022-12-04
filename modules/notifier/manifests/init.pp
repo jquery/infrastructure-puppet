@@ -1,7 +1,7 @@
 # @summary configures node-notifier to receive github webhooks
 # @param $webhook_secret github webhook secret
 # @param $version git version to clone. note that the module doesn't
-#   currently auto update after changing thiois.
+#   currently auto update after changing this.
 class notifier (
   String[1] $webhook_secret,
   String[1] $version,
