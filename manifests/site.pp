@@ -8,6 +8,10 @@ node 'codeorigin-02.ops.jquery.net' {
   role('codeorigin')
 }
 
+node 'gruntjs-02.ops.jquery.net' {
+  role('gruntjscom')
+}
+
 node 'puppet-03.ops.jquery.net' {
   role('puppet')
 }
@@ -16,4 +20,8 @@ node 'puppet-03.ops.jquery.net' {
 
 node 'codeorigin-02.stage.ops.jquery.net' {
   role('codeorigin')
+}
+
+node 'gruntjs-02.stage.ops.jquery.net' {
+  role('gruntjscom')
 }
