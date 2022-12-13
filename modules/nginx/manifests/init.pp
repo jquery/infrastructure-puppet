@@ -36,6 +36,12 @@ class nginx {
 
   nginx::site { '00-default':
     source => 'puppet:///modules/nginx/default.nginx',
+    notify => Exec['nginx-default-site-reload'],
+  }
+
+  exec { 'nginx-default-site-reload':
+    command     => '/usr/bin/systemctl reload nginx.service',
+    refreshonly => true,
   }
 
   letsencrypt::hook { 'nginx-reload':
