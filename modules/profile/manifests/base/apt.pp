@@ -41,6 +41,8 @@ class profile::base::apt (
     }
   }
 
+  Apt::Source<| |> -> File['sources.list']
+
   # configure default behaviour for config file updates: use the default specified by the package,
   # or fall back to the old file if no default has been specified
   apt::conf { 'dpkg-options-confdef':
