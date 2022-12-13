@@ -10,10 +10,15 @@ define letsencrypt::certificate (
     "-d ${domain}"
   }.join(' ')
 
-  # TODO: replace the cert if the domains change
   exec { "letsencrypt-request-${title}":
     command   => "${base_command} ${domains_command}",
     creates   => "/etc/letsencrypt/live/${title}",
+    logoutput => true,
+  }
+
+  exec { "letsencrypt-modify-${title}":
+    command   => "${base_command} ${domains_command}",
+    unless    => "/usr/local/bin/cert-compare /etc/letsencrypt/live/${title}/cert.pem ${domains.join(' ')}",
     logoutput => true,
   }
 }

@@ -3,7 +3,16 @@
 class letsencrypt::certbot (
   Stdlib::Email $email,
 ) {
-  ensure_packages(['certbot'])
+  ensure_packages([
+    'certbot',
+    'python3-cryptography',
+  ])
+
+  file { '/usr/local/bin/cert-compare':
+    ensure => file,
+    source => 'puppet:///modules/letsencrypt/cert-compare.py',
+    mode   => '0555',
+  }
 
   exec { 'certbot-register':
     command => "/usr/bin/certbot register --email ${email} --agree-tos --no-eff-email",
