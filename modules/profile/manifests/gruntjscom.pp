@@ -32,6 +32,7 @@ class profile::gruntjscom (
     listen_for        => [{ branch => 'main' }],
     local_path        => $base_path,
     local_user        => 'www-data',
+    extra_commands    => ["/usr/bin/npm install --prefix ${base_path} --cache /tmp/npm-gruntjscom"],
   }
 
   nftables::allow { 'gruntjscom-https':

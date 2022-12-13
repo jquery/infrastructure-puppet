@@ -4,7 +4,7 @@ define notifier::git_update (
   Array[Notifier::GitTarget] $listen_for,
   Stdlib::Unixpath           $local_path,
   String[1]                  $local_user,
-  Boolean                    $submodules = false,
+  Array[String[1]]           $extra_commands = [],
 ) {
   file { "/etc/notifier.d/${title}.js":
     ensure  => file,
@@ -19,12 +19,16 @@ define notifier::git_update (
     notify  => Service['notifier'],
   }
 
+  $sudo_commands = [
+    "/usr/bin/git -C ${local_path} fetch -v origin",
+    "/usr/bin/git -C ${local_path} merge --ff-only *"
+  ] + $extra_commands
+
+
   sudo::rule { "notifier-${title}":
     target     => 'notifier',
-    privileges => [
-      "ALL = (${local_user}) NOPASSWD: /usr/bin/git -C ${local_path} fetch -v origin",
-      "ALL = (${local_user}) NOPASSWD: /usr/bin/git -C ${local_path} merge --ff-only *",
-      "ALL = (${local_user}) NOPASSWD: /usr/bin/git -C ${local_path} submodule update --init --recursive",
-    ],
+    privileges => $sudo_commands.map |String[1] $cmd| {
+      "ALL = (${local_user}) NOPASSWD: ${cmd}"
+    },
   }
 }
