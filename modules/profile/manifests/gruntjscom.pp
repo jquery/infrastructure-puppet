@@ -16,7 +16,7 @@ class profile::gruntjscom (
   }
 
   exec { 'gruntjscom-npm-install':
-    command => '/usr/bin/npm install --production',
+    command => '/usr/bin/npm install --production --cache /tmp/npm-gruntjscom',
     cwd     => $base_path,
     creates => "${base_path}/node_modules",
     user    => 'www-data',
