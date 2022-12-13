@@ -44,5 +44,6 @@ define nginx::site(
   file { "/etc/nginx/sites-enabled/${basename}":
     ensure => stdlib::ensure($ensure, 'link'),
     target => "/etc/nginx/sites-available/${basename}",
+    notify => Exec['nginx-reload'],
   }
 }
