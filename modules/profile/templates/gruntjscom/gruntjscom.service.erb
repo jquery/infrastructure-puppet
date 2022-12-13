@@ -1,0 +1,15 @@
+[Unit]
+Description=gruntjs.com website
+Documentation=https://github.com/gruntjs/gruntjs.com/blob/main/README.md
+After=network.target nss-lookup.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=<%= @base_path %>
+Environment=PORT=<% @backend_port %>
+ExecStart=/usr/bin/node <%= @base_path %>/server.js
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

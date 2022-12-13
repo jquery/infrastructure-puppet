@@ -1,0 +1,7 @@
+profile::certbot::certificates:
+  gruntjscom:
+    domains:
+      - "%{::facts.fqdn}"
+
+profile::gruntjscom::tls_key_name: gruntjscom
+profile::notifier::tls_key_name: gruntjscom
