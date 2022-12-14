@@ -11,5 +11,10 @@ Environment=PORT=<% @backend_port %>
 ExecStart=/usr/bin/node <%= @base_path %>/server.js
 Restart=always
 
+PrivateTmp=full
+ProtectSystem=strict
+# For the NPM install data :/
+ReadWritePaths=<%= @base_path %>/src
+
 [Install]
 WantedBy=multi-user.target
