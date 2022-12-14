@@ -6,6 +6,8 @@ server {
   ssl_certificate_key /etc/letsencrypt/live/<%= @tls_key_name %>/privkey.pem;
   <%= @tls_config.join("\n  ") %>
 
+  server_name <%= @canonical_name %> <%= @aliases.join(' ') %> <%= @facts['fqdn'] %>;
+
   access_log    off;
   error_log     /var/log/nginx/error.log crit;
   server_tokens off;
@@ -14,6 +16,27 @@ server {
     proxy_pass http://localhost:<%= @backend_port %>;
     proxy_redirect off;
     proxy_buffering off;
+  }
+
+  location /.well-known/acme-challenge {
+    root /var/www/letsencrypt/;
+  }
+}
+
+server {
+  listen 443 ssl default_server;
+  listen [::]:443 ssl default_server;
+
+  ssl_certificate /etc/letsencrypt/live/<%= @tls_key_name %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= @tls_key_name %>/privkey.pem;
+  <%= @tls_config.join("\n  ") %>
+
+  access_log    off;
+  error_log     /var/log/nginx/error.log crit;
+  server_tokens off;
+
+  location / {
+    return 302 https://<%= @canonical_name %>$request_uri;
   }
 
   location /.well-known/acme-challenge {

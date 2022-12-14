@@ -1,7 +1,3 @@
 profile::puppet::agent::puppet_server: puppet-03.ops.jquery.net
 
 profile::certbot::email: infrastructure-team@jquery.com
-
-profile::codeorigin::vhost_hostnames:
-  - code2.jquery.com
-  - "%{::facts.fqdn}"

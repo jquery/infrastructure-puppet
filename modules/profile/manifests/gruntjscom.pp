@@ -1,6 +1,8 @@
 # @summary configures node-notifier and exposes it via tls
 class profile::gruntjscom (
-  String[1] $tls_key_name   = lookup('profile::gruntjscom::tls_key_name'),
+  String[1]           $tls_key_name   = lookup('profile::gruntjscom::tls_key_name'),
+  Stdlib::Fqdn        $canonical_name = lookup('profile::gruntjscom::canonical_name'),
+  Array[Stdlib::Fqdn] $aliases        = lookup('profile::gruntjscom::aliases'),
 ) {
   ensure_packages(['nodejs', 'npm'])
 
@@ -32,6 +34,7 @@ class profile::gruntjscom (
     listen_for        => [{ branch => 'main' }],
     local_path        => $base_path,
     local_user        => 'www-data',
+    # also executes grunt
     extra_commands    => ["/usr/bin/npm install --prefix ${base_path} --cache /tmp/npm-gruntjscom"],
   }
 
