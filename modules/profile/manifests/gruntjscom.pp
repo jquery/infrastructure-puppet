@@ -38,6 +38,10 @@ class profile::gruntjscom (
     extra_commands    => ["/usr/bin/npm install --prefix ${base_path} --cache /tmp/npm-gruntjscom"],
   }
 
+  nftables::allow { 'gruntjscom-http':
+    proto => 'tcp',
+    dport => 80,
+  }
   nftables::allow { 'gruntjscom-https':
     proto => 'tcp',
     dport => 443,
