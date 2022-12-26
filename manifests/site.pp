@@ -8,6 +8,10 @@ node 'codeorigin-02.ops.jquery.net' {
   role('codeorigin')
 }
 
+node 'contentorigin-02.ops.jquery.net' {
+  role('contentorigin')
+}
+
 node 'gruntjs-02.ops.jquery.net' {
   role('gruntjscom')
 }
