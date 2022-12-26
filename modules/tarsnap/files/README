@@ -1,0 +1,2 @@
+The signing key can be updated with:
+ curl -o tarsnap-archive-keyring.asc https://pkg.tarsnap.com/tarsnap-deb-packaging-key.asc
