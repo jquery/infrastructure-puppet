@@ -20,4 +20,4 @@ fi
 
 tarsnap-keygen --keyfile "$KEYFILE" --user "$TARSNAP_ACCOUNT_EMAIL" --machine "$INSTANCE"
 git -C "$TARSNAP_KEYS_BASE_PATH" add "$KEYFILE"
-git -C "$TARSNAP_KEYS_BASE_PATH" commit -m "($SUDO_USER) add Tarsnap keys for $INSTANCE"
+git -C "$TARSNAP_KEYS_BASE_PATH" commit -m "add Tarsnap keys for $INSTANCE"
