@@ -1,4 +1,4 @@
-# @summary manages the tarsnap backup client
+# @summary installs the tarsnap backup client
 class tarsnap () {
   file { '/usr/share/keyrings/tarsnap-archive-keyring.asc':
     ensure  => file,

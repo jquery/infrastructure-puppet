@@ -1,7 +1,8 @@
 # @summary provisions a puppet server
 class profile::puppet::server (
-  String[1] $java_memory        = lookup('profile::puppet::server::java_memory', {default_value => '1g'}),
-  String[1] $g10k_branch_filter = lookup('profile::puppet::server::g10k_branch_filter'),
+  String[1]     $java_memory           = lookup('profile::puppet::server::java_memory', {default_value => '1g'}),
+  String[1]     $g10k_branch_filter    = lookup('profile::puppet::server::g10k_branch_filter'),
+  Stdlib::Email $tarsnap_account_email = lookup('profile::puppet::server::tarsnap_account_email'),
 ) {
   include profile::puppet::common
 
@@ -81,6 +82,17 @@ class profile::puppet::server (
     umask   => '002',
   }
 
+  file { [
+    "${private_repo_dir}/hieradata/",
+    "${private_repo_dir}/files/",
+  ]:
+    ensure  => directory,
+    owner   => 'gitpuppet',
+    group   => 'gitpuppet',
+    mode    => '2775',
+    require => Exec['git-init-puppet-private'],
+  }
+
   file { '/etc/puppetlabs/hieradata':
     ensure  => absent,
     recurse => true,
@@ -153,5 +165,11 @@ class profile::puppet::server (
     privileges => [
       'ALL = (gitpuppet) NOPASSWD: /usr/bin/g10k -config /etc/puppetlabs/g10k.yaml',
     ],
+  }
+
+  class { 'tarsnap::keymgmt':
+    base_path     => "${private_repo_dir}/files/tarsnap-keys",
+    account_email => $tarsnap_account_email,
+    group         => 'puppet',
   }
 }
