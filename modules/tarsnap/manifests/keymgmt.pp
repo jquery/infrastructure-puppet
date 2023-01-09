@@ -8,7 +8,7 @@ class tarsnap::keymgmt (
   file { '/usr/local/sbin/jq-tarsnap-keygen':
     ensure => file,
     source => 'puppet:///modules/tarsnap/keymgmt/jq-tarsnap-keygen.sh',
-    user    => $user,
+    owner   => $user,
     group   => $group,
     mode   => '0550',
   }
