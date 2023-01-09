@@ -4,7 +4,6 @@ class tarsnap::keymgmt (
   Stdlib::Email    $account_email,
   String[1]        $user,
   String[1]        $group,
-  Boolean          $shared,
 ) {
   file { '/usr/local/sbin/jq-tarsnap-keygen':
     ensure => file,
