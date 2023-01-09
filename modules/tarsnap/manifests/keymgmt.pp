@@ -16,7 +16,7 @@ class tarsnap::keymgmt (
   file { '/etc/jq-tarsnap-keygen.sh':
     ensure  => file,
     content => template('tarsnap/keymgmt/config.sh'),
-    user    => $user,
+    owner   => $user,
     group   => $group,
     mode    => '0550',
   }
