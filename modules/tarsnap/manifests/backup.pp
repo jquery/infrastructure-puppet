@@ -11,11 +11,12 @@ define tarsnap::backup (
     }
 
     file { '/etc/tarsnap.key':
-      ensure  => file,
-      content => jqlib::secret("tarsnap-keys/${::fqdn}.key"),
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0440',
+      ensure    => file,
+      content   => jqlib::secret("tarsnap-keys/${::fqdn}.key"),
+      owner     => 'root',
+      group     => 'root',
+      mode      => '0440',
+      show_diff => false,
     }
   }
 
