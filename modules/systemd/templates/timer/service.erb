@@ -1,0 +1,9 @@
+[Unit]
+Description=<%= @description %>
+
+[Service]
+<%- @environment.each do |var| -%>
+Environment="<%= var %>"
+<%- end -%>
+User=<%= @user %>
+ExecStart=<%= @command %>

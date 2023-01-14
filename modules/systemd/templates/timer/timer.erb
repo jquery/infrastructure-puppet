@@ -1,0 +1,8 @@
+[Unit]
+Description=Periodic execution of <%= @title %> (<%= @description %>)
+
+[Timer]
+Unit=<%= @title %>.service
+<%- @interval.each do |line| %>
+<%= line %>
+<% end -%>

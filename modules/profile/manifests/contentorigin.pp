@@ -23,4 +23,8 @@ class profile::contentorigin (
       require => Letsencrypt::Certificate[$site['certificate']],
     }
   }
+
+  tarsnap::backup { 'contentorigin':
+    paths => ['/srv/www'],
+  }
 }

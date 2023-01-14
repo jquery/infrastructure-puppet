@@ -4,3 +4,6 @@ profile::notifier::webhook_secret: 'somesecret'
 profile::puppet::puppetdb::postgresql_password: 'fakepass'
 profile::puppet::puppetdb::nginx_htpassword_users: []
 profile::puppet::server::tarsnap_account_email: email@example.com
+
+# hacks
+jqlib::secret::use_fake_private: true
