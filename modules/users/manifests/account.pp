@@ -7,13 +7,12 @@
 # @param $user_groups the groups this user is in
 # @param $root If true, add the user to the `sudo` group, and add their key to the `root` user.
 define users::account (
-  Jqlib::Ensure $ensure,
-  Integer       $uid,
-  String        $key_type,
-  String        $key,
-  Array[String] $user_groups,
-  Array[String] $groups,
-  Boolean       $root,
+  Jqlib::Ensure         $ensure,
+  Integer               $uid,
+  Array[Users::Ssh_key] $ssh_keys,
+  Array[String]         $user_groups,
+  Array[String]         $groups,
+  Boolean               $root,
 ) {
   if $root {
     # adm for viewing logs and similar without sudo
@@ -55,19 +54,21 @@ define users::account (
     }
   }
 
-  ssh_authorized_key { "${title}_key":
-    ensure => $ensure,
-    user   => $title,
-    type   => $key_type,
-    key    => $key,
-  }
-
-  if $root {
-    ssh_authorized_key { "root_${title}_key":
+  $ssh_keys.each |Integer $count, Users::Ssh_key $key| {
+    ssh_authorized_key { "${title}_key_${count}":
       ensure => $ensure,
-      user   => 'root',
-      type   => $key_type,
-      key    => $key,
+      user   => $title,
+      type   => $key['type'],
+      key    => $key['key'],
+    }
+
+    if $root {
+      ssh_authorized_key { "root_${title}_key_${count}":
+        ensure => $ensure,
+        user   => 'root',
+        type   => $key['type'],
+        key    => $key['key'],
+      }
     }
   }
 }
