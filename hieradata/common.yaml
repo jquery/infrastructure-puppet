@@ -25,6 +25,11 @@ profile::base::accounts:
       # last changed in 2022
       - type: ssh-ed25519
         key: AAAAC3NzaC1lZDI1NTE5AAAAIEbXQ4PFT2Or3t8Y1M0pvN4/9KAU39QupA/xu1/+x6n1
+      # last changed in 2023
+      - type: sk-ssh-ed25519@openssh.com
+        key: AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIKIhmvQSYtWuH0Oq9Gw5sSOcR37Q4m0SJAoPys0PO858AAAABHNzaDo=
+      - type: sk-ssh-ed25519@openssh.com
+        key: AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIDjVhTkDu1JerHASe9pGTFA1vbKVM40QS/KuyKl7ubqUAAAABHNzaDo=
 
 profile::base::groups:
   sudo:
