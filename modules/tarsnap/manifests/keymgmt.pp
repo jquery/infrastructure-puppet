@@ -6,6 +6,10 @@ class tarsnap::keymgmt (
   String[1]        $group,
 ) {
   file { '/usr/local/sbin/jq-tarsnap-keygen':
+    ensure => absent,
+  }
+
+  file { '/usr/local/bin/jq-tarsnap-keygen':
     ensure => file,
     source => 'puppet:///modules/tarsnap/keymgmt/jq-tarsnap-keygen.sh',
     owner   => $user,
