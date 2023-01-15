@@ -173,4 +173,8 @@ class profile::puppet::server (
     user          => 'gitpuppet',
     group         => 'gitpuppet',
   }
+
+  tarsnap::backup { 'puppet-private':
+    paths => [$private_repo_dir],
+  }
 }
