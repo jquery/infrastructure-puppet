@@ -3,10 +3,7 @@ class profile::base::apt (
   Array[Debian::Codename] $security_supported_versions = lookup('profile::base::apt::security_supported_versions'),
 ) {
   class { 'apt':
-    update => {
-      frequency => 'daily',
-    },
-    purge  => {
+    purge => {
       'sources.list'   => true,
       'sources.list.d' => true,
       'preferences'    => true,
