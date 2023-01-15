@@ -19,5 +19,6 @@ if [ -f "$KEYFILE" ]; then
 fi
 
 tarsnap-keygen --keyfile "$KEYFILE" --user "$TARSNAP_ACCOUNT_EMAIL" --machine "$INSTANCE"
+chmod 660 "$KEYFILE"
 git -C "$TARSNAP_KEYS_BASE_PATH" add "$KEYFILE"
 git -C "$TARSNAP_KEYS_BASE_PATH" commit -m "add Tarsnap keys for $INSTANCE"
