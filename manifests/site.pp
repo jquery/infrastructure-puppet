@@ -20,6 +20,10 @@ node 'puppet-03.ops.jquery.net' {
   role('puppet')
 }
 
+node 'swarm-02.ops.jquery.net' {
+  role('testswarm')
+}
+
 # Staging
 
 node 'codeorigin-02.stage.ops.jquery.net' {
