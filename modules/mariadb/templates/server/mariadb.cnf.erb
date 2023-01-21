@@ -1,0 +1,29 @@
+# This is the MariaDB configuration file, managed by Puppet.
+
+[mysqld]
+user                    = mysql
+pid-file                = /run/mysqld/mysqld.pid
+basedir                 = /usr
+datadir                 = <%= @datadir %>
+tmpdir                  = <%= @tmpdir %>
+lc-messages-dir         = /usr/share/mysql
+lc-messages             = en_US
+max_connections         = <%= @max_connections %>
+
+bind-address            = <%= @bind_address %>
+port                    = <%= @bind_port %>
+
+local_infile            = 0
+
+skip-external-locking   = 1
+skip-name-resolve       = 1
+
+report_host             = <%= @facts['fqdn'] %>
+report_port             = <%= @bind_port %>
+
+character-set-server    = utf8mb4
+collation-server        = utf8mb4_general_ci
+
+<%- if @innodb_buffer_pool_size -%>
+innodb_buffer_pool_size = <%= @innodb_buffer_pool_size %>
+<%- end -%>
