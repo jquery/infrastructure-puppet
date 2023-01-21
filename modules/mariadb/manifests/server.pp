@@ -24,7 +24,7 @@ class mariadb::server (
   }
 
   exec { 'mariadb-install-database':
-    command   => "/usr/bin/mysql_install_db --user=mysql --datadir=${datadir}",
+    command   => "/usr/bin/mysql_install_db --user=mysql --datadir=${datadir} --skip-test-db",
     creates   => "${datadir}/mysql",
     require   => File[$datadir],
     notify    => Service['mariadb'],
