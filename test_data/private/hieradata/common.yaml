@@ -5,5 +5,7 @@ profile::puppet::puppetdb::postgresql_password: 'fakepass'
 profile::puppet::puppetdb::nginx_htpassword_users: []
 profile::puppet::server::tarsnap_account_email: email@example.com
 
+profile::testswarm::db_user_password: 'fakepass'
+
 # hacks
 jqlib::secret::use_fake_private: true
