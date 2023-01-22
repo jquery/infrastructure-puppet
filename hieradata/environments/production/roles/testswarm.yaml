@@ -1,2 +1,11 @@
 # TODO: update
 profile::testswarm::server::public_host_name: "%{::facts.fqdn}"
+
+# TODO: update
+profile::testswarm::server::settings::user_agents:
+  chrome_107:
+    browserFamily: Chrome
+    browserMajor: "107"
+profile::testswarm::server::settings::browser_sets:
+  jquery:
+    - chrome_107
