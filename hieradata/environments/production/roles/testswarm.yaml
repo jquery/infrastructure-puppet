@@ -1,0 +1,2 @@
+# TODO: update
+profile::testswarm::server::public_host_name: "%{::facts.fqdn}"
