@@ -6,6 +6,10 @@ class profile::testswarm::server (
   Hash         $user_agents      = lookup('profile::testswarm::server::settings::user_agents'),
   Hash         $browser_sets     = lookup('profile::testswarm::server::settings::browser_sets'),
 ) {
+  class { 'php':
+    extensions => ['mysql'],
+  }
+
   class { 'php::fpm':
     ini_values => {
       'memory_limit' => '512M',
@@ -73,11 +77,12 @@ class profile::testswarm::server (
   }
 
   file { '/etc/testswarm.json':
-    ensure  => file,
-    content => $config.to_json(),
-    owner   => 'www-data',
-    group   => 'www-data',
-    mode    => '0440',
+    ensure    => file,
+    content   => $config.to_json(),
+    owner     => 'www-data',
+    group     => 'www-data',
+    mode      => '0440',
+    show_diff => false,
   }
 
   file { '/srv/testswarm/config/localSettings.php':
