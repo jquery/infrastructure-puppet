@@ -6,7 +6,11 @@ class profile::testswarm::server (
   Hash         $user_agents      = lookup('profile::testswarm::server::settings::user_agents'),
   Hash         $browser_sets     = lookup('profile::testswarm::server::settings::browser_sets'),
 ) {
-  class { 'php::fpm': }
+  class { 'php::fpm':
+    ini_values => {
+      'memory_limit' => '512M',
+    },
+  }
 
   ensure_packages([
     'composer',
