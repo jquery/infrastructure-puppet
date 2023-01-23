@@ -4,4 +4,8 @@ class php () {
     'bullseye' => '7.4',
     default    => fail('php: unsupported debian version'),
   }
+
+  ensure_packages([
+    "php${version}",
+  ])
 }
