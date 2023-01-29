@@ -108,4 +108,9 @@ class profile::testswarm::server (
     content => template('profile/testswarm/server/site.nginx.erb'),
     require => Letsencrypt::Certificate[$tls_key_name],
   }
+
+  nftables::allow { 'testswarm-https':
+    proto => 'tcp',
+    dport => 443,
+  }
 }
