@@ -6,4 +6,5 @@ class role::testswarm {
 
   include profile::testswarm::database
   include profile::testswarm::server
+  include profile::testswarm::browserstack
 }
