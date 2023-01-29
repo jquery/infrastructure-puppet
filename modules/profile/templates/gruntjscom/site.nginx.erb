@@ -1,6 +1,4 @@
 server {
-  listen 80;
-  listen [::]:80;
   listen 443 ssl;
   listen [::]:443 ssl;
 
@@ -26,12 +24,8 @@ server {
 }
 
 server {
-  listen 80;
-  listen [::]:80;
   listen 443 ssl default_server;
   listen [::]:443 ssl default_server;
-
-  server_name www.gruntjs.com;
 
   ssl_certificate /etc/letsencrypt/live/<%= @tls_key_name %>/fullchain.pem;
   ssl_certificate_key /etc/letsencrypt/live/<%= @tls_key_name %>/privkey.pem;

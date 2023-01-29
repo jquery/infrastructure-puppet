@@ -39,10 +39,6 @@ class profile::gruntjscom (
     restart_services  => ['gruntjscom.service'],
   }
 
-  nftables::allow { 'gruntjscom-http':
-    proto => 'tcp',
-    dport => 80,
-  }
   nftables::allow { 'gruntjscom-https':
     proto => 'tcp',
     dport => 443,
