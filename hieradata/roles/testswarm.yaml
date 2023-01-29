@@ -3,4 +3,6 @@ profile::certbot::certificates:
     domains:
       - "%{::facts.fqdn}"
 
+profile::notifier::tls_key_name: testswarm
+
 profile::testswarm::server::tls_key_name: testswarm
