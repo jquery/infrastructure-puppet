@@ -1,10 +1,10 @@
 # @summary a testswarm server
 class profile::testswarm::server (
-  String[1]    $db_user_password = lookup('profile::testswarm::db_user_password'),
-  String[1]    $tls_key_name     = lookup('profile::testswarm::server::tls_key_name'),
-  Stdlib::Fqdn $public_host_name = lookup('profile::testswarm::server::public_host_name'),
-  Hash         $user_agents      = lookup('profile::testswarm::server::settings::user_agents'),
-  Hash         $browser_sets     = lookup('profile::testswarm::server::settings::browser_sets'),
+  String[1]                       $db_user_password = lookup('profile::testswarm::db_user_password'),
+  String[1]                       $tls_key_name     = lookup('profile::testswarm::server::tls_key_name'),
+  Stdlib::Fqdn                    $public_host_name = lookup('profile::testswarm::server::public_host_name'),
+  Profile::TestSwarm::UserAgents  $user_agents      = lookup('profile::testswarm::server::settings::user_agents'),
+  Profile::TestSwarm::BrowserSets $browser_sets     = lookup('profile::testswarm::server::settings::browser_sets'),
 ) {
   class { 'php':
     extensions => ['mysql'],
