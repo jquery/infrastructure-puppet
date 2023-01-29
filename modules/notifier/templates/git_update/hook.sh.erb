@@ -8,5 +8,8 @@ sudo -u <%= @local_user %> /usr/bin/git -C <%= @local_path %> merge --ff-only "$
 <%- @extra_commands.each do |cmd| -%>
 sudo -u <%= @local_user %> <%= cmd %>
 <%- end %>
+<%- @restart_services.each do |service| -%>
+sudo -u root /usr/bin/systemctl restart <%= service %>
+<%- end %>
 
 echo "Done!"

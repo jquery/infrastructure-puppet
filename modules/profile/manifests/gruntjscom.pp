@@ -36,6 +36,7 @@ class profile::gruntjscom (
     local_user        => 'www-data',
     # also executes grunt
     extra_commands    => ["/usr/bin/npm install --prefix ${base_path} --cache /tmp/npm-gruntjscom"],
+    restart_services  => ['gruntjscom.service'],
   }
 
   nftables::allow { 'gruntjscom-http':

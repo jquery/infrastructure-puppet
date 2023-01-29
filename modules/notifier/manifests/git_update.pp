@@ -4,7 +4,8 @@ define notifier::git_update (
   Array[Notifier::GitTarget] $listen_for,
   Stdlib::Unixpath           $local_path,
   String[1]                  $local_user,
-  Array[String[1]]           $extra_commands = [],
+  Array[String[1]]           $extra_commands   = [],
+  Array[String[1]]           $restart_services = [],
 ) {
   file { "/etc/notifier.d/${title}.js":
     ensure  => file,
@@ -19,16 +20,19 @@ define notifier::git_update (
     notify  => Service['notifier'],
   }
 
-  $sudo_commands = [
+  $command_rules = ([
     "/usr/bin/git -C ${local_path} fetch -v origin",
     "/usr/bin/git -C ${local_path} merge --ff-only *"
-  ] + $extra_commands
+  ] + $extra_commands).map |String[1] $cmd| {
+    "ALL = (${local_user}) NOPASSWD: ${cmd}"
+  }
 
+  $restart_rules = $restart_services.map |String[1] $service| {
+    "ALL = (root) NOPASSWD: /usr/bin/systemctl restart ${service}"
+  }
 
   sudo::rule { "notifier-${title}":
     target     => 'notifier',
-    privileges => $sudo_commands.map |String[1] $cmd| {
-      "ALL = (${local_user}) NOPASSWD: ${cmd}"
-    },
+    privileges => $command_rules + $restart_rules,
   }
 }
