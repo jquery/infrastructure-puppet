@@ -16,24 +16,12 @@ class profile::testswarm::server (
     },
   }
 
-  ensure_packages([
-    'composer',
-  ])
-
   git::clone { 'testswarm':
     path   => '/srv/testswarm',
     remote => 'https://github.com/jquery/testswarm',
     branch => 'main',
     owner  => 'www-data',
     group  => 'www-data',
-  }
-
-  exec { 'testswarm-composer-install':
-    command => '/usr/bin/composer install --no-dev',
-    cwd     => '/srv/testswarm',
-    creates => "/srv/testswarm/vendor",
-    user    => 'www-data',
-    require => Git::Clone['testswarm'],
   }
 
   file { '/srv/testswarm/cache':
