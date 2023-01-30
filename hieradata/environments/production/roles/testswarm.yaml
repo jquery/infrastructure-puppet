@@ -1,6 +1,8 @@
 # TODO: update
 profile::testswarm::public_host_name: "%{::facts.fqdn}"
 
+profile::testswarm::browserstack::ensure: absent
+
 profile::testswarm::server::settings::user_agents:
   chrome_90:
     browserFamily: Chrome

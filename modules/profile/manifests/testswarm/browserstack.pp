@@ -1,9 +1,10 @@
 # @summary configures the testswarm-browserstack connector
 class profile::testswarm::browserstack (
-  Stdlib::Fqdn $public_host_name  = lookup('profile::testswarm::public_host_name'),
-  String[1]    $browserstack_user = lookup('profile::testswarm::browserstack::browserstack_user'),
-  String[1]    $browserstack_key  = lookup('profile::testswarm::browserstack::browserstack_key'),
-  String[1]    $run_token         = lookup('profile::testswarm::browserstack::run_token'),
+  Stdlib::Fqdn  $public_host_name  = lookup('profile::testswarm::public_host_name'),
+  String[1]     $browserstack_user = lookup('profile::testswarm::browserstack::browserstack_user'),
+  String[1]     $browserstack_key  = lookup('profile::testswarm::browserstack::browserstack_key'),
+  String[1]     $run_token         = lookup('profile::testswarm::browserstack::run_token'),
+  Jqlib::Ensure $ensure            = lookup('profile::testswarm::browserstack::ensure'),
 ) {
   ensure_packages(['nodejs', 'npm'])
 
@@ -43,17 +44,22 @@ class profile::testswarm::browserstack (
     show_diff => false,
   }
 
-  #systemd::service { 'testswarm-browserstack':
-  #  content => template('profile/testswarm/browserstack/testswarm-browserstack.service.erb'),
-  #}
+  systemd::service { 'testswarm-browserstack':
+    ensure  => $ensure,
+    content => template('profile/testswarm/browserstack/testswarm-browserstack.service.erb'),
+  }
+
+  $restart_services = $ensure ? {
+    present => ['testswarm-browserstack.service'],
+    default => [],
+  }
 
   notifier::git_update { 'testswarm-browserstack':
     github_repository => 'jquery/testswarm-browserstack',
     listen_for        => [{ branch => 'main' }],
     local_path        => '/srv/testswarm-browserstack',
     local_user        => 'www-data',
-    # also executes grunt
-    extra_commands    => ["/usr/bin/npm install --prefix /srv/testswarm-browserstack --cache /tmp/npm-testswarm-browserstack"],
-    # restart_services  => ['testswarm-browserstack.service'],
+    extra_commands    => ['/usr/bin/npm install --prefix /srv/testswarm-browserstack --cache /tmp/npm-testswarm-browserstack'],
+    restart_services  => $restart_services,
   }
 }
