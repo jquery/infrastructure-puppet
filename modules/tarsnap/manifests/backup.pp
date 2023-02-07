@@ -18,6 +18,14 @@ define tarsnap::backup (
       mode      => '0440',
       show_diff => false,
     }
+
+    file { '/usr/local/sbin/jq-tarsnap-take-backup':
+      ensure => file,
+      source => 'puppet:///modules/tarsnap/backup/jq-tarsnap-take-backup.sh',
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0554',
+    }
   }
 
   $hour = fqdn_rand(24, "backup-hour-${title}")
@@ -27,7 +35,7 @@ define tarsnap::backup (
   systemd::timer { "backup-${title}":
     description => "Back up ${title} to Tarsnap",
     user        => 'root',
-    command     => "/usr/bin/tarsnap -c -f ${title} ${paths.join(' ')}",
+    command     => "/usr/local/sbin/jq-tarsnap-take-backup ${title} ${paths.join(' ')}",
     interval    => ["OnCalendar=*-*-* ${hour}:${minute}:00"],
     require     => Package['tarsnap'],
   }
