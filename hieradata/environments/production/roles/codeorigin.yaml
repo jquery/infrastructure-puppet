@@ -1,3 +1,4 @@
 profile::codeorigin::vhost_hostnames:
   - code.jquery.com
+  - codeorigin.jquery.com
   - "%{::facts.fqdn}"
