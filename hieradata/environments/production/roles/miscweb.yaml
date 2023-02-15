@@ -1,0 +1,3 @@
+profile::miscweb::sites:
+  podcast2.jquery.com:
+    certificate: miscweb

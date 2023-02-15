@@ -16,6 +16,10 @@ node 'gruntjs-02.ops.jquery.net' {
   role('gruntjscom')
 }
 
+node 'miscweb-01.ops.jquery.net' {
+  role('miscweb')
+}
+
 node 'puppet-03.ops.jquery.net' {
   role('puppet')
 }
