@@ -1,0 +1,4 @@
+profile::certbot::certificates:
+  miscweb:
+    domains:
+      - "%{::facts.fqdn}"

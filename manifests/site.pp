@@ -24,6 +24,10 @@ node 'swarm-02.ops.jquery.net' {
   role('testswarm')
 }
 
+node 'miscweb-01.ops.jquery.net' {
+  role('miscweb')
+}
+
 # Staging
 
 node 'codeorigin-02.stage.ops.jquery.net' {
