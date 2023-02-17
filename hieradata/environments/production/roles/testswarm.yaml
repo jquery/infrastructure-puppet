@@ -264,7 +264,7 @@ profile::testswarm::server::settings::user_agents:
     browserMajor: '94'
   opera_95:
     browserFamily: Opera
-    browserMajor: '94'
+    browserMajor: '95'
   safari_5_1:
     browserFamily: Safari
     browserMajor: '5'
