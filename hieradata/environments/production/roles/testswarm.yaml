@@ -1,5 +1,5 @@
 # TODO: update
-profile::testswarm::public_host_name: "%{::facts.fqdn}"
+profile::testswarm::public_host_name: "swarm2.jquery.org"
 
 profile::testswarm::browserstack::ensure: absent
 
