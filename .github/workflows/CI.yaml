@@ -19,4 +19,4 @@ jobs:
 
       - name: Run puppet-lint
         run: |
-          puppet-lint .
+          puppet-lint --fail-on-warnings .

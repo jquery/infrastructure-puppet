@@ -6,7 +6,7 @@ class postgresql () {
   }
 
   ensure_packages([
-    "postgresql-13",
+    'postgresql-13',
   ])
 
   $conf_path = "/etc/postgresql/${pg_version}/${cluster_name}"

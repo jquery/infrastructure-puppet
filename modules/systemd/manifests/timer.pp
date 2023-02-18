@@ -20,7 +20,7 @@ define systemd::timer (
   }
 
   service { "${title}.timer":
-    ensure   => stdlib::ensure($ensure, 'service'),
-    enable   => $ensure == 'present',
+    ensure => stdlib::ensure($ensure, 'service'),
+    enable => $ensure == 'present',
   }
 }

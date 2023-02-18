@@ -8,7 +8,7 @@ function jqlib::secret (
     $mod_path = get_module_path('jqlib')
     $private_path = "${mod_path}/../../test_data/private"
   } else {
-    $private_path = "/srv/git/puppet/private"
+    $private_path = '/srv/git/puppet/private'
   }
 
   $val = file("${private_path}/files/${name}")

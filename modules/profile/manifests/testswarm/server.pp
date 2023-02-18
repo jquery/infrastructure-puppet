@@ -91,8 +91,8 @@ class profile::testswarm::server (
   }
 
   file { '/srv/testswarm/robots.txt':
-    ensure => link,
-    target => '/srv/testswarm/config/sample-robots.txt',
+    ensure  => link,
+    target  => '/srv/testswarm/config/sample-robots.txt',
     require => Git::Clone['testswarm'],
   }
 
