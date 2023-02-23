@@ -6,6 +6,7 @@ profile::puppet::puppetdb::nginx_htpassword_users: []
 profile::puppet::server::tarsnap_account_email: email@example.com
 
 profile::testswarm::db_user_password: 'fakepass'
+profile::testswarm::server::builds_server_name: builds.example.com
 profile::testswarm::browserstack::browserstack_user: 'fakeuser'
 profile::testswarm::browserstack::browserstack_key: 'fakekey'
 profile::testswarm::browserstack::run_token: 'faketoken'

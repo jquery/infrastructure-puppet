@@ -1,5 +1,5 @@
 upstream jenkins-builds {
-  server builds.jenkins.jquery.com;
+  server <%= @builds_server_name %>;
 }
 
 server {
@@ -40,13 +40,12 @@ server {
   # rewrite ^(.*)data/jsonp.php.*$ $1data/jsonp.php;
 
   # Support: Safari 13.0+
-  # TODO: check is this needed still?
-  # Proxy /builds to https://builds.jenkins.jquery.com
+  # Proxy /builds to https://<%= @builds_server_name %>
   # Needed for Safari where cross-domain focus doesn't work.
-  # location ~* ^/builds/(.*)$ {
-  #   proxy_pass http://jenkins-builds/$1$is_args$args;
-  #   proxy_set_header Host builds.jenkins.jquery.com;
-  # }
+  location ~* ^/builds/(.*)$ {
+    proxy_pass https://builds/$1$is_args$args;
+    proxy_set_header Host <%= @builds_server_name %>;
+  }
 
   location / {
     index index.php index.html;
