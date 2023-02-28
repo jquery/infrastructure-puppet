@@ -4,6 +4,7 @@ class profile::testswarm::server (
   Stdlib::Fqdn                    $public_host_name   = lookup('profile::testswarm::public_host_name'),
   String[1]                       $tls_key_name       = lookup('profile::testswarm::server::tls_key_name'),
   Stdlib::Fqdn                    $builds_server_name = lookup('profile::testswarm::server::builds_server_name'),
+  Jqlib::Ensure                   $cleanup_ensure     = lookup('profile::testswarm::server::cleanup_ensure'),
   Profile::TestSwarm::UserAgents  $user_agents        = lookup('profile::testswarm::server::settings::user_agents'),
   Profile::TestSwarm::BrowserSets $browser_sets       = lookup('profile::testswarm::server::settings::browser_sets'),
 ) {
@@ -108,5 +109,13 @@ class profile::testswarm::server (
   nftables::allow { 'testswarm-https':
     proto => 'tcp',
     dport => 443,
+  }
+
+  systemd::timer { 'testswarm-cleanup':
+    ensure      => $cleanup_ensure,
+    description => 'Perform TestSwarm cleanup',
+    user        => 'root',
+    command     => "/usr/bin/curl -s https://${public_host_name}/api.php?action=cleanup",
+    interval    => ["OnCalendar=*-*-* *:*:30"],
   }
 }

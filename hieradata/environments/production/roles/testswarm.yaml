@@ -2,6 +2,7 @@
 profile::testswarm::public_host_name: "swarm2.jquery.org"
 
 profile::testswarm::browserstack::ensure: absent
+profile::testswarm::server::cleanup_ensure: absent
 
 profile::testswarm::server::settings::user_agents:
   chrome_90:
