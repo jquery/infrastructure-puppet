@@ -116,6 +116,6 @@ class profile::testswarm::server (
     description => 'Perform TestSwarm cleanup',
     user        => 'root',
     command     => "/usr/bin/curl -s https://${public_host_name}/api.php?action=cleanup",
-    interval    => ["OnCalendar=*-*-* *:*:30"],
+    interval    => ['OnCalendar=*-*-* *:*:30'],
   }
 }
