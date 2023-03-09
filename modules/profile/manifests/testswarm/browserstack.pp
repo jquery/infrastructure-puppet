@@ -1,9 +1,9 @@
 # @summary configures the testswarm-browserstack connector
 class profile::testswarm::browserstack (
   Stdlib::Fqdn  $public_host_name  = lookup('profile::testswarm::public_host_name'),
+  String[1]     $run_token         = lookup('profile::testswarm::run_token'),
   String[1]     $browserstack_user = lookup('profile::testswarm::browserstack::browserstack_user'),
   String[1]     $browserstack_key  = lookup('profile::testswarm::browserstack::browserstack_key'),
-  String[1]     $run_token         = lookup('profile::testswarm::browserstack::run_token'),
   Jqlib::Ensure $ensure            = lookup('profile::testswarm::browserstack::ensure'),
 ) {
   ensure_packages(['nodejs', 'npm'])

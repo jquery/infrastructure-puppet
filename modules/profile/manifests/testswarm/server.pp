@@ -2,6 +2,7 @@
 class profile::testswarm::server (
   String[1]                       $db_user_password   = lookup('profile::testswarm::db_user_password'),
   Stdlib::Fqdn                    $public_host_name   = lookup('profile::testswarm::public_host_name'),
+  String[1]                       $run_token          = lookup('profile::testswarm::run_token'),
   String[1]                       $tls_key_name       = lookup('profile::testswarm::server::tls_key_name'),
   Stdlib::Fqdn                    $builds_server_name = lookup('profile::testswarm::server::builds_server_name'),
   Jqlib::Ensure                   $cleanup_ensure     = lookup('profile::testswarm::server::cleanup_ensure'),
@@ -58,6 +59,7 @@ class profile::testswarm::server (
       cooldownSleep   => 0,
       nonewrunsSleep  => 10,
       runTimeout      => 600,
+      runTokenHash    => sha1($run_token),
       requireRunToken => true,
       refreshControl  => 4,
     },
