@@ -1,10 +1,13 @@
 # Puppet usage
 
-## Install
+## Applying changes
 
-This repository is installed onto Puppet servers using the
-`puppet::server` profile, applied via the `puppet` role. Updates to
-this repository are applied automatically.
+All nodes run Puppet every 30 minutes or so, so just pushing
+commits to the correct branch is usually all that's needed.
+
+However, if you need to manually run Puppet, there is a wrapper script
+called `run-puppet-agent` that should be used instead of directly
+executing `puppet agent -tv`.
 
 ## Provisioning new nodes
 
@@ -13,11 +16,6 @@ Add the instance to `site.pp`, `puppet-merge` that commit and use the
 ```bash
 $ bin/provision-instance.sh codeorigin-02.stage.ops.jquery.net staging
 ```
-
-## Running Puppet manually
-
-There is a wrapper script `run-puppet-agent` that should be used
-instead of directly executing `puppet agent -tv`.
 
 ## Conventions
 
@@ -67,10 +65,43 @@ multiple profiles, use the shared part of the profile name (for example
 Private Hiera data is stored in `/srv/git/puppet/private/` on the
 Puppet server. For now, follow the instructions in `README` to edit.
 
-## UID allocations
+## Managing user accounts
 
-Human users are assigned UIDs starting with 1200. These are configured
-in `hieradata/common.yaml`.
+### Human users and groups
+
+Human users are configured in `hieradata/common.yaml` and given UIDs
+starting from 1200. Groups that are intended for human users should
+have GIDs starting from 800.
+
+A user can belong in one or more groups, and the user is provisioned
+on all servers where that role is provisioned (which is controlled via
+the `profile::base::enabled_groups` Hiera key). The `sudo` group grants
+access to all jQuery servers, and using that is discouraged if you only
+need access to a single service.
+
+For example, to create a group for people managing the 'foo' service,
+the steps needed for that are roughly:
+* In `hieradata/common.yaml`, add the group definition into the
+  `profile::base::groups` key. You need to at least assign a GID
+  (pick the lowest available number that's at least 800) and add sudo
+  rules to the group. For example:
+```yaml
+profile::base::groups:
+  foo-admins:
+    gid: 802
+    sudo:
+      - "ALL = (root) NOPASSWD: /usr/local/sbin/run-puppet-agent"
+      - "ALL = (root) NOPASSWD: /usr/bin/systemctl restart foo.service"
+```
+* In the role Hiera file for that service (in `hieradata/roles/`),
+  add the group to `profile::base::enabled_groups`. For example:
+```yaml
+profile::base::enabled_groups: [foo-admins]
+```
+* Finally, add or modify user definitions in `hieradata/common.yaml`
+  and add the new group to the users who need access.
+
+### System user UID allocations
 
 Statically assigned system UIDs and GIDs start from 600 and should be
 documented here. They should be assigned using the `systemd::sysuser`
