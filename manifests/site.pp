@@ -28,6 +28,10 @@ node 'miscweb-01.ops.jquery.net' {
   role('miscweb')
 }
 
+node 'wpblogs-01.ops.jquery.net' {
+  role('wordpress::blogs')
+}
+
 # Staging
 
 node 'codeorigin-02.stage.ops.jquery.net' {
