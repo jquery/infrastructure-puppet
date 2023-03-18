@@ -27,13 +27,6 @@ class profile::testswarm::server (
     group  => 'www-data',
   }
 
-  notifier::git_update { 'testswarm':
-    github_repository => 'jquery/testswarm',
-    listen_for        => [{ branch => 'main' }],
-    local_path        => '/srv/testswarm',
-    local_user        => 'www-data',
-  }
-
   file { '/srv/testswarm/cache':
     ensure  => directory,
     owner   => 'www-data',
