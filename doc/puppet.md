@@ -69,9 +69,24 @@ Puppet server. For now, follow the instructions in `README` to edit.
 
 ### Human users and groups
 
-Human users are configured in `hieradata/common.yaml` and given UIDs
-starting from 1200. Groups that are intended for human users should
-have GIDs starting from 800.
+Human users are configured in `hieradata/common.yaml` with the
+`profile::base::accounts` Hiera key and given UIDs starting from 1200.
+Groups that are intended for human users should have GIDs starting
+from 800.
+
+#### Adding and removing users
+
+To add a new user, add a new entry to `profile::base::accounts`. The
+YAML array key is the Unix username, the standard restrictions apply
+(so lowercase letters, numbers and dashes only, and start with a
+letter). Other required settings are the numerical user ID (pick the
+lowest available that's over 1200), list of groups the user is in
+and SSH keys. Password authentication is not supported.
+
+To remove a user, simply set `ensure: absent` and remove any groups and
+SSH keys. Do not completely remove the user account definition.
+
+#### Groups
 
 A user can belong in one or more groups, and the user is provisioned
 on all servers where that role is provisioned (which is controlled via
@@ -82,7 +97,7 @@ need access to a single service.
 For example, to create a group for people managing the 'foo' service,
 the steps needed for that are roughly:
 * In `hieradata/common.yaml`, add the group definition into the
-  `profile::base::groups` key. You need to at least assign a GID
+  `profile::base::groups` key. You need to at least assign a group ID
   (pick the lowest available number that's at least 800) and add sudo
   rules to the group. For example:
 ```yaml
