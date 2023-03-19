@@ -14,6 +14,11 @@ define users::account (
   Array[String]         $groups,
   Boolean               $root,
 ) {
+  $real_ensure = $ensure ? {
+    'present' => $user_groups.empty.bool2str('absent', 'present'),
+    default   => $ensure,
+  }
+
   if $root {
     # adm for viewing logs and similar without sudo
     $adm_group = ['adm']
@@ -22,12 +27,12 @@ define users::account (
   }
 
   group { $title:
-    ensure => $ensure,
+    ensure => $real_ensure,
     gid    => $uid,
   }
 
   user { $title:
-    ensure         => $ensure,
+    ensure         => $real_ensure,
     uid            => $uid,
     gid            => $uid,
     password       => '*',
@@ -56,7 +61,7 @@ define users::account (
 
   $ssh_keys.each |Integer $count, Users::Ssh_key $key| {
     ssh_authorized_key { "${title}_key_${count}":
-      ensure => $ensure,
+      ensure => $real_ensure,
       user   => $title,
       type   => $key['type'],
       key    => $key['key'],
@@ -64,7 +69,7 @@ define users::account (
 
     if $root {
       ssh_authorized_key { "root_${title}_key_${count}":
-        ensure => $ensure,
+        ensure => $real_ensure,
         user   => 'root',
         type   => $key['type'],
         key    => $key['key'],
