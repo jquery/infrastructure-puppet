@@ -1,3 +1,7 @@
+# @summary installs and manages a wordpress blog
+# @param $host main host name of this blog
+# @param $certificate lets encrypt certificate name
+# @param $db_password_seed seed to use to generate a database password
 define wordpress::site (
   Stdlib::Fqdn $host,
   String[1]    $certificate,
