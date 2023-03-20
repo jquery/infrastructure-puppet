@@ -18,15 +18,16 @@ class mariadb::server (
   ])
 
   file { [ $datadir, $tmpdir ]:
-    ensure => directory,
-    owner  => 'mysql',
-    group  => 'mysql',
+    ensure  => directory,
+    owner   => 'mysql',
+    group   => 'mysql',
+    require => Package['mariadb-server'],
   }
 
   exec { 'mariadb-install-database':
     command   => "/usr/bin/mysql_install_db --user=mysql --datadir=${datadir} --skip-test-db",
     creates   => "${datadir}/mysql",
-    require   => File[$datadir],
+    require   => [File[$datadir], File['/etc/mysql/mariadb.cnf']],
     notify    => Service['mariadb'],
     logoutput => true,
   }
