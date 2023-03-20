@@ -22,4 +22,10 @@ define wordpress::site (
     database  => "wordpress_${title}",
     grants    => { all => true },
   }
+
+  exec { "wp-download-${title}":
+    command => "/usr/local/bin/wp core download --path=/srv/wordpress/${title}",
+    user    => 'www-data',
+    require => File['/usr/local/bin/wp'],
+  }
 }
