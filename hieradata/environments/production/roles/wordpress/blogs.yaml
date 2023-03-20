@@ -1,0 +1,9 @@
+profile::certbot::certificates:
+  blogs:
+    domains:
+      - "%{::facts.fqdn}"
+
+profile::wordpress::blogs::sites:
+  jqueryui:
+    host: blog.jqueryui.com
+    certificate: blogs

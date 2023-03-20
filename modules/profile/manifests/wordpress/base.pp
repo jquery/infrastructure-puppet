@@ -13,8 +13,6 @@ class profile::wordpress::base (
     innodb_buffer_pool_size => $innodb_buffer_pool_size,
   }
 
-  class { 'nginx': }
-
   class { 'php':
     extensions => ['mysql'],
   }
