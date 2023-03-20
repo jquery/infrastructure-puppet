@@ -41,3 +41,4 @@ profile::base::groups:
     gid: 600
 
 profile::notifier::version: v3.0.0
+profile::wordpress::base::wordpress_cli_version: "2.7.1"
