@@ -17,6 +17,7 @@ class php::fpm (
     group   => 'root',
     mode    => '0444',
     notify  => Service["php${version}-fpm"],
+    require => Package["php${version}-fpm"],
   }
 
   service { "php${version}-fpm":
