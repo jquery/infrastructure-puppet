@@ -6,4 +6,5 @@ profile::certbot::certificates:
 profile::wordpress::blogs::sites:
   jqueryui:
     host: blog.jqueryui.com
+    site_name: jQuery UI Blog
     certificate: blogs
