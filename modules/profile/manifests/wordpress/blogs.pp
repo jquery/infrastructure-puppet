@@ -24,7 +24,7 @@ class profile::wordpress::blogs (
       admin_password   => $admin_password,
       themes           => [
         { name => 'jquery',      path => '/srv/blog.jquery.com-theme/jquery', },
-        { name => $active_theme, path => "/srv/blog.jquery.com-theme/jquery/${active_theme}", },
+        { name => $active_theme, path => "/srv/blog.jquery.com-theme/${active_theme}", },
       ],
       base_path        => "/srv/wordpress/sites/${name}",
     }
