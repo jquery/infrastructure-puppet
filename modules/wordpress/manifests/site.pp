@@ -43,7 +43,7 @@ define wordpress::site (
   }
 
   exec { "wp-install-${title}":
-    command     => "/usr/local/bin/wp core install --path=/srv/wordpress/${title} --url=https://${host} --title=\"${site_name}\" --admin_user=admin --admin_password=\"${admin_password}\" --skip-email",
+    command     => "/usr/local/bin/wp core install --path=/srv/wordpress/${title} --url=https://${host} --title=\"${site_name}\" --admin_user=admin --admin-email=root@localhost --admin_password=\"${admin_password}\" --skip-email",
     user        => 'www-data',
     logoutput   => true,
     refreshonly => true,
