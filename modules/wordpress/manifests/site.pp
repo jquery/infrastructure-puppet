@@ -79,7 +79,7 @@ define wordpress::site (
     $option_name = $option['name']
     $option_value = $option['value']
     exec { "wp-option-${title}-${option_name}":
-      command   => "/usr/local/bin/wp --path=${base_path} option set ${active_theme} \"${option_value}\"",
+      command   => "/usr/local/bin/wp --path=${base_path} option set ${option_name} \"${option_value}\"",
       unless    => "test \"$(wp --path=${base_path} option get ${option_name})\" = \"${option_value}\"",
       user      => 'www-data',
       logoutput => true,
