@@ -14,7 +14,15 @@ class profile::wordpress::base (
   }
 
   class { 'php':
-    extensions => ['mysql'],
+    extensions => [
+      # https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions
+      'curl',
+      'imagick',
+      'mbstring',
+      'mysql',
+      'xml',
+      'zip',
+    ],
   }
 
   class { 'php::fpm':
