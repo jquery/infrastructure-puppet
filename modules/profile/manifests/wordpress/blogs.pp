@@ -13,6 +13,7 @@ class profile::wordpress::blogs (
       db_password_seed => $db_password_seed,
       admin_email      => $admin_email,
       admin_password   => $admin_password,
+      base_path        => "/srv/wordpress/sites/${name}",
     }
   }
 

@@ -2,12 +2,6 @@
 class wordpress::cli (
   String[1] $version,
 ) {
-  file { '/srv/wordpress':
-    ensure => directory,
-    owner  => 'www-data',
-    group  => 'www-data',
-  }
-
   file { '/usr/share/wp-cli':
     ensure  => directory,
     owner   => 'root',

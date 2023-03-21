@@ -13,6 +13,15 @@ class profile::wordpress::base (
     innodb_buffer_pool_size => $innodb_buffer_pool_size,
   }
 
+  file { [
+    '/srv/wordpress',
+    '/srv/wordpress/sites'
+  ]:
+    ensure => directory,
+    owner  => 'www-data',
+    group  => 'www-data',
+  }
+
   class { 'php':
     extensions => [
       # https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions
