@@ -49,7 +49,12 @@ define wordpress::site (
     command   => "/usr/local/bin/wp config create --path=${base_path} --dbname=wordpress_${title} --dbuser=wordpress_${title} --dbhost=127.0.0.1 --dbpass=\"${db_user_password}\"",
     creates   => "${base_path}/wp-config.php",
     user      => 'www-data',
-    require   => Exec["wp-download-${title}"],
+    require   => [
+      Mariadb::Database["wordpress_${title}"],
+      Mariadb::User["wordpress_${title}"],
+      Mariadb::Grant["wordpress_${title}"],
+      Exec["wp-download-${title}"]
+    ],
     notify    => Exec["wp-install-${title}"],
     logoutput => true,
   }
@@ -59,6 +64,13 @@ define wordpress::site (
     user        => 'www-data',
     logoutput   => true,
     refreshonly => true,
+  }
+
+  exec { "wp-theme-${title}":
+    command   => "/usr/local/bin/wp --path=${base_path} theme activate ${active_theme}",
+    unless    => "/usr/local/bin/wp --path=${base_path} theme is-active ${active_theme}",
+    logoutput => true,
+    require   => Exec["wp-install-${title}"],
   }
 
   $tls_config = nginx::tls_config()
