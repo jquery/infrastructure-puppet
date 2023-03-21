@@ -3,6 +3,7 @@ profile::certbot::certificates:
     domains:
       - "%{::facts.fqdn}"
 
+profile::wordpress::blogs::admin_email: infrastructure-team@jquery.com
 profile::wordpress::blogs::sites:
   jqueryui:
     host: blog.jqueryui.com

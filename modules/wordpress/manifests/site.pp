@@ -3,11 +3,12 @@
 # @param $certificate lets encrypt certificate name
 # @param $db_password_seed seed to use to generate a database password
 define wordpress::site (
-  Stdlib::Fqdn $host,
-  String[1]    $site_name,
-  String[1]    $certificate,
-  String[1]    $db_password_seed,
-  String[1]    $admin_password,
+  Stdlib::Fqdn  $host,
+  String[1]     $site_name,
+  String[1]     $certificate,
+  String[1]     $db_password_seed,
+  Stdlib::Email $admin_email,
+  String[1]     $admin_password,
 ) {
   mariadb::database { "wordpress_${title}": }
 
@@ -43,7 +44,7 @@ define wordpress::site (
   }
 
   exec { "wp-install-${title}":
-    command     => "/usr/local/bin/wp core install --path=/srv/wordpress/${title} --url=https://${host} --title=\"${site_name}\" --admin_user=admin --admin_email=root@localhost --admin_password=\"${admin_password}\" --skip-email",
+    command     => "/usr/local/bin/wp core install --path=/srv/wordpress/${title} --url=https://${host} --title=\"${site_name}\" --admin_user=admin --admin_email=${admin_email} --admin_password=\"${admin_password}\" --skip-email",
     user        => 'www-data',
     logoutput   => true,
     refreshonly => true,
