@@ -48,4 +48,10 @@ define wordpress::site (
     logoutput   => true,
     refreshonly => true,
   }
+
+  $tls_config = nginx::tls_config()
+  $php_fpm_version = $::php::fpm::version
+  nginx::site { "wordpress-${title}":
+    content => template('wordpress/site/site.nginx.erb'),
+  }
 }

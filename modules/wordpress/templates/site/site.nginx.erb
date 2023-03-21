@@ -1,0 +1,43 @@
+server {
+  listen 443 ssl;
+  listen [::]:443 ssl;
+
+  server_name <%= @host %>;
+
+  ssl_certificate /etc/letsencrypt/live/<%= @certificate %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= @certificate %>/privkey.pem;
+  <%= @tls_config.join("\n  ") %>
+
+  root /srv/wordpress/<%= @title %>;
+
+  access_log    /var/log/nginx/access.log;
+  error_log     /var/log/nginx/error.log crit;
+  server_tokens off;
+
+  # Prevent hidden "dotfiles" from being served
+  location ~ /\. {
+    access_log off;
+    log_not_found off;
+    deny all;
+  }
+
+  location = /favicon.ico { log_not_found off; access_log off; }
+  location = /robots.txt { log_not_found off; access_log off; allow all; }
+  location ~* \.(css|gif|ico|jpeg|jpg|js|png)$ {
+    expires 24h;
+    log_not_found off;
+  }
+
+  location / {
+    try_files $uri $uri/ /index.php$is_args$args;
+  }
+
+  location ~ \.php$ {
+    client_max_body_size 25M;
+    try_files            $uri =404;
+    fastcgi_pass         unix:/run/php/php<%= @php_fpm_version %>-fpm.sock;
+    fastcgi_index        index.php;
+    fastcgi_param        SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include              /etc/nginx/fastcgi_params;
+  }
+}
