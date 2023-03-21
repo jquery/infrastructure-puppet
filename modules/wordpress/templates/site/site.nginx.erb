@@ -10,8 +10,8 @@ server {
 
   root /srv/wordpress/<%= @title %>;
 
-  access_log    /var/log/nginx/access.log;
-  error_log     /var/log/nginx/error.log crit;
+  access_log    off;
+  error_log     /var/log/nginx/error.log;
   server_tokens off;
 
   # Prevent hidden "dotfiles" from being served
@@ -29,7 +29,7 @@ server {
   }
 
   location / {
-    try_files $uri $uri/ /index.php$is_args$args;
+    try_files $uri /index.php$is_args$args;
   }
 
   location ~ \.php$ {
