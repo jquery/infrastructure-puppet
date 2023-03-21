@@ -32,9 +32,10 @@ define wordpress::site (
   }
 
   exec { "wp-create-config-${title}":
-    command   => "/usr/local/bin/wp config create --dbname=wordpress_${title} --dbuser=wordpress_${title} --dbhost=127.0.0.1 --dbpass=${db_user_password}",
+    command   => "/usr/local/bin/wp config create --path=/srv/wordpress/${title} --dbname=wordpress_${title} --dbuser=wordpress_${title} --dbhost=127.0.0.1 --dbpass=${db_user_password}",
     creates   => "/srv/wordpress/${title}/wp-config.php",
     user      => 'www-data',
     require   => Exec["wp-download-${title}"],
+    logoutput => true,
   }
 }
