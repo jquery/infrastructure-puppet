@@ -26,6 +26,9 @@ class profile::wordpress::blogs (
         { name => 'jquery',      path => '/srv/blog.jquery.com-theme/jquery', },
         { name => $active_theme, path => "/srv/blog.jquery.com-theme/${active_theme}", },
       ],
+      options          => [
+        { name => 'permalink_structure', value => '/%year%/%monthnum%/%day%/%postname%/', },
+      ],
       base_path        => "/srv/wordpress/sites/${name}",
     }
   }

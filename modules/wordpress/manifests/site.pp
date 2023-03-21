@@ -3,15 +3,16 @@
 # @param $certificate lets encrypt certificate name
 # @param $db_password_seed seed to use to generate a database password
 define wordpress::site (
-  Stdlib::Fqdn            $host,
-  String[1]               $site_name,
-  String[1]               $certificate,
-  String[1]               $db_password_seed,
-  Stdlib::Email           $admin_email,
-  String[1]               $admin_password,
-  Stdlib::Unixpath        $base_path,
-  Array[Wordpress::Theme] $themes,
-  String[1]               $active_theme,
+  Stdlib::Fqdn             $host,
+  String[1]                $site_name,
+  String[1]                $certificate,
+  String[1]                $db_password_seed,
+  Stdlib::Email            $admin_email,
+  String[1]                $admin_password,
+  Stdlib::Unixpath         $base_path,
+  Array[Wordpress::Theme]  $themes,
+  Array[Wordpress::Option] $options,
+  String[1]                $active_theme,
 ) {
   mariadb::database { "wordpress_${title}": }
 
@@ -72,6 +73,20 @@ define wordpress::site (
     user      => 'www-data',
     logoutput => true,
     require   => Exec["wp-install-${title}"],
+  }
+
+  $options.each |Wordpress::Option $option| {
+    $option_name = $option['name']
+    $option_value = $option['value']
+    exec { "wp-option-${title}-${option_name}":
+      command   => "/usr/local/bin/wp --path=${base_path} option set ${active_theme} \"${option_value}\"",
+      unless    => "test \"$(wp --path=${base_path} option get ${option_name})\" = \"${option_value}\"",
+      user      => 'www-data',
+      logoutput => true,
+      # for the unless test command to work
+      provider  => 'shell',
+      require   => Exec["wp-install-${title}"],
+    }
   }
 
   $tls_config = nginx::tls_config()
