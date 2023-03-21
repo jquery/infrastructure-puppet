@@ -10,6 +10,7 @@ define wordpress::site (
   Stdlib::Email            $admin_email,
   String[1]                $admin_password,
   Stdlib::Unixpath         $base_path,
+  String[1]                $permalink_structure,
   Array[Wordpress::Theme]  $themes,
   Array[Wordpress::Option] $options,
   String[1]                $active_theme,
@@ -72,6 +73,16 @@ define wordpress::site (
     unless    => "/usr/local/bin/wp --path=${base_path} theme is-active ${active_theme}",
     user      => 'www-data',
     logoutput => true,
+    require   => Exec["wp-install-${title}"],
+  }
+
+  exec { "wp-permalink-structure-${title}":
+    command   => "/usr/local/bin/wp --path=${base_path} rewrite structure \"${permalink_structure}\"",
+    unless    => "test \"$(wp --path=${base_path} option get permalink_structure)\" = \"${permalink_structure}\"",
+    user      => 'www-data',
+    logoutput => true,
+    # for the unless test command to work
+    provider  => 'shell',
     require   => Exec["wp-install-${title}"],
   }
 
