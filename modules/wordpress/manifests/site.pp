@@ -69,6 +69,7 @@ define wordpress::site (
   exec { "wp-theme-${title}":
     command   => "/usr/local/bin/wp --path=${base_path} theme activate ${active_theme}",
     unless    => "/usr/local/bin/wp --path=${base_path} theme is-active ${active_theme}",
+    user      => 'www-data',
     logoutput => true,
     require   => Exec["wp-install-${title}"],
   }
