@@ -8,7 +8,7 @@ class profile::wordpress::blogs (
   include profile::wordpress::base
 
   git::clone { 'blog.jquery.com-theme':
-    path   => '/srv/blog.jquery.com-theme',
+    path   => '/srv/wordpress/blog.jquery.com-theme',
     remote => 'https://github.com/jquery/blog.jquery.com-theme',
     branch => 'main',
     owner  => 'www-data',
@@ -24,8 +24,8 @@ class profile::wordpress::blogs (
       admin_password      => $admin_password,
       permalink_structure => '/%year%/%monthnum%/%day%/%postname%/',
       themes              => [
-        { name => 'jquery',      path => '/srv/blog.jquery.com-theme/jquery', },
-        { name => $active_theme, path => "/srv/blog.jquery.com-theme/${active_theme}", },
+        { name => 'jquery',      path => '/srv/wordpress/blog.jquery.com-theme/jquery', },
+        { name => $active_theme, path => "/srv/wordpress/blog.jquery.com-theme/${active_theme}", },
       ],
       options             => [],
       base_path           => "/srv/wordpress/sites/${name}",
