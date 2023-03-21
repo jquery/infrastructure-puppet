@@ -7,12 +7,25 @@ class profile::wordpress::blogs (
 ) {
   include profile::wordpress::base
 
+  git::clone { 'blog.jquery.com-theme':
+    path   => '/srv/blog.jquery.com-theme',
+    remote => 'https://github.com/jquery/blog.jquery.com-theme',
+    branch => 'main',
+    owner  => 'www-data',
+    group  => 'www-data',
+  }
+
   $sites.each |String[1] $name, Hash $site| {
+    $active_theme = $site['active_theme']
     wordpress::site { $name:
       *                => $site,
       db_password_seed => $db_password_seed,
       admin_email      => $admin_email,
       admin_password   => $admin_password,
+      themes           => [
+        { name => 'jquery',      path => '/srv/blog.jquery.com-theme/jquery', },
+        { name => $active_theme, path => "/srv/blog.jquery.com-theme/jquery/${active_theme}", },
+      ],
       base_path        => "/srv/wordpress/sites/${name}",
     }
   }

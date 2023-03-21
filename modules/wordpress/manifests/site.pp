@@ -3,13 +3,15 @@
 # @param $certificate lets encrypt certificate name
 # @param $db_password_seed seed to use to generate a database password
 define wordpress::site (
-  Stdlib::Fqdn     $host,
-  String[1]        $site_name,
-  String[1]        $certificate,
-  String[1]        $db_password_seed,
-  Stdlib::Email    $admin_email,
-  String[1]        $admin_password,
-  Stdlib::Unixpath $base_path,
+  Stdlib::Fqdn            $host,
+  String[1]               $site_name,
+  String[1]               $certificate,
+  String[1]               $db_password_seed,
+  Stdlib::Email           $admin_email,
+  String[1]               $admin_password,
+  Stdlib::Unixpath        $base_path,
+  Array[Wordpress::Theme] $themes,
+  String[1]               $active_theme,
 ) {
   mariadb::database { "wordpress_${title}": }
 
@@ -33,6 +35,14 @@ define wordpress::site (
     user      => 'www-data',
     require   => File['/usr/local/bin/wp'],
     logoutput => true,
+  }
+
+  $themes.each |Wordpress::Theme $theme| {
+    $theme_name = $theme['name']
+    file { "${base_path}/wp-content/themes/${theme_name}":
+      ensure => link,
+      target => $theme['path'],
+    }
   }
 
   exec { "wp-create-config-${title}":
