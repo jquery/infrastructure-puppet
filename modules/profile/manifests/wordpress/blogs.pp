@@ -15,4 +15,9 @@ class profile::wordpress::blogs (
       admin_password   => $admin_password,
     }
   }
+
+  nftables::allow { 'wordpress-blogs-https':
+    proto => 'tcp',
+    dport => 443,
+  }
 }
