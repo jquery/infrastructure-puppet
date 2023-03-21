@@ -18,6 +18,7 @@ class profile::wordpress::base (
       # https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions
       'curl',
       'imagick',
+      'intl',
       'mbstring',
       'mysql',
       'xml',
