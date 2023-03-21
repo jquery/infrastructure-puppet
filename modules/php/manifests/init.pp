@@ -1,6 +1,6 @@
 # @summary installs and manages php
 class php (
-  Array[String[1]] $extensions = [],
+  Array[Php::Extension] $extensions = [],
 ) {
   $version = debian::codename() ? {
     'bullseye' => '7.4',
@@ -12,6 +12,14 @@ class php (
   ])
 
   ensure_packages(
-    $extensions.map |String[1] $ext| { "php${version}-${ext}" }
+    $extensions.map |Php::Extension $ext| {
+      if $ext =~ String[1] {
+        "php${version}-${ext}"
+      } elsif $ext['package'] {
+        $ext['package']
+      } else {
+        fail('invalid package declaration')
+      }
+    }
   )
 }

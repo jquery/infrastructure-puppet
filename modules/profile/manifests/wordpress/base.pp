@@ -17,7 +17,7 @@ class profile::wordpress::base (
     extensions => [
       # https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions
       'curl',
-      'imagick',
+      { package => 'php-imagick' },
       'intl',
       'mbstring',
       'mysql',
