@@ -24,9 +24,17 @@ define wordpress::site (
   }
 
   exec { "wp-download-${title}":
-    command => "/usr/local/bin/wp core download --path=/srv/wordpress/${title}",
-    creates => "/srv/wordpress/${title}",
-    user    => 'www-data',
-    require => File['/usr/local/bin/wp'],
+    command   => "/usr/local/bin/wp core download --path=/srv/wordpress/${title}",
+    creates   => "/srv/wordpress/${title}",
+    user      => 'www-data',
+    require   => File['/usr/local/bin/wp'],
+    logoutput => true,
+  }
+
+  exec { "wp-create-config-${title}":
+    command   => "/usr/local/bin/wp config create --dbname=wordpress_${title} --dbuser=wordpress_${title} --dbhost=127.0.0.1 --dbpass=${db_user_password}",
+    creates   => "/srv/wordpress/${title}/wp-config.php",
+    user      => 'www-data',
+    require   => Exec["wp-download-${title}"],
   }
 }
