@@ -8,7 +8,8 @@ server {
   ssl_certificate_key /etc/letsencrypt/live/<%= @certificate %>/privkey.pem;
   <%= @tls_config.join("\n  ") %>
 
-  root /srv/wordpress/<%= @title %>;
+  root  /srv/wordpress/<%= @title %>;
+  index index.php;
 
   access_log    off;
   error_log     /var/log/nginx/error.log;
@@ -29,7 +30,7 @@ server {
   }
 
   location / {
-    try_files $uri /index.php$is_args$args;
+    try_files $uri $uri/ /index.php$is_args$args;
   }
 
   location ~ \.php$ {
