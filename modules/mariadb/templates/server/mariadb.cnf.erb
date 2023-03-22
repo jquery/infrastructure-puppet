@@ -27,3 +27,8 @@ collation-server        = utf8mb4_general_ci
 <%- if @innodb_buffer_pool_size -%>
 innodb_buffer_pool_size = <%= @innodb_buffer_pool_size %>
 <%- end -%>
+
+log_bin
+binlog-format           = ROW
+expire_logs_days        = 14
+max_binlog_size         = 100M
