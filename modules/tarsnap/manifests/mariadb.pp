@@ -33,4 +33,9 @@ class tarsnap::mariadb (
     source => 'puppet:///modules/tarsnap/mariadb/jq-tarsnap-dump-mariadb.sh',
     mode   => '0555',
   }
+
+  tarsnap::backup { 'mariadb':
+    paths               => ['/var/lib/backup/mariadb'],
+    take_backup_command => "/usr/bin/sudo -u tarsnap /usr/local/bin/jq-tarsnap-dump-mariadb ${database_pattern}"
+  }
 }
