@@ -6,4 +6,10 @@ Description=<%= @description %>
 Environment="<%= var %>"
 <%- end -%>
 User=<%= @user %>
+<%- if @command.is_a? String -%>
 ExecStart=<%= @command %>
+<%- else -%>
+<%- @command.each do |cmd| -%>
+ExecStart=<%= cmd %>
+<%- end -%>
+<%- end -%>

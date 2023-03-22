@@ -1,11 +1,11 @@
 # @summary Simple systemd timer
 define systemd::timer (
-  String        $description,
-  String        $user,
-  String        $command,
-  Array[String] $interval,
-  Array[String] $environment = [],
-  Jqlib::Ensure $ensure      = present,
+  String[1]                            $description,
+  String[1]                            $user,
+  Variant[String[1], Array[String[1]]] $command,
+  Array[String[1]]                     $interval,
+  Array[String[1]]                     $environment = [],
+  Jqlib::Ensure                        $ensure      = present,
 ) {
   systemd::unit { "${title}.service":
     ensure  => $ensure,
