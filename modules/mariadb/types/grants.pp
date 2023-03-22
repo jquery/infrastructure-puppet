@@ -7,6 +7,11 @@ type Mariadb::Grants = Variant[
       'INSERT',
       'UPDATE',
       'DELETE',
+      'SHOW VIEW',
+      'RELOAD',
+      'EVENT',
+      'TRIGGER',
+      'LOCK TABLES',
     ]
   ],
   Struct[{ all => Boolean }],

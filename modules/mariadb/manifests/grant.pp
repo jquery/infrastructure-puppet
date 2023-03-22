@@ -11,17 +11,23 @@ define mariadb::grant (
 ) {
   $user = "'${user_name}'@'${user_host}'"
 
+  if $database == '*' {
+    $from_where = 'user_privileges WHERE'
+  } else {
+    $from_where = "schema_privileges WHERE table_schema = '${database}' AND"
+  }
+
   if $grants =~ Array[String] {
     $grants.each |$grant| {
       mariadb::command { "grant-${user_name}-${user_host}-${database}-${grant}":
         sql    => "GRANT ${grant} ON ${database}.* TO ${user}",
-        unless => "SELECT 1 FROM information_schema.schema_privileges WHERE grantee = \"${user}\" AND table_schema = '${database}' AND privilege_type = '${grant}'",
+        unless => "SELECT 1 FROM information_schema.${from_where} grantee = \"${user}\" AND privilege_type = '${grant}'",
       }
     }
   } elsif $grants['all'] {
     mariadb::command { "grant-${user_name}-${user_host}-${database}":
       sql    => "GRANT ALL PRIVILEGES ON ${database}.* TO ${user}",
-      unless => "SELECT 1 FROM information_schema.schema_privileges WHERE grantee = \"${user}\" AND table_schema = '${database}'",
+      unless => "SELECT 1 FROM information_schema.${from_where} grantee = \"${user}\"",
     }
   } else {
     fail('mariadb::grant: invalid $grants param')
