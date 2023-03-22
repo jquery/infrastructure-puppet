@@ -25,4 +25,12 @@ class tarsnap () {
   systemd::sysuser { 'tarsnap':
     content => 'u tarsnap 602 "unprivileged user for taking backups" /var/lib/backup',
   }
+
+  file { '/var/lib/backup':
+    ensure  => directory,
+    owner   => 'tarsnap',
+    group   => 'tarsnap',
+    mode    => '0755',
+    require => [Systemd::Sysuser['tarsnap'], Service['systemd-sysusers']],
+  }
 }

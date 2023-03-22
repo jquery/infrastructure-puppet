@@ -7,7 +7,7 @@ class tarsnap::mariadb (
     auth => { unix_socket => true },
   }
 
-  mariadb::grant { "tarsnap":
+  mariadb::grant { 'tarsnap':
     user_name => 'tarsnap',
     user_host => 'localhost',
     database  => '*',
@@ -22,11 +22,10 @@ class tarsnap::mariadb (
   }
 
   file { '/var/lib/backup/mariadb':
-    ensure  => directory,
-    owner   => 'tarsnap',
-    group   => 'tarsnap',
-    mode    => '0755',
-    require => Systemd::Sysuser['tarsnap'],
+    ensure => directory,
+    owner  => 'tarsnap',
+    group  => 'tarsnap',
+    mode   => '0755',
   }
 
   file { '/usr/local/bin/jq-tarsnap-dump-mariadb':
