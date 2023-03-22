@@ -44,4 +44,8 @@ class profile::wordpress::base (
   class { 'wordpress::cli':
     version => $wordpress_cli_version,
   }
+
+  class { 'tarsnap::mariadb':
+    database_pattern => 'wordpress\\_%',
+  }
 }
