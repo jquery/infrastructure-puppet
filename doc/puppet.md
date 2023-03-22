@@ -126,6 +126,7 @@ resource.
 |-----|-----|------|
 | 600 | 600 | gitpuppet
 | 601 | 601 | notifier
+| 602 | 602 | tarsnap
 
 ## Linting
 

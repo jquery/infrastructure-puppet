@@ -21,4 +21,8 @@ class tarsnap () {
   ], {
     require => Class['Apt::Update'],
   })
+
+  systemd::sysuser { 'tarsnap':
+    content => 'u tarsnap 602 "unprivileged user for taking backups" /var/lib/backup',
+  }
 }
