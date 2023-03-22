@@ -2,6 +2,7 @@
 Description=<%= @description %>
 
 [Service]
+Type=oneshot
 <%- @environment.each do |var| -%>
 Environment="<%= var %>"
 <%- end -%>
