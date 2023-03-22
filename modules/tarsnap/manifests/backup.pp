@@ -1,7 +1,8 @@
 # @summary backups a specific directory to tarsnap
 define tarsnap::backup (
   Array[Stdlib::Unixpath] $paths,
-  Jqlib::Ensure           $ensure = present,
+  Optional[String[1]]     $take_backup_command = undef,
+  Jqlib::Ensure           $ensure              = present,
 ) {
   # todo: move to a separate class?
   if !defined(File['/etc/tarsnap.conf']) {
@@ -31,11 +32,15 @@ define tarsnap::backup (
   $hour = fqdn_rand(24, "backup-hour-${title}")
   $minute = fqdn_rand(60, "backup-minute-${title}")
 
-  # https://www.tarsnap.com/usage.html
+  $commands = [
+    $take_backup_command,
+    "/usr/local/sbin/jq-tarsnap-take-backup ${title} ${paths.join(' ')}"
+  ].filter |$it| { $it != undef }
+
   systemd::timer { "backup-${title}":
     description => "Back up ${title} to Tarsnap",
     user        => 'root',
-    command     => "/usr/local/sbin/jq-tarsnap-take-backup ${title} ${paths.join(' ')}",
+    command     => $commands,
     interval    => ["OnCalendar=*-*-* ${hour}:${minute}:00"],
     require     => Package['tarsnap'],
   }
