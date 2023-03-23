@@ -22,7 +22,6 @@ class profile::wordpress::blogs (
       db_password_seed    => $db_password_seed,
       admin_email         => $admin_email,
       admin_password      => $admin_password,
-      permalink_structure => '/%year%/%monthnum%/%day%/%postname%/',
       themes              => [
         { name => 'jquery',      path => '/srv/wordpress/blog.jquery.com-theme/jquery', },
         { name => $active_theme, path => "/srv/wordpress/blog.jquery.com-theme/${active_theme}", },

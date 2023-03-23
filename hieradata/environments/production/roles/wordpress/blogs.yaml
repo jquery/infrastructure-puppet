@@ -10,3 +10,6 @@ profile::wordpress::blogs::sites:
     site_name: jQuery UI Blog
     active_theme: jqueryui.com
     certificate: blogs
+    # for whatever reason, the jqueryui blog has a different URL structure
+    # compared to other blogs have
+    permalink_structure: '/%year%/%monthnum%/%postname%/'

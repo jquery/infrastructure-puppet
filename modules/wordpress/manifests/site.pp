@@ -10,10 +10,10 @@ define wordpress::site (
   Stdlib::Email            $admin_email,
   String[1]                $admin_password,
   Stdlib::Unixpath         $base_path,
-  String[1]                $permalink_structure,
-  Array[Wordpress::Theme]  $themes,
-  Array[Wordpress::Option] $options,
   String[1]                $active_theme,
+  Array[Wordpress::Theme]  $themes              = [],
+  Array[Wordpress::Option] $options             = [],
+  String[1]                $permalink_structure = '/%year%/%monthnum%/%day%/%postname%/',
 ) {
   mariadb::database { "wordpress_${title}": }
 
