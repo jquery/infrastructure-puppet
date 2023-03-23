@@ -5,6 +5,16 @@ profile::certbot::certificates:
 
 profile::wordpress::blogs::admin_email: infrastructure-team@jquery.com
 profile::wordpress::blogs::sites:
+  jquery:
+    host: blog.jquery.com
+    site_name: Official jQuery Blog
+    active_theme: jquery.com
+    certificate: blogs
+  jquerymobile:
+    host: blog.jquerymobile.com
+    site_name: jQuery Mobile
+    active_theme: jquerymobile.com
+    certificate: blogs
   jqueryui:
     host: blog.jqueryui.com
     site_name: jQuery UI Blog
