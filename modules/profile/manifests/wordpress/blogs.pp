@@ -18,16 +18,16 @@ class profile::wordpress::blogs (
   $sites.each |String[1] $name, Hash $site| {
     $active_theme = $site['active_theme']
     wordpress::site { $name:
-      *                   => $site,
-      db_password_seed    => $db_password_seed,
-      admin_email         => $admin_email,
-      admin_password      => $admin_password,
-      themes              => [
+      *                => $site,
+      db_password_seed => $db_password_seed,
+      admin_email      => $admin_email,
+      admin_password   => $admin_password,
+      themes           => [
         { name => 'jquery',      path => '/srv/wordpress/blog.jquery.com-theme/jquery', },
         { name => $active_theme, path => "/srv/wordpress/blog.jquery.com-theme/${active_theme}", },
       ],
-      options             => [],
-      base_path           => "/srv/wordpress/sites/${name}",
+      options          => [],
+      base_path        => "/srv/wordpress/sites/${name}",
     }
   }
 
