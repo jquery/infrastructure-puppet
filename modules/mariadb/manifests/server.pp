@@ -38,6 +38,7 @@ class mariadb::server (
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
+    require => Package['mariadb-server'],
     notify  => Service['mariadb'],
   }
 
