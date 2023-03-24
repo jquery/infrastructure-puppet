@@ -13,6 +13,7 @@ define wordpress::site (
   String[1]                $active_theme,
   Array[Wordpress::Theme]  $themes              = [],
   Array[Wordpress::Option] $options             = [],
+  Array[Wordpress::User]   $users               = [],
   String[1]                $permalink_structure = '/%year%/%monthnum%/%day%/%postname%/',
 ) {
   mariadb::database { "wordpress_${title}": }
@@ -105,6 +106,20 @@ define wordpress::site (
       logoutput => true,
       # for the unless test command to work
       provider  => 'shell',
+      require   => Exec["wp-install-${title}"],
+    }
+  }
+
+  $users.each |Wordpress::User $user| {
+    $username = $user['username']
+    $password = $user['password']
+    $email = $user['email']
+    $role = $user['role']
+    exec { "wp-user-${title}-${option_name}":
+      command   => "/usr/local/bin/wp --path=${base_path} user create ${username} ${email} --role=${role} --password=\"${password}\"",
+      unless    => "/usr/local/bin/wp --path=${base_path} user get ${username}",
+      user      => 'www-data',
+      logoutput => true,
       require   => Exec["wp-install-${title}"],
     }
   }

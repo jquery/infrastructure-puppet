@@ -1,9 +1,11 @@
 # @summary documentation wordpress sites
 class profile::wordpress::docs (
-  Profile::Docs::Sites $sites            = lookup('docs_sites'),
-  String[1]            $db_password_seed = lookup('profile::wordpress::docs::db_password_seed'),
-  Stdlib::Email        $admin_email      = lookup('profile::wordpress::docs::admin_email'),
-  String[1]            $admin_password   = lookup('profile::wordpress::docs::admin_password'),
+  Profile::Docs::Sites $sites                 = lookup('docs_sites'),
+  String[1]            $db_password_seed      = lookup('profile::wordpress::docs::db_password_seed'),
+  Stdlib::Email        $admin_email           = lookup('profile::wordpress::docs::admin_email'),
+  String[1]            $admin_password        = lookup('profile::wordpress::docs::admin_password'),
+  Stdlib::Email        $builder_email         = lookup('profile::wordpress::docs::builder_email'),
+  String[1]            $builder_password_seed = lookup('docs_builder_password_seed'),
 ) {
   include profile::wordpress::base
 
@@ -31,6 +33,16 @@ class profile::wordpress::docs (
         { name => $active_theme, path => "/srv/wordpress/jquery-wp-content/themes/${active_theme}", },
       ],
       options          => [],
+      users            => [
+        {
+          username => 'builder',
+          password => jqlib::autogen_password("docs_builder_${name}", $builder_password_seed),
+          email    => $builder_email,
+          # I think this is needed to edit content pages, menus and similar.
+          # TODO: check if we can use a role with less privs.
+          role     => 'administrator',
+        }
+      ],
     }
   }
 

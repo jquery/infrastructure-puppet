@@ -16,6 +16,7 @@ profile::wordpress::blogs::admin_password: 'fakepass'
 
 profile::wordpress::docs::db_password_seed: 'fakeseed'
 profile::wordpress::docs::admin_password: 'fakepass'
+docs_builder_password_seed: 'fakeseed'
 
 # hacks
 jqlib::secret::use_fake_private: true
