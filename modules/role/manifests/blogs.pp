@@ -1,5 +1,5 @@
-# @summary blogs
-class role::wordpress::blogs {
+# @summary blog sites
+class role::blogs {
   include profile::base
 
   include profile::certbot

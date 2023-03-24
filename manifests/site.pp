@@ -29,7 +29,7 @@ node 'miscweb-01.ops.jquery.net' {
 }
 
 node 'wpblogs-01.ops.jquery.net' {
-  role('wordpress::blogs')
+  role('blogs')
 }
 
 # Staging
