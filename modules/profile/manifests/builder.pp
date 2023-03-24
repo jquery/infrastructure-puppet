@@ -17,7 +17,9 @@ class profile::builder (
   file { '/usr/local/bin/builder-do-update':
     ensure => file,
     source => 'puppet:///modules/profile/builder/builder-do-update.sh',
-    owner  => '0555',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0555',
   }
 
   $sites.each |String[1] $name, Profile::Docs::Site $site| {
