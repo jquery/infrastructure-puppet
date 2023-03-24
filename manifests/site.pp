@@ -34,10 +34,18 @@ node 'wpblogs-01.ops.jquery.net' {
 
 # Staging
 
+node 'builder-04.stage.ops.jquery.net' {
+  role('docs::builder')
+}
+
 node 'codeorigin-02.stage.ops.jquery.net' {
   role('codeorigin')
 }
 
 node 'gruntjs-02.stage.ops.jquery.net' {
   role('gruntjscom')
+}
+
+node 'wp-02.stage.ops.jquery.net' {
+  role('docs::wordpress')
 }
