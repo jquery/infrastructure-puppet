@@ -31,6 +31,10 @@ class profile::wordpress::blogs (
     }
   }
 
+  tarsnap::backup { 'wordpress':
+    paths => $sites.keys.map |String[1] $site| { "/srv/wordpress/sites/${site}/wp-content/uploads/" },
+  }
+
   nftables::allow { 'wordpress-blogs-https':
     proto => 'tcp',
     dport => 443,
