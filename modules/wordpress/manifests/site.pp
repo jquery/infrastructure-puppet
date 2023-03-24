@@ -86,6 +86,15 @@ define wordpress::site (
     require   => Exec["wp-install-${title}"],
   }
 
+  # Delete the "Welcome to WordPress!" post and the assosiated comment
+  exec { "wp-delete-sample-post-${title}":
+    command   => "/usr/local/bin/wp --path=${base_path} post delete 1 --force",
+    onlyif    => "/usr/local/bin/wp --path=${base_path} post get 1",
+    user      => 'www-data',
+    logoutput => true,
+    require   => Exec["wp-install-${title}"],
+  }
+
   $options.each |Wordpress::Option $option| {
     $option_name = $option['name']
     $option_value = $option['value']
