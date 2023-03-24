@@ -39,4 +39,8 @@ class profile::wordpress::blogs (
     proto => 'tcp',
     dport => 443,
   }
+
+  class { 'tarsnap::mariadb':
+    database_pattern => 'wordpress\\_%',
+  }
 }

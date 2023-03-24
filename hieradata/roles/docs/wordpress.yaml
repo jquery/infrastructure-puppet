@@ -1,0 +1,4 @@
+profile::certbot::certificates:
+  wordpress:
+    domains:
+      - "%{::facts.fqdn}"
