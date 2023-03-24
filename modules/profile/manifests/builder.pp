@@ -25,8 +25,8 @@ class profile::builder (
   $sites.each |String[1] $name, Profile::Docs::Site $site| {
     git::clone { "builder-${name}":
       path    => "/srv/builder/${name}",
-      remote  => 'https://github.com/gruntjs/gruntjs.com',
-      branch  => 'main',
+      remote  => "https://github.com/${site['repository']['name']}",
+      branch  => $site['repository']['branch'],
       owner   => 'builder',
       group   => 'builder',
       require => Service['systemd-sysusers'],
