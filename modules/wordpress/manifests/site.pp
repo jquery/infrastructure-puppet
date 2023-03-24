@@ -116,7 +116,7 @@ define wordpress::site (
     $email = $user['email']
     $role = $user['role']
     exec { "wp-user-${title}-${option_name}":
-      command   => "/usr/local/bin/wp --path=${base_path} user create ${username} ${email} --role=${role} --password=\"${password}\"",
+      command   => "/usr/local/bin/wp --path=${base_path} user create ${username} ${email} --role=${role} --user_pass=\"${password}\"",
       unless    => "/usr/local/bin/wp --path=${base_path} user get ${username}",
       user      => 'www-data',
       logoutput => true,
