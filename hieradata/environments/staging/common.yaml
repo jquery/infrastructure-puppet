@@ -2,10 +2,13 @@ profile::puppet::agent::puppet_server: puppet-03.ops.jquery.net
 
 profile::certbot::email: infrastructure-team@jquery.com
 
+docs_active_host: wp-02.stage.ops.jquery.net
 docs_sites:
   learn_jquery_com:
     host: stage.learn.jquery.com
     site_name: jQuery Learning Center (staging)
-    repository: jquery/learn.jquery.com
+    repository:
+      name: jquery/learn.jquery.com
+      branch: main
     certificate: wordpress
     active_theme: learn.jquery.com
