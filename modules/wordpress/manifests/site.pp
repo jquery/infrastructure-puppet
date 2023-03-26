@@ -14,6 +14,7 @@ define wordpress::site (
   Array[Wordpress::Theme]  $themes              = [],
   Array[Wordpress::Option] $options             = [],
   Array[Wordpress::User]   $users               = [],
+  Array[Wordpress::Plugin] $plugins             = [],
   String[1]                $permalink_structure = '/%year%/%monthnum%/%day%/%postname%/',
 ) {
   mariadb::database { "wordpress_${title}": }
@@ -118,6 +119,23 @@ define wordpress::site (
     exec { "wp-user-${title}-${username}":
       command   => "/usr/local/bin/wp --path=${base_path} user create ${username} ${email} --role=${role} --user_pass=\"${password}\"",
       unless    => "/usr/local/bin/wp --path=${base_path} user get ${username}",
+      user      => 'www-data',
+      logoutput => true,
+      require   => Exec["wp-install-${title}"],
+    }
+  }
+
+  $plugins.each |Wordpress::Plugin $plugin| {
+    $plugin_name = $plugin['name']
+    $extension = $plugin['single_file'].bool2str('.php', '')
+    file { "${base_path}/wp-content/plugins/${plugin_name}${extension}":
+      ensure => link,
+      target => $plugin['path'],
+    }
+
+    exec { "wp-theme-${title}-${plugin_name}":
+      command   => "/usr/local/bin/wp --path=${base_path} plugin activate ${plugin_name}",
+      unless    => "/usr/local/bin/wp --path=${base_path} plugin is-active ${plugin_name}",
       user      => 'www-data',
       logoutput => true,
       require   => Exec["wp-install-${title}"],

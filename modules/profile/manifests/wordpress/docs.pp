@@ -32,6 +32,9 @@ class profile::wordpress::docs (
         { name => 'jquery',      path => '/srv/wordpress/jquery-wp-content/themes/jquery', },
         { name => $active_theme, path => "/srv/wordpress/jquery-wp-content/themes/${active_theme}", },
       ],
+      plugins          => [
+        { name => 'gilded-wordpress', path => '/srv/wordpress/jquery-wp-content/mu-plugins/gilded-wordpress.php', single_file => false, },
+      ],
       options          => [],
       users            => [
         {
