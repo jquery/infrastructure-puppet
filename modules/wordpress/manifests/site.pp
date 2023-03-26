@@ -11,6 +11,7 @@ define wordpress::site (
   String[1]                $admin_password,
   Stdlib::Unixpath         $base_path,
   String[1]                $active_theme,
+  Array[Stdlib::Unixpath]  $config_files        = [],
   Array[Wordpress::Theme]  $themes              = [],
   Array[Wordpress::Option] $options             = [],
   Array[Wordpress::User]   $users               = [],
@@ -61,6 +62,17 @@ define wordpress::site (
     ],
     notify    => Exec["wp-install-${title}"],
     logoutput => true,
+  }
+
+  $config_files.each |Stdlib::Unixpath $path| {
+    file_line { "wp-config-file-${title}-${path}":
+      ensure  => present,
+      path    => "${base_path}/wp-config.php",
+      line    => "require '${path}';",
+      after   => 'Add any custom values between',
+      require => [Exec["wp-create-config-${title}"], File[$path]],
+      before  => Exec["wp-install-${title}"],
+    }
   }
 
   exec { "wp-install-${title}":

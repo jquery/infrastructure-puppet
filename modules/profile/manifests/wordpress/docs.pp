@@ -17,27 +17,38 @@ class profile::wordpress::docs (
     group  => 'www-data',
   }
 
+  file { '/srv/wordpress/docs-config-shared.php':
+    ensure => file,
+    source => 'puppet:///modules/profile/wordpress/docs/config.php',
+  }
+
   $sites.each |String[1] $name, Profile::Docs::Site $site| {
     $active_theme = $site['active_theme']
     wordpress::site { $name:
-      host             => $site['host'],
-      site_name        => $site['site_name'],
-      certificate      => $site['certificate'],
-      db_password_seed => $db_password_seed,
-      admin_email      => $admin_email,
-      admin_password   => $admin_password,
-      base_path        => "/srv/wordpress/sites/${name}",
-      active_theme     => $active_theme,
-      themes           => [
+      host                => $site['host'],
+      site_name           => $site['site_name'],
+      certificate         => $site['certificate'],
+      db_password_seed    => $db_password_seed,
+      admin_email         => $admin_email,
+      admin_password      => $admin_password,
+      base_path           => "/srv/wordpress/sites/${name}",
+      permalink_structure => '/%postname%/',
+      config_files        => [
+        '/srv/wordpress/docs-config-shared.php',
+        "/srv/wordpress/sites/${site}/jquery-config.php",
+      ],
+      active_theme        => $active_theme,
+      themes              => [
         { name => 'jquery',      path => '/srv/wordpress/jquery-wp-content/themes/jquery', },
         { name => $active_theme, path => "/srv/wordpress/jquery-wp-content/themes/${active_theme}", },
       ],
-      plugins          => [
+      plugins             => [
         { name => 'gilded-wordpress', path => '/srv/wordpress/jquery-wp-content/mu-plugins/gilded-wordpress.php', single_file => true, },
         { name => 'redirects',        path => '/srv/wordpress/jquery-wp-content/mu-plugins/redirects.php',        single_file => true, },
+        { name => 'jquery-filters',   path => '/srv/wordpress/jquery-wp-content/mu-plugins/jquery-filters.php',   single_file => true, },
       ],
-      options          => [],
-      users            => [
+      options             => [],
+      users               => [
         {
           username => 'builder',
           password => jqlib::autogen_password("docs_builder_${name}", $builder_password_seed),
@@ -47,6 +58,11 @@ class profile::wordpress::docs (
           role     => 'administrator',
         }
       ],
+    }
+
+    file { "/srv/wordpress/sites/${site}/jquery-config.php":
+      ensure  => file,
+      content => template('profile/wordpress/docs/jquery-config.php.erb'),
     }
   }
 
