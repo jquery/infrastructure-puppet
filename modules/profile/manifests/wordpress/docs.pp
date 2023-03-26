@@ -34,6 +34,7 @@ class profile::wordpress::docs (
       ],
       plugins          => [
         { name => 'gilded-wordpress', path => '/srv/wordpress/jquery-wp-content/mu-plugins/gilded-wordpress.php', single_file => true, },
+        { name => 'redirects',        path => '/srv/wordpress/jquery-wp-content/mu-plugins/redirects.php',        single_file => true, },
       ],
       options          => [],
       users            => [
