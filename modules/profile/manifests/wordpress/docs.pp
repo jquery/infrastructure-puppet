@@ -60,6 +60,7 @@ class profile::wordpress::docs (
       ],
     }
 
+    $live_site = regsubst($site['host'], '^stage\.(.*)$', '\1')
     file { "/srv/wordpress/sites/${name}/jquery-config.php":
       ensure  => file,
       content => template('profile/wordpress/docs/jquery-config.php.erb'),
