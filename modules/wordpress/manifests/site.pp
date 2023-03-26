@@ -133,7 +133,7 @@ define wordpress::site (
       target => $plugin['path'],
     }
 
-    exec { "wp-theme-${title}-${plugin_name}":
+    exec { "wp-plugin-${title}-${plugin_name}":
       command   => "/usr/local/bin/wp --path=${base_path} plugin activate ${plugin_name}",
       unless    => "/usr/local/bin/wp --path=${base_path} plugin is-active ${plugin_name}",
       user      => 'www-data',
