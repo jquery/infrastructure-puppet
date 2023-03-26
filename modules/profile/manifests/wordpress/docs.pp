@@ -35,7 +35,7 @@ class profile::wordpress::docs (
       permalink_structure => '/%postname%/',
       config_files        => [
         '/srv/wordpress/docs-config-shared.php',
-        "/srv/wordpress/sites/${site}/jquery-config.php",
+        "/srv/wordpress/sites/${name}/jquery-config.php",
       ],
       active_theme        => $active_theme,
       themes              => [
@@ -60,7 +60,7 @@ class profile::wordpress::docs (
       ],
     }
 
-    file { "/srv/wordpress/sites/${site}/jquery-config.php":
+    file { "/srv/wordpress/sites/${name}/jquery-config.php":
       ensure  => file,
       content => template('profile/wordpress/docs/jquery-config.php.erb'),
     }
