@@ -33,7 +33,7 @@ class profile::wordpress::docs (
 
     if $site['enable_static_index'] {
       $static_index_plugins = [
-        { name => 'jquery-static-index', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-filters.php', single_file => true, },
+        { name => 'jquery-static-index', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-static-index.php', single_file => true, },
       ]
     } else {
       $static_index_plugins = []
