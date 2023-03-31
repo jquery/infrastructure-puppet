@@ -8,4 +8,5 @@ type Profile::Docs::Site = Struct[{
   certificate            => String[1],
   active_theme           => String[1],
   builder_extra_settings => Optional[Hash],
+  enable_static_index    => Optional[Boolean],
 }]

@@ -24,6 +24,21 @@ class profile::wordpress::docs (
 
   $sites.each |String[1] $name, Profile::Docs::Site $site| {
     $active_theme = $site['active_theme']
+
+    $base_plugins = [
+      { name => 'gilded-wordpress', path => '/srv/wordpress/jquery-wp-content/mu-plugins/gilded-wordpress.php', single_file => true, },
+      { name => 'redirects',        path => '/srv/wordpress/jquery-wp-content/mu-plugins/redirects.php',        single_file => true, },
+      { name => 'jquery-filters',   path => '/srv/wordpress/jquery-wp-content/mu-plugins/jquery-filters.php',   single_file => true, },
+    ]
+
+    if $site['enable_static_index'] {
+      $static_index_plugins = [
+        { name => 'jquery-static-index', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-filters.php', single_file => true, },
+      ]
+    } else {
+      $static_index_plugins = []
+    }
+
     wordpress::site { $name:
       host                => $site['host'],
       site_name           => $site['site_name'],
@@ -42,11 +57,7 @@ class profile::wordpress::docs (
         { name => 'jquery',      path => '/srv/wordpress/jquery-wp-content/themes/jquery', },
         { name => $active_theme, path => "/srv/wordpress/jquery-wp-content/themes/${active_theme}", },
       ],
-      plugins             => [
-        { name => 'gilded-wordpress', path => '/srv/wordpress/jquery-wp-content/mu-plugins/gilded-wordpress.php', single_file => true, },
-        { name => 'redirects',        path => '/srv/wordpress/jquery-wp-content/mu-plugins/redirects.php',        single_file => true, },
-        { name => 'jquery-filters',   path => '/srv/wordpress/jquery-wp-content/mu-plugins/jquery-filters.php',   single_file => true, },
-      ],
+      plugins             => $base_plugins + $static_index_plugins,
       options             => [],
       users               => [
         {
