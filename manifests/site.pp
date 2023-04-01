@@ -32,6 +32,10 @@ node 'wpblogs-01.ops.jquery.net' {
   role('blogs')
 }
 
+node 'search-02.ops.jquery.net' {
+  role('search')
+}
+
 # Staging
 
 node 'builder-04.stage.ops.jquery.net' {
