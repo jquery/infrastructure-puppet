@@ -163,11 +163,12 @@ private repository (and remember to commit that change).
 [octocatalog-diff]: https://github.com/github/octocatalog-diff/
 
 Then, run octocatalog-diff like so:
+
 ```shell
 $ export PUPPETDB_URL="https://username:password@puppet-03.ops.jquery.net:8100/"
 
 $ octocatalog-diff -n codeorigin-02.stage.ops.jquery.net
-$ octocatalog-diff --environment production -n puppet-03.ops.jquery.net
+$ octocatalog-diff --environment production -n codeorigin-02.ops.jquery.net
 ```
 
 By default, `octocatalog-diff` will show the difference between the
@@ -176,8 +177,11 @@ current working tree and the last commit pushed to `origin`.
 `octocatalog-diff` requires a local installation of Puppet 7. On a
 Debian Bookworm (testing) setup, as of time of writing you need the
 following packages:
+
 ```
+git
 octocatalog-diff
 puppet-agent
 puppet-module-puppetlabs-sshkeys-core
+g10k
 ```
