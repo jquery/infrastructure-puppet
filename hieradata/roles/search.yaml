@@ -1,0 +1,6 @@
+profile::certbot::certificates:
+  search:
+    domains:
+      - "%{::facts.fqdn}"
+
+profile::typesense::tls_key_name: search

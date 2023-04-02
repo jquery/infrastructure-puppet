@@ -1,0 +1,10 @@
+; This file is managed by Puppet
+; Typesense Configuration
+; https://typesense.org/docs/0.24.0/api/server-configuration.html
+
+[server]
+api-address = 0.0.0.0
+api-port = 8108
+data-dir = /var/lib/typesense
+api-key = <%= @api_key %>
+log-dir = /var/log/typesense

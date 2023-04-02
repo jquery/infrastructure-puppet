@@ -1,0 +1,18 @@
+server {
+  listen 443 ssl;
+  listen [::]:443 ssl;
+
+  ssl_certificate /etc/letsencrypt/live/<%= @tls_key_name %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= @tls_key_name %>/privkey.pem;
+  <%= @tls_config.join("\n  ") %>
+
+  access_log    off;
+  error_log     /var/log/nginx/error.log crit;
+  server_tokens off;
+
+  location / {
+    proxy_pass http://localhost:<%= @backend_port %>;
+    proxy_redirect off;
+    proxy_buffering off;
+  }
+}

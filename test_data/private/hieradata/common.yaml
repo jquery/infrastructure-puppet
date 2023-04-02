@@ -18,5 +18,7 @@ profile::wordpress::docs::db_password_seed: 'fakeseed'
 profile::wordpress::docs::admin_password: 'fakepass'
 docs_builder_password_seed: 'fakeseed'
 
+profile::typesense::api_key: 'fakekey'
+
 # hacks
 jqlib::secret::use_fake_private: true
