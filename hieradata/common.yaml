@@ -30,6 +30,16 @@ profile::base::accounts:
         key: AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIKIhmvQSYtWuH0Oq9Gw5sSOcR37Q4m0SJAoPys0PO858AAAABHNzaDo=
       - type: sk-ssh-ed25519@openssh.com
         key: AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIDjVhTkDu1JerHASe9pGTFA1vbKVM40QS/KuyKl7ubqUAAAABHNzaDo=
+  mgol:
+    ensure: present
+    uid: 1203
+    groups: [sudo]
+    ssh_keys:
+      # last changed in 2023
+      - type: ssh-ed25519
+        key: AAAAC3NzaC1lZDI1NTE5AAAAII0Q87D035QrL8Mj0XRzb3sYb4npzBc4n2J3d+R3VdtA
+      - type: ssh-ed25519
+        key: AAAAC3NzaC1lZDI1NTE5AAAAIMw1u8AA/INyhvzT9O3PlPcm+qTy6ZhNUFLH++xvmISJ
 
 profile::base::groups:
   sudo:
