@@ -1,6 +1,7 @@
 profile::certbot::certificates:
   search:
     domains:
+      - typesense.jquery.com
       - "%{::facts.fqdn}"
 
 profile::typesense::tls_key_name: search
