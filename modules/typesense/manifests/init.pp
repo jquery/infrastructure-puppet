@@ -21,6 +21,15 @@ class typesense (
     require => Package['curl'], # from the base profile
   }
 
+  file { $deb:
+    ensure  => file,
+    replace => false,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    require => Exec['typesense-download'],
+  }
+
   # The package takes care of the following following:
   #
   # - create /etc/typesense/typesense-server.ini (with random $API_KEY)
