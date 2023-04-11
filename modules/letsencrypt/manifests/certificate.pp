@@ -19,6 +19,7 @@ define letsencrypt::certificate (
   exec { "letsencrypt-modify-${title}":
     command   => "${base_command} ${domains_command}",
     unless    => "/usr/local/bin/cert-compare /etc/letsencrypt/live/${title}/cert.pem ${domains.join(' ')}",
+    tag       => 'letsencrypt-modify',
     logoutput => true,
   }
 }

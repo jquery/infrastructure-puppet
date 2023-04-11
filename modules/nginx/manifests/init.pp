@@ -47,4 +47,8 @@ class nginx {
   letsencrypt::hook { 'nginx-reload':
     content => "#!/bin/sh\nsystemctl reload nginx.service\n",
   }
+
+  Exec <| tag == 'letsencrypt-modify' |> {
+    notify => Exec['nginx-reload'],
+  }
 }
