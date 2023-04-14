@@ -15,6 +15,7 @@ class profile::testswarm::server (
 
   class { 'php::fpm':
     ini_values => {
+      'expose_php' => 'On',
       'memory_limit' => '512M',
     },
   }
