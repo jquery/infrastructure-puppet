@@ -77,6 +77,7 @@ class profile::wordpress::docs (
     file { "/srv/wordpress/sites/${name}/jquery-config.php":
       ensure  => file,
       content => template('profile/wordpress/docs/jquery-config.php.erb'),
+      require => Exec["wp-download-${name}"],
     }
   }
 
