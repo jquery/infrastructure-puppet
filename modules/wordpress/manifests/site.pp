@@ -3,20 +3,21 @@
 # @param $certificate lets encrypt certificate name
 # @param $db_password_seed seed to use to generate a database password
 define wordpress::site (
-  Stdlib::Fqdn             $host,
-  String[1]                $site_name,
-  String[1]                $certificate,
-  String[1]                $db_password_seed,
-  Stdlib::Email            $admin_email,
-  String[1]                $admin_password,
-  Stdlib::Unixpath         $base_path,
-  String[1]                $active_theme,
-  Array[Stdlib::Unixpath]  $config_files        = [],
-  Array[Wordpress::Theme]  $themes              = [],
-  Array[Wordpress::Option] $options             = [],
-  Array[Wordpress::User]   $users               = [],
-  Array[Wordpress::Plugin] $plugins             = [],
-  String[1]                $permalink_structure = '/%year%/%monthnum%/%day%/%postname%/',
+  Stdlib::Fqdn              $host,
+  String[1]                 $site_name,
+  String[1]                 $certificate,
+  String[1]                 $db_password_seed,
+  Stdlib::Email             $admin_email,
+  String[1]                 $admin_password,
+  Stdlib::Unixpath          $base_path,
+  String[1]                 $active_theme,
+  Array[Stdlib::Unixpath]   $config_files        = [],
+  Array[Wordpress::Theme]   $themes              = [],
+  Array[Wordpress::Option]  $options             = [],
+  Array[Wordpress::User]    $users               = [],
+  Array[Wordpress::Plugin]  $plugins             = [],
+  Array[Wordpress::Sidebar] $sidebars            = [],
+  String[1]                 $permalink_structure = '/%year%/%monthnum%/%day%/%postname%/',
 ) {
   mariadb::database { "wordpress_${title}": }
 
@@ -150,6 +151,23 @@ define wordpress::site (
       unless    => "/usr/local/bin/wp --path=${base_path} plugin is-active ${plugin_name}",
       user      => 'www-data',
       logoutput => true,
+      require   => Exec["wp-install-${title}"],
+    }
+  }
+
+  $sidebars.each |Wordpress::Sidebar $sidebar| {
+    $slot = $sidebar['slot']
+    if $sidebar['ensure'] != 'absent' {
+      fail("sidebar ${slot}: invalid ensure value")
+    }
+
+    exec { "wp-sidebar-${title}-${slot}-clear":
+      command   => "/usr/local/bin/wp --path=${base_path} widget reset ${slot}",
+      unless    => "test \"$(wp --path=${base_path} --format=json widget list ${slot})\" = \"[]\"",
+      user      => 'www-data',
+      logoutput => true,
+      # for the unless test command to work
+      provider  => 'shell',
       require   => Exec["wp-install-${title}"],
     }
   }

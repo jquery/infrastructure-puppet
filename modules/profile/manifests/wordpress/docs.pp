@@ -61,6 +61,9 @@ class profile::wordpress::docs (
       ],
       plugins             => $base_plugins + $static_index_plugins,
       options             => [],
+      sidebars            => [
+        { slot => 'sidebar-1', ensure => absent, },
+      ],
       users               => [
         {
           username => 'builder',
