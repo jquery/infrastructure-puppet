@@ -120,3 +120,14 @@ curl http://localhost:8108/keys \
   -H 'Content-Type: application/json' \
   -d '{"description":"Search-only key.","actions": ["documents:search"], "collections": ["*"]}'
 ```
+
+#### Create scrapers
+
+Add these two secrets to the GitHub repo's settings:
+
+* `TYPESENSE_HOST`: `typesense.jquery.com` (host-only, no port or protocol)
+* `TYPESENSE_ADMIN_KEY`: (an admin key with rights to relevant collections)
+
+Then add `/docsearch.config.json` and `/.github/workflows/typesense.yaml`  files
+to the repository, similar to those in <https://github.com/qunitjs/qunitjs.com/>
+or <https://github.com/jquery/api.jquery.com/>.
