@@ -22,3 +22,4 @@ profile::typesense::api_key: 'fakekey'
 
 # hacks
 jqlib::secret::use_fake_private: true
+profile::base::enable_ssh_ca: false

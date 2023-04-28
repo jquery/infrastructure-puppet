@@ -177,4 +177,6 @@ class profile::puppet::server (
   tarsnap::backup { 'puppet-private':
     paths => [$private_repo_dir],
   }
+
+  include profile::ssh::ca
 }
