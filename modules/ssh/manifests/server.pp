@@ -21,7 +21,7 @@ class ssh::server (
       ssh::server::ca_signed_hostkey { "/etc/ssh/ssh_host_${type}_key-cert.pub":
         hosts  => $trusted_host_names,
         type   => $type,
-        notify => Service['ssh'],
+        notify => Service['sshd'],
       }
     }
   }
