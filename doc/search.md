@@ -59,21 +59,24 @@ documentation for how to works in more detail.
 
 ## Typesense
 
-As of 2021, we're exploring an open-source solution that we support
-within our free software ecosystem, and that we can adopt without
-a lower privacy budget by not sending PII to another third party.
-
 ### Background
 
-In 2021, we first evaluated Meilisearch ([private thread](https://github.com/jquery/infrastructure/issues/522))
-and experienced some suboptimal aspects that eventually made us
-transition the experiment to Typesense. These reasons included:
+As of 2021, we're exploring an open-source solution that we can support
+within the free software ecosystem. In doing so we will increase security
+and availability (by reducing client-side dependence on third-party
+domains), and lower our privacy budget.
+
+We first evaluated Meilisearch ([private thread](https://github.com/jquery/infrastructure/issues/522))
+and experienced some suboptimal aspects. These included:
 difficult upgrades (not yet committing to forward compatibility or
 automatic in-place upgrades), [opt-out telemetry](https://docs.meilisearch.com/learn/what_is_meilisearch/telemetry.html) instead of opt-in, no official Debian packages,
 non-trivial interactive setup, missing support for querying multiple
 indexes (e.g. qunitjs.com and api.qunitjs.com), and a not yet clear
 future in terms of business model (Meilisearch Cloud was not
 yet in the picture, and the backend is not GPL licensed).
+
+In mid-2022, the experiment transitioned to focus on
+[Typesense](https://typesense.org/) instead.
 
 ### Runbook
 
