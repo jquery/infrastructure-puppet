@@ -18,6 +18,7 @@ Puppet::Functions.create_function(:'ssh::ssh_sign_host_certificate') do
         '/usr/bin/ssh-keygen',
         '-s', '/etc/ssh-ca/ca',
         '-I', 'jQuery SSH CA v1',
+        '-h',  # sign host keys
         '-n', names.join(','),
         '-V', '+6w',
         pubkey_file
