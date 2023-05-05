@@ -22,6 +22,12 @@ server {
     deny all;
   }
 
+<%- if @gilded_wordpress -%>
+  location ~ ^/resources/(?<name>.*) {
+    alias /var/www/wordpress/gw-resources/<%= @host %>/$name;
+  }
+<%- end -%>
+
   location = /favicon.ico { log_not_found off; access_log off; }
   location = /robots.txt { log_not_found off; access_log off; allow all; }
   location ~* \.(css|gif|ico|jpeg|jpg|js|png)$ {

@@ -18,6 +18,7 @@ define wordpress::site (
   Array[Wordpress::Plugin]  $plugins             = [],
   Array[Wordpress::Sidebar] $sidebars            = [],
   String[1]                 $permalink_structure = '/%year%/%monthnum%/%day%/%postname%/',
+  Boolean                   $gilded_wordpress    = false,
 ) {
   mariadb::database { "wordpress_${title}": }
 

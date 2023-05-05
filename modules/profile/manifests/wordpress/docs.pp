@@ -50,6 +50,7 @@ class profile::wordpress::docs (
       admin_password      => $admin_password,
       base_path           => "/srv/wordpress/sites/${name}",
       permalink_structure => '/%postname%/',
+      gilded_wordpress    => true,
       config_files        => [
         '/srv/wordpress/docs-config-shared.php',
         "/srv/wordpress/sites/${name}/jquery-config.php",
