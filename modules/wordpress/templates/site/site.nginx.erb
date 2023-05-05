@@ -24,7 +24,7 @@ server {
 
 <%- if @gilded_wordpress -%>
   location ~ ^/resources/(?<name>.*) {
-    alias /var/www/wordpress/gw-resources/<%= @host %>/$name;
+    alias <%= @base_path %>/gw-resources/<%= @host %>/$name;
   }
 <%- end -%>
 
