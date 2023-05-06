@@ -4,6 +4,7 @@ profile::certbot::certificates:
       - "%{::facts.fqdn}"
 
 profile::wordpress::blogs::admin_email: infrastructure-team@jquery.com
+profile::wordpress::blogs::wordpress_version: "6.2"
 profile::wordpress::blogs::sites:
   jquery:
     host: blog.jquery.com

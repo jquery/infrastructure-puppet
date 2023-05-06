@@ -5,6 +5,7 @@
 define wordpress::site (
   Stdlib::Fqdn              $host,
   String[1]                 $site_name,
+  String[1]                 $version,
   String[1]                 $certificate,
   String[1]                 $db_password_seed,
   Stdlib::Email             $admin_email,
@@ -37,11 +38,26 @@ define wordpress::site (
   }
 
   exec { "wp-download-${title}":
-    command   => "/usr/local/bin/wp core download --path=${base_path}",
+    command   => "/usr/local/bin/wp core download --path=${base_path} --version=${version}",
     creates   => $base_path,
     user      => 'www-data',
     require   => File['/usr/local/bin/wp'],
     logoutput => true,
+  }
+
+  exec { "wp-update-${title}":
+    command   => "/usr/local/bin/wp core update --path=${base_path} --version=${version}",
+    unless    => "test \"$(wp --path=${base_path} core version)\" = \"${version}\"",
+    user      => 'www-data',
+    logoutput => true,
+    notify    => Exec["wp-update-db-${title}"],
+  }
+
+  exec { "wp-update-db-${title}":
+    command     => "/usr/local/bin/wp core update-db --path=${base_path}",
+    user        => 'www-data',
+    logoutput   => true,
+    refreshonly => true,
   }
 
   $themes.each |Wordpress::Theme $theme| {

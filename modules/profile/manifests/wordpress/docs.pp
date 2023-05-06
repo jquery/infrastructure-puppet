@@ -1,6 +1,7 @@
 # @summary documentation wordpress sites
 class profile::wordpress::docs (
   Profile::Docs::Sites $sites                 = lookup('docs_sites'),
+  String[1]            $wordpress_version     = lookup('profile::wordpress::docs::wordpress_version'),
   String[1]            $db_password_seed      = lookup('profile::wordpress::docs::db_password_seed'),
   Stdlib::Email        $admin_email           = lookup('profile::wordpress::docs::admin_email'),
   String[1]            $admin_password        = lookup('profile::wordpress::docs::admin_password'),
@@ -44,6 +45,7 @@ class profile::wordpress::docs (
     wordpress::site { $name:
       host                => $site['host'],
       site_name           => $site['site_name'],
+      version             => $wordpress_version,
       certificate         => $site['certificate'],
       db_password_seed    => $db_password_seed,
       admin_email         => $admin_email,
