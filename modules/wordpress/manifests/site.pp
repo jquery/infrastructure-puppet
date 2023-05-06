@@ -50,6 +50,8 @@ define wordpress::site (
     unless    => "test \"$(wp --path=${base_path} core version)\" = \"${version}\"",
     user      => 'www-data',
     logoutput => true,
+    # for the unless test command to work
+    provider  => 'shell',
     notify    => Exec["wp-update-db-${title}"],
   }
 
