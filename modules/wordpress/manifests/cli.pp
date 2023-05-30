@@ -31,4 +31,14 @@ class wordpress::cli (
     target  => "/usr/share/wp-cli/wp-${version}.phar",
     require => Exec['wp-cli-download'],
   }
+
+  file { '/etc/nginx/wordpress-subsites':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    recurse => true,
+    purge   => true,
+    force   => true,
+    notify  => Exec['nginx-reload'],
+  }
 }
