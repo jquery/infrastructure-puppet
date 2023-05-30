@@ -35,7 +35,7 @@ server {
     log_not_found off;
   }
 
-  include /etc/nginx/wordpress-subsites/<%= @host %>/*.conf;
+  include /etc/nginx/wordpress-subsites/<%= @host %>.d/*.conf;
 
   location / {
     try_files $uri $uri/ /index.php$is_args$args;
