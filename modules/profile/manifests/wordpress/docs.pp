@@ -45,6 +45,7 @@ class profile::wordpress::docs (
     wordpress::site { $name:
       host                => $site['host'],
       site_name           => $site['site_name'],
+      path                => pick($site['path'], '/'),
       version             => $wordpress_version,
       certificate         => $site['certificate'],
       db_password_seed    => $db_password_seed,

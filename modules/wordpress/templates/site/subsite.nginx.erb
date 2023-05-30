@@ -1,0 +1,10 @@
+<%- if @gilded_wordpress -%>
+location ~ ^<%= @path %>resources/(?<name>.*) {
+  alias <%= @base_path %>/gw-resources/<%= @host %>/$name;
+}
+<%- end -%>
+
+location <% @path %> {
+  root <%= @base_path %>;
+  try_files $uri $uri/ <%= @path %>index.php$is_args$args;
+}

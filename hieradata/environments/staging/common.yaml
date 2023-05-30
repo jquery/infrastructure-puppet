@@ -13,3 +13,21 @@ docs_sites:
     certificate: wordpress
     active_theme: learn.jquery.com
     enable_static_index: true
+  api_jqueryui_com:
+    host: stage.api.jquery.com
+    path: /
+    site_name: jQuery UI API Documentation (staging)
+    repository:
+      name: jquery/api.jqueryui.com
+      branch: main
+    certificate: wordpress
+    active_theme: api.jqueryui.com
+  api_jqueryui_com_1_8:
+    host: stage.api.jquery.com
+    path: /1.8/
+    site_name: jQuery UI 1.8 API Documentation (staging)
+    repository:
+      name: jquery/api.jqueryui.com
+      branch: 1-8
+    certificate: wordpress
+    active_theme: api.jqueryui.com

@@ -4,6 +4,7 @@
 # @param $db_password_seed seed to use to generate a database password
 define wordpress::site (
   Stdlib::Fqdn              $host,
+  Wordpress::Path           $path,
   String[1]                 $site_name,
   String[1]                 $version,
   String[1]                 $certificate,
@@ -96,7 +97,7 @@ define wordpress::site (
   }
 
   exec { "wp-install-${title}":
-    command     => "/usr/local/bin/wp core install --path=${base_path} --url=https://${host} --title=\"${site_name}\" --admin_user=admin --admin_email=${admin_email} --admin_password=\"${admin_password}\" --skip-email",
+    command     => "/usr/local/bin/wp core install --path=${base_path} --url=https://${host}${path} --title=\"${site_name}\" --admin_user=admin --admin_email=${admin_email} --admin_password=\"${admin_password}\" --skip-email",
     user        => 'www-data',
     logoutput   => true,
     refreshonly => true,
@@ -191,9 +192,29 @@ define wordpress::site (
     }
   }
 
-  $tls_config = nginx::tls_config()
-  $php_fpm_version = $::php::fpm::version
-  nginx::site { "wordpress-${title}":
-    content => template('wordpress/site/site.nginx.erb'),
+  if $path == '/' {
+    $tls_config = nginx::tls_config()
+    $php_fpm_version = $::php::fpm::version
+    nginx::site { "wordpress-${title}":
+      content => template('wordpress/site/site.nginx.erb'),
+    }
+
+    file { "/etc/nginx/wordpress-subsites/${host}.d":
+      ensure  => directory,
+      owner   => 'root',
+      group   => 'root',
+      recurse => true,
+      purge   => true,
+      force   => true,
+      notify  => Exec['nginx-reload'],
+    }
+  } else {
+    file { "/etc/nginx/wordpress-subsites/${host}.d/${regsubst($title, '[\W_]', '-', 'G')}.conf":
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      content => template('wordpress/site/subsite.nginx.erb'),
+      notify  => Exec['nginx-reload'],
+    }
   }
 }
