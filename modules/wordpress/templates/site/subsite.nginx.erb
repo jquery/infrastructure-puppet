@@ -4,7 +4,7 @@ location ~ ^<%= @path %>resources/(?<name>.*) {
 }
 <%- end -%>
 
-location <% @path %> {
+location <%= @path %> {
   root <%= @base_path %>;
   try_files $uri $uri/ <%= @path %>index.php$is_args$args;
 }
