@@ -85,7 +85,13 @@ define wordpress::site (
     logoutput => true,
   }
 
-  $config_files.each |Stdlib::Unixpath $path| {
+  file { "${base_path}/jquery-config-base.php":
+    ensure  => file,
+    content => template('wordpress/site/jquery-config-base.php.erb'),
+    require => Exec["wp-create-config-${title}"],
+  }
+
+  ($config_files + ["${base_path}/jquery-config-base.php"]).each |Stdlib::Unixpath $path| {
     file_line { "wp-config-file-${title}-${path}":
       ensure  => present,
       path    => "${base_path}/wp-config.php",
