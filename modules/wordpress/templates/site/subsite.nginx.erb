@@ -5,6 +5,14 @@ location ~ ^<%= @path %>resources/(?<name>.*) {
 <%- end -%>
 
 location <%= @path %> {
-  root <%= @base_path %>;
+  alias <%= @base_path %>/;
   try_files $uri $uri/ <%= @path %>index.php$is_args$args;
+
+  location ~ \.php$ {
+    client_max_body_size 25M;
+    try_files            $uri =404;
+    fastcgi_pass         unix:/run/php/php<%= @php_fpm_version %>-fpm.sock;
+    fastcgi_param        SCRIPT_FILENAME $request_filename;
+    include              /etc/nginx/fastcgi_params;
+  }
 }
