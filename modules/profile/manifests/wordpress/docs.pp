@@ -42,21 +42,25 @@ class profile::wordpress::docs (
       $static_index_plugins = []
     }
 
+    $path = pick($site['path'], '/')
+    $dir = regsubst("/srv/wordpress/sites/${name}${path}", '^(.*)\/$', '\1')
+
     wordpress::site { $name:
       host                => $site['host'],
       site_name           => $site['site_name'],
-      path                => pick($site['path'], '/'),
+      path                => $path,
+      webroot             => "/srv/wordpress/sites/${name}",
       version             => $wordpress_version,
       certificate         => $site['certificate'],
       db_password_seed    => $db_password_seed,
       admin_email         => $admin_email,
       admin_password      => $admin_password,
-      base_path           => "/srv/wordpress/sites/${name}",
+      base_path           => $dir,
       permalink_structure => '/%postname%/',
       gilded_wordpress    => true,
       config_files        => [
         '/srv/wordpress/docs-config-shared.php',
-        "/srv/wordpress/sites/${name}/jquery-config.php",
+        "${dir}/jquery-config.php",
       ],
       active_theme        => $active_theme,
       themes              => [
@@ -81,7 +85,7 @@ class profile::wordpress::docs (
     }
 
     $live_site = regsubst($site['host'], '^stage\.(.*)$', '\1')
-    file { "/srv/wordpress/sites/${name}/jquery-config.php":
+    file { "${dir}/jquery-config.php":
       ensure  => file,
       content => template('profile/wordpress/docs/jquery-config.php.erb'),
       require => Exec["wp-download-${name}"],

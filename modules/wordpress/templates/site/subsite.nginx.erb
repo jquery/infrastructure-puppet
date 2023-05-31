@@ -4,8 +4,8 @@ location ~ ^<%= @path %>resources/(?<name>.*) {
 }
 <%- end -%>
 
-location <%= @path %> {
-  alias <%= @base_path %>/;
+location ^~ <%= @path %> {
+  root <%= @webroot %>/;
   try_files $uri $uri/ <%= @path %>index.php$is_args$args;
 
   location ~ \.php$ {

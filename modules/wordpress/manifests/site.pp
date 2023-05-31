@@ -21,6 +21,7 @@ define wordpress::site (
   Array[Wordpress::Sidebar] $sidebars            = [],
   String[1]                 $permalink_structure = '/%year%/%monthnum%/%day%/%postname%/',
   Boolean                   $gilded_wordpress    = false,
+  Stdlib::Unixpath          $webroot             = $base_path,
 ) {
   mariadb::database { "wordpress_${title}": }
 

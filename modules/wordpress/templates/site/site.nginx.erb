@@ -8,7 +8,7 @@ server {
   ssl_certificate_key /etc/letsencrypt/live/<%= @certificate %>/privkey.pem;
   <%= @tls_config.join("\n  ") %>
 
-  root  <%= @base_path %>;
+  root  <%= @webroot %>;
   index index.php;
 
   access_log    off;
