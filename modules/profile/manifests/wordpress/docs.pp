@@ -48,6 +48,8 @@ class profile::wordpress::docs (
     if $path != '/' {
       file { "/srv/wordpress/sites/${name}":
         ensure => directory,
+        owner  => 'www-data',
+        group  => 'www-data',
       }
     }
 
