@@ -45,6 +45,12 @@ class profile::wordpress::docs (
     $path = pick($site['path'], '/')
     $dir = regsubst("/srv/wordpress/sites/${name}${path}", '^(.*)\/$', '\1')
 
+    if $path != '/' {
+      file { "/srv/wordpress/sites/${name}":
+        ensure => directory,
+      }
+    }
+
     wordpress::site { $name:
       host                => $site['host'],
       site_name           => $site['site_name'],
