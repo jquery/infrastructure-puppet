@@ -4,7 +4,14 @@ class profile::builder (
   Stdlib::Fqdn         $docs_active_host      = lookup('docs_active_host'),  # this is a hack
   String[1]            $builder_password_seed = lookup('docs_builder_password_seed'),
 ) {
-  ensure_packages(['nodejs', 'npm'])
+  ensure_packages([
+    'nodejs',
+    'npm',
+
+    # tools needed by some sites:
+    'libxml2-utils',  # for xmllint
+    'xsltproc',
+  ])
 
   systemd::sysuser { 'builder':
     content => 'u builder - "unprivileged user for building doc sites" /srv/builder',
