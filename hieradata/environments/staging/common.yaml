@@ -22,6 +22,7 @@ docs_sites:
       branch: main
     certificate: wordpress
     active_theme: api.jqueryui.com
+    enable_api_tweaks: true
   api_jqueryui_com_1_8:
     host: stage.api.jqueryui.com
     path: /1.8/
@@ -31,3 +32,4 @@ docs_sites:
       branch: 1-8
     certificate: wordpress
     active_theme: api.jqueryui.com
+    enable_api_tweaks: true

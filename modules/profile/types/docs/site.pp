@@ -10,4 +10,5 @@ type Profile::Docs::Site = Struct[{
   active_theme           => String[1],
   builder_extra_settings => Optional[Hash],
   enable_static_index    => Optional[Boolean],
+  enable_api_tweaks      => Optional[Boolean],
 }]

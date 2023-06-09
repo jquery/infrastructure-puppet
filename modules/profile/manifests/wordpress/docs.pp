@@ -26,6 +26,17 @@ class profile::wordpress::docs (
   $sites.each |String[1] $name, Profile::Docs::Site $site| {
     $active_theme = $site['active_theme']
 
+    $path = pick($site['path'], '/')
+    $dir = regsubst("/srv/wordpress/sites/${name}${path}", '^(.*)\/$', '\1')
+
+    if $path != '/' {
+      file { "/srv/wordpress/sites/${name}":
+        ensure => directory,
+        owner  => 'www-data',
+        group  => 'www-data',
+      }
+    }
+
     $base_plugins = [
       { name => 'gilded-wordpress',     path => '/srv/wordpress/jquery-wp-content/mu-plugins/gilded-wordpress.php',              single_file => true, },
       { name => 'redirects',            path => '/srv/wordpress/jquery-wp-content/mu-plugins/redirects.php',                     single_file => true, },
@@ -43,15 +54,20 @@ class profile::wordpress::docs (
       $static_index_plugins = []
     }
 
-    $path = pick($site['path'], '/')
-    $dir = regsubst("/srv/wordpress/sites/${name}${path}", '^(.*)\/$', '\1')
-
-    if $path != '/' {
-      file { "/srv/wordpress/sites/${name}":
-        ensure => directory,
-        owner  => 'www-data',
-        group  => 'www-data',
+    if $site['enable_api_tweaks'] {
+      if $path != '/' {
+        $subsite_plugins = [
+          { name => 'rewrite-old-api-links', path => '/srv/wordpress/jquery-wp-content/mu-plugins/rewrite-old-api-links.php', single_file => true },
+        ]
+      } else {
+        $subsite_plugins = []
       }
+
+      $api_site_plugins = [
+        { name => 'category-listings', path => '/srv/wordpress/jquery-wp-content/mu-plugins/category-listings.php', single_file => true },
+      ] + $subsite_plugins
+    } else {
+      $api_site_plugins = []
     }
 
     wordpress::site { $name:
@@ -76,7 +92,7 @@ class profile::wordpress::docs (
         { name => 'jquery',      path => '/srv/wordpress/jquery-wp-content/themes/jquery', },
         { name => $active_theme, path => "/srv/wordpress/jquery-wp-content/themes/${active_theme}", },
       ],
-      plugins             => $base_plugins + $static_index_plugins,
+      plugins             => $base_plugins + $static_index_plugins + $api_site_plugins,
       options             => [],
       sidebars            => [
         { slot => 'sidebar-1', ensure => absent, },
