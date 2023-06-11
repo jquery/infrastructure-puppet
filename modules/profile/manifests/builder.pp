@@ -39,8 +39,9 @@ class profile::builder (
       require => Service['systemd-sysusers'],
     }
 
+    $path = pick($site['path'], '/')
     $settings = {
-      url      => "https://${site['host']}",
+      url      => "https://${site['host']}${path}",
       host     => $docs_active_host,
       username => 'builder',
       password => jqlib::autogen_password("docs_builder_${name}", $builder_password_seed),
