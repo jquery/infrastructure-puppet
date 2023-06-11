@@ -13,6 +13,6 @@ Puppet::Functions.create_function(:'jqlib::autogen_password') do
   end
 
   def autogen_password(username, seed)
-    Digest::SHA256.base64digest("#{seed}|||#{username}")[0..20]
+    Digest::SHA256.hexdigest("#{seed}|||#{username}")[0..20]
   end
 end
