@@ -33,3 +33,43 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
+  api_jqueryui_com_1_9:
+    host: stage.api.jqueryui.com
+    path: /1.9/
+    site_name: jQuery UI 1.9 API Documentation (staging)
+    repository:
+      name: jquery/api.jqueryui.com
+      branch: 1-9
+    certificate: wordpress
+    active_theme: api.jqueryui.com
+    enable_api_tweaks: true
+  api_jqueryui_com_1_10:
+    host: stage.api.jqueryui.com
+    path: /1.10/
+    site_name: jQuery UI 1.10 API Documentation (staging)
+    repository:
+      name: jquery/api.jqueryui.com
+      branch: 1-10
+    certificate: wordpress
+    active_theme: api.jqueryui.com
+    enable_api_tweaks: true
+  api_jqueryui_com_1_11:
+    host: stage.api.jqueryui.com
+    path: /1.11/
+    site_name: jQuery UI 1.11 API Documentation (staging)
+    repository:
+      name: jquery/api.jqueryui.com
+      branch: 1-11
+    certificate: wordpress
+    active_theme: api.jqueryui.com
+    enable_api_tweaks: true
+  api_jqueryui_com_1_12:
+    host: stage.api.jqueryui.com
+    path: /1.12/
+    site_name: jQuery UI 1.11 API Documentation (staging)
+    repository:
+      name: jquery/api.jqueryui.com
+      branch: 1-12
+    certificate: wordpress
+    active_theme: api.jqueryui.com
+    enable_api_tweaks: true
