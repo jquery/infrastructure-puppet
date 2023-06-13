@@ -1,3 +1,5 @@
+profile::notifier::tls_key_name: wordpress
+
 profile::certbot::certificates:
   wordpress:
     domains:

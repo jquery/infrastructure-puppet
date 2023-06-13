@@ -6,6 +6,7 @@ class profile::wordpress::docs (
   Stdlib::Email        $admin_email           = lookup('profile::wordpress::docs::admin_email'),
   String[1]            $admin_password        = lookup('profile::wordpress::docs::admin_password'),
   Stdlib::Email        $builder_email         = lookup('profile::wordpress::docs::builder_email'),
+  String[1]            $wp_content_branch     = lookup('profile::wordpress::docs::wp_content_branch'),
   String[1]            $builder_password_seed = lookup('docs_builder_password_seed'),
 ) {
   include profile::wordpress::base
@@ -13,9 +14,17 @@ class profile::wordpress::docs (
   git::clone { 'jquery-wp-content':
     path   => '/srv/wordpress/jquery-wp-content',
     remote => 'https://github.com/jquery/jquery-wp-content',
-    branch => 'main',
+    branch => $wp_content_branch,
     owner  => 'www-data',
     group  => 'www-data',
+  }
+
+  notifier::git_update { 'jquery-wp-content':
+    github_repository => 'jquery/jquery-wp-content',
+    listen_for        => [{ branch => $wp_content_branch }],
+    local_path        => '/srv/wordpress/jquery-wp-content',
+    local_user        => 'www-data',
+    require           => Git::Clone['jquery-wp-content'],
   }
 
   file { '/srv/wordpress/docs-config-shared.php':
