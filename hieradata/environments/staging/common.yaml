@@ -14,6 +14,8 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
+    options:
+      jquery_logo_link: "https://stage.jqueryui.com"
   api_jqueryui_com_1_8:
     host: stage.api.jqueryui.com
     path: /1.8/
@@ -24,6 +26,8 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
+    options:
+      jquery_logo_link: "https://stage.jqueryui.com"
   api_jqueryui_com_1_9:
     host: stage.api.jqueryui.com
     path: /1.9/
@@ -34,6 +38,8 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
+    options:
+      jquery_logo_link: "https://stage.jqueryui.com"
   api_jqueryui_com_1_10:
     host: stage.api.jqueryui.com
     path: /1.10/
@@ -44,6 +50,8 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
+    options:
+      jquery_logo_link: "https://stage.jqueryui.com"
   api_jqueryui_com_1_11:
     host: stage.api.jqueryui.com
     path: /1.11/
@@ -54,6 +62,8 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
+    options:
+      jquery_logo_link: "https://stage.jqueryui.com"
   api_jqueryui_com_1_12:
     host: stage.api.jqueryui.com
     path: /1.12/
@@ -64,6 +74,8 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
+    options:
+      jquery_logo_link: "https://stage.jqueryui.com"
   jquery_com:
     host: stage.jquery.com
     site_name: jQuery (staging)
@@ -74,6 +86,7 @@ docs_sites:
     active_theme: jquery.com
     enable_static_index: true
     options:
+      jquery_description: "jQuery: The Write Less, Do More, JavaScript Library"
       jquery_xfn_rel_me: "https://social.lfx.dev/@jquery"
   learn_jquery_com:
     host: stage.learn.jquery.com
