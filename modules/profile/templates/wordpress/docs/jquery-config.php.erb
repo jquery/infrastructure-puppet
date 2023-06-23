@@ -1,3 +1,10 @@
 <?php
-define( 'JQUERY_LIVE_SITE',   '<%= @live_site %>' );
-define( 'JQUERY_LIVE_DOMAIN', '<%= @live_domain %>' );
+define( 'JQUERY_LIVE_SITE',      '<%= @live_site %>' );
+define( 'JQUERY_LIVE_DOMAIN',    '<%= @live_domain %>' );
+<%- if @live_domain == @site['host'] -%>
+define( 'JQUERY_STAGING',        false );
+define( 'JQUERY_STAGING_PREFIX', '' );
+<%- else -%>
+define( 'JQUERY_STAGING',        true );
+define( 'JQUERY_STAGING_PREFIX', 'stage.' );
+<%- end -%>
