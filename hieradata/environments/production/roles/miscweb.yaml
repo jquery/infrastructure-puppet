@@ -1,1 +1,7 @@
 profile::miscweb::podcast_vhost: podcast.jquery.com
+
+profile::miscweb::redirects:
+  ui.jquery.com:
+    target: https://jqueryui.com
+    mode: prefix
+    certificate: miscweb
