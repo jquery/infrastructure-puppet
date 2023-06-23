@@ -72,6 +72,7 @@ docs_sites:
       branch: main
     certificate: wordpress
     active_theme: jquery.com
+    enable_static_index: true
   learn_jquery_com:
     host: stage.learn.jquery.com
     site_name: jQuery Learning Center (staging)
