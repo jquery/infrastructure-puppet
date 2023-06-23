@@ -79,6 +79,14 @@ class profile::wordpress::docs (
       $api_site_plugins = []
     }
 
+    if $site['options'] {
+      $options = $site['options'].map |String[1] $name, String $value| {
+        { name => $name, value => $value }
+      }
+    } else {
+      $options = []
+    }
+
     wordpress::site { $name:
       host                => $site['host'],
       site_name           => $site['site_name'],
@@ -102,7 +110,7 @@ class profile::wordpress::docs (
         { name => $active_theme, path => "/srv/wordpress/jquery-wp-content/themes/${active_theme}", },
       ],
       plugins             => $base_plugins + $static_index_plugins + $api_site_plugins,
-      options             => [],
+      options             => $options,
       sidebars            => [
         { slot => 'sidebar-1', ensure => absent, },
       ],
