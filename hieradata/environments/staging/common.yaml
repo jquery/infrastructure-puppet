@@ -64,6 +64,14 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
+  jquery_com:
+    host: stage.jquery.com
+    site_name: jQuery (staging)
+    repository:
+      name: jquery/jquery.com
+      branch: main
+    certificate: wordpress
+    active_theme: jquery.com
   learn_jquery_com:
     host: stage.learn.jquery.com
     site_name: jQuery Learning Center (staging)
