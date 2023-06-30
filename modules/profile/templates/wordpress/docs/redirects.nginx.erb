@@ -1,0 +1,12 @@
+<%- @site['redirects'].each do |redirect| -%>
+<%- status_code = redirect.fetch('permanent', true) ? 301 : 302 %>
+location <%= redirect['mode'] == 'exact' ? '=' : '' %> <%= redirect['path'] %> {
+  return <%= status_code %> <%= redirect['target'] %>;
+}
+
+<%- if redirect['mode'] == 'exact' and not redirect['path'].end_with?('/') %>
+location = <%= redirect['path'] %>/ {
+  return <%= status_code %> <%= redirect['target'] %>;
+}
+<%- end -%>
+<%- end -%>

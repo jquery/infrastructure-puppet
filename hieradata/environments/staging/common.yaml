@@ -95,6 +95,11 @@ docs_sites:
       jquery_body_class: jquery
       jquery_description: "jQuery: The Write Less, Do More, JavaScript Library"
       jquery_xfn_rel_me: "https://social.lfx.dev/@jquery"
+    redirects:
+      - path: /ui
+        match: prefix
+        target: "https://stage.jqueryui.com"
+        permanent: false
   learn_jquery_com:
     host: stage.learn.jquery.com
     site_name: jQuery Learning Center (staging)

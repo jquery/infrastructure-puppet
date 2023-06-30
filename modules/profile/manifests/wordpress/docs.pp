@@ -134,6 +134,16 @@ class profile::wordpress::docs (
       content => template('profile/wordpress/docs/jquery-config.php.erb'),
       require => Exec["wp-download-${name}"],
     }
+
+    if $site['redirects'] {
+      file { "/etc/nginx/wordpress-subsites/${site['host']}.d/${name}.conf":
+        ensure  => file,
+        owner   => 'root',
+        group   => 'root',
+        content => template('profile/wordpress/docs/redirects.nginx.erb'),
+        notify  => Exec['nginx-reload'],
+      }
+    }
   }
 
   nftables::allow { 'wordpress-docs-https':
