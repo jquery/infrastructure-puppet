@@ -7,19 +7,26 @@ class ssh::server (
     ensure => installed,
   }
 
-  if $enable_ssh_ca {
-    $trusted_host_names = [
-      $::facts['networking']['fqdn'],
-      $::facts['networking']['hostname'],
-      $::facts['networking']['ip'],
-      $::facts['networking']['ip6'],
-    ].flatten.filter |$x| {
-      $x =~ NotUndef and !($x =~ /^fe80/)
-    }.sort
+  $host_names = [
+    $::facts['networking']['fqdn'],
+    $::facts['networking']['ip'],
+    $::facts['networking']['ip6'],
+  ].flatten.filter |$x| {
+    $x =~ NotUndef and !($x =~ /^fe80/)
+  }.sort
 
-    $enabled_key_types.each |Ssh::KeyType $type| {
+  $enabled_key_types.each |Ssh::KeyType $type| {
+    @@sshkey { "${::fqdn}-${type}":
+      ensure       => present,
+      name         => $::facts['networking']['fqdn'],
+      type         => $::ssh[$type]['type'],
+      key          => $::ssh[$type]['key'],
+      host_aliases => $host_names.filter |$it| { $it != $::facts['networking']['fqdn'] },
+    }
+
+    if $enable_ssh_ca {
       ssh::server::ca_signed_hostkey { "/etc/ssh/ssh_host_${type}_key-cert.pub":
-        hosts  => $trusted_host_names,
+        hosts  => $host_names,
         type   => $type,
         notify => Service['sshd'],
       }
