@@ -189,7 +189,7 @@ class profile::puppet::server (
   $ca_data = jqlib::secret('ssh_ca/ca.pub')
   $keys = jqlib::puppetdb_query('resources[certname, parameters] { type = "Sshkey" and exported = true }').map |$key| {
     $names = [$key['certname']] + $key['parameters']['host_aliases']
-    "${names.sort} ${key['parameters']['type']} ${key['parameters']['key']}"
+    "${names.sort.join(' ')} ${key['parameters']['type']} ${key['parameters']['key']}"
   }.sort
 
   file { '/srv/www/known_hosts':
