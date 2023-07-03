@@ -21,4 +21,16 @@ server {
     proxy_ssl_verify on;
     proxy_ssl_protocols TLSv1.3;
   }
+
+  location /pdb/meta {
+    proxy_pass https://<%= @facts['fqdn'] %>:8081/pdb/meta;
+    proxy_redirect off;
+    proxy_buffering off;
+
+    proxy_ssl_certificate /etc/puppetlabs/puppetdb/ssl/public.pem;
+    proxy_ssl_certificate_key /etc/puppetlabs/puppetdb/ssl/private.pem;
+    proxy_ssl_trusted_certificate /etc/puppetlabs/puppetdb/ssl/ca.pem;
+    proxy_ssl_verify on;
+    proxy_ssl_protocols TLSv1.3;
+  }
 }
