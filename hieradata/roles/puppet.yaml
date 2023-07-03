@@ -6,6 +6,7 @@ profile::certbot::certificates:
       - "%{::facts.fqdn}"
 
 profile::puppet::puppetdb::nginx_certificate_name: puppet
+profile::puppet::server::nginx_certificate_name: puppet
 profile::puppet::server::g10k_branch_filter: '^(staging|production)$'
 
 profile::notifier::tls_key_name: puppet

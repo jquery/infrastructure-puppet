@@ -1,8 +1,9 @@
 # @summary provisions a puppet server
 class profile::puppet::server (
-  String[1]     $java_memory           = lookup('profile::puppet::server::java_memory', {default_value => '1g'}),
-  String[1]     $g10k_branch_filter    = lookup('profile::puppet::server::g10k_branch_filter'),
-  Stdlib::Email $tarsnap_account_email = lookup('profile::puppet::server::tarsnap_account_email'),
+  String[1]     $java_memory            = lookup('profile::puppet::server::java_memory', {default_value => '1g'}),
+  String[1]     $g10k_branch_filter     = lookup('profile::puppet::server::g10k_branch_filter'),
+  String[1]     $nginx_certificate_name = lookup('profile::puppet::server::nginx_certificate_name'),
+  Stdlib::Email $tarsnap_account_email  = lookup('profile::puppet::server::tarsnap_account_email'),
 ) {
   include profile::puppet::common
 
@@ -179,4 +180,27 @@ class profile::puppet::server (
   }
 
   include profile::ssh::ca
+
+  # Expose SSH keys so users can verify them
+  file { '/srv/www':
+    ensure => directory,
+  }
+
+  $ca_data = jqlib::secret('ssh_ca/ca.pub')
+  $keys = jqlib::puppetdb_query('resources[certname, parameters] { type = "Sshkey" and exported = true }').map |$key| {
+    $names = [$key['certname']] + $key['parameters']['aliases']
+    "${names.sort} ${key['parameters']['type']} ${key['parameters']['key']}"
+  }.sort
+
+  file { '/srv/www/known_hosts':
+    ensure    => file,
+    content   => template('profile/puppet/server/web/known_hosts.erb'),
+    show_diff => false,
+  }
+
+  $tls_config = nginx::tls_config()
+  nginx::site { 'puppet-metadata':
+    content => template('profile/puppet/server/web/site.nginx.erb'),
+    require => Letsencrypt::Certificate[$nginx_certificate_name],
+  }
 }
