@@ -203,4 +203,9 @@ class profile::puppet::server (
     content => template('profile/puppet/server/web/site.nginx.erb'),
     require => Letsencrypt::Certificate[$nginx_certificate_name],
   }
+
+  nftables::allow { 'puppet-metadata':
+    proto => 'tcp',
+    dport => 443,
+  }
 }
