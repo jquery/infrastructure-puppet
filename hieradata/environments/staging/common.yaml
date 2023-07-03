@@ -17,6 +17,8 @@ docs_sites:
     options:
       jquery_body_class: jquery-ui
       jquery_logo_link: "https://stage.jqueryui.com"
+      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
+      jquery_docsearch_index_name: jqueryui
   api_jqueryui_com_1_8:
     host: stage.api.jqueryui.com
     path: /1.8/
@@ -30,6 +32,8 @@ docs_sites:
     options:
       jquery_body_class: jquery-ui
       jquery_logo_link: "https://stage.jqueryui.com"
+      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
+      jquery_docsearch_index_name: jqueryui
   api_jqueryui_com_1_9:
     host: stage.api.jqueryui.com
     path: /1.9/
@@ -43,6 +47,8 @@ docs_sites:
     options:
       jquery_body_class: jquery-ui
       jquery_logo_link: "https://stage.jqueryui.com"
+      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
+      jquery_docsearch_index_name: jqueryui
   api_jqueryui_com_1_10:
     host: stage.api.jqueryui.com
     path: /1.10/
@@ -56,6 +62,8 @@ docs_sites:
     options:
       jquery_body_class: jquery-ui
       jquery_logo_link: "https://stage.jqueryui.com"
+      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
+      jquery_docsearch_index_name: jqueryui
   api_jqueryui_com_1_11:
     host: stage.api.jqueryui.com
     path: /1.11/
@@ -69,6 +77,8 @@ docs_sites:
     options:
       jquery_body_class: jquery-ui
       jquery_logo_link: "https://stage.jqueryui.com"
+      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
+      jquery_docsearch_index_name: jqueryui
   api_jqueryui_com_1_12:
     host: stage.api.jqueryui.com
     path: /1.12/
@@ -82,6 +92,8 @@ docs_sites:
     options:
       jquery_body_class: jquery-ui
       jquery_logo_link: "https://stage.jqueryui.com"
+      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
+      jquery_docsearch_index_name: jqueryui
   jquery_com:
     host: stage.jquery.com
     site_name: jQuery (staging)
@@ -95,6 +107,8 @@ docs_sites:
       jquery_body_class: jquery
       jquery_description: "jQuery: The Write Less, Do More, JavaScript Library"
       jquery_xfn_rel_me: "https://social.lfx.dev/@jquery"
+      jquery_docsearch_api_key: 3cfde9aca378c8aab554d5bf1b23489b
+      jquery_docsearch_index_name: jquery
     redirects:
       - path: /ui
         match: prefix
