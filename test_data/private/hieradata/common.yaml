@@ -21,5 +21,6 @@ docs_builder_password_seed: 'fakeseed'
 profile::typesense::api_key: 'fakekey'
 
 # hacks
+jqlib::has_puppetdb: false
 jqlib::secret::use_fake_private: true
 profile::base::enable_ssh_ca: false

@@ -16,12 +16,14 @@ class ssh::server (
   }.sort
 
   $enabled_key_types.each |Ssh::KeyType $type| {
-    @@sshkey { "${::fqdn}-${type}":
-      ensure       => present,
-      name         => $::facts['networking']['fqdn'],
-      type         => $::ssh[$type]['type'],
-      key          => $::ssh[$type]['key'],
-      host_aliases => $host_names.filter |$it| { $it != $::facts['networking']['fqdn'] },
+    if jqlib::has_puppetdb() {
+      @@sshkey { "${::fqdn}-${type}":
+        ensure       => present,
+        name         => $::facts['networking']['fqdn'],
+        type         => $::ssh[$type]['type'],
+        key          => $::ssh[$type]['key'],
+        host_aliases => $host_names.filter |$it| { $it != $::facts['networking']['fqdn'] },
+      }
     }
 
     if $enable_ssh_ca {
