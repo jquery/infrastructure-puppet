@@ -12,7 +12,7 @@ docs_sites:
       branch: main
     certificate: wordpress
     active_theme: api.jquery.com
-    enable_blog_tweaks: true
+    enable_api_tweaks: true
     options:
       jquery_body_class: jquery
       jquery_logo_link: "https://stage.jquery.com"
