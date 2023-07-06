@@ -4,6 +4,20 @@ profile::certbot::email: infrastructure-team@jquery.com
 
 docs_active_host: wp-02.stage.ops.jquery.net
 docs_sites:
+  api_jquery_com:
+    host: stage.api.jquery.com
+    site_name: 'jQuery API Documentation (staging)'
+    repository:
+      name: jquery/api.jquery.com
+      branch: main
+    certificate: wordpress
+    active_theme: api.jquery.com
+    enable_blog_tweaks: true
+    options:
+      jquery_body_class: jquery
+      jquery_logo_link: "https://stage.jquery.com"
+      jquery_docsearch_api_key: 3cfde9aca378c8aab554d5bf1b23489b
+      jquery_docsearch_index_name: jquery
   api_jqueryui_com:
     host: stage.api.jqueryui.com
     path: /
