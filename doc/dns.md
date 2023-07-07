@@ -15,17 +15,7 @@ Format: `<role-##>.ops.jquery.net` or `<role-##>.stage.ops.jquery.net`
 
 Example: `wp-01.ops.jquery.net`, `wp-01.stage.ops.jquery.net`
 
-These generally refer to the public IP address of a specific virtual machine (e.g. DigitalOcean droplet). We use public IPs to enable direct SSH access for debugging, and in some cases to allow access from a webhook. In the case of web services, we attach CNAME the `ops` hostname to the canonical public domain name (e.g. `something.jquery.com`), possibly via a CDN. 
-
-### Internal service
-
-Format: `<service>.jquery.net`
-
-Example: `builder.jquery.net`, `builder.stage.jquery.net`
-
-These are generally a CNAME to an internal hostname, and are meant to be used in non-user facing ways only. Typically for use cases that are considered project-internal in purpose, but managed outside our self-hosted infrastructure in ways that Puppet automation can't easily reach. This helps separate concerns and reduces risk of breakage due to untracked references.
-
-For example, webhooks from the dozens of WordPress content repositories (like `jquery/api.jquery.com`) notify `builder.jquery.net` which then refers to currently primary builder.
+These generally refer to the public IP address of a specific virtual machine (e.g. DigitalOcean droplet). We use public IPs to enable direct SSH access for debugging, and in some cases to allow access from a webhook. In the case of web services, we attach CNAME the `ops` hostname to the canonical public domain name (e.g. `something.jquery.com`), possibly via a CDN.
 
 ### Public service
 
