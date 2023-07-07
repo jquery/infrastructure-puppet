@@ -1,4 +1,10 @@
 # @summary Simple systemd timer
+#
+# To help understand a timer's "OnCalendar" interval,
+# use the `systemd-analyze calendar` command [1], or refer
+# to <https://wiki.archlinux.org/title/Systemd/Timers>.
+#
+# [1]: <https://manpages.debian.org/bookworm/systemd/systemd-analyze.1.en.html#systemd-analyze_calendar_EXPRESSION...>
 define systemd::timer (
   String[1]                            $description,
   String[1]                            $user,

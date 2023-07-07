@@ -106,11 +106,31 @@ class profile::testswarm::server (
     dport => 443,
   }
 
+  # High-priority TestSwarm jobs (every minute at *:30s)
+  #
+  # This is for resetting timed-out browsers and other urgent jobs.
+  # During a migration between servers, you may want to turn this off
+  # so that both servers don't instruct the same public URL.
   systemd::timer { 'testswarm-cleanup':
     ensure      => $cleanup_ensure,
-    description => 'Perform TestSwarm cleanup',
+    description => 'TestSwarm urgent jobs',
     user        => 'root',
     command     => "/usr/bin/curl -s https://${public_host_name}/api.php?action=cleanup",
     interval    => ['OnCalendar=*-*-* *:*:30'],
+  }
+
+  # Low-priority TestSwarm jobs (daily)
+  #
+  # This is for pruning data older than ~ 6 months (200 days),
+  # to keep the database size somewhat under control.
+  #
+  # https://github.com/jquery/infrastructure/issues/339
+  # https://github.com/jquery/infrastructure/issues/535
+  systemd::timer { 'testswarm-prune':
+    ensure      => present,
+    description => 'TestSwarm database pruning',
+    user        => 'root',
+    command     => '/usr/bin/php /srv/testswarm/scripts/purge.php --maxage=200 --quick',
+    interval    => ['OnCalendar=*-*-* 14:50:50'],
   }
 }
