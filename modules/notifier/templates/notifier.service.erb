@@ -7,7 +7,7 @@ After=network.target nss-lookup.target
 User=notifier
 Group=notifier
 WorkingDirectory=<%= @base_path %>
-ExecStart=/usr/bin/node <%= @base_path %>/bin/notifier-server -d /etc/notifier.d -p 3333
+ExecStart=/usr/bin/node <%= @base_path %>/bin/notifier-server --debug -d /etc/notifier.d -p 3333
 Restart=always
 
 [Install]
