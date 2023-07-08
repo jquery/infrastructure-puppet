@@ -4,6 +4,7 @@ class role::docs::wordpress {
 
   include profile::certbot
   include profile::notifier
+  include profile::tarsnap
 
   include profile::wordpress::docs
 }
