@@ -150,4 +150,8 @@ class profile::wordpress::docs (
     proto => 'tcp',
     dport => 443,
   }
+
+  class { 'tarsnap::mariadb':
+    database_pattern => 'wordpress\\_%',
+  }
 }
