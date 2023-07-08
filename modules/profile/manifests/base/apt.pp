@@ -58,6 +58,13 @@ class profile::base::apt (
     content  => "APT::Periodic::Update-Package-Lists \"1\";\nAPT::Periodic::Unattended-Upgrade \"1\";",
   }
 
+  apt::conf { 'unattended-upgrades-main':
+    priority => '30',
+    # lint:ignore:single_quote_string_with_variables
+    content  => 'Unattended-Upgrade::Origins-Pattern:: "origin=${distro_id},codename=${distro_codename}";',
+    # lint:endignore
+  }
+
   apt::conf { 'unattended-upgrades-updates':
     priority => '30',
     # lint:ignore:single_quote_string_with_variables
