@@ -2,8 +2,8 @@ server {
   listen 443 ssl;
   listen [::]:443 ssl;
 
-  ssl_certificate /etc/letsencrypt/live/miscweb/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/miscweb/privkey.pem;
+  ssl_certificate /etc/letsencrypt/live/<%= @default_certificate %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= @default_certificate %>/privkey.pem;
 
   <%= @tls_config.join("\n  ") %>
 

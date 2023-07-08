@@ -1,7 +1,12 @@
 profile::miscweb::podcast_vhost: podcast.jquery.com
 
+profile::miscweb::default_certificate: miscweb
+
 profile::miscweb::redirects:
+  try.jquery.com:
+    target: https://learn.jquery.com
+    mode: root
   ui.jquery.com:
     target: https://jqueryui.com
     mode: prefix
-    certificate: miscweb
+    certificate: miscweb-a

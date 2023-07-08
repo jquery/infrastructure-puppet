@@ -1,7 +1,8 @@
 # @summary misc server for redirects and static version-controlled content
 class profile::miscweb (
-  Stdlib::Fqdn                                   $podcast_vhost = lookup('profile::miscweb::podcast_vhost'),
-  Hash[Stdlib::Fqdn, Profile::Miscweb::Redirect] $redirects     = lookup('profile::miscweb::redirects'),
+  Stdlib::Fqdn                                   $podcast_vhost       = lookup('profile::miscweb::podcast_vhost'),
+  String[1]                                      $default_certificate = lookup('profile::miscweb::default_certificate'),
+  Hash[Stdlib::Fqdn, Profile::Miscweb::Redirect] $redirects           = lookup('profile::miscweb::redirects'),
 ) {
   nftables::allow { 'miscweb-https':
     proto => 'tcp',
@@ -21,20 +22,20 @@ class profile::miscweb (
   nginx::site { $podcast_vhost:
     content => template('profile/miscweb/jquerypodcast.nginx.erb'),
     require => [
-      Letsencrypt::Certificate['miscweb'],
+      Letsencrypt::Certificate[$default_certificate],
       Git::Clone['jquerypodcast'],
     ],
   }
 
-  $redirects.each |Stdlib::Fqdn $fqdn, Profile::Miscweb::Redirect $redirect| {
-    $matching_cert = profile::certbot::pick_certificate($fqdn)
-    if $redirect['certificate'] {
-      $certificate = $redirect['certificate']
-    } elsif $matching_cert {
-      $certificate = $matching_cert
-    } else {
-      fail("Missing certificate for redirect ${fqdn}")
+  profile::miscweb::group_certificates($redirects).each |String[1] $name, Array[Stdlib::Fqdn] $domains| {
+    letsencrypt::certificate { $name:
+      domains => $domains,
+      require => [Exec['nginx-default-site-reload'], Service['nftables']],
     }
+  }
+
+  $redirects.each |Stdlib::Fqdn $fqdn, Profile::Miscweb::Redirect $redirect| {
+    $certificate = pick($redirect['certificate'], $default_certificate)
 
     if 'permanent' in $redirect {
       $status_code = $redirect['permanent'].bool2str(301, 302)
