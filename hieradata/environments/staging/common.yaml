@@ -124,9 +124,26 @@ docs_sites:
       jquery_docsearch_api_key: 3cfde9aca378c8aab554d5bf1b23489b
       jquery_docsearch_index_name: jquery
     redirects:
-      - path: /ui
-        match: prefix
-        target: "https://stage.jqueryui.com"
+      - match:
+          path: /blog
+          mode: prefix
+        target:
+          url: "https://blog.jquery.com"
+          mode: prefix
+        permanent: false
+      - match:
+          path: /forum
+          mode: prefix
+        target:
+          url: "https://form.jquery.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /ui
+          mode: prefix
+        target:
+          url: "https://stage.jqueryui.com"
+          mode: exact
         permanent: false
   learn_jquery_com:
     host: stage.learn.jquery.com
