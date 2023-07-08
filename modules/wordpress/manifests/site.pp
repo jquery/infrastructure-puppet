@@ -6,7 +6,7 @@ define wordpress::site (
   Stdlib::Fqdn              $host,
   Wordpress::Path           $path,
   String[1]                 $site_name,
-  String[1]                 $version,
+  Optional[String[1]]       $version,
   String[1]                 $certificate,
   String[1]                 $db_password_seed,
   Stdlib::Email             $admin_email,
@@ -39,29 +39,32 @@ define wordpress::site (
     grants    => { all => true },
   }
 
+  $version_arg = ($version != undef).bool2str("--version=${version}", '')
   exec { "wp-download-${title}":
-    command   => "/usr/local/bin/wp core download --path=${base_path} --version=${version}",
+    command   => "/usr/local/bin/wp core download --path=${base_path} ${version_arg}",
     creates   => $base_path,
     user      => 'www-data',
     require   => File['/usr/local/bin/wp'],
     logoutput => true,
   }
 
-  exec { "wp-update-${title}":
-    command   => "/usr/local/bin/wp core update --path=${base_path} --version=${version}",
-    unless    => "test \"$(wp --path=${base_path} core version)\" = \"${version}\"",
-    user      => 'www-data',
-    logoutput => true,
-    # for the unless test command to work
-    provider  => 'shell',
-    notify    => Exec["wp-update-db-${title}"],
-  }
+  if $version {
+    exec { "wp-update-${title}":
+      command   => "/usr/local/bin/wp core update --path=${base_path} --version=${version}",
+      unless    => "test \"$(wp --path=${base_path} core version)\" = \"${version}\"",
+      user      => 'www-data',
+      logoutput => true,
+      # for the unless test command to work
+      provider  => 'shell',
+      notify    => Exec["wp-update-db-${title}"],
+    }
 
-  exec { "wp-update-db-${title}":
-    command     => "/usr/local/bin/wp core update-db --path=${base_path}",
-    user        => 'www-data',
-    logoutput   => true,
-    refreshonly => true,
+    exec { "wp-update-db-${title}":
+      command     => "/usr/local/bin/wp core update-db --path=${base_path}",
+      user        => 'www-data',
+      logoutput   => true,
+      refreshonly => true,
+    }
   }
 
   $themes.each |Wordpress::Theme $theme| {

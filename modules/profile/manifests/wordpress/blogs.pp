@@ -1,7 +1,7 @@
 # @summary various blog sites
 class profile::wordpress::blogs (
   Profile::Wordpress::Blogs::Sites $sites             = lookup('profile::wordpress::blogs::sites'),
-  String[1]                        $wordpress_version = lookup('profile::wordpress::blogs::wordpress_version'),
+  Optional[String[1]]              $wordpress_version = lookup('profile::wordpress::blogs::wordpress_version'),
   String[1]                        $db_password_seed  = lookup('profile::wordpress::blogs::db_password_seed'),
   Stdlib::Email                    $admin_email       = lookup('profile::wordpress::blogs::admin_email'),
   String[1]                        $admin_password    = lookup('profile::wordpress::blogs::admin_password'),
