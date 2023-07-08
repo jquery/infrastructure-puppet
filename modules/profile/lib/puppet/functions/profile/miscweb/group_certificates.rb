@@ -11,7 +11,6 @@ Puppet::Functions.create_function(:'profile::miscweb::group_certificates') do
     redirects
       .filter { |_, site| site['certificate'] != nil }
       .group_by { |_, site| site['certificate'] }
-      # we only care about names, not the site details
       .transform_values { |cert| cert.map { |item| item[0] } }
   end
 end
