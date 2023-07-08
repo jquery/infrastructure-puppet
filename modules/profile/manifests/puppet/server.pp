@@ -168,6 +168,14 @@ class profile::puppet::server (
     ],
   }
 
+  git::config { '/etc/gitconfig':
+    settings => {
+      'safe' => {
+        'directory' => $private_repo_dir,
+      },
+    },
+  }
+
   class { 'tarsnap::keymgmt':
     base_path     => "${private_repo_dir}/files/tarsnap-keys",
     account_email => $tarsnap_account_email,
