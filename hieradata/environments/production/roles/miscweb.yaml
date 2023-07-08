@@ -44,16 +44,16 @@ profile::miscweb::redirects:
     mode: prefix
     certificate: miscweb-a
   view.jquery.com:
-    target: https://releases.jquery.com/jquery/
+    target: https://releases.jquery.com/jquery
     mode: root
   view.jquery.org:
-    target: https://releases.jquery.com/jquery/
+    target: https://releases.jquery.com/jquery
     mode: root
   view.jquerymobile.com:
-    target: https://releases.jquery.com/mobile/
+    target: https://releases.jquery.com/mobile
     mode: root
   view.jqueryui.com:
-    target: https://releases.jquery.com/ui/
+    target: https://releases.jquery.com/ui
     mode: root
   www.jquery.com:
     target: https://jquery.com
