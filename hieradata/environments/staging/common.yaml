@@ -164,6 +164,17 @@ docs_sites:
     enable_static_index: true
     options:
       jquery_body_class: jquery-foundation
+  contribute_jquery_org:
+    host: stage.contribute.jquery.org
+    site_name: Contribute to jQuery (staging)
+    repository:
+      name: jquery/contribute.jquery.org
+      branch: main
+    certificate: wordpress
+    active_theme: contribute.jquery.org
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery-foundation
   jquery_com:
     host: stage.jquery.com
     site_name: jQuery (staging)
@@ -239,6 +250,17 @@ docs_sites:
     enable_static_index: true
     options:
       jquery_body_class: jquery-learn
+  meetings_jquery_org:
+    host: stage.meetings.jquery.org
+    site_name: jQuery Meetings (staging)
+    repository:
+      name: jquery/meetings.jquery.org
+      branch: main
+    certificate: wordpress
+    active_theme: meetings.jquery.org
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery-foundation
   releases_jquery_com:
     host: stage.releases.jquery.com
     site_name: jQuery CDN (staging)
