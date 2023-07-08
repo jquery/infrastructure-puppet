@@ -3,10 +3,37 @@ profile::miscweb::podcast_vhost: podcast.jquery.com
 profile::miscweb::default_certificate: miscweb
 
 profile::miscweb::redirects:
+  brand.jquery.com:
+    target: https://brand.jquery.org
+    mode: prefix
+  contribute.jquery.com:
+    target: https://contribute.jquery.org
+    mode: prefix
+  download.jquery.com:
+    target: https://jquery.com/download
+    mode: root
+  events.jquery.com:
+    target: https://js.foundation/events
+    mode: root
+  irc.jquery.com:
+    target: https://irc.jquery.org
+    mode: root
+  meetups.jquery.com:
+    target: https://meetups.jquery.org
+    mode: root
   try.jquery.com:
     target: https://learn.jquery.com
     mode: root
+  swarm.jquery.com:
+    target: https://swarm.jquery.org
+    mode: prefix
   ui.jquery.com:
     target: https://jqueryui.com
     mode: prefix
     certificate: miscweb-a
+  view.jquery.com:
+    target: https://releases.jquery.com/jquery/
+    mode: root
+  www.jquery.com:
+    target: https://jquery.com
+    mode: prefix
