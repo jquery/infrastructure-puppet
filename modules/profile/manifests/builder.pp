@@ -21,6 +21,13 @@ class profile::builder (
     ensure => directory,
   }
 
+  # npm cache in builder user home directory
+  file { '/srv/builder/.npm':
+    ensure => directory,
+    owner  => 'builder',
+    group  => 'builder',
+  }
+
   file { '/usr/local/bin/builder-do-update':
     ensure => file,
     source => 'puppet:///modules/profile/builder/builder-do-update.sh',
