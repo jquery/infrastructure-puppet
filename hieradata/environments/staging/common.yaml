@@ -145,6 +145,19 @@ docs_sites:
           url: "https://stage.jqueryui.com"
           mode: exact
         permanent: false
+  jquerymobile_com:
+    host: stage.jquerymobile.com
+    site_name: jQuery Mobile (staging)
+    repository:
+      name: jquery/jquerymobile.com
+      branch: main
+    certificate: wordpress
+    active_theme: jquerymobile.com
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery-mobile
+      jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
+      jquery_docsearch_index_name: jquerymobile
   jqueryui_com:
     host: stage.jqueryui.com
     site_name: jQuery UI (staging)
