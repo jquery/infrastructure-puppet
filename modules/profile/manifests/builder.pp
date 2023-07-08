@@ -9,6 +9,8 @@ class profile::builder (
     'npm',
 
     # tools needed by some sites:
+    'graphicsmagick',
+    'imagemagick',
     'libxml2-utils',  # for xmllint
     'xsltproc',
   ])
