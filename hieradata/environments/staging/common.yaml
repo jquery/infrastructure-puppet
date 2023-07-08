@@ -153,6 +153,17 @@ docs_sites:
       jquery_logo_link: "https://stage.jqueryui.com"
       jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
       jquery_docsearch_index_name: jqueryui
+  brand_jquery_org:
+    host: stage.brand.jquery.org
+    site_name: jQuery Brand Guidelines (staging)
+    repository:
+      name: jquery/brand.jquery.org
+      branch: main
+    certificate: wordpress
+    active_theme: brand.jquery.org
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery-foundation
   jquery_com:
     host: stage.jquery.com
     site_name: jQuery (staging)
