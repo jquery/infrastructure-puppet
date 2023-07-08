@@ -33,6 +33,36 @@ docs_sites:
       jquery_logo_link: "https://stage.jquerymobile.com"
       jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
       jquery_docsearch_index_name: jquerymobile
+  api_jquerymobile_com_1_3:
+    host: stage.api.jquerymobile.com
+    path: /1.3/
+    site_name: jQuery Mobile 1.3 API Documentation (staging)
+    repository:
+      name: jquery/api.jquerymobile.com
+      branch: 1-3
+    certificate: wordpress
+    active_theme: api.jquerymobile.com
+    enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery-mobile
+      jquery_logo_link: "https://stage.jquerymobile.com"
+      jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
+      jquery_docsearch_index_name: jquerymobile
+  api_jquerymobile_com_1_4:
+    host: stage.api.jquerymobile.com
+    path: /1.4/
+    site_name: jQuery Mobile 1.3 API Documentation (staging)
+    repository:
+      name: jquery/api.jquerymobile.com
+      branch: 1-4
+    certificate: wordpress
+    active_theme: api.jquerymobile.com
+    enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery-mobile
+      jquery_logo_link: "https://stage.jquerymobile.com"
+      jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
+      jquery_docsearch_index_name: jquerymobile
   api_jqueryui_com:
     host: stage.api.jqueryui.com
     path: /
