@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euxo pipefail
 
+export NODE_ENV=production
+
 cd "$1"
 npm install --cache /tmp/npm-cache-builder
 npm update --cache /tmp/npm-cache-builder
