@@ -55,7 +55,7 @@ class profile::base::apt (
 
   apt::conf { 'auto-upgrades':
     priority => '20',
-    content  => 'APT::Periodic::Update-Package-Lists "1";\nAPT::Periodic::Unattended-Upgrade "1";',
+    content  => "APT::Periodic::Update-Package-Lists \"1\";\nAPT::Periodic::Unattended-Upgrade \"1\";",
   }
 
   apt::conf { 'unattended-upgrades-updates':
