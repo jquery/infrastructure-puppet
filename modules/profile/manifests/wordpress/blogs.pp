@@ -20,6 +20,7 @@ class profile::wordpress::blogs (
     $active_theme = $site['active_theme']
     wordpress::site { $name:
       *                => $site,
+      path             => '/',
       version          => $wordpress_version,
       db_password_seed => $db_password_seed,
       admin_email      => $admin_email,
