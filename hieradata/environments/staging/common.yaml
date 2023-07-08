@@ -18,6 +18,21 @@ docs_sites:
       jquery_logo_link: "https://stage.jquery.com"
       jquery_docsearch_api_key: 3cfde9aca378c8aab554d5bf1b23489b
       jquery_docsearch_index_name: jquery
+  api_jquerymobile_com:
+    host: stage.api.jquerymobile.com
+    path: /
+    site_name: jQuery Mobile API Documentation (staging)
+    repository:
+      name: jquery/api.jquerymobile.com
+      branch: main
+    certificate: wordpress
+    active_theme: api.jquerymobile.com
+    enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery-mobile
+      jquery_logo_link: "https://stage.jquerymobile.com"
+      jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
+      jquery_docsearch_index_name: jquerymobile
   api_jqueryui_com:
     host: stage.api.jqueryui.com
     path: /
