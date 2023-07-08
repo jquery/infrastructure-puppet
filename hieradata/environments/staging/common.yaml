@@ -135,7 +135,7 @@ docs_sites:
           path: /forum
           mode: prefix
         target:
-          url: "https://form.jquery.com"
+          url: "https://forum.jquery.com"
           mode: exact
         permanent: false
       - match:
