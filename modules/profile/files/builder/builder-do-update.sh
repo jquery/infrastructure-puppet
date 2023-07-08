@@ -4,9 +4,9 @@ set -euxo pipefail
 export NODE_ENV=production
 
 cd "$1"
-npm install --cache /tmp/npm-cache-builder
-npm update --cache /tmp/npm-cache-builder
-npm prune --cache /tmp/npm-cache-builder
+npm install
+npm update
+npm prune
 node_modules/.bin/grunt --no-color deploy
 
 # Reset to a clean state so that the next deploy will succeed.
