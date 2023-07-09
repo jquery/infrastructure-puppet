@@ -46,11 +46,13 @@ profile::miscweb::redirects:
   meetups.jquery.org:
     target: https://jquery.com/meetups/
     mode: root
+    certificate: miscweb-a
   # "Try jQuery" is no more.
   # https://blog.jquery.com/2013/02/22/try-jquery-interactive-course/
   try.jquery.com:
     target: https://learn.jquery.com/
     mode: root
+    certificate: miscweb-a
   swarm.jquery.com:
     target: https://swarm.jquery.org
     mode: prefix
@@ -80,6 +82,7 @@ profile::miscweb::redirects:
   www.jquery.com:
     target: https://jquery.com
     mode: prefix
+    certificate: miscweb-a
   www.jquery.org:
     target: https://jquery.org
     mode: prefix
@@ -91,3 +94,4 @@ profile::miscweb::redirects:
   www.jqueryui.com:
     target: https://jqueryui.com
     mode: prefix
+    certificate: miscweb-a
