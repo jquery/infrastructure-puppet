@@ -43,7 +43,7 @@ class profile::miscweb (
       $status_code = 301
     }
 
-    if $redirect['target'].stdlib::end_with('/') {
+    if $redirect['mode'] == 'prefix' and $redirect['target'].stdlib::end_with('/') {
       fail("Redirect ${fqdn} target must not end with a slash")
     }
 
