@@ -13,6 +13,14 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jquery.com
     enable_api_tweaks: true
+    redirects:
+      - match:
+          path: /api
+          mode: prefix
+        target:
+          url: https://stage.api.jquery.com/resources/api.xml
+          mode: exact
+        permanent: false
     options:
       jquery_body_class: jquery
       jquery_logo_link: "https://stage.jquery.com"
@@ -192,11 +200,39 @@ docs_sites:
       jquery_docsearch_index_name: jquery
     redirects:
       - match:
+          path: /api
+          mode: prefix
+        target:
+          url: https://stage.api.jquery.com
+          mode: exact
+        permanent: false
+      - match:
           path: /blog
           mode: prefix
         target:
           url: "https://blog.jquery.com"
           mode: prefix
+        permanent: false
+      - match:
+          path: /dev
+          mode: prefix
+        target:
+          url: https://bugs.jquery.com
+          mode: exact
+        permanent: false
+      - match:
+          path: /join
+          mode: prefix
+        target:
+          url: https://stage.jquery.org/join/
+          mode: exact
+        permanent: false
+      - match:
+          path: /events.jquery.org
+          mode: prefix
+        target:
+          url: https://events.jquery.org
+          mode: exact
         permanent: false
       - match:
           path: /forum
@@ -206,10 +242,38 @@ docs_sites:
           mode: exact
         permanent: false
       - match:
+          path: /latest
+          mode: prefix
+        target:
+          url: "https://code.jquery.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /plugins
+          mode: prefix
+        target:
+          url: "https://plugins.jquery.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /src
+          mode: prefix
+        target:
+          url: "https://code.jquery.com"
+          mode: exact
+        permanent: false
+      - match:
           path: /ui
           mode: prefix
         target:
           url: "https://stage.jqueryui.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /view
+          mode: prefix
+        target:
+          url: "https://view.jquery.com"
           mode: exact
         permanent: false
   jquerymobile_com:
