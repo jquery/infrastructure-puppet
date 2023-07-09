@@ -276,6 +276,96 @@ docs_sites:
           url: "https://view.jquery.com"
           mode: exact
         permanent: false
+  jquery_org:
+    host: stage.jquery.org
+    site_name: jQuery Foundation (staging)
+    repository:
+      name: jquery/jquery.org
+      branch: main
+    certificate: wordpress
+    active_theme: jquery.org
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery-foundation
+    redirects:
+      - match:
+          path: /
+          mode: exact
+        target:
+          url: https://openjsf.org
+          mode: exact
+      - match:
+          path: /about
+          mode: exact
+        target:
+          url: https://openjsf.org
+          mode: exact
+      - match:
+          path: /bylaws
+          mode: exact
+        target:
+          url: https://openjsf.org/wp-content/uploads/sites/84/2019/10/OpenJS-Foundation-Bylaws-2019-10-22.pdf
+          mode: exact
+      - match:
+          path: /conduct
+          mode: exact
+        target:
+          url: https://github.com/openjs-foundation/cross-project-council/blob/main/CODE_OF_CONDUCT.md
+          mode: exact
+      - match:
+          path: /donate
+          mode: exact
+        target:
+          url: https://openjsf.org/about/project-funding-opportunities
+          mode: exact
+      - match:
+          path: /feed
+          mode: exact
+        target:
+          url: https://stage.meetings.jquery.org/feed
+          mode: exact
+      - match:
+          path: /join
+          mode: exact
+        target:
+          url: https://openjsf.org/about/join
+          mode: exact
+      - match:
+          path: /meeting
+          mode: exact
+        target:
+          url: https://stage.meetings.jquery.org
+          mode: exact
+      - match:
+          path: /members
+          mode: exact
+        target:
+          url: https://openjsf.org/about/members
+          mode: exact
+      - match:
+          path: /projects
+          mode: exact
+        target:
+          url: https://openjsf.org/projects
+          mode: exact
+      - match:
+          path: /sponsors
+          mode: exact
+        target:
+          url: https://openjsf.org/about/members
+          mode: exact
+      - match:
+          path: /trademark-policy
+          mode: exact
+        target:
+          url: https://openjsf.org/wp-content/uploads/sites/84/2019/10/OpenJS-Foundation-Trademark-Policy-2019-10-22.pdf
+          mode: exact
+      - match:
+          path: /updates
+          mode: exact
+        target:
+          url: https://stage.meetings.jquery.org
+          mode: exact
   jquerymobile_com:
     host: stage.jquerymobile.com
     site_name: jQuery Mobile (staging)
