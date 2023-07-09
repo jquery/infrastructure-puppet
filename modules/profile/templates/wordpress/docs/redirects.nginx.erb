@@ -1,7 +1,7 @@
 <%- @site['redirects'].each do |redirect| -%>
 <%- status_code = redirect.fetch('permanent', true) ? 301 : 302 -%>
-location <%= redirect['match']['mode'] == 'exact' ? '= ' : '' %><%= redirect['match']['path'] %> {
-  return <%= status_code %> <%= redirect['target']['url'] %><%= redirect['target']['mode'] == 'prefix' ? '$request_uri' : '' %>;
+location <%= redirect['match']['mode'] == 'exact' ? '= ' : '~ ^' %><%= redirect['match']['path'] %><%= redirect['match']['mode'] == 'exact' ? '' : '(/.*|$)' %> {
+  return <%= status_code %> <%= redirect['target']['url'] %><%= redirect['target']['mode'] == 'prefix' ? '$1' : '' %>;
 }
 
 <%- if redirect['match']['mode'] == 'exact' and not redirect['match']['path'].end_with?('/') -%>
