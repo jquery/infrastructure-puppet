@@ -97,14 +97,20 @@ class Unit {
   /**
    * testHttp( 'https://example.org', '/foo' );
    * testHttp( 'example.org', 'http://something.test/foo' );
+   * testHttp( 'http://something.test/foo', null );
    *
-   * @param string $server Origin or (if path is full URL) hostname
-   * @param string $path
+   * @param string $server Origin, hostname (if path is full URL), or full URL (if path is null)
+   * @param string $path|null
    * @param string $reqHeaders
    * @param string $expectHeaders
    */
 	public static function testHttp( $server, $path, array $reqHeaders, array $expectHeaders ) {
-    if ( !str_starts_with( $path, '/' ) ) {
+    if ( $path === null ) {
+      $message = $server;
+      $parts = parse_url( $server );
+      $server = $parts['scheme'] . '://' . $parts['host'];
+      $path = $parts['path'] . ( ( $parts['query'] ?? '' ) !== '' ? '?' . $parts['query'] : '' );
+    } elseif ( !str_starts_with( $path, '/' ) ) {
       $message = $path;
       $parts = parse_url( $path );
       $reqHeaders[] = 'Host: ' . $parts['host'];

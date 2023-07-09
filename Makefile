@@ -25,7 +25,7 @@ test: test-prod test-stage
 
 test-stage: test-codeorigin-stage
 
-test-prod: test-codeorigin-prod-http test-codeorigin-prod-https test-miscweb-prod
+test-prod: test-codeorigin-prod-http test-codeorigin-prod-https test-miscweb test-wpdocs
 
 test-codeorigin-prod-http:
 	@ php test/CodeoriginTest.php "http://code.jquery.com"
@@ -35,8 +35,12 @@ test-codeorigin-prod-https:
 	@ php test/CodeoriginTest.php "https://code.jquery.com"
 	@ echo "✅ $@"
 
-test-miscweb test-miscweb-prod:
+test-miscweb:
 	@ php test/MiscwebTest.php
+	@ echo "✅ $@"
+
+test-wpdocs:
+	@ php test/WpdocsTest.php
 	@ echo "✅ $@"
 
 test-codeorigin-stage:

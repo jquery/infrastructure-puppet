@@ -9,16 +9,18 @@ $server = @$argv[1] ?: '';
 Unit::start();
 
 foreach ( [
-  [ 'dev.jqueryui.com', '/ticket/5462', 'https://bugs.jqueryui.com/ticket/5462' ],
-  [ 'learn.jqueryui.com', '/something', 'https://learn.jquery.com/jquery-ui/' ],
-  [ 'view.jquery.com', '/something', 'https://releases.jquery.com/jquery/' ],
-  [ 'ui.jquery.com', '/about/', 'https://jqueryui.com/about/' ],
-] as [ $host, $path, $expected ] ) {
-  Unit::testHttp( "http://$host", $path, [], [
+  'http://dev.jqueryui.com/ticket/5462' => 'https://bugs.jqueryui.com/ticket/5462',
+  'http://learn.jqueryui.com/something' => 'https://learn.jquery.com/jquery-ui/',
+  'http://view.jquery.com/something' => 'https://releases.jquery.com/jquery/',
+  'http://ui.jquery.com/about/' => 'https://jqueryui.com/about/',
+  'http://ui.jquery.com/bugs/ticket/3484' => 'https://jqueryui.com/bugs/ticket/3484',
+] as $url => $expected ) {
+  Unit::testHttp( $url, null, [], [
     'status' => '301',
     'location' => $expected,
   ] );
-  Unit::testHttp( "https://$host", $path, [], [
+  $urlHttps = str_replace( 'http:', 'https:', $url );
+  Unit::testHttp( $urlHttps, null, [], [
     'status' => '301',
     'location' => $expected,
   ] );
