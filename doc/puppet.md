@@ -11,7 +11,7 @@ executing `puppet agent -tv`.
 
 ## Provisioning new nodes
 
-Add the instance to `site.pp`, `puppet-merge` that commit and use the
+Add the instance to `site.pp`, push the commit and then use the
 `bin/provision-instance.sh` script on your local machine:
 ```bash
 $ bin/provision-instance.sh codeorigin-02.stage.ops.jquery.net staging
