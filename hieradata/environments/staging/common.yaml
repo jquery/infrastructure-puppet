@@ -289,6 +289,42 @@ docs_sites:
       jquery_body_class: jquery-mobile
       jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
       jquery_docsearch_index_name: jquerymobile
+    redirects:
+      - match:
+          path: /gbs
+          mode: prefix
+        target:
+          url: https://stage.jquerymobile.com/browser-support
+          mode: prefix
+        permanent: false
+      - match:
+          path: /test
+          mode: prefix
+        target:
+          url: https://view.jquerymobile.com/master
+          mode: exact
+        permanent: false
+      - match:
+          path: /branches
+          mode: prefix
+        target:
+          url: https://view.jquerymobile.com
+          mode: prefix
+        permanent: false
+      - match:
+          path: /demos
+          mode: prefix
+        target:
+          url: https://demos.jquerymobile.com
+          mode: prefix
+        permanent: false
+      - match:
+          path: /themeroller
+          mode: prefix
+        target:
+          url: https://themeroller.jquerymobile.com
+          mode: prefix
+        permanent: false
   jqueryui_com:
     host: stage.jqueryui.com
     site_name: jQuery UI (staging)
