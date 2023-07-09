@@ -12,6 +12,7 @@ profile::miscweb::redirects:
   dev.jqueryui.com:
     target: https://bugs.jqueryui.com
     mode: prefix
+    certificate: miscweb-a
   download.jquery.com:
     target: https://jquery.com/download
     mode: root
@@ -30,12 +31,16 @@ profile::miscweb::redirects:
   learn.jqueryui.com:
     target: https://learn.jquery.com/jquery-ui
     mode: root
+    certificate: miscweb-a
   meetups.jquery.com:
     target: https://jquery.com/meetups/
     mode: root
+    certificate: miscweb-a
   meetups.jquery.org:
     target: https://jquery.com/meetups/
     mode: root
+  # "Try jQuery" is no more.
+  # https://blog.jquery.com/2013/02/22/try-jquery-interactive-course/
   try.jquery.com:
     target: https://learn.jquery.com
     mode: root
@@ -46,9 +51,12 @@ profile::miscweb::redirects:
     target: https://jqueryui.com
     mode: prefix
     certificate: miscweb-a
+  # Gitview was a file browser for release artefacts, superseded by the releases docsite.
+  # https://github.com/jquery/infrastructure/issues/503
   view.jquery.com:
     target: https://releases.jquery.com/jquery
     mode: root
+    certificate: miscweb-a
   view.jquery.org:
     target: https://releases.jquery.com/jquery
     mode: root
@@ -58,6 +66,7 @@ profile::miscweb::redirects:
   view.jqueryui.com:
     target: https://releases.jquery.com/ui
     mode: root
+    certificate: miscweb-a
   www.jquery.com:
     target: https://jquery.com
     mode: prefix

@@ -8,6 +8,10 @@ class profile::miscweb (
     proto => 'tcp',
     dport => 443,
   }
+  nftables::allow { 'miscweb-http':
+    proto => 'tcp',
+    dport => 80,
+  }
 
   git::clone { 'jquerypodcast':
     path   => '/srv/jquerypodcast',
