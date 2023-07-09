@@ -13,6 +13,11 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jquery.com
     enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery
+      jquery_logo_link: "https://stage.jquery.com"
+      jquery_docsearch_api_key: 3cfde9aca378c8aab554d5bf1b23489b
+      jquery_docsearch_index_name: jquery
     redirects:
       - match:
           path: /api
@@ -21,11 +26,6 @@ docs_sites:
           url: https://stage.api.jquery.com/resources/api.xml
           mode: exact
         permanent: false
-    options:
-      jquery_body_class: jquery
-      jquery_logo_link: "https://stage.jquery.com"
-      jquery_docsearch_api_key: 3cfde9aca378c8aab554d5bf1b23489b
-      jquery_docsearch_index_name: jquery
   api_jquerymobile_com:
     host: stage.api.jquerymobile.com
     path: /
@@ -86,6 +86,14 @@ docs_sites:
       jquery_logo_link: "https://stage.jqueryui.com"
       jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
       jquery_docsearch_index_name: jqueryui
+    redirects:
+      - match:
+          path: /api
+          mode: prefix
+        target:
+          url: https://stage.api.jquery.com/resources/api.xml
+          mode: exact
+        permanent: false
   api_jqueryui_com_1_8:
     host: stage.api.jqueryui.com
     path: /1.8/
@@ -436,6 +444,21 @@ docs_sites:
       jquery_description: "jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library. Whether you're building highly interactive web applications or you just need to add a date picker to a form control, jQuery UI is the perfect choice."
       jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
       jquery_docsearch_index_name: jqueryui
+    redirects:
+      - match:
+          path: /docs/Changelog
+          mode: prefix
+        target:
+          url: https://stage.jqueryui.com/changelog
+          mode: prefix
+        permanent: false
+      - match:
+          path: /docs
+          mode: prefix
+        target:
+          url: https://stage.jqueryui.com
+          mode: prefix
+        permanent: false
   learn_jquery_com:
     host: stage.learn.jquery.com
     site_name: jQuery Learning Center (staging)
