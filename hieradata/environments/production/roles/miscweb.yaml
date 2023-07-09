@@ -11,7 +11,7 @@ profile::miscweb::redirects:
     mode: prefix
   dev.jqueryui.com:
     target: https://bugs.jqueryui.com
-    mode: root
+    mode: prefix
   download.jquery.com:
     target: https://jquery.com/download
     mode: root
@@ -31,7 +31,10 @@ profile::miscweb::redirects:
     target: https://learn.jquery.com/jquery-ui
     mode: root
   meetups.jquery.com:
-    target: https://meetups.jquery.org
+    target: https://jquery.com/meetups/
+    mode: root
+  meetups.jquery.org:
+    target: https://jquery.com/meetups/
     mode: root
   try.jquery.com:
     target: https://learn.jquery.com
