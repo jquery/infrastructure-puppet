@@ -80,7 +80,7 @@ profile::miscweb::redirects:
     mode: root
     certificate: miscweb-a
   wiki.jqueryui.com:
-    target: https://jqueryui.pbworks.com/
+    target: https://jqueryui.pbworks.com
     mode: prefix
     certificate: miscweb-a
   www.jquery.com:
