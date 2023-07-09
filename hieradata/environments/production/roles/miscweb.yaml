@@ -19,6 +19,7 @@ profile::miscweb::redirects:
   download.jquerymobile.com:
     target: https://jquerymobile.com/download/
     mode: root
+    certificate: miscweb-a
   events.jquery.com:
     target: https://openjsf.org/
     mode: root
@@ -65,6 +66,7 @@ profile::miscweb::redirects:
   view.jquerymobile.com:
     target: https://releases.jquery.com/mobile/
     mode: root
+    certificate: miscweb-a
   view.jqueryui.com:
     target: https://releases.jquery.com/ui/
     mode: root
@@ -79,6 +81,7 @@ profile::miscweb::redirects:
   www.jquerymobile.com:
     target: https://jquerymobile.com
     mode: prefix
+    certificate: miscweb-a
   www.jqueryui.com:
     target: https://jqueryui.com
     mode: prefix
