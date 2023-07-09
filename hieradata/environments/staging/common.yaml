@@ -183,6 +183,13 @@ docs_sites:
     enable_static_index: true
     options:
       jquery_body_class: jquery-foundation
+    redirects:
+      - match:
+          path: /cla
+          mode: prefix
+        target:
+          url: https://cla.openjsf.org
+          mode: prefix
   jquery_com:
     host: stage.jquery.com
     site_name: jQuery (staging)
