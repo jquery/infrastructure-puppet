@@ -1,0 +1,17 @@
+name: smoke
+on:
+  # Daily at 7:30 UTC. https://crontab.guru/
+  schedule:
+    - cron: '30 7 * * *'
+  # Or manually
+  workflow_dispatch:
+  # Or when developing this workflow
+  push:
+    paths:
+      - .github/workflows/smoke.yaml
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: make test
