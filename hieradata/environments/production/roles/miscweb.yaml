@@ -79,6 +79,10 @@ profile::miscweb::redirects:
     target: https://releases.jquery.com/ui/
     mode: root
     certificate: miscweb-a
+  wiki.jqueryui.com:
+    target: https://jqueryui.pbworks.com/
+    mode: prefix
+    certificate: miscweb-a
   www.jquery.com:
     target: https://jquery.com
     mode: prefix

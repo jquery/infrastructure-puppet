@@ -14,6 +14,7 @@ foreach ( [
   'http://view.jquery.com/something' => 'https://releases.jquery.com/jquery/',
   'http://ui.jquery.com/about/' => 'https://jqueryui.com/about/',
   'http://ui.jquery.com/bugs/ticket/3484' => 'https://jqueryui.com/bugs/ticket/3484',
+  'http://wiki.jqueryui.com/Droppable' => 'https://jqueryui.pbworks.com/Droppable',
 ] as $url => $expected ) {
   Unit::testHttp( $url, null, [], [
     'status' => '301',
