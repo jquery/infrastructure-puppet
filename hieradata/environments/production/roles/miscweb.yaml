@@ -6,9 +6,11 @@ profile::miscweb::redirects:
   brand.jquery.com:
     target: https://brand.jquery.org
     mode: prefix
+    certificate: miscweb-a
   contribute.jquery.com:
     target: https://contribute.jquery.org
     mode: prefix
+    certificate: miscweb-a
   dev.jqueryui.com:
     target: https://bugs.jqueryui.com
     mode: prefix
@@ -16,6 +18,7 @@ profile::miscweb::redirects:
   download.jquery.com:
     target: https://jquery.com/download/
     mode: root
+    certificate: miscweb-a
   download.jquerymobile.com:
     target: https://jquerymobile.com/download/
     mode: root
@@ -23,6 +26,7 @@ profile::miscweb::redirects:
   events.jquery.com:
     target: https://openjsf.org/
     mode: root
+    certificate: miscweb-a
   events.jquery.org:
     target: https://openjsf.org/
     mode: root
@@ -30,6 +34,7 @@ profile::miscweb::redirects:
   irc.jquery.com:
     target: https://irc.jquery.org/
     mode: root
+    certificate: miscweb-a
   learn.jqueryui.com:
     target: https://learn.jquery.com/jquery-ui/
     mode: root
@@ -49,6 +54,7 @@ profile::miscweb::redirects:
   swarm.jquery.com:
     target: https://swarm.jquery.org
     mode: prefix
+    certificate: miscweb-a
   ui.jquery.com:
     target: https://jqueryui.com
     mode: prefix
