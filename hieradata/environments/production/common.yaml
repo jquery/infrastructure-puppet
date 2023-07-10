@@ -1,3 +1,7 @@
 profile::puppet::agent::puppet_server: puppet-03.ops.jquery.net
 
 profile::certbot::email: infrastructure-team@jquery.com
+
+# TODO: allow splitting the active sites between two hosts
+docs_active_host: wp-04.ops.jquery.net
+docs_sites: {}
