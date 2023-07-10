@@ -26,7 +26,7 @@ class notifier (
     owner   => 'notifier',
     group   => 'notifier',
     branch  => $version,
-    require => Systemd::Sysuser['notifier'],
+    require => Systemd::Tmpfile['notifier'],
   }
 
   exec { 'notifier-npm-install':
