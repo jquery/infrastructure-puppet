@@ -39,6 +39,7 @@ class wordpress::cli (
     recurse => true,
     purge   => true,
     force   => true,
+    require => Package['nginx'],
     notify  => Exec['nginx-reload'],
   }
 }
