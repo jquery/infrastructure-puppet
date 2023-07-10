@@ -1,4 +1,4 @@
-profile::base::apt::security_supported_versions: [bullseye]
+profile::base::apt::security_supported_versions: [bullseye, bookworm]
 
 profile::base::accounts:
   krinkle:
