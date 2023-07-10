@@ -9,8 +9,11 @@ profile::certbot::certificates:
   wordpress:
     domains:
       - "%{::facts.fqdn}"
-      - stage.jquery.com
       - stage.api.jquery.com
+      - stage.api.jqueryui.com
+      - stage.brand.jquery.org
+      - stage.contribute.jquery.org
+      - stage.jquery.com
+      - stage.jquerymobile.com
       - stage.learn.jquery.com
       - stage.releases.jquery.com
-      - stage.api.jqueryui.com
