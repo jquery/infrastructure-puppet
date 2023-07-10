@@ -5,6 +5,8 @@
 
 moduledir 'vendor_modules'
 
+mod 'puppetlabs/sshkeys_core', '2.4.0'
+
 mod 'puppetlabs/stdlib', '8.5.0'
 mod 'puppetlabs/apt', '9.0.1'
 mod 'puppetlabs/concat', '7.3.0'
