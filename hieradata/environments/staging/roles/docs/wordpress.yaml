@@ -10,10 +10,13 @@ profile::certbot::certificates:
     domains:
       - "%{::facts.fqdn}"
       - stage.api.jquery.com
+      - stage.api.jquerymobile.com
       - stage.api.jqueryui.com
       - stage.brand.jquery.org
       - stage.contribute.jquery.org
       - stage.jquery.com
+      - stage.jquery.org
       - stage.jquerymobile.com
+      - stage.jqueryui.com
       - stage.learn.jquery.com
       - stage.releases.jquery.com
