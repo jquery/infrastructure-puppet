@@ -53,6 +53,7 @@ node 'wp-04.ops.jquery.net' {
 
 # 4 CPU, 8 GB mem (SFO3)
 node 'wp-05.ops.jquery.net' {
+  role('docs::wordpress')
 }
 
 # 1 CPU, 2 GB mem
