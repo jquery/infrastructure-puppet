@@ -160,6 +160,9 @@ profile::testswarm::server::settings::user_agents:
   firefox_114:
     browserFamily: Firefox
     browserMajor: '114'
+  firefox_115:
+    browserFamily: Firefox
+    browserMajor: '115'
   ie_6:
     browserFamily: IE
     browserMajor: '6'
@@ -319,6 +322,9 @@ profile::testswarm::server::settings::user_agents:
   opera_99:
     browserFamily: Opera
     browserMajor: '99'
+  opera_100:
+    browserFamily: Opera
+    browserMajor: '100'
   safari_5_1:
     browserFamily: Safari
     browserMajor: '5'
@@ -437,10 +443,10 @@ profile::testswarm::server::settings::browser_sets:
     - edge_113
     - edge_114
     - firefox_102
-    - firefox_113
     - firefox_114
+    - firefox_115
     - ie_11
-    - opera_99
+    - opera_100
     - safari_15
     - safari_16
     - iphone-ios_14
@@ -458,12 +464,12 @@ profile::testswarm::server::settings::browser_sets:
     - firefox_78
     - firefox_91
     - firefox_102
-    - firefox_113
     - firefox_114
+    - firefox_115
     - ie_9
     - ie_10
     - ie_11
-    - opera_99
+    - opera_100
     - safari_15
     - safari_16
     - iphone-ios_8_3
@@ -483,12 +489,12 @@ profile::testswarm::server::settings::browser_sets:
     - edge_108
     - edge_109
     - firefox_102
-    - firefox_113
     - firefox_114
+    - firefox_115
     - ie_9
     - ie_10
     - ie_11
-    - opera_99
+    - opera_100
     - safari_15
     - safari_16
     - iphone-ios_14
@@ -506,15 +512,15 @@ profile::testswarm::server::settings::browser_sets:
     - firefox_78
     - firefox_91
     - firefox_102
-    - firefox_113
     - firefox_114
+    - firefox_115
     - ie_6
     - ie_7
     - ie_8
     - ie_9
     - ie_10
     - ie_11
-    - opera_99
+    - opera_100
     - safari_5_1
     - safari_6
     - safari_8
@@ -541,11 +547,11 @@ profile::testswarm::server::settings::browser_sets:
     - edge_18
     - edge_113
     - edge_114
-    - firefox_113
     - firefox_114
+    - firefox_115
     - ie_11
-    - opera_98
     - opera_99
+    - opera_100
     - safari_15
     - safari_16
   jquery-ui-future:
@@ -553,11 +559,11 @@ profile::testswarm::server::settings::browser_sets:
     - chrome_114
     - edge_113
     - edge_114
-    - firefox_113
     - firefox_114
+    - firefox_115
     - ie_11
-    - opera_98
     - opera_99
+    - opera_100
     - safari_15
     - safari_16
   debug:
