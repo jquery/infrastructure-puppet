@@ -19,4 +19,5 @@ profile::certbot::certificates:
       - stage.jquerymobile.com
       - stage.jqueryui.com
       - stage.learn.jquery.com
+      - stage.meetings.jquery.org
       - stage.releases.jquery.com
