@@ -18,6 +18,7 @@ foreach ( [
 }
 
 foreach ( [
+  'https://jquery.com/blog/feed/' => 'https://blog.jquery.com/feed/',
   'https://jquery.com/blog/2008/09/28/jquery-microsoft-nokia' => 'https://blog.jquery.com/2008/09/28/jquery-microsoft-nokia',
 ] as $url => $expected ) {
   Unit::testHttp( $url, null, [], [
