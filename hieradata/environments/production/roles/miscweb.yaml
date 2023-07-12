@@ -3,6 +3,7 @@ profile::miscweb::podcast_vhost: podcast.jquery.com
 profile::miscweb::default_certificate: miscweb
 
 profile::miscweb::redirects:
+  # css-chassis.com
   css-chassis.com:
     target: https://github.com/jquery/css-chassis
     mode: root
@@ -19,6 +20,7 @@ profile::miscweb::redirects:
     target: https://github.com/jquery/css-chassis
     mode: root
     certificate: miscweb-a
+  # jquery.com
   brand.jquery.com:
     target: https://brand.jquery.org
     mode: prefix
@@ -43,29 +45,17 @@ profile::miscweb::redirects:
     target: https://openjsf.org/
     mode: root
     certificate: miscweb-a
-  events.jquery.org:
-    target: https://openjsf.org/
-    mode: root
-    certificate: miscweb-a
   irc.jquery.com:
     target: https://irc.jquery.org/
-    mode: root
-    certificate: miscweb-a
-  learn.jqueryui.com:
-    target: https://learn.jquery.com/jquery-ui/
     mode: root
     certificate: miscweb-a
   meetups.jquery.com:
     target: https://jquery.com/meetups/
     mode: root
     certificate: miscweb-a
-  meetups.jquery.org:
-    target: https://jquery.com/meetups/
-    mode: root
-    certificate: miscweb-a
-  # "Try jQuery" is no more.
-  # https://blog.jquery.com/2013/02/22/try-jquery-interactive-course/
   try.jquery.com:
+    # "Try jQuery" is no more.
+    # https://blog.jquery.com/2013/02/22/try-jquery-interactive-course/
     target: https://learn.jquery.com/
     mode: root
     certificate: miscweb-a
@@ -77,18 +67,19 @@ profile::miscweb::redirects:
     target: https://jqueryui.com
     mode: prefix
     certificate: miscweb-a
-  # Gitview was a file browser for release artefacts, superseded by the releases docsite.
-  # https://github.com/jquery/infrastructure/issues/503
   view.jquery.com:
+    # Gitview was a file browser for release artefacts, superseded by the releases docsite.
+    # https://github.com/jquery/infrastructure/issues/503
     target: https://releases.jquery.com/jquery/
     mode: root
     certificate: miscweb-a
-  view.jquery.org:
-    target: https://releases.jquery.com/jquery/
-    mode: root
+  www.jquery.com:
+    target: https://jquery.com
+    mode: prefix
     certificate: miscweb-a
-  view.jquerymobile.com:
-    target: https://releases.jquery.com/mobile/
+  # jqueryui.com
+  learn.jqueryui.com:
+    target: https://learn.jquery.com/jquery-ui/
     mode: root
     certificate: miscweb-a
   view.jqueryui.com:
@@ -99,19 +90,33 @@ profile::miscweb::redirects:
     target: https://jqueryui.pbworks.com
     mode: prefix
     certificate: miscweb-a
-  www.jquery.com:
-    target: https://jquery.com
+  www.jqueryui.com:
+    target: https://jqueryui.com
     mode: prefix
     certificate: miscweb-a
-  www.jquery.org:
-    target: https://jquery.org
-    mode: prefix
+  # jquerymobile.com
+  view.jquerymobile.com:
+    target: https://releases.jquery.com/mobile/
+    mode: root
     certificate: miscweb-a
   www.jquerymobile.com:
     target: https://jquerymobile.com
     mode: prefix
     certificate: miscweb-a
-  www.jqueryui.com:
-    target: https://jqueryui.com
+  # jquery.org
+  events.jquery.org:
+    target: https://openjsf.org/
+    mode: root
+    certificate: miscweb-a
+  meetups.jquery.org:
+    target: https://jquery.com/meetups/
+    mode: root
+    certificate: miscweb-a
+  view.jquery.org:
+    target: https://releases.jquery.com/jquery/
+    mode: root
+    certificate: miscweb-a
+  www.jquery.org:
+    target: https://jquery.org
     mode: prefix
     certificate: miscweb-a
