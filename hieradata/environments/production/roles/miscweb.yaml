@@ -20,6 +20,15 @@ profile::miscweb::redirects:
     target: https://github.com/jquery/css-chassis
     mode: root
     certificate: miscweb-a
+  # css-chassis.org
+  css-chassis.org:
+    target: https://github.com/jquery/css-chassis
+    mode: root
+    certificate: miscweb-a
+  www.css-chassis.org:
+    target: https://github.com/jquery/css-chassis
+    mode: root
+    certificate: miscweb-a
   # jquery.com
   brand.jquery.com:
     target: https://brand.jquery.org
