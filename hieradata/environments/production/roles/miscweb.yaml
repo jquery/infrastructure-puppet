@@ -3,6 +3,22 @@ profile::miscweb::podcast_vhost: podcast.jquery.com
 profile::miscweb::default_certificate: miscweb
 
 profile::miscweb::redirects:
+  css-chassis.com:
+    target: https://github.com/jquery/css-chassis
+    mode: root
+    certificate: miscweb-a
+  perf.css-chassis.com:
+    target: https://github.com/jquery/css-chassis
+    mode: root
+    certificate: miscweb-a
+  view.css-chassis.com:
+    target: https://github.com/jquery/css-chassis
+    mode: root
+    certificate: miscweb-a
+  www.css-chassis.com:
+    target: https://github.com/jquery/css-chassis
+    mode: root
+    certificate: miscweb-a
   brand.jquery.com:
     target: https://brand.jquery.org
     mode: prefix
