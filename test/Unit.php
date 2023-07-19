@@ -8,7 +8,7 @@ if ( !function_exists( 'str_starts_with' ) ) {
 }
 
 function jq_req( $url, array $reqHeaders = [] ) {
-  Unit::verbose( "# $url\n" );
+	Unit::verbose( "# $url\n" );
 	$ch = curl_init( $url );
 	$resp = [ 'headers' => [], 'body' => null ];
 	curl_setopt_array( $ch, [
@@ -18,6 +18,9 @@ function jq_req( $url, array $reqHeaders = [] ) {
 		CURLOPT_HEADERFUNCTION => function( $ch, $header ) use ( &$resp ) {
 			$caseInsensitiveHeaders = [
 				'connection'
+			];
+			$listHeaders = [
+				'cache-control'
 			];
 			$len = strlen( $header );
 			// Both HTTP/1.1 and HTTP/2 are valid
@@ -36,6 +39,10 @@ function jq_req( $url, array $reqHeaders = [] ) {
 					if ( isset( $resp['headers'][$name] ) ) {
 						$resp['headers'][$name] .= ", $val";
 					} else {
+						if ( in_array( $name, $listHeaders ) ) {
+							// "foo,bar,baz" => "foo, bar, baz"
+							$val = preg_replace( '/,(\S)/', ', $1', $val );
+						}
 						$resp['headers'][$name] = $val;
 					}
 				}
@@ -64,18 +71,18 @@ class Unit {
 	static $i = 0;
 	static $pass = true;
 
-  public static function verbose( $line ) {
-    if ( @$_SERVER['DEBUG'] !== '0' ) {
-      print $line;
-    }
-  }
+	public static function verbose( $line ) {
+		if ( @$_SERVER['DEBUG'] !== '0' ) {
+			print $line;
+		}
+	}
 
-  public static function always( $line ) {
-    if ( @$_SERVER['DEBUG'] !== '0' ) {
-      print "\n";
-    }
-    print $line;
-  }
+	public static function always( $line ) {
+		if ( @$_SERVER['DEBUG'] !== '0' ) {
+			print "\n";
+		}
+		print $line;
+	}
 
 	public static function start() {
 		error_reporting( E_ALL );
@@ -85,7 +92,7 @@ class Unit {
 	public static function test( $name, $actual, $expected ) {
 		$num = ++self::$i;
 		if ( $actual === $expected ) {
-      self::verbose( "ok $num $name\n" );
+			self::verbose( "ok $num $name\n" );
 		} else {
 			self::$pass = false;
 			self::always( "not ok $num $name\n  ---\n  actual:   "
@@ -94,31 +101,31 @@ class Unit {
 		}
 	}
 
-  /**
-   * testHttp( 'https://example.org', '/foo' );
-   * testHttp( 'example.org', 'http://something.test/foo' );
-   * testHttp( 'http://something.test/foo', null );
-   *
-   * @param string $server Origin, hostname (if path is full URL), or full URL (if path is null)
-   * @param string $path|null
-   * @param string $reqHeaders
-   * @param string $expectHeaders
-   */
+	/**
+	 * testHttp( 'https://example.org', '/foo' );
+	 * testHttp( 'example.org', 'http://something.test/foo' );
+	 * testHttp( 'http://something.test/foo', null );
+	 *
+	 * @param string $server Origin, hostname (if path is full URL), or full URL (if path is null)
+	 * @param string $path|null
+	 * @param string $reqHeaders
+	 * @param string $expectHeaders
+	 */
 	public static function testHttp( $server, $path, array $reqHeaders, array $expectHeaders ) {
-    if ( $path === null ) {
-      $message = $server;
-      $parts = parse_url( $server );
-      $server = $parts['scheme'] . '://' . $parts['host'];
-      $path = $parts['path'] . ( ( $parts['query'] ?? '' ) !== '' ? '?' . $parts['query'] : '' );
-    } elseif ( !str_starts_with( $path, '/' ) ) {
-      $message = $path;
-      $parts = parse_url( $path );
-      $reqHeaders[] = 'Host: ' . $parts['host'];
-      $server = $parts['scheme'] . '://' . $server;
-      $path = $parts['path'] . ( ( $parts['query'] ?? '' ) !== '' ? '?' . $parts['query'] : '' );
-    } else {
-      $message = $server . $path;
-    }
+		if ( $path === null ) {
+			$message = $server;
+			$parts = parse_url( $server );
+			$server = $parts['scheme'] . '://' . $parts['host'];
+			$path = $parts['path'] . ( ( $parts['query'] ?? '' ) !== '' ? '?' . $parts['query'] : '' );
+		} elseif ( !str_starts_with( $path, '/' ) ) {
+			$message = $path;
+			$parts = parse_url( $path );
+			$reqHeaders[] = 'Host: ' . $parts['host'];
+			$server = $parts['scheme'] . '://' . $server;
+			$path = $parts['path'] . ( ( $parts['query'] ?? '' ) !== '' ? '?' . $parts['query'] : '' );
+		} else {
+			$message = $server . $path;
+		}
 		try {
 			$resp = jq_req( $server . $path, $reqHeaders );
 			foreach ( $expectHeaders as $key => $val ) {
@@ -141,7 +148,7 @@ class Unit {
 	}
 
 	public static function end() {
-    self::verbose( '1..' . self::$i . "\n" );
+		self::verbose( '1..' . self::$i . "\n" );
 		if ( !self::$pass ) {
 			exit( 1 );
 		}
