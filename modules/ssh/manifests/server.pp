@@ -44,6 +44,17 @@ class ssh::server (
     notify  => Service['sshd'],
   }
 
+  file { '/etc/ssh/sshd_config.d':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0555',
+    recurse => true,
+    force   => true,
+    purge   => true,
+    notify  => Service['sshd'],
+  }
+
   service { 'sshd':
     ensure => running,
     enable => true,
