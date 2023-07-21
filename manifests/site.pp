@@ -9,6 +9,7 @@
 
 # 2 CPU, 2 GB mem
 node 'builder-02.ops.jquery.net' {
+  role('docs::builder')
 }
 
 # 2 CPU, 2 GB mem
