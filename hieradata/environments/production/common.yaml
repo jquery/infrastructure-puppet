@@ -4,4 +4,15 @@ profile::certbot::email: infrastructure-team@jquery.com
 
 # TODO: allow splitting the active sites between two hosts
 docs_active_host: wp-04.ops.jquery.net
-docs_sites: {}
+docs_sites:
+  releases_jquery_com:
+    host: releases.jquery.com
+    site_name: jQuery CDN
+    repository:
+      name: jquery/codeorigin.jquery.com
+      branch: main
+    certificate: wordpress
+    active_theme: releases.jquery.com
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery
