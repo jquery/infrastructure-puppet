@@ -3,8 +3,8 @@
 We run two quite different types of WordPress installations:
 * The `blogs` servers host blog.jquery.com, blog.jqueryui.com and
   blog.jquerymobile.com. These are edited by humans who have accounts
-  that they use to log in to the WordPress interface directly.
-* The `docs` sites includes everything else. This is a collection of
+  that they use to log in to the WordPress admin interface directly.
+* The `docs` sites host everything else. This is a collection of
   about 20 sites that are directly provisioned from Git repositories
   using the [grunt-jquery-content] system.
 
@@ -12,17 +12,6 @@ We run two quite different types of WordPress installations:
 
 All of the WordPress settings are managed by Puppet. The sites are
 backed by a locally running MariaDB instance.
-
-## Blog accounts
-
-TODO.
-
-## Builders
-
-The docs sites are provisioned by the `builder` hosts. These run
-`node-notifier` to pick up changes to the sites and then run Grunt to
-perform the upgrade. All of the configuration (including user
-management) is handled by Puppet.
 
 ## WordPress versions
 
@@ -43,3 +32,23 @@ We keep Tarsnap backups for the databases and (for blogs) uploads. See
 the [backup.md] file for details.
 
 [backup.md]: ./backup.md
+
+## Blog sites
+
+### Blog accounts
+
+TODO.
+
+## Doc sites
+
+### Webhooks
+
+There are token-secured and SSL-verified webhooks for [github.com/jquery](https://github.com/organizations/jquery/settings/hooks/) (organisztion-wide) that notify the `builder` and `wp` hosts
+of push events (commits and tags) to all repositories.
+
+### Builder hosts
+
+The docs sites are provisioned by the `builder` hosts. These run
+`node-notifier` to pick up changes to the sites and then run Grunt to
+perform the upgrade. All of the configuration (including user
+management) is handled by Puppet.
