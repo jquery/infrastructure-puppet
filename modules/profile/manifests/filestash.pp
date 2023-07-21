@@ -20,7 +20,7 @@ class profile::filestash (
 
   $deploy_keys.each |Integer $i, Users::Ssh_key $key| {
     ssh_authorized_key { "filestash_${i}":
-      user    => $title,
+      user    => 'filestash',
       type    => $key['type'],
       key     => $key['key'],
       require => Systemd::Sysuser['filestash'],
