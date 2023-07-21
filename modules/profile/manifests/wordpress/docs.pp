@@ -1,6 +1,8 @@
 # @summary documentation wordpress sites
+# @param $docs_active_host default host for sites without explicit active_host config
 class profile::wordpress::docs (
   Profile::Docs::Sites $sites                 = lookup('docs_sites'),
+  Stdlib::Fqdn         $docs_active_host      = lookup('docs_active_host'),
   Optional[String[1]]  $wordpress_version     = lookup('profile::wordpress::docs::wordpress_version'),
   String[1]            $db_password_seed      = lookup('profile::wordpress::docs::db_password_seed'),
   Stdlib::Email        $admin_email           = lookup('profile::wordpress::docs::admin_email'),
@@ -32,7 +34,10 @@ class profile::wordpress::docs (
     source => 'puppet:///modules/profile/wordpress/docs/config.php',
   }
 
-  $sites.each |String[1] $name, Profile::Docs::Site $site| {
+  $sites.filter |String[1] $name, Profile::Docs::Site $site| {
+    $active_host = pick($site['active_host'], $docs_active_host)
+    $active_host == $::facts['networking']['fqdn']
+  }.each |String[1] $name, Profile::Docs::Site $site| {
     $active_theme = $site['active_theme']
 
     $path = pick($site['path'], '/')
