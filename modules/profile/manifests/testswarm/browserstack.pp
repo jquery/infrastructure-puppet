@@ -17,11 +17,12 @@ class profile::testswarm::browserstack (
   }
 
   exec { 'testswarm-browserstack-npm-install':
-    command => '/usr/bin/npm install --cache /tmp/npm-testswarm-browserstack',
-    cwd     => '/srv/testswarm-browserstack',
-    creates => '/srv/testswarm-browserstack/node_modules',
-    user    => 'www-data',
-    require => Git::Clone['testswarm-browserstack'],
+    command     => '/usr/bin/npm install --cache /tmp/npm-testswarm-browserstack',
+    cwd         => '/srv/testswarm-browserstack',
+    creates     => '/srv/testswarm-browserstack/node_modules',
+    user        => 'www-data',
+    require     => Git::Clone['testswarm-browserstack'],
+    environment => ['NODE_ENV=production'],
   }
 
   $config = {
@@ -59,7 +60,7 @@ class profile::testswarm::browserstack (
     listen_for        => [{ branch => 'main' }],
     local_path        => '/srv/testswarm-browserstack',
     local_user        => 'www-data',
-    extra_commands    => ['/usr/bin/npm install --prefix /srv/testswarm-browserstack --cache /tmp/npm-testswarm-browserstack'],
+    extra_commands    => ['NODE_ENV=production /usr/bin/npm install --prefix /srv/testswarm-browserstack --cache /tmp/npm-testswarm-browserstack'],
     restart_services  => $restart_services,
   }
 }
