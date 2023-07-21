@@ -8,6 +8,10 @@
 # ----------
 
 # 2 CPU, 2 GB mem
+node 'builder-02.ops.jquery.net' {
+}
+
+# 2 CPU, 2 GB mem
 node 'codeorigin-02.ops.jquery.net' {
   role('codeorigin')
 }
