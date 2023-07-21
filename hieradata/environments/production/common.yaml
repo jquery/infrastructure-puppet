@@ -2,9 +2,109 @@ profile::puppet::agent::puppet_server: puppet-03.ops.jquery.net
 
 profile::certbot::email: infrastructure-team@jquery.com
 
+# dummy key not used anywhere that can be used to define yaml tags
+dummy:
+  other_host: &other_host wp-05.ops.jquery.net
+  semver_tag: &semver_tag "^v?\\d+\\.\\d+\\.\\d+(-\\d+)?$"
+
 # TODO: allow splitting the active sites between two hosts
 docs_active_host: wp-04.ops.jquery.net
 docs_sites:
+  jquery_com:
+    active_host: *other_host
+    host: jquery.com
+    site_name: jQuery (staging)
+    repository:
+      name: jquery/jquery.com
+      branch: main
+      tag_format: *semver_tag
+    certificate: wordpress
+    active_theme: jquery.com
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery
+      jquery_description: "jQuery: The Write Less, Do More, JavaScript Library"
+      jquery_xfn_rel_me: "https://social.lfx.dev/@jquery"
+      jquery_docsearch_api_key: 3cfde9aca378c8aab554d5bf1b23489b
+      jquery_docsearch_index_name: jquery
+    redirects:
+      - match:
+          path: /api
+          mode: prefix
+        target:
+          url: https://api.jquery.com
+          mode: exact
+        permanent: false
+      - match:
+          path: /blog
+          mode: prefix
+        target:
+          url: "https://blog.jquery.com"
+          mode: prefix
+        permanent: false
+      - match:
+          path: /dev
+          mode: prefix
+        target:
+          url: https://bugs.jquery.com
+          mode: exact
+        permanent: false
+      - match:
+          path: /join
+          mode: prefix
+        target:
+          url: https://jquery.org/join/
+          mode: exact
+        permanent: false
+      - match:
+          path: /events.jquery.org
+          mode: prefix
+        target:
+          url: https://events.jquery.org
+          mode: exact
+        permanent: false
+      - match:
+          path: /forum
+          mode: prefix
+        target:
+          url: "https://forum.jquery.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /latest
+          mode: prefix
+        target:
+          url: "https://code.jquery.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /plugins
+          mode: prefix
+        target:
+          url: "https://plugins.jquery.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /src
+          mode: prefix
+        target:
+          url: "https://code.jquery.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /ui
+          mode: prefix
+        target:
+          url: "https://jqueryui.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /view
+          mode: prefix
+        target:
+          url: "https://view.jquery.com"
+          mode: exact
+        permanent: false
   releases_jquery_com:
     host: releases.jquery.com
     site_name: jQuery CDN
