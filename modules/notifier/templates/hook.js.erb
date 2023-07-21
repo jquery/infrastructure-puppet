@@ -3,5 +3,12 @@ module.exports = function( server, exec ) {
 <%- if entry.key? 'branch' -%>
   server.on( "<%= @github_repository %>/push/heads/<%= entry['branch'] %>", exec );
 <%- end -%>
+<%- if entry.key? 'tag' -%>
+  server.on( "<%= @github_repository %>/push/tags/*", function ( data ) {
+    if ( data.tag.match( /<%= entry['branch'] %>/ ) ) {
+      exec( data );
+    }
+  } );
+<%- end -%>
 <%- end -%>
 };
