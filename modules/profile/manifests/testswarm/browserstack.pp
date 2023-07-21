@@ -55,12 +55,20 @@ class profile::testswarm::browserstack (
     default => [],
   }
 
+  file { '/usr/local/bin/update-testswarm-dependencies':
+    ensure => file,
+    source => 'puppet:///modules/profile/testswarm/browserstack/update-testswarm-dependencies.sh',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0555',
+  }
+
   notifier::git_update { 'testswarm-browserstack':
     github_repository => 'jquery/testswarm-browserstack',
     listen_for        => [{ branch => 'main' }],
     local_path        => '/srv/testswarm-browserstack',
     local_user        => 'www-data',
-    extra_commands    => ['NODE_ENV=production /usr/bin/npm install --prefix /srv/testswarm-browserstack --cache /tmp/npm-testswarm-browserstack'],
+    extra_commands    => ['/usr/local/bin/update-testswarm-dependencies'],
     restart_services  => $restart_services,
   }
 }
