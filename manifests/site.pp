@@ -19,6 +19,7 @@ node 'contentorigin-02.ops.jquery.net' {
 
 # 2 CPU, 2 GB mem
 node 'filestash-01.ops.jquery.net' {
+  role('docs::filestash')
 }
 
 # 1 CPU, 2 GB mem
