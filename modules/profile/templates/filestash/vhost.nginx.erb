@@ -1,0 +1,26 @@
+server {
+  listen 443 ssl;
+  listen [::]:443 ssl;
+
+  ssl_certificate /etc/letsencrypt/live/<%= @certificate %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= @certificate %>/privkey.pem;
+
+  <%= @tls_config.join("\n  ") %>
+
+  server_name  <%= @facts['networking']['fqdn'] %>;
+
+  access_log    off;
+  error_log     /var/log/nginx/error.log crit;
+
+  server_tokens off;
+
+  location / {
+    root /srv/filestash;
+  }
+
+  location /.well-known/acme-challenge {
+    root /var/www/letsencrypt/;
+  }
+}
+
+# vim: ts=2 sw=2 et
