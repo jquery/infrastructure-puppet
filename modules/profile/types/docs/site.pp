@@ -4,8 +4,9 @@ type Profile::Docs::Site = Struct[{
   path                   => Optional[Wordpress::Path],
   site_name              => String[1],
   repository             => Struct[{
-    name   => String[1],
-    branch => String[1],
+    name       => String[1],
+    branch     => String[1],
+    tag_format => Optional[String[1]],
   }],
   certificate            => String[1],
   active_theme           => String[1],

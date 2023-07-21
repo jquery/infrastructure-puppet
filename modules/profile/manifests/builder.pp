@@ -67,9 +67,16 @@ class profile::builder (
       require => Git::Clone["builder-${name}"],
     }
 
+    if $site['repository']['tag_format'] {
+      # TODO: can we check out the latest tag on clone as well?
+      $listen_for = { tag => $site['repository']['tag_format'] }
+    } else {
+      $listen_for = { branch => $site['repository']['branch'] }
+    }
+
     notifier::git_update { "builder-${name}":
       github_repository => $site['repository']['name'],
-      listen_for        => [{ branch => $site['repository']['branch'] }],
+      listen_for        => [$listen_for],
       local_path        => "/srv/builder/${name}",
       local_user        => 'builder',
       extra_commands    => ["/usr/local/bin/builder-do-update /srv/builder/${name}"],
