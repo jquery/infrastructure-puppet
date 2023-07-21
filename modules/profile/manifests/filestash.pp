@@ -1,3 +1,4 @@
+# @summary file stash for constantly updating release files
 class profile::filestash (
   String[1] $certificate = lookup('profile::filestash::certificate'),
 ) {
