@@ -13,7 +13,12 @@ class profile::filestash (
 
   file { [
     '/srv/filestash',
-    '/srv/filestash/data'
+    '/srv/filestash/data',
+    '/srv/filestash/data/color',
+    '/srv/filestash/data/mobile',
+    '/srv/filestash/data/pep',
+    '/srv/filestash/data/qunit',
+    '/srv/filestash/data/ui',
   ]:
     ensure  => directory,
     owner   => 'filestash',
