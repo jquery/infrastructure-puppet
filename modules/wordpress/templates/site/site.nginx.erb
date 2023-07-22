@@ -22,6 +22,8 @@ server {
     deny all;
   }
 
+  include /etc/nginx/wordpress-subsites/<%= @host %>.d/*.conf;
+
 <%- if @gilded_wordpress -%>
   location ~ ^/resources/(?<name>.*) {
     alias <%= @base_path %>/gw-resources/<%= @host %>/$name;
@@ -34,8 +36,6 @@ server {
     expires 24h;
     log_not_found off;
   }
-
-  include /etc/nginx/wordpress-subsites/<%= @host %>.d/*.conf;
 
   location / {
     try_files $uri $uri/ /index.php$is_args$args;

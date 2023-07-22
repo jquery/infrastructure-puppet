@@ -8,6 +8,11 @@ location ^~ <%= @path %> {
   root <%= @webroot %>/;
   try_files $uri $uri/ <%= @path %>index.php$is_args$args;
 
+  location ~* \.(css|gif|ico|jpeg|jpg|js|png)$ {
+    expires 24h;
+    log_not_found off;
+  }
+
   location ~ \.php$ {
     client_max_body_size 25M;
     try_files            $uri =404;
