@@ -16,21 +16,19 @@ server {
 
   server_tokens off;
 
-  location ~ /\. {
-    deny all;
-  }
-
-  location / {
-    root /srv/www/<%= @fqdn %><%= @site['webroot'] or '' %>;
+  root /srv/www/<%= @fqdn %><%= @site['webroot'] or '' %>;
 
 <%- if @site['allow_php'] -%>
-    index index.php index.html;
-    try_files $uri $uri/ /index.php$is_args$args;
+  index index.php index.html;
+  try_files $uri $uri/ /index.php$is_args$args;
 <%- end -%>
 
 <%- if @site.key? 'extra_config' -%>
-    <%= @site['extra_config'].split("\n").join("\n    ") %>
+  <%= @site['extra_config'].split("\n").join("\n    ") %>
 <%- end -%>
+
+  location ~ /\. {
+    deny all;
   }
 
 <%- if @site['allow_php'] -%>
