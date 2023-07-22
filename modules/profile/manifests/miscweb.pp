@@ -1,7 +1,7 @@
 # @summary misc server for redirects and static version-controlled content
 class profile::miscweb (
-  Stdlib::Fqdn                                   $podcast_vhost       = lookup('profile::miscweb::podcast_vhost'),
   String[1]                                      $default_certificate = lookup('profile::miscweb::default_certificate'),
+  Hash[Stdlib::Fqdn, Profile::Miscweb::Site]     $sites               = lookup('profile::miscweb::sites'),
   Hash[Stdlib::Fqdn, Profile::Miscweb::Redirect] $redirects           = lookup('profile::miscweb::redirects'),
 ) {
   nftables::allow { 'miscweb-https':
@@ -13,22 +13,34 @@ class profile::miscweb (
     dport => 80,
   }
 
-  git::clone { 'jquerypodcast':
-    path   => '/srv/jquerypodcast',
-    remote => 'https://github.com/jquery/podcast.jquery.com',
-    branch => 'main',
-    owner  => 'root',
-    group  => 'www-data',
-  }
-
   $tls_config = nginx::tls_config()
 
-  nginx::site { $podcast_vhost:
-    content => template('profile/miscweb/jquerypodcast.nginx.erb'),
-    require => [
-      Letsencrypt::Certificate[$default_certificate],
-      Git::Clone['jquerypodcast'],
-    ],
+
+  file { '/srv/www':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0775',
+  }
+
+  $sites.each |Stdlib::Fqdn $fqdn, Profile::Miscweb::Site $site| {
+    $certificate = pick($site['certificate'], $default_certificate)
+
+    git::clone { $fqdn:
+      path   => "/srv/www/${fqdn}",
+      remote => "https://github.com/${site['repository']['name']}",
+      branch => $site['repository']['branch'],
+      owner  => 'root',
+      group  => 'root',
+    }
+
+    nginx::site { $fqdn:
+      content => template('profile/miscweb/site.nginx.erb'),
+      require => [
+        Letsencrypt::Certificate[$certificate],
+        Git::Clone[$fqdn],
+      ],
+    }
   }
 
   profile::miscweb::group_certificates($redirects).each |String[1] $name, Array[Stdlib::Fqdn] $domains| {

@@ -1,5 +1,0 @@
-profile::certbot::certificates:
-  miscweb:
-    domains:
-      - "%{::facts.fqdn}"
-      - podcast.jquery.com

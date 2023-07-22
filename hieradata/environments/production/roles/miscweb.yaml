@@ -1,6 +1,19 @@
-profile::miscweb::podcast_vhost: podcast.jquery.com
-
+profile::certbot::certificates:
+  miscweb:
+    domains:
+      - "%{::facts.fqdn}"
+      - podcast.jquery.com
 profile::miscweb::default_certificate: miscweb
+
+profile::miscweb::sites:
+  podcast.jquery.com:
+    repository:
+      name: jquery/podcast.jquery.com
+      branch: main
+    webroot: /build_production
+    extra_config: |
+      # Compatibility with http://feeds.feedburner.com/jQueryPodcastShowNotes
+      rewrite ^/feed/?$ /feed/jQueryPodcastShowNotes.xml permanent;
 
 profile::miscweb::redirects:
   # css-chassis.com
