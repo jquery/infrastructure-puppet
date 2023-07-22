@@ -116,3 +116,6 @@ docs_sites:
     enable_static_index: true
     options:
       jquery_body_class: jquery
+    proxies:
+      - path: /git/
+        target: https://filestash-01.ops.jquery.net/

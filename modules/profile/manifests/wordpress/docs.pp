@@ -141,11 +141,21 @@ class profile::wordpress::docs (
     }
 
     if $site['redirects'] {
-      file { "/etc/nginx/wordpress-subsites/${site['host']}.d/${name}.conf":
+      file { "/etc/nginx/wordpress-subsites/${site['host']}.d/${name}-redirects.conf":
         ensure  => file,
         owner   => 'root',
         group   => 'root',
         content => template('profile/wordpress/docs/redirects.nginx.erb'),
+        notify  => Exec['nginx-reload'],
+      }
+    }
+
+    if $site['proxies'] {
+      file { "/etc/nginx/wordpress-subsites/${site['host']}.d/${name}-proxies.conf":
+        ensure  => file,
+        owner   => 'root',
+        group   => 'root',
+        content => template('profile/wordpress/docs/proxies.nginx.erb'),
         notify  => Exec['nginx-reload'],
       }
     }

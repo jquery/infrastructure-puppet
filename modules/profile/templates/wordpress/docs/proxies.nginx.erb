@@ -1,0 +1,5 @@
+<%- @site['proxies'].each do |proxy| -%>
+location <%= proxy['path'] %> {
+  proxy_pass <%= proxy['target'] %>;
+}
+<%- end -%>

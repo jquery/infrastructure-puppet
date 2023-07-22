@@ -15,4 +15,5 @@ type Profile::Docs::Site = Struct[{
   enable_api_tweaks      => Optional[Boolean],
   options                => Optional[Hash[String[1], String]],
   redirects              => Optional[Array[Profile::Docs::Redirect]],
+  proxies                => Optional[Array[Profile::Docs::Proxy]],
 }]
