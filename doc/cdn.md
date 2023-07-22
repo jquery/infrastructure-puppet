@@ -107,7 +107,16 @@ By 2021, our traffic had risen to [over 2 petabytes](https://blog.jquery.com/202
 
 ### Latest statistics
 
-As of January 2023, jQuery CDN transfers 2.2 petabytes a month in bandwidth, in response to 57 billion web requests, with a cache-hit ratio of >99.999%.
+Traffic profile from Highwinds StrikeTracker, as of January 2023 (HTTP+HTTPS combined):
+
+* Overall: 2.2 petabytes bandwidth per month, in response to 57 billion web requests.
+* 16K-30K req/s (mean: 21K req/s)
+* Bandwidth: 4.7-8.9Gbps (mean: 6.2Gbps)
+* Average response size: 39KB
+* Cache-hit ratio: >99.999%
+* Library size: 398MB ([codeorigin.git](https://github.com/jquery/codeorigin.jquery.com))
+* Geographic distribution (HTTPS): US-West (4 POPs): 24%, US-East (7 POPs): 19%, US-Central (3 POPs): 8%, Europe (11 POPs): 49%.
+* Geographic distribution (HTTP): US-West: 41%, US-East: 7%, US-Central: 4%, Europe: 48%.
 
 jQuery is used by [73% of the top 100K websites](https://trends.builtwith.com/javascript/jQuery) according to BuiltWith as of June 2023. According to W3 Techs in July 2023, jQuery is used on [77% of the world's top 10 million websites](https://w3techs.com/technologies/details/js-jquery). jQuery is used on [94% of websites](https://w3techs.com/technologies/details/js-jquery) that use at least one known JavaScript library.
 
