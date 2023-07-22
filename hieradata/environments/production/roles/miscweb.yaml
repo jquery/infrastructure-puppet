@@ -6,6 +6,11 @@ profile::certbot::certificates:
 profile::miscweb::default_certificate: miscweb
 
 profile::miscweb::sites:
+  demos.jquerymobile.com:
+    repository:
+      name: jquery/demos.jquerymobile.com
+      branch: main
+    allow_php: true
   podcast.jquery.com:
     repository:
       name: jquery/podcast.jquery.com

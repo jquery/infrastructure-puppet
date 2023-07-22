@@ -23,10 +23,25 @@ server {
   location / {
     root /srv/www/<%= @fqdn %><%= @site['webroot'] or '' %>;
 
-    <%- if @site.key? 'extra_config' -%>
+<%- if @site['allow_php'] -%>
+    index index.php index.html;
+    try_files $uri $uri/ /index.php$is_args$args;
+<%- end -%>
+
+<%- if @site.key? 'extra_config' -%>
     <%= @site['extra_config'].split("\n").join("\n    ") %>
-    <%- end -%>
+<%- end -%>
   }
+
+<%- if @site['allow_php'] -%>
+  location ~ \.php$ {
+    client_max_body_size 25M;
+    try_files            $uri =404;
+    fastcgi_pass         unix:/run/php/php<%= @php_fpm_version %>-fpm.sock;
+    fastcgi_param        SCRIPT_FILENAME $request_filename;
+    include              /etc/nginx/fastcgi_params;
+  }
+<%- end -%>
 
   location /.well-known/acme-challenge {
     root /var/www/letsencrypt/;

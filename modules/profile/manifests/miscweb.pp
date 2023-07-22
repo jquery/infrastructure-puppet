@@ -23,6 +23,11 @@ class profile::miscweb (
     mode   => '0775',
   }
 
+  class { 'php': }
+  class { 'php::fpm': }
+
+  $php_fpm_version = $::php::fpm::version
+
   $sites.each |Stdlib::Fqdn $fqdn, Profile::Miscweb::Site $site| {
     $certificate = pick($site['certificate'], $default_certificate)
 
