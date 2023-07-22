@@ -1,5 +1,5 @@
 <%- @site['proxies'].each do |proxy| -%>
-location <%= proxy['path'] %> {
+location ~ ^<%= proxy['path'] %>(.*)$ {
   resolver <%= @facts['nameservers'].join(' ') %>;
   proxy_pass <%= proxy['target'] %>;
 }
