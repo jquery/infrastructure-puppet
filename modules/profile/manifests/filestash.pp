@@ -8,7 +8,7 @@ class profile::filestash (
   ])
 
   systemd::sysuser { 'filestash':
-    content => 'u filestash - "unprivileged user for updating filestash files" /srv/filestash',
+    content => 'u filestash - "unprivileged user for updating filestash files" /srv/filestash /bin/sh',
   }
 
   file { [
