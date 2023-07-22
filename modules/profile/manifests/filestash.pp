@@ -3,6 +3,10 @@ class profile::filestash (
   String[1]             $certificate = lookup('profile::filestash::certificate'),
   Array[Users::Ssh_key] $deploy_keys = lookup('profile::filestash::deploy_keys', {default_value => []}),
 ) {
+  ensure_packages([
+    'rsync',
+  ])
+
   systemd::sysuser { 'filestash':
     content => 'u filestash - "unprivileged user for updating filestash files" /srv/filestash',
   }
@@ -23,6 +27,7 @@ class profile::filestash (
       user    => 'filestash',
       type    => $key['type'],
       key     => $key['key'],
+      options => ['restrict', 'command="/usr/bin/rrsync -wo /srv/filestash/data"'],
       require => Systemd::Sysuser['filestash'],
     }
   }
