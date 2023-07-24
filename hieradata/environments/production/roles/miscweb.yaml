@@ -3,6 +3,7 @@ profile::certbot::certificates:
     domains:
       - "%{::facts.fqdn}"
       - podcast.jquery.com
+      - demos.jquerymobile.com
 profile::miscweb::default_certificate: miscweb
 
 profile::miscweb::sites:
