@@ -27,6 +27,12 @@ server {
   <%= @site['extra_config'].split("\n").join("\n    ") %>
 <%- end -%>
 
+  # Use ^~ to ensure precedence over the `~ /\.` block
+  # https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms
+  location ^~ /.well-known/acme-challenge {
+    root /var/www/letsencrypt/;
+  }
+
   location ~ /\. {
     deny all;
   }
@@ -40,10 +46,6 @@ server {
     include              /etc/nginx/fastcgi_params;
   }
 <%- end -%>
-
-  location /.well-known/acme-challenge {
-    root /var/www/letsencrypt/;
-  }
 }
 
 # vim: ts=2 sw=2 et
