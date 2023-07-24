@@ -123,6 +123,14 @@ profile::miscweb::redirects:
     mode: prefix
     certificate: miscweb-a
   # jquerymobile.com
+  jquerymobile.net:
+    target: https://jquerymobile.com
+    mode: root
+    certificate: miscweb-a
+  jquerymobile.org:
+    target: https://jquerymobile.com
+    mode: root
+    certificate: miscweb-a
   view.jquerymobile.com:
     target: https://releases.jquery.com/mobile/
     mode: root
