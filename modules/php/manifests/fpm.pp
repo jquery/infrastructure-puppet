@@ -6,7 +6,11 @@ class php::fpm (
 
   $version = $::php::version
   $ini_values = merge({
-    'expose_php'   => 'On',
+    'expose_php'      => 'On',
+    # Enable deprecation warnings
+    # Will be redundant on PHP 8.0+
+    # https://www.php.net/manual/en/errorfunc.configuration.php#ini.error-reporting
+    'error_reporting' => 'E_ALL',
   }, $ini_values_extra)
 
   ensure_packages([
