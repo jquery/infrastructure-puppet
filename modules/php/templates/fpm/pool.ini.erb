@@ -12,9 +12,9 @@ pm.start_servers = 2
 pm.min_spare_servers = 1
 pm.max_spare_servers = 3
 
-# PHP sets log_errors=On by default, but errors go nowhere by default.
-# Setting php_admin_value[error_log] to a file doesn't work either.
-# Enabling catch_workers_output sends errors to /var/log/phpX-fpm.log
+; PHP sets log_errors=On by default, but errors go nowhere by default.
+; Setting php_admin_value[error_log] to a file doesn't work either.
+; Enabling catch_workers_output sends errors to /var/log/phpX-fpm.log
 catch_workers_output = yes
 
 <%- @ini_values.each do |key, value| -%>
