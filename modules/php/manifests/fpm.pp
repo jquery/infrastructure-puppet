@@ -1,10 +1,13 @@
 # @summary installs a php-fpm service
 class php::fpm (
-  Hash[String[1], String] $ini_values = {},
+  Hash[String[1], String] $ini_values_extra = {},
 ) {
   include php
 
   $version = $::php::version
+  $ini_values = merge({
+    'expose_php'   => 'On',
+  }, $ini_values_extra)
 
   ensure_packages([
     "php${version}-fpm",
