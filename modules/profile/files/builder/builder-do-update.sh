@@ -15,7 +15,7 @@ npm install
 npm update
 npm prune
 
-GRUNT="$(npm bin)/grunt"
+GRUNT="node_modules/.bin/grunt"
 SERVERS="$(cat /etc/builder-wordpress-hosts)"
 
 for SERVER in $SERVERS
