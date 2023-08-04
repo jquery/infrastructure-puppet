@@ -9,7 +9,7 @@ dummy:
 docs_sites:
   jquery_com:
     host: jquery.com
-    site_name: jQuery (staging)
+    site_name: jQuery
     repository:
       name: jquery/jquery.com
       branch: main
