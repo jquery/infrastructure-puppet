@@ -20,5 +20,5 @@ SERVERS="$(cat /etc/builder-wordpress-hosts)"
 
 for SERVER in $SERVERS
 do
-  WP_HOST="$SERVER" $GRUNT" deploy
+  WP_HOST="$SERVER" "$GRUNT" deploy
 done
