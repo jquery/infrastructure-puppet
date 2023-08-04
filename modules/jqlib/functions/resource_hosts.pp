@@ -10,7 +10,7 @@ function jqlib::resource_hosts (
 
   $pql = @("PQL")
   resources[certname] {
-    type = "${jqlib::format_puppet_title(resource_type)}" ${title_query}
+    type = "${jqlib::format_puppet_title($resource_type)}" ${title_query}
   }
   | PQL
 
