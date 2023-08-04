@@ -102,7 +102,7 @@ docs_sites:
           mode: exact
         permanent: false
   learn_jquery_com:
-    host: stage.jquery.com
+    host: learn.jquery.com
     site_name: jQuery Learning Center
     repository:
       name: jquery/learn.jquery.com
