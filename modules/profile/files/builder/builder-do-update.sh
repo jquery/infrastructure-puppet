@@ -14,4 +14,11 @@ cd "$1"
 npm install
 npm update
 npm prune
-node_modules/.bin/grunt --no-color deploy
+
+GRUNT="$(npm bin)/grunt"
+SERVERS="$(cat /etc/builder-wordpress-hosts)"
+
+for SERVER in $SERVERS
+do
+  WP_HOST="$SERVER" $GRUNT" deploy
+done

@@ -4,6 +4,8 @@ class profile::builder (
   Stdlib::Fqdn         $docs_active_host      = lookup('docs_active_host'),
   String[1]            $builder_password_seed = lookup('docs_builder_password_seed'),
 ) {
+  $wordpress_hosts = jqlib::resource_hosts('class', 'profile::wordpress::docs')
+
   ensure_packages([
     'nodejs',
     'npm',
@@ -38,6 +40,14 @@ class profile::builder (
     mode   => '0555',
   }
 
+  file { '/etc/builder-wordpress-hosts':
+    ensure  => file,
+    content => $wordpress_hosts.join("\n"),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+  }
+
   $sites.each |String[1] $name, Profile::Docs::Site $site| {
     git::clone { "builder-${name}":
       path    => "/srv/builder/${name}",
@@ -59,8 +69,11 @@ class profile::builder (
     } + pick($site['builder_extra_settings'], {})
 
     file { "/srv/builder/${name}/config.json":
-      ensure  => file,
-      content => $settings.to_json_pretty(),
+      ensure  => absent,
+    }
+
+    file { "/srv/builder/${name}/config.js":
+      content => template('profile/builder/repo-config.js.erb'),
       owner   => 'builder',
       group   => 'builder',
       mode    => '0440',

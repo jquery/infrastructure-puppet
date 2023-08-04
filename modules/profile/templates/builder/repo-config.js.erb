@@ -1,0 +1,10 @@
+<%# Here we (ab)use the fact that JSON is also valid JavaScript. -%>
+const settings = <%= @settings.to_json() %>;
+
+settings.host = process.env.WP_HOST;
+if ( !settings.host ) {
+  console.error( 'A host must be set via the WP_HOST environment variable' );
+  process.exit( 1 );
+}
+
+module.exports = settings;
