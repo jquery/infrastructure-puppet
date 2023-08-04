@@ -4,7 +4,6 @@ profile::certbot::email: infrastructure-team@jquery.com
 
 # dummy key not used anywhere that can be used to define yaml tags
 dummy:
-  other_host: &other_host wp-05.ops.jquery.net
   semver_tag: &semver_tag "^v?\\d+\\.\\d+\\.\\d+(-\\d+)?$"
 
 docs_sites:
