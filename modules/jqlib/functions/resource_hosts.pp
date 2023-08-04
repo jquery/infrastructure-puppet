@@ -5,12 +5,12 @@ function jqlib::resource_hosts (
 ) >> Array[Stdlib::Host] {
   $title_query = $resource_title ? {
     undef   => '',
-    default => " and title = \"${resource_title}\"",
+    default => " and title = \"${jqlib::format_puppet_title($resource_title)}\"",
   }
 
   $pql = @("PQL")
   resources[certname] {
-    type = "${resource_type.split('::').capitalize.join('::')}" ${title_query}
+    type = "${jqlib::format_puppet_title(resource_type)}" ${title_query}
   }
   | PQL
 
