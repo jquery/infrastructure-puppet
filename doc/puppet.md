@@ -83,6 +83,10 @@ letter). Other required settings are the numerical user ID (pick the
 lowest available that's over 1200), list of groups the user is in
 and SSH keys. Password authentication is not supported.
 
+There is [separate documentation] for setting up your access.
+
+[separate documentation]: ./access.md
+
 To remove a user, simply set `ensure: absent` and remove any groups and
 SSH keys. Do not completely remove the user account definition.
 
