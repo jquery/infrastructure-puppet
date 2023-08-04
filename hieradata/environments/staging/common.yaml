@@ -2,7 +2,6 @@ profile::puppet::agent::puppet_server: puppet-03.ops.jquery.net
 
 profile::certbot::email: infrastructure-team@jquery.com
 
-docs_active_host: wp-02.stage.ops.jquery.net
 docs_sites:
   api_jquery_com:
     host: stage.api.jquery.com

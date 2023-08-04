@@ -7,11 +7,8 @@ dummy:
   other_host: &other_host wp-05.ops.jquery.net
   semver_tag: &semver_tag "^v?\\d+\\.\\d+\\.\\d+(-\\d+)?$"
 
-# TODO: allow splitting the active sites between two hosts
-docs_active_host: wp-04.ops.jquery.net
 docs_sites:
   jquery_com:
-    active_host: *other_host
     host: jquery.com
     site_name: jQuery (staging)
     repository:

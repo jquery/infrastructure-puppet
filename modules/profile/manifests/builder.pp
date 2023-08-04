@@ -1,7 +1,6 @@
 # @summary updates the docs wordpress sites
 class profile::builder (
   Profile::Docs::Sites $sites                 = lookup('docs_sites'),
-  Stdlib::Fqdn         $docs_active_host      = lookup('docs_active_host'),
   String[1]            $builder_password_seed = lookup('docs_builder_password_seed'),
 ) {
   $wordpress_hosts = jqlib::resource_hosts('class', 'profile::wordpress::docs')
@@ -59,10 +58,8 @@ class profile::builder (
     }
 
     $path = pick($site['path'], '/')
-    $active_host = pick($site['active_host'], $docs_active_host)
     $settings = {
       url      => "https://${site['host']}${path}",
-      host     => $active_host,
       username => 'builder',
       password => jqlib::autogen_password("docs_builder_${name}", $builder_password_seed),
       dir      => 'dist/wordpress',

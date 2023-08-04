@@ -1,6 +1,5 @@
 type Profile::Docs::Site = Struct[{
   host                   => Stdlib::Host,
-  active_host            => Optional[Stdlib::Host],
   path                   => Optional[Wordpress::Path],
   site_name              => String[1],
   repository             => Struct[{
