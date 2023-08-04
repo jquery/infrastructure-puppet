@@ -55,4 +55,8 @@ class profile::filestash (
     proto => 'tcp',
     dport => 443,
   }
+
+  tarsnap::backup { 'filestash':
+    paths => ['/srv/filestash/data'],
+  }
 }
