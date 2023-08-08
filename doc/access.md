@@ -10,7 +10,7 @@
   * If you have an YubiKey (or any other FIDO hardware authenticator),
     modern OpenSSH versions have support [storing SSH keys on them].
 * The key you use to log in to jQuery host **must be encrypted** with a
-  secure passphraise.
+  secure passphrase.
 * **Never use SSH agent forwarding** (-A) for the key you use for
   jQuery hosts. Even if [you think you trust the hosts]. This also
   applies to any other other keys you may have loaded in the same agent

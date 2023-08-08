@@ -49,6 +49,7 @@ by the Hiera system.
 
 The only permitted way to look up Hiera configuration is to use the
 `lookup` function on a class parameter in a profile. For example:
+
 ```puppet
 class profile::certbot (
   Stdlib::Email $email = lookup('profile::certbot::email'),
