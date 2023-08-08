@@ -33,7 +33,7 @@ Unit::testHttp( $server, '/jquery-3.0.0.js', [], [
 	'last-modified' => 'Fri, 18 Oct 1991 12:00:00 GMT',
 	'vary' => 'Accept-Encoding',
 	'etag' => '"28feccc0-40464"',
-	'cache-control' => 'max-age=315360000, public',
+	'cache-control' => 'public, max-age=315360000, stale-while-revalidate=604800',
 	'access-control-allow-origin' => '*',
 	'accept-ranges' => 'bytes',
 ] );
@@ -46,7 +46,7 @@ Unit::testHttp( $server, '/qunit/qunit-2.0.0.css', [], [
 	'last-modified' => 'Fri, 18 Oct 1991 12:00:00 GMT',
 	'vary' => 'Accept-Encoding',
 	'etag' => '"28feccc0-1d20"',
-	'cache-control' => 'max-age=315360000, public',
+	'cache-control' => 'public, max-age=315360000, stale-while-revalidate=604800',
 	'access-control-allow-origin' => '*',
 	'accept-ranges' => 'bytes',
 ] );
@@ -58,7 +58,7 @@ Unit::testHttp( $server, '/ui/1.10.0/themes/base/images/ui-icons_222222_256x240.
 	'content-length' => '4369',
 	'last-modified' => 'Fri, 18 Oct 1991 12:00:00 GMT',
 	'etag' => '"28feccc0-1111"',
-	'cache-control' => 'max-age=315360000, public',
+	'cache-control' => 'public, max-age=315360000, stale-while-revalidate=604800',
 	'access-control-allow-origin' => '*',
 	'accept-ranges' => 'bytes',
 ] );
@@ -70,7 +70,7 @@ Unit::testHttp( $server, '/jquery-2.0.0.min.map', [], [
 	'content-length' => '126081',
 	'last-modified' => 'Fri, 18 Oct 1991 12:00:00 GMT',
 	'etag' => '"28feccc0-1ec81"',
-	'cache-control' => 'max-age=315360000, public',
+	'cache-control' => 'public, max-age=315360000, stale-while-revalidate=604800',
 	'access-control-allow-origin' => '*',
 	'accept-ranges' => 'bytes',
 ] );
@@ -87,7 +87,7 @@ Unit::testHttp( $server, '/jquery-3.0.0.js', [
 	'last-modified' => 'Fri, 18 Oct 1991 12:00:00 GMT',
 	'vary' => 'Accept-Encoding',
 	'etag' => '"28feccc0-40464"',
-	'cache-control' => 'max-age=315360000, public',
+	'cache-control' => 'public, max-age=315360000, stale-while-revalidate=604800',
 	'access-control-allow-origin' => '*',
 	'accept-ranges' => 'bytes',
 ] );

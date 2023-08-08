@@ -73,9 +73,10 @@ server {
       add_header Vary "x-cdn-access";
     }
 
-    add_header Cache-Control "public";
+    # CDN assets are considered immutable so allow CDN and web browsers to reuse stale
+    # responses during revalidation or downtime. Currently 1 year, and 7 days.
+    add_header Cache-Control "public, max-age=315360000, stale-while-revalidate=604800";
     add_header Access-Control-Allow-Origin *;
-    expires max;
     gzip on;
     gzip_comp_level 9;
     gzip_vary on;
@@ -83,9 +84,9 @@ server {
     # Applies to charset_types (mainly for JS and CSS)
     charset utf-8;
 
-    # Let rerouting responses be cached for a shorter time for faster recovery from mistakes
+    # Shorten caching of rerouting responses to 5min, for faster recovery from mistakes
     if ($key_expect != $key_input) {
-      expires 5m;
+      add_header Cache-Control "public, max-age=300";
       return 302 https://code.jquery.com$uri;
     }
   }
