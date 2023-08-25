@@ -7,7 +7,9 @@ class profile::wordpress::docs (
   String[1]            $admin_password        = lookup('profile::wordpress::docs::admin_password'),
   Stdlib::Email        $builder_email         = lookup('profile::wordpress::docs::builder_email'),
   String[1]            $wp_content_branch     = lookup('profile::wordpress::docs::wp_content_branch'),
+  String               $append_title          = lookup('profile::wordpress::docs::append_title', {default_value => ''}),
   String[1]            $builder_password_seed = lookup('docs_builder_password_seed'),
+  String               $prepend_host          = lookup('docs_prepend_host', {default_value => ''}),
 ) {
   include profile::wordpress::base
 
@@ -87,9 +89,11 @@ class profile::wordpress::docs (
       $options = []
     }
 
+    $host = $site['host']
+
     wordpress::site { $name:
-      host                => $site['host'],
-      site_name           => $site['site_name'],
+      host                => "${prepend_host}${host}",
+      site_name           => "${site['site_name']}${append_title}",
       path                => $path,
       webroot             => "/srv/wordpress/sites/${name}",
       version             => $wordpress_version,
@@ -126,8 +130,7 @@ class profile::wordpress::docs (
       ],
     }
 
-    $live_domain = regsubst($site['host'], '^stage\.(.*)$', '\1')
-    $live_site = regsubst("${live_domain}${path}", '^(.*)\/$', '\1')
+    $live_site = regsubst("${host}${path}", '^(.*)\/$', '\1')
 
     file { "${dir}/jquery-config.php":
       ensure  => file,
@@ -136,7 +139,7 @@ class profile::wordpress::docs (
     }
 
     if $site['redirects'] {
-      file { "/etc/nginx/wordpress-subsites/${site['host']}.d/${name}-redirects.conf":
+      file { "/etc/nginx/wordpress-subsites/${prepend_host}${host}.d/${name}-redirects.conf":
         ensure  => file,
         owner   => 'root',
         group   => 'root',
@@ -146,7 +149,7 @@ class profile::wordpress::docs (
     }
 
     if $site['proxies'] {
-      file { "/etc/nginx/wordpress-subsites/${site['host']}.d/${name}-proxies.conf":
+      file { "/etc/nginx/wordpress-subsites/${prepend_host}${host}.d/${name}-proxies.conf":
         ensure  => file,
         owner   => 'root',
         group   => 'root',

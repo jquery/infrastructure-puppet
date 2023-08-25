@@ -1,7 +1,7 @@
 <?php
 define( 'JQUERY_LIVE_SITE',      '<%= @live_site %>' );
-define( 'JQUERY_LIVE_DOMAIN',    '<%= @live_domain %>' );
-<%- if @live_domain == @site['host'] -%>
+define( 'JQUERY_LIVE_DOMAIN',    '<%= @host %>' );
+<%- if @environment == 'production' -%>
 define( 'JQUERY_STAGING',        false );
 define( 'JQUERY_STAGING_PREFIX', '' );
 <%- else -%>

@@ -2,6 +2,8 @@
 class profile::builder (
   Profile::Docs::Sites $sites                 = lookup('docs_sites'),
   String[1]            $builder_password_seed = lookup('docs_builder_password_seed'),
+  String               $prepend_host          = lookup('docs_prepend_host', {default_value => ''}),
+  Boolean              $tags_only             = lookup('profile::builder::tags_only'),
 ) {
   $wordpress_hosts = jqlib::resource_hosts('class', 'profile::wordpress::docs')
 
@@ -59,7 +61,7 @@ class profile::builder (
 
     $path = pick($site['path'], '/')
     $settings = {
-      url      => "https://${site['host']}${path}",
+      url      => "https://${prepend_host}${site['host']}${path}",
       username => 'builder',
       password => jqlib::autogen_password("docs_builder_${name}", $builder_password_seed),
       dir      => 'dist/wordpress',
@@ -77,7 +79,7 @@ class profile::builder (
       require => Git::Clone["builder-${name}"],
     }
 
-    if $site['repository']['tag_format'] {
+    if $site['repository']['tag_format'] and $tags_only {
       # TODO: can we check out the latest tag on clone as well?
       $listen_for = { tag => $site['repository']['tag_format'] }
     } else {

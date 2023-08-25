@@ -1,3 +1,513 @@
+# dummy key not used anywhere that can be used to define yaml tags
+dummy:
+  semver_tag: &semver_tag "^v?\\d+\\.\\d+\\.\\d+(-\\d+)?$"
+
+docs_sites:
+  api_jquery_com:
+    host: api.jquery.com
+    site_name: 'jQuery API Documentation'
+    repository:
+      name: jquery/api.jquery.com
+      branch: main
+      tag_format: *semver_tag
+    certificate: wordpress
+    active_theme: api.jquery.com
+    enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery
+      jquery_logo_link: "https://jquery.com"
+      jquery_docsearch_api_key: 3cfde9aca378c8aab554d5bf1b23489b
+      jquery_docsearch_index_name: jquery
+    redirects:
+      - match:
+          path: /api
+          mode: prefix
+        target:
+          url: https://api.jquery.com/resources/api.xml
+          mode: exact
+        permanent: false
+  api_jquerymobile_com:
+    host: api.jquerymobile.com
+    path: /
+    site_name: jQuery Mobile API Documentation
+    repository:
+      name: jquery/api.jquerymobile.com
+      branch: main
+      tag_format: *semver_tag
+    certificate: wordpress
+    active_theme: api.jquerymobile.com
+    enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery-mobile
+      jquery_logo_link: "https://jquerymobile.com"
+      jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
+      jquery_docsearch_index_name: jquerymobile
+  api_jquerymobile_com_1_3:
+    host: api.jquerymobile.com
+    path: /1.3/
+    site_name: jQuery Mobile 1.3 API Documentation
+    repository:
+      name: jquery/api.jquerymobile.com
+      branch: 1-3
+    certificate: wordpress
+    active_theme: api.jquerymobile.com
+    enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery-mobile
+      jquery_logo_link: "https://jquerymobile.com"
+      jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
+      jquery_docsearch_index_name: jquerymobile
+  api_jquerymobile_com_1_4:
+    host: api.jquerymobile.com
+    path: /1.4/
+    site_name: jQuery Mobile 1.3 API Documentation
+    repository:
+      name: jquery/api.jquerymobile.com
+      branch: 1-4
+    certificate: wordpress
+    active_theme: api.jquerymobile.com
+    enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery-mobile
+      jquery_logo_link: "https://jquerymobile.com"
+      jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
+      jquery_docsearch_index_name: jquerymobile
+  api_jqueryui_com:
+    host: api.jqueryui.com
+    path: /
+    site_name: jQuery UI API Documentation
+    repository:
+      name: jquery/api.jqueryui.com
+      branch: main
+      tag_format: *semver_tag
+    certificate: wordpress
+    active_theme: api.jqueryui.com
+    enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery-ui
+      jquery_logo_link: "https://jqueryui.com"
+      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
+      jquery_docsearch_index_name: jqueryui
+    redirects:
+      - match:
+          path: /api
+          mode: prefix
+        target:
+          url: https://api.jquery.com/resources/api.xml
+          mode: exact
+        permanent: false
+  api_jqueryui_com_1_8:
+    host: api.jqueryui.com
+    path: /1.8/
+    site_name: jQuery UI 1.8 API Documentation
+    repository:
+      name: jquery/api.jqueryui.com
+      branch: 1-8
+    certificate: wordpress
+    active_theme: api.jqueryui.com
+    enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery-ui
+      jquery_logo_link: "https://jqueryui.com"
+      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
+      jquery_docsearch_index_name: jqueryui
+  api_jqueryui_com_1_9:
+    host: api.jqueryui.com
+    path: /1.9/
+    site_name: jQuery UI 1.9 API Documentation
+    repository:
+      name: jquery/api.jqueryui.com
+      branch: 1-9
+    certificate: wordpress
+    active_theme: api.jqueryui.com
+    enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery-ui
+      jquery_logo_link: "https://jqueryui.com"
+      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
+      jquery_docsearch_index_name: jqueryui
+  api_jqueryui_com_1_10:
+    host: api.jqueryui.com
+    path: /1.10/
+    site_name: jQuery UI 1.10 API Documentation
+    repository:
+      name: jquery/api.jqueryui.com
+      branch: 1-10
+    certificate: wordpress
+    active_theme: api.jqueryui.com
+    enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery-ui
+      jquery_logo_link: "https://jqueryui.com"
+      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
+      jquery_docsearch_index_name: jqueryui
+  api_jqueryui_com_1_11:
+    host: api.jqueryui.com
+    path: /1.11/
+    site_name: jQuery UI 1.11 API Documentation
+    repository:
+      name: jquery/api.jqueryui.com
+      branch: 1-11
+    certificate: wordpress
+    active_theme: api.jqueryui.com
+    enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery-ui
+      jquery_logo_link: "https://jqueryui.com"
+      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
+      jquery_docsearch_index_name: jqueryui
+  api_jqueryui_com_1_12:
+    host: api.jqueryui.com
+    path: /1.12/
+    site_name: jQuery UI 1.11 API Documentation
+    repository:
+      name: jquery/api.jqueryui.com
+      branch: 1-12
+    certificate: wordpress
+    active_theme: api.jqueryui.com
+    enable_api_tweaks: true
+    options:
+      jquery_body_class: jquery-ui
+      jquery_logo_link: "https://jqueryui.com"
+      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
+      jquery_docsearch_index_name: jqueryui
+  brand_jquery_org:
+    host: brand.jquery.org
+    site_name: jQuery Brand Guidelines
+    repository:
+      name: jquery/brand.jquery.org
+      branch: main
+      tag_format: *semver_tag
+    certificate: wordpress
+    active_theme: brand.jquery.org
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery-foundation
+  contribute_jquery_org:
+    host: contribute.jquery.org
+    site_name: Contribute to jQuery
+    repository:
+      name: jquery/contribute.jquery.org
+      branch: main
+      tag_format: *semver_tag
+    certificate: wordpress
+    active_theme: contribute.jquery.org
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery-foundation
+    redirects:
+      - match:
+          path: /cla
+          mode: prefix
+        target:
+          url: https://cla.openjsf.org
+          mode: prefix
+  jquery_com:
+    host: jquery.com
+    site_name: jQuery
+    repository:
+      name: jquery/jquery.com
+      branch: main
+      tag_format: *semver_tag
+    certificate: wordpress
+    active_theme: jquery.com
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery
+      jquery_description: "jQuery: The Write Less, Do More, JavaScript Library"
+      jquery_xfn_rel_me: "https://social.lfx.dev/@jquery"
+      jquery_docsearch_api_key: 3cfde9aca378c8aab554d5bf1b23489b
+      jquery_docsearch_index_name: jquery
+    redirects:
+      - match:
+          path: /api
+          mode: prefix
+        target:
+          url: https://api.jquery.com
+          mode: exact
+        permanent: false
+      - match:
+          path: /blog
+          mode: prefix
+        target:
+          url: "https://blog.jquery.com"
+          mode: prefix
+        permanent: false
+      - match:
+          path: /dev
+          mode: prefix
+        target:
+          url: https://bugs.jquery.com
+          mode: exact
+        permanent: false
+      - match:
+          path: /join
+          mode: prefix
+        target:
+          url: https://jquery.org/join/
+          mode: exact
+        permanent: false
+      - match:
+          path: /events.jquery.org
+          mode: prefix
+        target:
+          url: https://events.jquery.org
+          mode: exact
+        permanent: false
+      - match:
+          path: /forum
+          mode: prefix
+        target:
+          url: "https://forum.jquery.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /latest
+          mode: prefix
+        target:
+          url: "https://code.jquery.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /plugins
+          mode: prefix
+        target:
+          url: "https://plugins.jquery.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /src
+          mode: prefix
+        target:
+          url: "https://code.jquery.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /ui
+          mode: prefix
+        target:
+          url: "https://jqueryui.com"
+          mode: exact
+        permanent: false
+      - match:
+          path: /view
+          mode: prefix
+        target:
+          url: "https://view.jquery.com"
+          mode: exact
+        permanent: false
+  jquery_org:
+    host: jquery.org
+    site_name: jQuery Foundation
+    repository:
+      name: jquery/jquery.org
+      branch: main
+      tag_format: *semver_tag
+    certificate: wordpress
+    active_theme: jquery.org
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery-foundation
+    redirects:
+      - match:
+          path: /
+          mode: exact
+        target:
+          url: https://openjsf.org
+          mode: exact
+      - match:
+          path: /about
+          mode: exact
+        target:
+          url: https://openjsf.org
+          mode: exact
+      - match:
+          path: /bylaws
+          mode: exact
+        target:
+          url: https://openjsf.org/wp-content/uploads/sites/84/2019/10/OpenJS-Foundation-Bylaws-2019-10-22.pdf
+          mode: exact
+      - match:
+          path: /conduct
+          mode: exact
+        target:
+          url: https://github.com/openjs-foundation/cross-project-council/blob/main/CODE_OF_CONDUCT.md
+          mode: exact
+      - match:
+          path: /donate
+          mode: exact
+        target:
+          url: https://openjsf.org/about/project-funding-opportunities
+          mode: exact
+      - match:
+          path: /feed
+          mode: exact
+        target:
+          url: https://meetings.jquery.org/feed
+          mode: exact
+      - match:
+          path: /join
+          mode: exact
+        target:
+          url: https://openjsf.org/about/join
+          mode: exact
+      - match:
+          path: /meeting
+          mode: exact
+        target:
+          url: https://meetings.jquery.org
+          mode: exact
+      - match:
+          path: /members
+          mode: exact
+        target:
+          url: https://openjsf.org/about/members
+          mode: exact
+      - match:
+          path: /projects
+          mode: exact
+        target:
+          url: https://openjsf.org/projects
+          mode: exact
+      - match:
+          path: /sponsors
+          mode: exact
+        target:
+          url: https://openjsf.org/about/members
+          mode: exact
+      - match:
+          path: /trademark-policy
+          mode: exact
+        target:
+          url: https://openjsf.org/wp-content/uploads/sites/84/2019/10/OpenJS-Foundation-Trademark-Policy-2019-10-22.pdf
+          mode: exact
+      - match:
+          path: /updates
+          mode: exact
+        target:
+          url: https://meetings.jquery.org
+          mode: exact
+  jquerymobile_com:
+    host: jquerymobile.com
+    site_name: jQuery Mobile
+    repository:
+      name: jquery/jquerymobile.com
+      branch: main
+      tag_format: *semver_tag
+    certificate: wordpress
+    active_theme: jquerymobile.com
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery-mobile
+      jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
+      jquery_docsearch_index_name: jquerymobile
+    redirects:
+      - match:
+          path: /gbs
+          mode: prefix
+        target:
+          url: https://jquerymobile.com/browser-support
+          mode: prefix
+        permanent: false
+      - match:
+          path: /test
+          mode: prefix
+        target:
+          url: https://view.jquerymobile.com/master
+          mode: exact
+        permanent: false
+      - match:
+          path: /branches
+          mode: prefix
+        target:
+          url: https://view.jquerymobile.com
+          mode: prefix
+        permanent: false
+      - match:
+          path: /demos
+          mode: prefix
+        target:
+          url: https://demos.jquerymobile.com
+          mode: prefix
+        permanent: false
+      - match:
+          path: /themeroller
+          mode: prefix
+        target:
+          url: https://themeroller.jquerymobile.com
+          mode: prefix
+        permanent: false
+  jqueryui_com:
+    host: jqueryui.com
+    site_name: jQuery UI
+    repository:
+      name: jquery/jqueryui.com
+      branch: main
+      tag_format: *semver_tag
+    certificate: wordpress
+    active_theme: jqueryui.com
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery-ui
+      jquery_description: "jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library. Whether you're building highly interactive web applications or you just need to add a date picker to a form control, jQuery UI is the perfect choice."
+      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
+      jquery_docsearch_index_name: jqueryui
+    redirects:
+      - match:
+          path: /docs/Changelog
+          mode: prefix
+        target:
+          url: https://jqueryui.com/changelog
+          mode: prefix
+        permanent: false
+      - match:
+          path: /docs
+          mode: prefix
+        target:
+          url: https://jqueryui.com
+          mode: prefix
+        permanent: false
+  learn_jquery_com:
+    host: learn.jquery.com
+    site_name: jQuery Learning Center
+    repository:
+      name: jquery/learn.jquery.com
+      branch: main
+      tag_format: *semver_tag
+    certificate: wordpress
+    active_theme: learn.jquery.com
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery-learn
+  meetings_jquery_org:
+    host: meetings.jquery.org
+    site_name: jQuery Meetings
+    repository:
+      name: jquery/meetings.jquery.org
+      branch: main
+      tag_format: *semver_tag
+    certificate: wordpress
+    active_theme: meetings.jquery.org
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery-foundation
+  releases_jquery_com:
+    host: releases.jquery.com
+    site_name: jQuery CDN
+    repository:
+      name: jquery/codeorigin.jquery.com
+      branch: main
+      tag_format: *semver_tag
+    certificate: wordpress
+    active_theme: releases.jquery.com
+    enable_static_index: true
+    options:
+      jquery_body_class: jquery
+    proxies:
+      - path: /git/
+        target: https://filestash-01.ops.jquery.net/
+
+
 profile::base::apt::security_supported_versions: [bullseye, bookworm]
 
 profile::base::accounts:
