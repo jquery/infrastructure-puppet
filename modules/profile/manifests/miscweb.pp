@@ -22,7 +22,9 @@ class profile::miscweb (
     mode   => '0775',
   }
 
-  class { 'php': }
+  class { 'php':
+    extensions => ['zip'],
+  }
   class { 'php::fpm': }
 
   # Site-specific stuff :(
