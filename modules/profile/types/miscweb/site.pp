@@ -6,5 +6,6 @@ type Profile::Miscweb::Site = Struct[{
   webroot      => Optional[String[1]],
   extra_config => Optional[String[1]],
   allow_php    => Optional[Boolean],
+  php_env      => Optional[Hash[String[1], String]],
   certificate  => Optional[String[1]],
 }]

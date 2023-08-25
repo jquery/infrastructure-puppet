@@ -20,6 +20,17 @@ profile::miscweb::sites:
     extra_config: |
       # Compatibility with http://feeds.feedburner.com/jQueryPodcastShowNotes
       rewrite ^/feed/?$ /feed/jQueryPodcastShowNotes.xml permanent;
+  themeroller.jquerymobile.com:
+    repository:
+      name: jquery/themeroller.jquerymobile.com
+      branch: main
+    allow_php: true
+    extra_config: |
+      location /zips {
+        root /var/cache/themeroller-zip;
+      }
+    php_env:
+      THEMEROLLER_ZIPDIR: /var/cache/themeroller-zip
 
 profile::miscweb::redirects:
   # css-chassis.com

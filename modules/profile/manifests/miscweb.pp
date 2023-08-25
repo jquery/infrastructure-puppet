@@ -15,7 +15,6 @@ class profile::miscweb (
 
   $tls_config = nginx::tls_config()
 
-
   file { '/srv/www':
     ensure => directory,
     owner  => 'root',
@@ -25,6 +24,14 @@ class profile::miscweb (
 
   class { 'php': }
   class { 'php::fpm': }
+
+  # Site-specific stuff :(
+
+  systemd::tmpfile { 'themeroller-zip':
+    content => 'd /var/cache/themeroller-zip 0775 www-data www-data',
+  }
+
+  # End site-specific stuff :)   <-- closing parenthesis for the one on the "site-specific stuff" line
 
   $php_fpm_version = $::php::fpm::version
 

@@ -43,6 +43,11 @@ server {
     try_files            $uri =404;
     fastcgi_pass         unix:/run/php/php<%= @php_fpm_version %>-fpm.sock;
     fastcgi_param        SCRIPT_FILENAME $request_filename;
+    <%- if @site['php_env'] -%>
+    <%- @site['php_env'].each do |key, value| -%>
+    fastcgi_param        <%= key %> <%= value %>;
+    <%- end -%>
+    <%- end -%>
     include              /etc/nginx/fastcgi_params;
   }
 <%- end -%>
