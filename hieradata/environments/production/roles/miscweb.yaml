@@ -26,8 +26,8 @@ profile::miscweb::sites:
       branch: main
     allow_php: true
     extra_config: |
-      location /zips {
-        root /var/cache/themeroller-zip;
+      location ~ ^/zips/(?<name>.*)\.zip {
+        alias /var/cache/themeroller-zip/$name.zip;
       }
     php_env:
       THEMEROLLER_ZIPDIR: /var/cache/themeroller-zip
