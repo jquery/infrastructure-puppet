@@ -406,24 +406,24 @@ docs_sites:
       # Importantly, don't match /demos/ which is a real page
       rewrite ^/demos/(.+)\$ https://demos.jquerymobile.com/\$1 permanent;
     redirects:
+      # Page moved
+      # http://jquerymobile.com/gbs/1.3/
       - match:
-          # http://jquerymobile.com/gbs/1.3/
-          # Page moved
           path: /gbs
           mode: prefix
         target:
           url: https://jquerymobile.com/browser-support
           mode: prefix
         permanent: false
+      # Preview builds for demos of release and dev branches
+      # http://jquerymobile.com/branches/popup-simple/docs/
+      # moved to http://view.jquerymobile.com/$branch
+      # which was decommissioned. Point to demos index instead.
       - match:
-          # http://view.jquerymobile.com/1.4.0-beta.1/dist/demos/
-          # http://jquerymobile.com/branches/popup-simple/docs/
-          # Preview builds for release and dev branches,
-          # Moved to http://view.jquerymobile.com/$branch
           path: /branches
           mode: prefix
         target:
-          url: https://releases.jquery.com/mobile/
+          url: https://jquerymobile.com/demos/
           mode: exact
         permanent: false
       - match:
@@ -431,6 +431,14 @@ docs_sites:
           mode: prefix
         target:
           url: https://themeroller.jquerymobile.com
+          mode: prefix
+        permanent: false
+      # http://jquerymobile.com/blog/2011/11/16/announcing-jquery-mobile-1-0/
+      - match:
+          path: /blog
+          mode: prefix
+        target:
+          url: https://blog.jquerymobile.com
           mode: prefix
         permanent: false
   jqueryui_com:
