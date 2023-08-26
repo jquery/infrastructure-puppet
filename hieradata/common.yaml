@@ -240,7 +240,7 @@ docs_sites:
         target:
           url: "https://blog.jquery.com"
           mode: prefix
-        permanent: false
+        permanent: true
       - match:
           path: /dev
           mode: prefix
