@@ -407,6 +407,8 @@ docs_sites:
       rewrite ^/demos/(.+)\$ https://demos.jquerymobile.com/\$1 permanent;
     redirects:
       - match:
+          # http://jquerymobile.com/gbs/1.3/
+          # Page moved
           path: /gbs
           mode: prefix
         target:
@@ -414,18 +416,15 @@ docs_sites:
           mode: prefix
         permanent: false
       - match:
-          path: /test
-          mode: prefix
-        target:
-          url: https://view.jquerymobile.com/master
-          mode: exact
-        permanent: false
-      - match:
+          # http://view.jquerymobile.com/1.4.0-beta.1/dist/demos/
+          # http://jquerymobile.com/branches/popup-simple/docs/
+          # Preview builds for release and dev branches,
+          # Moved to http://view.jquerymobile.com/$branch
           path: /branches
           mode: prefix
         target:
-          url: https://view.jquerymobile.com
-          mode: prefix
+          url: https://releases.jquery.com/mobile/
+          mode: exact
         permanent: false
       - match:
           path: /themeroller
@@ -500,6 +499,7 @@ docs_sites:
     enable_static_index: true
     options:
       jquery_body_class: jquery
+      jquery_description: "Worldwide distribution of jQuery releases."
     proxies:
       - path: /git/
         target: https://filestash-01.ops.jquery.net/
