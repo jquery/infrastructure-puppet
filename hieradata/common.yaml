@@ -42,6 +42,14 @@ docs_sites:
       jquery_logo_link: "https://jquerymobile.com"
       jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
       jquery_docsearch_index_name: jquerymobile
+    redirects:
+      - match:
+          path: /api
+          mode: prefix
+        target:
+          url: https://api.jquerymobile.com/resources/api.xml
+          mode: exact
+        permanent: false
   api_jquerymobile_com_1_3:
     host: api.jquerymobile.com
     path: /1.3/
