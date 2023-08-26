@@ -422,7 +422,7 @@ docs_sites:
         target:
           url: https://jquerymobile.com/browser-support
           mode: prefix
-        permanent: false
+        permanent: true
       # Preview builds for demos of release and dev branches
       # http://jquerymobile.com/branches/popup-simple/docs/
       # moved to http://view.jquerymobile.com/$branch
@@ -433,14 +433,14 @@ docs_sites:
         target:
           url: https://jquerymobile.com/demos/
           mode: exact
-        permanent: false
+        permanent: true
       - match:
           path: /themeroller
           mode: prefix
         target:
           url: https://themeroller.jquerymobile.com
           mode: prefix
-        permanent: false
+        permanent: true
       # http://jquerymobile.com/blog/2011/11/16/announcing-jquery-mobile-1-0/
       - match:
           path: /blog
@@ -448,7 +448,7 @@ docs_sites:
         target:
           url: https://blog.jquerymobile.com
           mode: prefix
-        permanent: false
+        permanent: true
   jqueryui_com:
     host: jqueryui.com
     site_name: jQuery UI
