@@ -21,11 +21,7 @@ all: lint
 lint:
 	puppet-lint --fail-on-warnings .
 
-test: test-prod test-stage
-
-test-stage: test-codeorigin-stage
-
-test-prod: test-codeorigin-prod-http test-codeorigin-prod-https test-miscweb test-wpdocs
+test: test-codeorigin-stage test-codeorigin-prod-http test-codeorigin-prod-https test-codeorigin-next-http test-codeorigin-next-https test-miscweb test-wpdocs
 
 test-codeorigin-prod-http:
 	@ php test/CodeoriginTest.php "http://code.jquery.com"
@@ -33,6 +29,14 @@ test-codeorigin-prod-http:
 
 test-codeorigin-prod-https:
 	@ php test/CodeoriginTest.php "https://code.jquery.com"
+	@ echo "✅ $@"
+
+test-codeorigin-next-http:
+	@ php test/CodeoriginTest.php "http://codeorigin.jquery.com"
+	@ echo "✅ $@"
+
+test-codeorigin-next-https:
+	@ php test/CodeoriginTest.php "https://codeorigin.jquery.com"
 	@ echo "✅ $@"
 
 test-miscweb:
