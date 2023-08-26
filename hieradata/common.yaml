@@ -401,6 +401,10 @@ docs_sites:
       jquery_body_class: jquery-mobile
       jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
       jquery_docsearch_index_name: jquerymobile
+    extra_config: |
+      # http://jquerymobile.com/demos/1.0rc3/
+      # Importantly, don't match /demos/ which is a real page
+      rewrite ^/demos/(.+)\$ https://demos.jquerymobile.com/\$1 permanent;
     redirects:
       - match:
           path: /gbs
@@ -421,13 +425,6 @@ docs_sites:
           mode: prefix
         target:
           url: https://view.jquerymobile.com
-          mode: prefix
-        permanent: false
-      - match:
-          path: /demos
-          mode: prefix
-        target:
-          url: https://demos.jquerymobile.com
           mode: prefix
         permanent: false
       - match:
