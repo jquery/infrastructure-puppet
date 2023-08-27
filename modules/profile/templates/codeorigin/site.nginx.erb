@@ -75,7 +75,7 @@ server {
 
     # CDN assets are considered immutable so allow CDN and web browsers to reuse stale
     # responses during revalidation or downtime. Currently 1 year, and 7 days.
-    add_header Cache-Control "public, max-age=315360000, stale-while-revalidate=604800";
+    add_header Cache-Control "public, max-age=31536000, stale-while-revalidate=604800";
     add_header Access-Control-Allow-Origin *;
     gzip on;
     gzip_comp_level 9;
