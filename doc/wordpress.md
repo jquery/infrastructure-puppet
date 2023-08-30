@@ -35,6 +35,15 @@ the [backup.md] file for details.
 
 ## Blog sites
 
+* https://blog.jquery.com
+* https://blog.jqueryui.com
+* https://blog.jquerymobile.com
+
+The canonical RSS feed is <https://blog.jquery.com/feed/>, but
+subscribers also use the following aliases:
+* https://feeds.feedburner.com/jquery/
+* https://jquery.com/blog/feed/
+
 ### Blog accounts
 
 TODO.
