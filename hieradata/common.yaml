@@ -204,12 +204,19 @@ docs_sites:
     options:
       jquery_body_class: jquery-foundation
     redirects:
+      # E.g. http://contribute.jquery.org/CLA/status/?owner=jquery&repo=jquery&sha=XYZ
+      - match:
+          path: /CLA
+          mode: prefix
+        target:
+          url: https://cla.openjsf.org
+          mode: exact
       - match:
           path: /cla
           mode: prefix
         target:
           url: https://cla.openjsf.org
-          mode: prefix
+          mode: exact
   jquery_com:
     host: jquery.com
     site_name: jQuery
@@ -325,73 +332,73 @@ docs_sites:
           mode: exact
       - match:
           path: /about
-          mode: exact
+          mode: prefix
         target:
-          url: https://openjsf.org
+          url: https://openjsf.org/about/
           mode: exact
       - match:
           path: /bylaws
-          mode: exact
+          mode: prefix
         target:
-          url: https://openjsf.org/wp-content/uploads/sites/84/2019/10/OpenJS-Foundation-Bylaws-2019-10-22.pdf
+          url: https://bylaws.openjsf.org/
           mode: exact
       - match:
           path: /conduct
-          mode: exact
+          mode: prefix
         target:
           url: https://github.com/openjs-foundation/cross-project-council/blob/main/CODE_OF_CONDUCT.md
           mode: exact
       - match:
           path: /donate
-          mode: exact
+          mode: prefix
         target:
-          url: https://openjsf.org/about/project-funding-opportunities
+          url: https://openjsf.org/about/project-funding-opportunities/
           mode: exact
       - match:
           path: /feed
-          mode: exact
+          mode: prefix
         target:
-          url: https://meetings.jquery.org/feed
+          url: https://meetings.jquery.org/feed/
           mode: exact
       - match:
           path: /join
-          mode: exact
+          mode: prefix
         target:
-          url: https://openjsf.org/about/join
+          url: https://openjsf.org/about/join/
           mode: exact
       - match:
           path: /meeting
-          mode: exact
+          mode: prefix
         target:
           url: https://meetings.jquery.org
           mode: exact
       - match:
           path: /members
-          mode: exact
+          mode: prefix
         target:
-          url: https://openjsf.org/about/members
+          url: https://openjsf.org/about/members/
           mode: exact
       - match:
           path: /projects
-          mode: exact
+          mode: prefix
         target:
-          url: https://openjsf.org/projects
+          url: https://openjsf.org/projects/
           mode: exact
       - match:
           path: /sponsors
-          mode: exact
+          mode: prefix
         target:
           url: https://openjsf.org/about/members
           mode: exact
       - match:
           path: /trademark-policy
-          mode: exact
+          mode: prefix
         target:
-          url: https://openjsf.org/wp-content/uploads/sites/84/2019/10/OpenJS-Foundation-Trademark-Policy-2019-10-22.pdf
+          url: https://trademark-policy.openjsf.org/
           mode: exact
       - match:
           path: /updates
-          mode: exact
+          mode: prefix
         target:
           url: https://meetings.jquery.org
           mode: exact

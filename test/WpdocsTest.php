@@ -37,4 +37,14 @@ foreach ( [
   ] );
 }
 
+foreach ( [
+  'https://jquery.org/feed/' => 'https://meetings.jquery.org/feed/',
+  'https://contribute.jquery.org/CLA/status/' => 'https://cla.openjsf.org/',
+] as $url => $expected ) {
+  Unit::testHttp( $url, null, [], [
+    'status' => '301',
+    'location' => $expected,
+  ] );
+}
+
 Unit::end();
