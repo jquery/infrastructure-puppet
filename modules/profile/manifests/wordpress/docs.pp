@@ -6,7 +6,7 @@ class profile::wordpress::docs (
   Stdlib::Email        $admin_email           = lookup('profile::wordpress::docs::admin_email'),
   String[1]            $admin_password        = lookup('profile::wordpress::docs::admin_password'),
   Stdlib::Email        $builder_email         = lookup('profile::wordpress::docs::builder_email'),
-  String[1]            $wp_content_branch     = lookup('profile::wordpress::docs::wp_content_branch'),
+  String[1]            $wp_content_branch     = lookup('profile::wordpress::docs::wp_content_branch', {default_value => 'main'}),
   String               $append_title          = lookup('profile::wordpress::docs::append_title', {default_value => ''}),
   String[1]            $builder_password_seed = lookup('docs_builder_password_seed'),
   String               $prepend_host          = lookup('docs_prepend_host', {default_value => ''}),
@@ -68,14 +68,14 @@ class profile::wordpress::docs (
     if $site['enable_api_tweaks'] {
       if $path != '/' {
         $subsite_plugins = [
-          { name => 'rewrite-old-api-links', path => '/srv/wordpress/jquery-wp-content/mu-plugins/rewrite-old-api-links.php', single_file => true },
+          { name => 'rewrite-old-api-links', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-api-versioned-links.php', single_file => true },
         ]
       } else {
         $subsite_plugins = []
       }
 
       $api_site_plugins = [
-        { name => 'category-listings', path => '/srv/wordpress/jquery-wp-content/mu-plugins/category-listings.php', single_file => true },
+        { name => 'category-listings', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-api-category-listing.php', single_file => true },
       ] + $subsite_plugins
     } else {
       $api_site_plugins = []

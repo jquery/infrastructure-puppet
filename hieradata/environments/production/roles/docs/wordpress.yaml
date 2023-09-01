@@ -2,9 +2,6 @@ profile::wordpress::docs::admin_email: infrastructure-team@jquery.com
 profile::wordpress::docs::builder_email: infrastructure-team+builder@jquery.com
 profile::wordpress::docs::wordpress_version: ~
 
-# for changes that are incompatible with the current version
-profile::wordpress::docs::wp_content_branch: next
-
 profile::certbot::certificates:
   wordpress:
     domains:
