@@ -19,6 +19,8 @@ server {
 
     expires 30d;
 
+    add_header Access-Control-Allow-Origin "*";
+
     location ~* git {
       expires off;
     }
