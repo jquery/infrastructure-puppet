@@ -12,7 +12,6 @@ type Profile::Docs::Site = Struct[{
   builder_extra_settings => Optional[Hash],
   enable_static_index    => Optional[Boolean],
   enable_api_tweaks      => Optional[Boolean],
-  options                => Optional[Hash[String[1], String]],
   extra_config           => Optional[String[1]],
   redirects              => Optional[Array[Profile::Docs::Redirect]],
   proxies                => Optional[Array[Profile::Docs::Proxy]],

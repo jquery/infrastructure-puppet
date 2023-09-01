@@ -13,11 +13,6 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jquery.com
     enable_api_tweaks: true
-    options:
-      jquery_body_class: jquery
-      jquery_logo_link: "https://jquery.com"
-      jquery_docsearch_api_key: 3cfde9aca378c8aab554d5bf1b23489b
-      jquery_docsearch_index_name: jquery
     redirects:
       - match:
           path: /api
@@ -37,11 +32,6 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jquerymobile.com
     enable_api_tweaks: true
-    options:
-      jquery_body_class: jquery-mobile
-      jquery_logo_link: "https://jquerymobile.com"
-      jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
-      jquery_docsearch_index_name: jquerymobile
     redirects:
       - match:
           path: /api
@@ -60,11 +50,6 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jquerymobile.com
     enable_api_tweaks: true
-    options:
-      jquery_body_class: jquery-mobile
-      jquery_logo_link: "https://jquerymobile.com"
-      jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
-      jquery_docsearch_index_name: jquerymobile
   api_jquerymobile_com_1_4:
     host: api.jquerymobile.com
     path: /1.4/
@@ -75,11 +60,6 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jquerymobile.com
     enable_api_tweaks: true
-    options:
-      jquery_body_class: jquery-mobile
-      jquery_logo_link: "https://jquerymobile.com"
-      jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
-      jquery_docsearch_index_name: jquerymobile
   api_jqueryui_com:
     host: api.jqueryui.com
     path: /
@@ -91,11 +71,6 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
-    options:
-      jquery_body_class: jquery-ui
-      jquery_logo_link: "https://jqueryui.com"
-      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
-      jquery_docsearch_index_name: jqueryui
     redirects:
       - match:
           path: /api
@@ -114,11 +89,6 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
-    options:
-      jquery_body_class: jquery-ui
-      jquery_logo_link: "https://jqueryui.com"
-      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
-      jquery_docsearch_index_name: jqueryui
   api_jqueryui_com_1_9:
     host: api.jqueryui.com
     path: /1.9/
@@ -129,11 +99,6 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
-    options:
-      jquery_body_class: jquery-ui
-      jquery_logo_link: "https://jqueryui.com"
-      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
-      jquery_docsearch_index_name: jqueryui
   api_jqueryui_com_1_10:
     host: api.jqueryui.com
     path: /1.10/
@@ -144,11 +109,6 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
-    options:
-      jquery_body_class: jquery-ui
-      jquery_logo_link: "https://jqueryui.com"
-      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
-      jquery_docsearch_index_name: jqueryui
   api_jqueryui_com_1_11:
     host: api.jqueryui.com
     path: /1.11/
@@ -159,11 +119,6 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
-    options:
-      jquery_body_class: jquery-ui
-      jquery_logo_link: "https://jqueryui.com"
-      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
-      jquery_docsearch_index_name: jqueryui
   api_jqueryui_com_1_12:
     host: api.jqueryui.com
     path: /1.12/
@@ -174,11 +129,6 @@ docs_sites:
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
-    options:
-      jquery_body_class: jquery-ui
-      jquery_logo_link: "https://jqueryui.com"
-      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
-      jquery_docsearch_index_name: jqueryui
   brand_jquery_org:
     host: brand.jquery.org
     site_name: jQuery Brand Guidelines
@@ -189,8 +139,6 @@ docs_sites:
     certificate: wordpress
     active_theme: brand.jquery.org
     enable_static_index: true
-    options:
-      jquery_body_class: jquery-foundation
   contribute_jquery_org:
     host: contribute.jquery.org
     site_name: Contribute to jQuery
@@ -201,8 +149,6 @@ docs_sites:
     certificate: wordpress
     active_theme: contribute.jquery.org
     enable_static_index: true
-    options:
-      jquery_body_class: jquery-foundation
     redirects:
       # E.g. http://contribute.jquery.org/CLA/status/?owner=jquery&repo=jquery&sha=XYZ
       - match:
@@ -227,12 +173,6 @@ docs_sites:
     certificate: wordpress
     active_theme: jquery.com
     enable_static_index: true
-    options:
-      jquery_body_class: jquery
-      jquery_description: "jQuery: The Write Less, Do More, JavaScript Library"
-      jquery_xfn_rel_me: "https://social.lfx.dev/@jquery"
-      jquery_docsearch_api_key: 3cfde9aca378c8aab554d5bf1b23489b
-      jquery_docsearch_index_name: jquery
     redirects:
       - match:
           path: /api
@@ -321,8 +261,6 @@ docs_sites:
     certificate: wordpress
     active_theme: jquery.org
     enable_static_index: true
-    options:
-      jquery_body_class: jquery-foundation
     redirects:
       - match:
           path: /
@@ -412,10 +350,6 @@ docs_sites:
     certificate: wordpress
     active_theme: jquerymobile.com
     enable_static_index: true
-    options:
-      jquery_body_class: jquery-mobile
-      jquery_docsearch_api_key: 207328b0f1c18555c9021d05157dd651
-      jquery_docsearch_index_name: jquerymobile
     extra_config: |
       # http://jquerymobile.com/demos/1.0rc3/
       # Importantly, don't match /demos/ which is a real page
@@ -466,11 +400,6 @@ docs_sites:
     certificate: wordpress
     active_theme: jqueryui.com
     enable_static_index: true
-    options:
-      jquery_body_class: jquery-ui
-      jquery_description: "jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library. Whether you're building highly interactive web applications or you just need to add a date picker to a form control, jQuery UI is the perfect choice."
-      jquery_docsearch_api_key: 2fce35e56784bbb48c78d105739190c2
-      jquery_docsearch_index_name: jqueryui
     redirects:
       - match:
           path: /docs/Changelog
@@ -496,8 +425,6 @@ docs_sites:
     certificate: wordpress
     active_theme: learn.jquery.com
     enable_static_index: true
-    options:
-      jquery_body_class: jquery-learn
   meetings_jquery_org:
     host: meetings.jquery.org
     site_name: jQuery Meetings
@@ -508,8 +435,6 @@ docs_sites:
     certificate: wordpress
     active_theme: meetings.jquery.org
     enable_static_index: true
-    options:
-      jquery_body_class: jquery-foundation
   releases_jquery_com:
     host: releases.jquery.com
     site_name: jQuery CDN
@@ -520,13 +445,9 @@ docs_sites:
     certificate: wordpress
     active_theme: releases.jquery.com
     enable_static_index: true
-    options:
-      jquery_body_class: jquery
-      jquery_description: "Worldwide distribution of jQuery releases."
     proxies:
       - path: /git/
         target: https://filestash-01.ops.jquery.net/
-
 
 profile::base::apt::security_supported_versions: [bullseye, bookworm]
 
