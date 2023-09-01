@@ -30,6 +30,12 @@ class nginx {
     require => Package['nginx-full'],
   }
 
+  file { '/etc/nginx/conf.d/gzip.conf':
+    ensure  => file,
+    source  => 'puppet:///modules/nginx/gzip.conf',
+    require => Package['nginx-full'],
+  }
+
   nginx::site { '00-status':
     source => 'puppet:///modules/nginx/status.nginx',
   }
