@@ -22,6 +22,12 @@ class nginx {
     require     =>  Package['nginx-full'],
   }
 
+  file { '/etc/nginx/nginx.conf':
+    ensure => file,
+    source => 'puppet:///modules/nginx/nginx.conf',
+    notify => Exec['nginx-reload'],
+  }
+
   file { [ '/etc/nginx/conf.d', '/etc/nginx/sites-available', '/etc/nginx/sites-enabled' ]:
     ensure  => 'directory',
     recurse => true,
@@ -31,9 +37,8 @@ class nginx {
   }
 
   file { '/etc/nginx/conf.d/gzip.conf':
-    ensure  => file,
-    source  => 'puppet:///modules/nginx/gzip.conf',
-    require => Package['nginx-full'],
+    ensure => absent,
+    notify => Exec['nginx-reload'],
   }
 
   nginx::site { '00-status':
