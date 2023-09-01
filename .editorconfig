@@ -25,3 +25,7 @@ indent_size = 4
 [Makefile]
 indent_style = tab
 indent_size = 4
+
+[modules/nginx/files/nginx.conf]
+indent_style = tab
+indent_size = 4
