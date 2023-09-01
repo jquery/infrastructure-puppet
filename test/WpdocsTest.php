@@ -4,7 +4,6 @@
  */
 
 require_once __DIR__ . '/Unit.php';
-$server = @$argv[1] ?: '';
 
 Unit::start();
 
