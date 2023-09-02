@@ -1,4 +1,5 @@
 profile::notifier::tls_key_name: wordpress
+profile::wordpress::base::default_site_cert: wordpress
 
 profile::certbot::certificates:
   wordpress:
