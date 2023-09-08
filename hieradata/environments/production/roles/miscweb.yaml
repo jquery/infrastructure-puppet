@@ -59,6 +59,13 @@ profile::miscweb::redirects:
     target: https://github.com/jquery/css-chassis
     mode: root
     certificate: miscweb-a
+  # js.foundation
+  js.foundation:
+    target: https://openjsf.org
+    mode: root
+  www.js.foundation:
+    target: https://openjsf.org
+    mode: root
   # jquery.com
   brand.jquery.com:
     target: https://brand.jquery.org
