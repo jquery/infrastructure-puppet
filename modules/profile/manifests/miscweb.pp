@@ -33,6 +33,11 @@ class profile::miscweb (
     content => 'd /var/cache/themeroller-zip 0775 www-data www-data',
   }
 
+  nginx::site { 'docs.jquery.com':
+    content => template('profile/miscweb/docs.jquery.com.nginx.erb'),
+    require => Letsencrypt::Certificate[$certificate],
+  }
+
   # End site-specific stuff :)   <-- closing parenthesis for the one on the "site-specific stuff" line
 
   $php_fpm_version = $::php::fpm::version
