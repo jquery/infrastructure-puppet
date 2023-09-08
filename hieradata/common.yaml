@@ -28,7 +28,7 @@ docs_sites:
     repository:
       name: jquery/api.jquerymobile.com
       branch: main
-      tag_format: *semver_tag
+      tag_format: "^v?1\\.4\\.\\d+(-\\d+)?$"
     certificate: wordpress
     active_theme: api.jquerymobile.com
     enable_api_tweaks: true
@@ -67,7 +67,7 @@ docs_sites:
     repository:
       name: jquery/api.jqueryui.com
       branch: main
-      tag_format: *semver_tag
+      tag_format: "^v?1\\.13\\.\\d+(-\\d+)?$"
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
