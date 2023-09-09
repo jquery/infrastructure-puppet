@@ -284,7 +284,7 @@ docs_sites:
           path: /conduct
           mode: prefix
         target:
-          url: https://github.com/openjs-foundation/cross-project-council/blob/main/CODE_OF_CONDUCT.md
+          url: https://code-of-conduct.openjsf.org/
           mode: exact
       - match:
           path: /donate
