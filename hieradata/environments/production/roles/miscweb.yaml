@@ -66,6 +66,9 @@ profile::miscweb::redirects:
   www.js.foundation:
     target: https://openjsf.org
     mode: root
+  cla.js.foundation:
+    target: https://cla.openjsf.org
+    mode: root
   # jquery.com
   brand.jquery.com:
     target: https://brand.jquery.org
