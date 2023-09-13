@@ -19,18 +19,6 @@ server {
     expires 30d;
 
     add_header Access-Control-Allow-Origin "*";
-
-    location ~* git {
-      expires off;
-    }
-
-    location ~* latest {
-      expires 1d;
-    }
-
-    location ~* \.js$ {
-      expires max;
-    }
   }
 
   location /.well-known/acme-challenge {
