@@ -1,6 +1,7 @@
-# @summary origin server for content. and static. content
+# @summary origin server for content.jquery.com
 class profile::contentorigin (
-  Hash[Stdlib::Fqdn, Profile::Contentorigin::Site] $sites = lookup('profile::contentorigin::sites'),
+  String[1]           $tls_key_name   = lookup('profile::contentorigin::tls_key_name'),
+  Stdlib::Fqdn        $host           = lookup('profile::contentorigin::server_name'),
 ) {
   nftables::allow { 'contentorigin-https':
     proto => 'tcp',
@@ -13,15 +14,13 @@ class profile::contentorigin (
     ensure => directory,
   }
 
-  $sites.each |Stdlib::Fqdn $host, Profile::Contentorigin::Site $site| {
-    file { "/srv/www/${host}":
-      ensure => directory,
-    }
+  file { '/srv/www/content.jquery.com':
+    ensure => directory,
+  }
 
-    nginx::site { $host:
-      content => template('profile/contentorigin/site.nginx.erb'),
-      require => Letsencrypt::Certificate[$site['certificate']],
-    }
+  nginx::site { $host:
+    content => template('profile/contentorigin/site.nginx.erb'),
+    require => Letsencrypt::Certificate[$tls_key_name],
   }
 
   tarsnap::backup { 'contentorigin':

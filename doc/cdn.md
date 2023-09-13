@@ -5,11 +5,11 @@
 Primary services:
 * `code.jquery.com` HTTP + HTTPS
 * `releases.jquery.com` HTTP + HTTPS
+* `content.jquery.com` HTTP + HTTPS
 
 Legacy services:
-* `content.jquery.com` HTTP + HTTPS
-* `static.jquery.com` HTTP + HTTPS (alias: content)
 * `codeorigin.jquery.com` HTTP + HTTPS (alias: code)
+* `static.jquery.com` HTTP + HTTPS (alias: content)
 * `content.origin.jquery.com` HTTP only (alias: content)
 * `static.origin.jquery.com` HTTP only (alias: content)
 
@@ -91,7 +91,9 @@ Notable differences:
 
 ## Service: content.jquery.com
 
-The content CDN hosts legacy media content. It hosts the canonical audio files for the [jQuery Podcast](https://podcast.jquery.com/) as referenced in the Apple Podcasts directory and indexed by major podcast apps. The service also hosts various other binary files, such as videos (historical conference talks) and miscellaneous images, as referenced in blog posts and other web content.
+The content CDN hosts media content. It hosts the canonical audio files for the [jQuery Podcast](https://podcast.jquery.com/) as referenced in the Apple Podcasts directory and indexed by major podcast apps.
+
+The service also hosts various other binary files, such as videos (historical conference talks) and miscellaneous images, as referenced in blog posts and other web content.
 
 ## History
 

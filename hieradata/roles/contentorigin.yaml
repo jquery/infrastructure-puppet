@@ -2,3 +2,5 @@ profile::certbot::certificates:
   contentorigin:
     domains:
       - "%{::facts.fqdn}"
+
+profile::contentorigin::tls_key_name: contentorigin

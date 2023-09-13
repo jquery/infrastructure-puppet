@@ -1,5 +1,1 @@
-profile::contentorigin::sites:
-  content.jquery.com:
-    certificate: contentorigin
-  static.jquery.com:
-    certificate: contentorigin
+profile::contentorigin::server_name: content.jquery.com

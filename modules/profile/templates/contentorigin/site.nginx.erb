@@ -2,9 +2,8 @@ server {
   listen 443 ssl;
   listen [::]:443 ssl;
 
-  ssl_certificate /etc/letsencrypt/live/<%= @site['certificate'] %>/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/<%= @site['certificate'] %>/privkey.pem;
-
+  ssl_certificate /etc/letsencrypt/live/<%= @tls_key_name %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= @tls_key_name %>/privkey.pem;
   <%= @tls_config.join("\n  ") %>
 
   server_name  <%= @host %>;
@@ -15,7 +14,7 @@ server {
   server_tokens off;
 
   location / {
-    root /srv/www/<%= @host %>;
+    root /srv/www/content.jquery.com;
 
     expires 30d;
 
