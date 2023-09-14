@@ -6,6 +6,7 @@ profile::certbot::certificates:
       - podcast.jquery.com
       - demos.jquerymobile.com
       - themeroller.jquerymobile.com
+profile::notifier::tls_key_name: miscweb
 profile::miscweb::default_certificate: miscweb
 
 profile::miscweb::sites:
@@ -19,6 +20,7 @@ profile::miscweb::sites:
       name: jquery/podcast.jquery.com
       branch: main
     webroot: /build_production
+    notifier: true
     extra_config: |
       # Compatibility with http://feeds.feedburner.com/jQueryPodcastShowNotes
       rewrite ^/feed/?$ /feed/jQueryPodcastShowNotes.xml permanent;

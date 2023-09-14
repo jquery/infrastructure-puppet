@@ -49,8 +49,18 @@ class profile::miscweb (
       path   => "/srv/www/${fqdn}",
       remote => "https://github.com/${site['repository']['name']}",
       branch => $site['repository']['branch'],
-      owner  => 'root',
-      group  => 'root',
+      owner  => 'www-data',
+      group  => 'www-data',
+    }
+
+    if $site['notifier'] {
+      notifier::git_update { $fqdn:
+        github_repository => $site['repository']['name'],
+        listen_for        => [{ branch => $site['repository']['branch'] }],
+        local_path        => "/srv/www/${fqdn}",
+        local_user        => 'www-data',
+        require           => Git::Clone[$fqdn],
+      }
     }
 
     nginx::site { $fqdn:
