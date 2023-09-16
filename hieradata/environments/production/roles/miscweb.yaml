@@ -59,6 +59,15 @@ profile::miscweb::redirects:
     target: https://github.com/jquery/css-chassis
     mode: root
     certificate: miscweb-a
+  # globalizejs.com
+  globalizejs.com:
+    target: https://github.com/globalizejs/globalize
+    mode: root
+    certificate: miscweb-a
+  www.globalizejs.com:
+    target: https://github.com/globalizejs/globalize
+    mode: root
+    certificate: miscweb-a
   # js.foundation
   js.foundation:
     target: https://openjsf.org
