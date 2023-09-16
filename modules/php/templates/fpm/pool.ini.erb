@@ -9,8 +9,8 @@ listen.group = www-data
 pm = dynamic
 pm.max_children = 20
 pm.start_servers = 2
-pm.min_spare_servers = 1
-pm.max_spare_servers = 3
+pm.min_spare_servers = 2
+pm.max_spare_servers = 8
 
 ; PHP sets log_errors=On by default, but errors go nowhere by default.
 ; Setting php_admin_value[error_log] to a file doesn't work either.
