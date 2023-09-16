@@ -13,12 +13,12 @@ server {
 
   access_log    off;
   error_log     /var/log/nginx/error.log;
+  log_not_found off;
   server_tokens off;
 
   # Prevent hidden "dotfiles" from being served
   location ~ /\. {
     access_log off;
-    log_not_found off;
     deny all;
   }
 
@@ -32,19 +32,16 @@ server {
 
   location = /favicon.ico {
     access_log off;
-    log_not_found off;
     try_files /wp-content/themes/<%= @active_theme %>/i/favicon.ico /wp-content/themes/jquery/i/favicon.ico;
   }
 
   location = /robots.txt {
     access_log off;
-    log_not_found off;
     try_files $uri /wp-content/themes/<%= @active_theme %>/robots.txt;
   }
 
   location ~* \.(css|gif|ico|jpeg|jpg|js|png)$ {
     expires 24h;
-    log_not_found off;
   }
 
   location / {

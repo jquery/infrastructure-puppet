@@ -7,10 +7,10 @@ location ~ ^<%= @path %>resources/(?<name>.*) {
 location ^~ <%= @path %> {
   root <%= @webroot %>/;
   try_files $uri $uri/ <%= @path %>index.php$is_args$args;
+  log_not_found off;
 
   location ~* \.(css|gif|ico|jpeg|jpg|js|png)$ {
     expires 24h;
-    log_not_found off;
   }
 
   location ~ \.php$ {
