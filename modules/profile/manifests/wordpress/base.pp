@@ -26,6 +26,7 @@ class profile::wordpress::base (
   class { 'php':
     extensions => [
       # https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions
+      'apcu',
       'curl',
       { package => 'php-imagick' },
       'intl',
