@@ -4,6 +4,7 @@ profile::certbot::certificates:
       - "%{::facts.fqdn}"
       - podcast.jquery.com
       - demos.jquerymobile.com
+      - themeroller.jquerymobile.com
 profile::miscweb::default_certificate: miscweb
 
 profile::miscweb::sites:
