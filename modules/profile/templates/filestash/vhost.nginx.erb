@@ -16,6 +16,11 @@ server {
 
   location / {
     root /srv/filestash/data;
+
+    expires 5m;
+
+    add_header Cache-Control public;
+    add_header Access-Control-Allow-Origin "*";
   }
 
   location /.well-known/acme-challenge {
