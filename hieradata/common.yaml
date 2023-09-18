@@ -491,6 +491,16 @@ profile::base::accounts:
         key: AAAAC3NzaC1lZDI1NTE5AAAAII0Q87D035QrL8Mj0XRzb3sYb4npzBc4n2J3d+R3VdtA
       - type: ssh-ed25519
         key: AAAAC3NzaC1lZDI1NTE5AAAAIMw1u8AA/INyhvzT9O3PlPcm+qTy6ZhNUFLH++xvmISJ
+  timmywil:
+    ensure: present
+    uid: 1204
+    groups: [sudo]
+    ssh_keys:
+      # last changed in 2023
+      - type: ssh-ed25519
+        key: AAAAC3NzaC1lZDI1NTE5AAAAICA7xmhroURmm3VVWoT3YS1UxiolOd2GDNLJDkqAv4/g
+      - type: ssh-ed25519
+        key: AAAAC3NzaC1lZDI1NTE5AAAAIFCjUw6x+00qflR+FPNB475zRQlAVZahBePutdZyVKak
 
 profile::base::groups:
   sudo:
