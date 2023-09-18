@@ -17,6 +17,10 @@ server {
   location / {
     root /srv/filestash/data;
 
+    # Avoid duplicate "Vary: Accept-Encoding" headers after proxying via releases.jquery.com
+    gzip off;
+    gzip_vary off;
+
     expires 5m;
 
     add_header Cache-Control public;
