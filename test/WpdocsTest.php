@@ -8,22 +8,22 @@ require_once __DIR__ . '/Unit.php';
 Unit::start();
 
 foreach ( [
-  'http://jquery.com/api' => 'https://api.jquery.com',
-  'http://jquery.com/api/' => 'https://api.jquery.com',
-  'http://jquery.com/blog/feed' => 'https://blog.jquery.com/feed',
-  'http://jquery.com/blog/feed/' => 'https://blog.jquery.com/feed/',
-  'http://jquery.com/dev/bugs/new/' => 'https://bugs.jquery.com',
-  'http://jquery.com/dev/svn/trunk/plugins/' => 'https://bugs.jquery.com',
-  'http://jquery.com/docs/Base/Expression/' => 'https://api.jquery.com',
+  'https://jquery.com/api' => 'https://api.jquery.com',
+  'https://jquery.com/api/' => 'https://api.jquery.com',
+  'https://jquery.com/blog/feed' => 'https://blog.jquery.com/feed',
+  'https://jquery.com/blog/feed/' => 'https://blog.jquery.com/feed/',
+  'https://jquery.com/dev/bugs/new/' => 'https://bugs.jquery.com',
+  'https://jquery.com/dev/svn/trunk/plugins/' => 'https://bugs.jquery.com',
+  'https://jquery.com/docs/Base/Expression/' => 'https://api.jquery.com',
   'https://jquery.com/blog/2008/09/28/jquery-microsoft-nokia' => 'https://blog.jquery.com/2008/09/28/jquery-microsoft-nokia',
 
-  'http://jqueryui.com/docs/Changelog/1.13.0' => 'https://jqueryui.com/changelog/1.13.0',
-  'http://jqueryui.com/docs/Theming' => 'https://learn.jquery.com/jquery-ui/theming/',
-  'http://jqueryui.com/docs/About' => 'https://jqueryui.com/About',
-  'http://jqueryui.com/docs/dialog' => 'https://jqueryui.com/dialog',
+  'https://jqueryui.com/docs/Changelog/1.13.0' => 'https://jqueryui.com/changelog/1.13.0',
+  'https://jqueryui.com/docs/Theming' => 'https://learn.jquery.com/jquery-ui/theming/',
+  'https://jqueryui.com/docs/About' => 'https://jqueryui.com/About',
+  'https://jqueryui.com/docs/dialog' => 'https://jqueryui.com/dialog',
 
-  'http://api.jqueryui.com/api' => 'https://api.jqueryui.com/resources/api.xml',
-  'http://api.jqueryui.com/api/foo' => 'https://api.jqueryui.com/resources/api.xml',
+  'https://api.jqueryui.com/api' => 'https://api.jqueryui.com/resources/api.xml',
+  'https://api.jqueryui.com/api/foo' => 'https://api.jqueryui.com/resources/api.xml',
 
   'https://jquerymobile.com/blog/feed' => 'https://blog.jquerymobile.com/feed',
   'https://jquerymobile.com/blog/feed/' => 'https://blog.jquerymobile.com/feed/',

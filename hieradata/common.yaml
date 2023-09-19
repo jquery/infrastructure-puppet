@@ -421,11 +421,6 @@ docs_sites:
     certificate: wordpress
     active_theme: jqueryui.com
     enable_static_index: true
-    extra_config: |
-      rewrite ^/docs/Changelog(.*)$ /changelog$1 permanent;
-      rewrite ^/docs/Theming(.*)$ https://learn.jquery.com/jquery-ui/theming/ permanent;
-      rewrite ^/docs(.*)$ $1 permanent;
-      rewrite ^/bugs/(.*)$ https://bugs.jqueryui.com/$1 permanent;
     redirects:
       - match:
           path: /docs/Changelog
@@ -433,14 +428,28 @@ docs_sites:
         target:
           url: https://jqueryui.com/changelog
           mode: prefix
-        permanent: false
+        permanent: true
+      - match:
+          path: /docs/Theming
+          mode: prefix
+        target:
+          url: https://learn.jquery.com/jquery-ui/theming/
+          mode: prefix
+        permanent: true
       - match:
           path: /docs
           mode: prefix
         target:
           url: https://jqueryui.com
           mode: prefix
-        permanent: false
+        permanent: true
+      - match:
+          path: /bugs
+          mode: prefix
+        target:
+          url: https://bugs.jqueryui.com/
+          mode: prefix
+        permanent: true
   learn_jquery_com:
     host: learn.jquery.com
     site_name: jQuery Learning Center
