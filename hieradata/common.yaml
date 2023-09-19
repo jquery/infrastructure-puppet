@@ -180,7 +180,7 @@ docs_sites:
         target:
           url: https://api.jquery.com
           mode: exact
-        permanent: false
+        permanent: true
       - match:
           path: /blog
           mode: prefix
@@ -194,7 +194,35 @@ docs_sites:
         target:
           url: https://bugs.jquery.com
           mode: exact
+        permanent: true
+      - match:
+          path: /discuss
+          mode: exact
+        target:
+          url: https://forum.jquery.com/
+          mode: exact
         permanent: false
+      - match:
+          path: /discuss/
+          mode: exact
+        target:
+          url: https://forum.jquery.com/
+          mode: exact
+        permanent: false
+      - match:
+          path: /discuss/
+          mode: prefix
+        target:
+          url: https://www.mail-archive.com/discuss@jquery.com/
+          mode: exact
+        permanent: false
+      - match:
+          path: /docs
+          mode: prefix
+        target:
+          url: https://api.jquery.com
+          mode: exact
+        permanent: true
       - match:
           path: /join
           mode: prefix
@@ -222,7 +250,7 @@ docs_sites:
         target:
           url: "https://code.jquery.com"
           mode: exact
-        permanent: false
+        permanent: true
       - match:
           path: /plugins
           mode: prefix
@@ -400,6 +428,11 @@ docs_sites:
     certificate: wordpress
     active_theme: jqueryui.com
     enable_static_index: true
+    extra_config: |
+      rewrite ^/docs/Changelog(.*)$ /changelog$1 permanent;
+      rewrite ^/docs/Theming(.*)$ https://learn.jquery.com/jquery-ui/theming/ permanent;
+      rewrite ^/docs(.*)$ $1 permanent;
+      rewrite ^/bugs/(.*)$ https://bugs.jqueryui.com/$1 permanent;
     redirects:
       - match:
           path: /docs/Changelog

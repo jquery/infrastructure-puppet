@@ -18,7 +18,7 @@ HTTP/HTTPS monitoring every 10-15 minutes, with alerts sent to `site-monitor@js.
 
 Monitoring includes:
 
-* jQuery Content: jquery.com, jqueryui.com, jquerymobile.com.
 * jQuery CDN: code.jquery.com, content.jquery.com.
-* jQuery Blogs: blog.jquery.com, blog.jqueryui.com.
+* jQuery Doc sites: jquery.com, api.jquery.com, jqueryui.com, jquerymobile.com.
+* jQuery Blogs: blog.jquery.com, blog.jqueryui.com, blog.jquerymobile.com.
 * jQuery Foundation projects: qunitjs.com, gruntjs.com mochajs.org, eslint.org, lodash.com, etc.
