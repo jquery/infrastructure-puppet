@@ -203,7 +203,7 @@ docs_sites:
           mode: exact
         permanent: false
       - match:
-          path: /discuss/
+          path: /discuss
           mode: prefix
         target:
           url: https://www.mail-archive.com/discuss@jquery.com/

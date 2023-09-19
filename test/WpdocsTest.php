@@ -22,15 +22,9 @@ foreach ( [
   'https://jqueryui.com/docs/About' => 'https://jqueryui.com/About',
   'https://jqueryui.com/docs/dialog' => 'https://jqueryui.com/dialog',
 
-  'https://api.jqueryui.com/api' => 'https://api.jqueryui.com/resources/api.xml',
-  'https://api.jqueryui.com/api/foo' => 'https://api.jqueryui.com/resources/api.xml',
-
   'https://jquerymobile.com/blog/feed' => 'https://blog.jquerymobile.com/feed',
   'https://jquerymobile.com/blog/feed/' => 'https://blog.jquerymobile.com/feed/',
   'https://jquerymobile.com/blog/2011/11/16/announcing-jquery-mobile-1-0/' => 'https://blog.jquerymobile.com/2011/11/16/announcing-jquery-mobile-1-0/',
-
-  'http://api.jquerymobile.com/api' => 'https://api.jquerymobile.com/resources/api.xml',
-  'http://api.jquerymobile.com/api/foo' => 'https://api.jquerymobile.com/resources/api.xml',
 
   'https://jquery.org/feed/' => 'https://meetings.jquery.org/feed/',
 
@@ -48,7 +42,7 @@ foreach ( [
 }
 
 foreach ( [
-  'http://jquery.com/discuss/' => 'https://forum.jquery.com',
+  'http://jquery.com/discuss/' => 'https://forum.jquery.com/',
   'http://jquery.com/discuss/2006-May/000804/' => 'https://www.mail-archive.com/discuss@jquery.com/',
   'http://jquery.com/forum' => 'https://forum.jquery.com',
   'http://jquery.com/latest' => 'https://code.jquery.com',
@@ -62,6 +56,12 @@ foreach ( [
 
   'http://jqueryui.com/latest/ui/jquery.effects.core.js' => 'https://code.jquery.com',
   'https://jqueryui.com/bugs/ticket/3484' => 'https://bugs.jqueryui.com/ticket/3484',
+
+  'https://api.jqueryui.com/api' => 'https://api.jqueryui.com/resources/api.xml',
+  'https://api.jqueryui.com/api/foo' => 'https://api.jqueryui.com/resources/api.xml',
+
+  'https://api.jquerymobile.com/api' => 'https://api.jquerymobile.com/resources/api.xml',
+  'https://api.jquerymobile.com/api/foo' => 'https://api.jquerymobile.com/resources/api.xml',
 
   'https://contribute.jquery.org/CLA/status/' => 'https://cla.openjsf.org',
 
