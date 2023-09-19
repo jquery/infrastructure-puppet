@@ -2,6 +2,7 @@ profile::certbot::certificates:
   miscweb:
     domains:
       - "%{::facts.fqdn}"
+      - docs.jquery.com
       - podcast.jquery.com
       - demos.jquerymobile.com
       - themeroller.jquerymobile.com

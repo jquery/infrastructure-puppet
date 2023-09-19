@@ -35,7 +35,7 @@ class profile::miscweb (
 
   nginx::site { 'docs.jquery.com':
     content => template('profile/miscweb/docs.jquery.com.nginx.erb'),
-    require => Letsencrypt::Certificate[$certificate],
+    require => Letsencrypt::Certificate[$default_certificate],
   }
 
   # End site-specific stuff :)   <-- closing parenthesis for the one on the "site-specific stuff" line
