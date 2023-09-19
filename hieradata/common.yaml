@@ -76,7 +76,7 @@ docs_sites:
           path: /api
           mode: prefix
         target:
-          url: https://api.jquery.com/resources/api.xml
+          url: https://api.jqueryui.com/resources/api.xml
           mode: exact
         permanent: false
   api_jqueryui_com_1_8:
