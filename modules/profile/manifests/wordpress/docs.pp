@@ -49,7 +49,7 @@ class profile::wordpress::docs (
     }
 
     $base_plugins = [
-      { name => 'gilded-wordpress',     path => '/srv/wordpress/jquery-wp-content/plugins/gilded-wordpress.php',              single_file => true, },
+      { name => 'gilded-wordpress',     path => '/srv/wordpress/jquery-wp-content/plugins/gilded-wordpress/gilded-wordpress.php',              single_file => true, },
       { name => 'redirects',            path => '/srv/wordpress/jquery-wp-content/plugins/redirects.php',                     single_file => true, },
       { name => 'disable-emojis',       path => '/srv/wordpress/jquery-wp-content/plugins/disable-emojis/disable-emojis.php', single_file => true, },
       { name => 'jquery-actions',       path => '/srv/wordpress/jquery-wp-content/plugins/jquery-actions.php',                single_file => true, },
