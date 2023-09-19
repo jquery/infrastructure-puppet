@@ -204,13 +204,6 @@ docs_sites:
         permanent: false
       - match:
           path: /discuss/
-          mode: exact
-        target:
-          url: https://forum.jquery.com/
-          mode: exact
-        permanent: false
-      - match:
-          path: /discuss/
           mode: prefix
         target:
           url: https://www.mail-archive.com/discuss@jquery.com/
