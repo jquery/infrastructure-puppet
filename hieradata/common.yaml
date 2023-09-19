@@ -447,8 +447,15 @@ docs_sites:
           path: /bugs
           mode: prefix
         target:
-          url: https://bugs.jqueryui.com/
+          url: https://bugs.jqueryui.com
           mode: prefix
+        permanent: true
+      - match:
+          path: /latest
+          mode: prefix
+        target:
+          url: https://code.jquery.com
+          mode: exact
         permanent: true
   learn_jquery_com:
     host: learn.jquery.com
