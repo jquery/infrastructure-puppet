@@ -56,5 +56,6 @@ class tarsnap () {
     mode   => '0554',
   }
 
+  File <| tag == 'tarsnap' |>
   Systemd::Timer <| tag == 'tarsnap::backup' |>
 }

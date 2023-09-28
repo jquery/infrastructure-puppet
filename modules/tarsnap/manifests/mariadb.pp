@@ -21,11 +21,12 @@ class tarsnap::mariadb (
     ],
   }
 
-  file { '/var/lib/backup/mariadb':
+  @file { '/var/lib/backup/mariadb':
     ensure => directory,
     owner  => 'tarsnap',
     group  => 'tarsnap',
     mode   => '0755',
+    tag    => 'tarsnap',
   }
 
   file { '/usr/local/bin/jq-tarsnap-dump-mariadb':
