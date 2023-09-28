@@ -1,1 +1,1 @@
-profile::wordpress::base::default_site_cert: wordpress
+profile::wordpress::base::default_site_cert: blogs
