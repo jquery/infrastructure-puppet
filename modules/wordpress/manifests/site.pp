@@ -19,6 +19,7 @@ define wordpress::site (
   Array[Wordpress::Plugin]  $plugins             = [],
   Array[Wordpress::Sidebar] $sidebars            = [],
   String[1]                 $permalink_structure = '/%year%/%monthnum%/%day%/%postname%/',
+  Boolean                   $robots_txt_deny_all = false,
   Boolean                   $gilded_wordpress    = false,
   Stdlib::Unixpath          $webroot             = $base_path,
 ) {
@@ -184,6 +185,14 @@ define wordpress::site (
       # for the unless test command to work
       provider  => 'shell',
       require   => Exec["wp-install-${title}"],
+    }
+  }
+
+  if $robots_txt_deny_all {
+    file { "${base_path}/robots.txt":
+      ensure  => file,
+      content => "User-Agent: *\nDisallow: /\n",
+      require => Exec["wp-install-${title}"],
     }
   }
 

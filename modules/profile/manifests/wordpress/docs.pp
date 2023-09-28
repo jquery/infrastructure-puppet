@@ -8,6 +8,7 @@ class profile::wordpress::docs (
   Stdlib::Email        $builder_email         = lookup('profile::wordpress::docs::builder_email'),
   String[1]            $wp_content_branch     = lookup('profile::wordpress::docs::wp_content_branch', {default_value => 'main'}),
   String               $append_title          = lookup('profile::wordpress::docs::append_title', {default_value => ''}),
+  Boolean              $robots_txt_deny_all   = lookup('profile::wordpress::docs::robots_txt_deny_all', {default_value => false}),
   String[1]            $builder_password_seed = lookup('docs_builder_password_seed'),
   String               $prepend_host          = lookup('docs_prepend_host', {default_value => ''}),
 ) {
@@ -96,6 +97,7 @@ class profile::wordpress::docs (
       base_path           => $dir,
       permalink_structure => '/%postname%/',
       gilded_wordpress    => true,
+      robots_txt_deny_all => $robots_txt_deny_all,
       config_files        => [
         '/srv/wordpress/docs-config-shared.php',
         "${dir}/jquery-config.php",

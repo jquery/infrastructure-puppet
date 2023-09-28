@@ -1,5 +1,6 @@
 profile::wordpress::docs::admin_email: infrastructure-team@jquery.com
 profile::wordpress::docs::builder_email: infrastructure-team+builder@jquery.com
+profile::wordpress::docs::robots_txt_deny_all: true
 profile::wordpress::docs::wordpress_version: ~
 
 profile::certbot::certificates:
