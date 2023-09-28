@@ -82,6 +82,7 @@ node 'gruntjs-02.stage.ops.jquery.net' {
   role('gruntjscom')
 }
 
-node 'wp-02.stage.ops.jquery.net' {
+node 'wp-02.stage.ops.jquery.net',
+  'wp-03.stage.ops.jquery.net' {
   role('docs::wordpress')
 }
