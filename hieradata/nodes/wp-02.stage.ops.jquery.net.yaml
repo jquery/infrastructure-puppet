@@ -1,0 +1,2 @@
+# Was previously enabled on this host, which is now being removed.
+profile::tarsnap::enabled: true

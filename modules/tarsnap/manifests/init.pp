@@ -33,4 +33,28 @@ class tarsnap () {
     mode    => '0755',
     require => [Systemd::Sysuser['tarsnap'], Service['systemd-sysusers']],
   }
+
+  file { '/etc/tarsnap.conf':
+    ensure => file,
+    source => 'puppet:///modules/tarsnap/backup/tarsnap.conf',
+  }
+
+  file { '/etc/tarsnap.key':
+    ensure    => file,
+    content   => jqlib::secret("tarsnap-keys/${::fqdn}.key"),
+    owner     => 'root',
+    group     => 'root',
+    mode      => '0440',
+    show_diff => false,
+  }
+
+  file { '/usr/local/sbin/jq-tarsnap-take-backup':
+    ensure => file,
+    source => 'puppet:///modules/tarsnap/backup/jq-tarsnap-take-backup.sh',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0554',
+  }
+
+  Systemd::Timer <| tag == 'tarsnap::backup' |>
 }
