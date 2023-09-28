@@ -19,13 +19,14 @@ class nginx {
   exec { 'nginx-reload':
     command     => '/usr/sbin/service nginx reload',
     refreshonly => true,
-    require     =>  Package['nginx-full'],
+    require     => Package['nginx-full'],
   }
 
   file { '/etc/nginx/nginx.conf':
-    ensure => file,
-    source => 'puppet:///modules/nginx/nginx.conf',
-    notify => Exec['nginx-reload'],
+    ensure  => file,
+    source  => 'puppet:///modules/nginx/nginx.conf',
+    require => Package['nginx-full'],
+    notify  => Exec['nginx-reload'],
   }
 
   file { [ '/etc/nginx/conf.d', '/etc/nginx/sites-available', '/etc/nginx/sites-enabled' ]:
