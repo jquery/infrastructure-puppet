@@ -26,9 +26,9 @@ class nftables () {
   }
 
   service { 'nftables':
-    require => Package['nftables'],
     ensure  => running,
     enable  => true,
+    require => Package['nftables'],
   }
 
   File <| tag == 'nftables' |>
