@@ -5,12 +5,13 @@ class nftables () {
   }
 
   file { '/etc/nftables.conf':
-    ensure => file,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0444',
-    source => 'puppet:///modules/nftables/init.nft',
-    notify => Service['nftables'],
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/nftables/init.nft',
+    require => Package['nftables'],
+    notify  => Service['nftables'],
   }
 
   file { '/etc/nftables/':
@@ -20,12 +21,14 @@ class nftables () {
     recurse => true,
     purge   => true,
     force   => true,
+    require => Package['nftables'],
     notify  => Service['nftables'],
   }
 
   service { 'nftables':
-    ensure => running,
-    enable => true,
+    require => Package['nftables'],
+    ensure  => running,
+    enable  => true,
   }
 
   File <| tag == 'nftables' |>
