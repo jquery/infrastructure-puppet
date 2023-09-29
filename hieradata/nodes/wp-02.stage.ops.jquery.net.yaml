@@ -1,8 +1,0 @@
-# Was previously enabled on this host, which is now being removed.
-profile::tarsnap::enabled: true
-
-# This host is no longer serving traffic.
-profile::certbot::certificates:
-  wordpress:
-    domains:
-      - "%{::facts.fqdn}"
