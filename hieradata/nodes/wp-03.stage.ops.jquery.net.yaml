@@ -1,5 +1,0 @@
-# Temporary, to be removed until DNS has been switched over.
-profile::certbot::certificates:
-  wordpress:
-    domains:
-      - "%{::facts.fqdn}"
