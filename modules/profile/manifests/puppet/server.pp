@@ -187,6 +187,16 @@ class profile::puppet::server (
     paths => [$private_repo_dir],
   }
 
+  # This also uses config from tarsnap::keymgmt.
+  file { '/usr/local/bin/jq-decom-instance':
+    ensure => file,
+    source => 'puppet:///modules/profile/puppet/server/jq-decom-instance.sh',
+    owner  => 'root',
+    group  => 'gitpuppet',
+    mode   => '0550',
+  }
+
+
   include profile::ssh::ca
 
   # Expose SSH keys so users can verify them
