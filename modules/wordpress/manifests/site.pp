@@ -221,4 +221,16 @@ define wordpress::site (
       notify  => Exec['nginx-reload'],
     }
   }
+
+  $cron_minute = fqdn_rand(60, "wordpress-cron-${title}-minute")
+  $cron_second = fqdn_rand(60, "wordpress-cron-${title}-second")
+  systemd::timer { "wordpress-cron-${title}":
+    ensure      => present,
+    description => "Run WordPress cron jobs for ${host}${path}",
+    user        => 'root',
+    # -k since the certs we use only contain the node FQDN, not the
+    # sites themselves. this is over localhost so it should be safe
+    command     => "/usr/bin/curl https://${host}${path}wp-cron.php -k --connect-to ::localhost",
+    interval    => ["OnCalendar=*-*-* *:${cron_minute}:${cron_second}"],
+  }
 }
