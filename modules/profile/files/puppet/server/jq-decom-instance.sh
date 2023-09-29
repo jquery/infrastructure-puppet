@@ -19,7 +19,7 @@ if [ -f "$TARNSAP_KEYFILE" ]; then
 
   tarsnap --keyfile "$TARNSAP_KEYFILE" --nuke
 
-  git -C "$TARSNAP_KEYS_BASE_PATH" rm "$KEYFILE"
+  git -C "$TARSNAP_KEYS_BASE_PATH" rm "$TARNSAP_KEYFILE"
   git -C "$TARSNAP_KEYS_BASE_PATH" commit -m "remove Tarsnap keys for $INSTANCE"
 fi
 
