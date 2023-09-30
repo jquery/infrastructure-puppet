@@ -9,7 +9,8 @@ class php (
   }
 
   ensure_packages([
-    "php${version}",
+    "php${version}-common",
+    "php${version}-cli",
   ])
 
   ensure_packages(
