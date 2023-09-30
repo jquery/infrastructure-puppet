@@ -6,6 +6,7 @@ profile::certbot::certificates:
       - podcast.jquery.com
       - demos.jquerymobile.com
       - themeroller.jquerymobile.com
+      - bugs.jqueryui.com
 profile::notifier::tls_key_name: miscweb
 profile::miscweb::default_certificate: miscweb
 
@@ -35,6 +36,13 @@ profile::miscweb::sites:
       }
     php_env:
       THEMEROLLER_ZIPDIR: /var/cache/themeroller-zip
+  bugs.jqueryui.com:
+    repository:
+      name: jquery/bugs.jqueryui.com
+      branch: gh-pages
+    notifier: true
+    extra_config: |
+      rewrite ^/newticket https://github.com/jquery/jquery-ui/issues/new permanent;
 
 profile::miscweb::redirects:
   # css-chassis.com
