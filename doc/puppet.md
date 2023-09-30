@@ -162,26 +162,42 @@ private repository (and remember to commit that change).
 
 [octocatalog-diff]: https://github.com/github/octocatalog-diff/
 
-Then, run octocatalog-diff like so:
+Then, run `./bin/octodiff-docker.sh`, enter the username/password, and
+run `octocatalog-diff` commands like so:
 
 ```shell
-$ export PUPPETDB_URL="https://username:password@puppet-03.ops.jquery.net:8100/"
+# staging
+octocatalog-diff -n codeorigin-02.stage.ops.jquery.net
 
-$ octocatalog-diff -n codeorigin-02.stage.ops.jquery.net
-$ octocatalog-diff --environment production -n codeorigin-02.ops.jquery.net
+# production
+octocatalog-diff --environment production -n codeorigin-02.ops.jquery.net
+
+# production (verbose)
+octocatalog-diff --environment production -n codeorigin-02.ops.jquery.net --display-detail-add
 ```
 
 By default, `octocatalog-diff` will show the difference between the
 current working tree and the last commit pushed to `origin`.
 
-`octocatalog-diff` requires a local installation of Puppet 7. On a
-Debian Bookworm (testing) setup, as of time of writing you need the
-following packages:
+Alternatively, you can install octocatalog-diff yourself:
 
-```
-git
-octocatalog-diff
-puppet-agent
-puppet-module-puppetlabs-sshkeys-core
-g10k
-```
+* Install `octocatalog-diff` package (e.g. from apt-get).
+* octocatalog-diff requires a local installation of Puppet 7.
+  Debian 12 Bookworm, you need the following packages:
+  ```
+  git
+  puppet-agent
+  puppet-module-puppetlabs-sshkeys-core
+  g10k
+  ```
+* Provide your username and passwowrd via the environment:
+  ```shell
+  export PUPPETDB_URL="https://username:password@puppet-03.ops.jquery.net:8100/"
+  ```
+* Then, run `g10k` once on the jquery/infrastructure-puppet directory, and
+  then you can use the`octocatalog-diff` command like above.
+  ```
+  $ cd /path/to/jquery/infrastructure-puppet
+  $ g10k -puppetfile
+  $ octocatalog-diff -n codeorigin-02.stage.ops.jquery.net
+  ```
