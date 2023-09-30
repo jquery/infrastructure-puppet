@@ -6,6 +6,8 @@ profile::certbot::certificates:
       - podcast.jquery.com
       - demos.jquerymobile.com
       - themeroller.jquerymobile.com
+      - bugs.jquery.com
+      - bugs.jqueryui.com
 profile::notifier::tls_key_name: miscweb
 profile::miscweb::default_certificate: miscweb
 
