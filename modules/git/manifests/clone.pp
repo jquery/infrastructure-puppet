@@ -50,7 +50,7 @@ define git::clone (
     if $update {
       exec { "git_checkout_${title}":
         cwd       => $path,
-        unless    => "test \"$(git describe --exact-match --tags) = \"${branch}\"",
+        unless    => "test \"$(git describe --exact-match --tags)\" = \"${branch}\"",
         # This will delete
         command   => "/usr/bin/git fetch --tags --prune --prune-tags \"${remote}\" && /usr/bin/git checkout --force --quiet \"${branch}\" && /usr/bin/git clean -dfx",
         logoutput => true,
