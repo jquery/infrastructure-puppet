@@ -553,7 +553,7 @@ profile::base::groups:
   gitpuppet:
     gid: 600
 
-profile::notifier::version: v4.0.0
+profile::notifier::version: v3.0.0
 
 # https://github.com/wp-cli/wp-cli/releases
 profile::wordpress::base::wordpress_cli_version: "2.8.1"

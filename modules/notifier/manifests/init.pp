@@ -1,7 +1,6 @@
 # @summary configures node-notifier to receive github webhooks
 # @param $webhook_secret github webhook secret
-# @param $version git version to clone. note that the module doesn't
-#   currently auto update after changing this.
+# @param $version git tag to clone
 class notifier (
   String[1] $webhook_secret,
   String[1] $version,
@@ -26,6 +25,9 @@ class notifier (
     owner   => 'notifier',
     group   => 'notifier',
     branch  => $version,
+    # After updates, git::clone will delete old node_modules, allowing
+    # the next exec to install the new version, and then restart the service.
+    update  => true,
     require => Systemd::Tmpfile['notifier'],
   }
 
@@ -38,6 +40,7 @@ class notifier (
       Git::Clone['notifier'],
       Systemd::Tmpfile['notifier'],
     ],
+    notify  => Service['notifier'],
   }
 
   $config = {
