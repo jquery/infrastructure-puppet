@@ -3,8 +3,8 @@ define( 'JQUERY_LIVE_SITE',      '<%= @live_site %>' );
 define( 'JQUERY_LIVE_DOMAIN',    '<%= @host %>' );
 <%- if @environment == 'production' -%>
 define( 'JQUERY_STAGING',        false );
-define( 'JQUERY_STAGING_PREFIX', '' );
+define( 'JQUERY_STAGING_FORMAT', '' );
 <%- else -%>
 define( 'JQUERY_STAGING',        true );
-define( 'JQUERY_STAGING_PREFIX', 'stage.' );
+define( 'JQUERY_STAGING_FORMAT', 'stage.%s' );
 <%- end -%>
