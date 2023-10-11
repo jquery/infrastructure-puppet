@@ -25,7 +25,9 @@ server {
   include /etc/nginx/wordpress-subsites/<%= @host %>.d/*.conf;
 
 <%- if @gilded_wordpress -%>
-  location ~ ^/resources/(?<name>.*) {
+  # Avoid matching /resources/ itself as that can be a real page
+  # https://jquerymobile.com/resources/
+  location ~ ^/resources/(?<name>.+) {
     alias <%= @base_path %>/gw-resources/<%= @host %>/$name;
   }
 <%- end -%>
