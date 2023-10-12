@@ -92,12 +92,15 @@ profile::miscweb::redirects:
   js.foundation:
     target: https://openjsf.org
     mode: root
+    certificate: miscweb-a
   www.js.foundation:
     target: https://openjsf.org
     mode: root
+    certificate: miscweb-a
   cla.js.foundation:
     target: https://cla.openjsf.org
     mode: root
+    certificate: miscweb-a
   # jquery.com
   brand.jquery.com:
     target: https://brand.jquery.org
