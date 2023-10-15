@@ -15,9 +15,9 @@ Legacy services:
 
 ## Service: code.jquery.com
 
-As of January 2023, jQuery CDN transfers 2.2 petabytes a month in bandwidth. jQuery CDN is currently powered by StackPath ([§ History](#history)).
+As of January 2023, jQuery CDN transfers 2.2 petabytes a month in bandwidth. jQuery CDN is currently powered by Fastly ([§ History](#history)).
 
-StackPath is configured to consider content at any URL to be immutable. New content is pulled by the CDN from our origin server.
+Fastly is configured to treat content as immutable (cached unconditionally for up to 1 year). New content is pulled by the CDN from an origin server.
 
 The origin servers (hosted at DigitalOcean) are managed by Puppet, running Debian Linux with an Nginx web server to serve static files. Files are served from a checkout of the [codeorigin Git repository](https://github.com/jquery/codeorigin.jquery.com).
 
@@ -29,7 +29,7 @@ The following are examples of mitigations and optimizations:
 
 * Consumers: Promote use of SRI integrity attributes on `<script>` tags.
 * CDN: 2FA for control panel accounts.
-* CDN: Gzip compression and 1-year unconditional browser caching.
+* CDN: Gzip compression, 1-year unconditional browser caching, 7-day stale-while-revalidate.
 * CDN: Pull from origin using an encrypted connection (including for plain HTTP requests).
 * CDN: Enable strict SNI verification on the HTTPS/TLS connection to the origin.
 * Origin: Debian Linux LTS with debian-security, unattended-upgrades, and basic firewalls.
@@ -48,46 +48,34 @@ You can run [an automated test suite](https://github.com/jquery/codeorigin.jquer
 
 For uptime monitoring, refer to [monitoring.md](./monitoring.md).
 
-### Highwinds configuration
+### Fastly configuration
 
-In StrikeTracker (StackPath Highwinds' control panel), the "code" site has the following notable configuration settings:
+The "code" service has the following notable configuration settings (last updated Oct 2023). See also [issue #30](https://github.com/jquery/infrastructure-puppet/issues/30).
 
-* SSL support: Enabled.
-* IPv6 support: Enabled.
-* HTTPS/2 support: Enabled.
-* Delivery:
-  * Gzip compression: Enabled.
-  * Gzip level: 6 (highest).
-* Cache overrides:
-  * Browser TTL: 1 year (max-age=31536000)
-  * CDN TTL: 1 year (max-age=31536000)
-  * Stale Cache Extension: 1 day (86400 seconds)
-  * Case Insensitive Cache: Enabled.
-* Origin:
-  * No Query String Parameters: Enabled.
-  * Origin protocol: Always HTTPS.
-  * Compressed Origin Pull: Enabled (accept Gzip responses).
-* Reporting:
-  * Raw Logs: **Disabled**.
-  * Access Log: **Disabled**.
-  * Origin Log: **Disabled**.
-
-See also:
-
-* [StrikeTracker Help - Origins](https://support.highwinds.com/hc/en-us/articles/360029757491-Origins)
-* [StrikeTracker Help - Origin Settings](https://support.highwinds.com/hc/en-us/articles/11299302193563-Origin-Settings)
+* Origins:
+  * Always TLS to origin.
+  * Verify cert.
+  * Enable SNI hostname.
+* Headers
+  * [Ignore query strings: req.url = req.url.path](https://docs.fastly.com/en/guides/making-query-strings-agnostic)
+  * [Case-insensitive req.url](https://developer.fastly.com/reference/vcl/functions/strings/std-tolower/)
+* DNS entrypoint:
+  * Dualstack IPv4 & IPv6.
+  * TLS 1.2+
+  * TLS ciphers include CBC (for Windows 7, Windows 8, and IE9-11 compat).
+  * HTTP/2
+  * HTTPS & plain HTTP
 
 ## Service: release.jquery.com
 
-This is a WordPress-based documentation site (see TODO), similar to https://jquery.com and https://api.jquery.com.
+This is a WordPress-based documentation site (see [wordpress.md](./wordpress.md)), similar to https://jquery.com and https://api.jquery.com and served from the same set of WordPress origin servers.
 
 Notable differences:
 
-* support access over IPv6
-* support access over plain HTTP (no redirect)
-* no traffic rejection of any kind (e.g. DDOS/WAF or other security rules)
-* served by jQuery CDN (unlike other doc sites, which use Cloudflare)
-* proxy `/git/` directory to serve unreleased alpha versions, built by Jenkins
+* fronted by same CDN provider as the jQuery CDN (unlike our other doc sites, which use Cloudflare).
+* support access over IPv6.
+* support access over plain HTTP (no redirect).
+* little to no traffic filtering (e.g. DDOS/WAF or other security rules, no captchas, interstitials, or other client-side interventions).
 
 ## Service: content.jquery.com
 
@@ -107,9 +95,11 @@ In 2018, jQuery CDN internally [transitioned from MaxCDN to Highwinds](https://w
 
 By 2021, our traffic had risen to [over 2 petabytes](https://blog.jquery.com/2021/06/17/jquery-project-updates-addressing-temporary-cdn-issues/) per month.
 
+In 2023, jQuery CDN [migrated](https://github.com/jquery/infrastructure-puppet/issues/30) from StackPath to Fastly.
+
 ### Latest statistics
 
-Traffic profile from Highwinds StrikeTracker, as of January 2023 (HTTP+HTTPS combined):
+Traffic profile as of January 2023 ("code" and "releases" services combined):
 
 * Overall: 2.2 petabytes bandwidth per month, in response to 57 billion web requests.
 * 16K-30K req/s (mean: 21K req/s)

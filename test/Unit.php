@@ -129,7 +129,7 @@ class Unit {
 		try {
 			$resp = jq_req( $server . $path, $reqHeaders );
 			foreach ( $expectHeaders as $key => $val ) {
-				// Tolerate E-Tag weakning (which Highwinds CDN does)
+				// Tolerate E-Tag weakning (which the CDN might)
 				if ( $key == 'etag' ) {
 					$actualVal = @$resp['headers'][$key];
 					if ( $val !== $actualVal && $actualVal === "W/$val" ) {
