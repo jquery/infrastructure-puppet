@@ -130,6 +130,10 @@ profile::miscweb::redirects:
     target: https://irc.jquery.org/
     mode: root
     certificate: miscweb-a
+  m.jquery.com:
+    target: https://jquery.com
+    mode: root
+    certificate: miscweb-a
   meetups.jquery.com:
     target: https://jquery.com/meetups/
     mode: root
