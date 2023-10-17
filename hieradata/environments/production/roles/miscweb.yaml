@@ -42,15 +42,11 @@ profile::miscweb::sites:
       name: jquery/bugs.jquery.com
       branch: gh-pages
     notifier: true
-    extra_config: |
-      rewrite ^/newticket https://github.com/jquery/jquery/issues/new permanent;
   bugs.jqueryui.com:
     repository:
       name: jquery/bugs.jqueryui.com
       branch: gh-pages
     notifier: true
-    extra_config: |
-      rewrite ^/newticket https://github.com/jquery/jquery-ui/issues/new permanent;
 
 profile::miscweb::redirects:
   # css-chassis.com
