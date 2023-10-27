@@ -40,11 +40,14 @@ To add a new host, run the following script as your own user on the Puppet serve
 $ jq-tarsnap-keygen FULL-HOSTNAME.ops.jquery.net
 ```
 
-To delete a host, login to the host in question and run:
+To delete a host, follow the decom host procedure in [puppet.md]. Alternatively, login to the host
+in question and run:
 
 ```shell-session
 $ tarsnap --nuke
 ```
+
+[puppet.md]: ./puppet.md
 
 This will ask for confirmation and then automatically enumerate each backup (`sudo tarsnap --list-archives`) and delete it (`sudo tarsnap -d -f <entry>`).
 

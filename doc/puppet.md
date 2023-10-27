@@ -9,13 +9,24 @@ However, if you need to manually run Puppet, there is a wrapper script
 called `run-puppet-agent` that should be used instead of directly
 executing `puppet agent -tv`.
 
-## Provisioning new nodes
+## Managing nodes
+
+### Provisioning new nodes
 
 Add the instance to `site.pp`, push the commit and then use the
 `bin/provision-instance.sh` script on your local machine:
-```bash
+```shell-session
 $ bin/provision-instance.sh codeorigin-02.stage.ops.jquery.net staging
 ```
+
+### Decomissioning new nodes
+
+To decom a node, run the following script as your own user on the
+Puppet server:
+```shell-session
+$ jq-decom-instance FULL-HOSTNAME.ops.jquery.net
+```
+Then remove references from `site.pp`, host-specific hiera files, etc.
 
 ## Conventions
 
