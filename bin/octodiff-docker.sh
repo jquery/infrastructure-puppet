@@ -10,6 +10,7 @@ apt-get update -qq && \
 DEBIAN_FRONTEND=noninteractive DEBCONF_NOWARNINGS=yes apt-get install -y -qq git octocatalog-diff puppet-agent puppet-module-puppetlabs-sshkeys-core g10k > /dev/null && \
  \
 cd /infrastructure-puppet && \
+git config --global --add safe.directory /infrastructure-puppet && \
 g10k -puppetfile -quiet && \
 echo && \
 read -p \"PuppetDB Username: \" username && \
