@@ -46,7 +46,15 @@ subscribers also use the following aliases:
 
 ### Blog accounts
 
-TODO.
+The WordPress hosts can't send mail, so a normal password reset can't
+be done that way. Instead it's possible to reset a lost password with
+the `wp` CLI utility:
+1. Log in to the active `wpblogs` host
+2. Navigate to the correct directory under `/srv/wordpress/sites/`, for
+   example `/srv/wordpress/sites/jquery/` for blog.jquery.com.
+3. Run `sudo -u www-data wp user reset-password <USERNAME> --skip-email --show-password`
+4. Log in via wp-admin, and maybe set a new password other than the
+   randomly generated one?
 
 ## Doc sites
 
