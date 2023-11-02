@@ -421,6 +421,11 @@ profile::testswarm::server::settings::user_agents:
     browserFamily: Chrome Mobile
     osFamily: Android
     osMajor: '12'
+  android_14:
+    browserFamily: Chrome Mobile
+    osFamily: Android
+    osMajor: '12'
+    deviceFamily: Google Pixel 8 Pro
   iphone-ios_7_0:
     deviceFamily: iPhone
     osFamily: iOS
@@ -473,7 +478,7 @@ profile::testswarm::server::settings::browser_sets:
   jquery:
     - chrome_116
     - chrome_117
-    - android_12
+    #- android_12
     - edge_115
     - edge_116
     - firefox_115
@@ -489,7 +494,7 @@ profile::testswarm::server::settings::browser_sets:
   jquery-3:
     - chrome_116
     - chrome_117
-    - android_12
+    #- android_12
     - edge_18
     - edge_115
     - edge_116
@@ -520,7 +525,7 @@ profile::testswarm::server::settings::browser_sets:
   jquery-color:
     - chrome_116
     - chrome_117
-    - android_12
+    #- android_12
     - edge_18
     - edge_108
     - edge_109
@@ -539,7 +544,7 @@ profile::testswarm::server::settings::browser_sets:
   jquery-color-2:
     - chrome_116
     - chrome_117
-    - android_12
+    #- android_12
     - edge_18
     - edge_115
     - edge_116
