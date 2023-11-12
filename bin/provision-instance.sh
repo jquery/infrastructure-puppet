@@ -24,8 +24,8 @@ if [ "$VERSION_CODENAME" == "bullseye" ]; then
 fi
 
 ssh root@"$INSTANCE" apt-get update
-ssh root@"$INSTANCE" apt-get -o Dpkg::Options::="--force-confold" upgrade -y
-ssh root@"$INSTANCE" apt-get -o Dpkg::Options::="--force-confold" install -y puppet-agent
+ssh root@"$INSTANCE" apt-get -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" upgrade -y
+ssh root@"$INSTANCE" apt-get -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" install -y puppet-agent
 ssh root@"$INSTANCE" "$PUPPET" config --section agent set server "$PUPPET_SERVER"
 ssh root@"$INSTANCE" "$PUPPET" config --section agent set environment "$ENVIRONMENT"
 ssh root@"$INSTANCE" "$PUPPET" agent -t || true
