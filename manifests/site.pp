@@ -75,6 +75,11 @@ node 'builder-04.stage.ops.jquery.net' {
   role('docs::builder')
 }
 
+# Debian 12 Bookworm
+node 'builder-05.stage.ops.jquery.net' {
+  role('docs::builder')
+}
+
 # Debian 11 Bullseye
 node 'codeorigin-02.stage.ops.jquery.net' {
   role('codeorigin')
