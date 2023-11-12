@@ -3,10 +3,11 @@ class postgresql () {
   $cluster_name = 'main'
   $pg_version = debian::codename() ? {
     'bullseye' => '13',
+    'bookworm' => '15',
   }
 
   ensure_packages([
-    'postgresql-13',
+    "postgresql-${pg_version}",
   ])
 
   $conf_path = "/etc/postgresql/${pg_version}/${cluster_name}"
