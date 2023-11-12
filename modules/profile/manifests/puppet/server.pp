@@ -116,6 +116,7 @@ class profile::puppet::server (
     user    => 'gitpuppet',
     group   => 'gitpuppet',
     umask   => '002',
+    require => Package['git'],
   }
 
   file { [
@@ -153,6 +154,7 @@ class profile::puppet::server (
   Concat[$::profile::puppet::common::config_file] ~> Service['puppetserver']
 
   ['puppetserver.conf'].each |String $file| {
+    $puppet_agent_base_path = $profile::puppet::common::config_path
     file { "${server_config_path}/conf.d/${file}":
       ensure  => file,
       mode    => '0440',

@@ -1,5 +1,6 @@
 # configuration for the JRuby interpreters
 jruby-puppet: {
+<%- if @server_config_path == '/etc/puppetlabs/puppetserver' -%>
     # Where the puppet-agent dependency places puppet, facter, etc...
     # Puppet server expects to load Puppet from this location
     ruby-load-path: [/opt/puppetlabs/puppet/lib/ruby/vendor_ruby]
@@ -12,6 +13,20 @@ jruby-puppet: {
     # the gem-home directory as well as any other directories that gems can be loaded
     # from (including the vendored gems directory for gems that ship with puppetserver)
     gem-path: [${jruby-puppet.gem-home}, "/opt/puppetlabs/server/data/puppetserver/vendored-jruby-gems", "/opt/puppetlabs/puppet/lib/ruby/vendor_gems"]
+<%- else -%>
+    # Where the puppet-agent dependency places puppet, facter, etc...
+    # Puppet server expects to load Puppet from this location
+    ruby-load-path: [/usr/lib/puppetserver/ruby/vendor_ruby]
+
+    # This setting determines where JRuby will install gems.  It is used for loading gems,
+    # and also by the `puppetserver gem` command line tool.
+    gem-home: /var/lib/puppetserver/jruby-gems
+
+    # This setting defines the complete "GEM_PATH" for jruby.  If set, it should include
+    # the gem-home directory as well as any other directories that gems can be loaded
+    # from (including the vendored gems directory for gems that ship with puppetserver)
+    gem-path: [${jruby-puppet.gem-home}, "/usr/lib/puppetserver/vendored-jruby-gems"]
+<%- end -%>
 
     # PLEASE NOTE: Use caution when modifying the below settings. Modifying
     # these settings will change the value of the corresponding Puppet settings
@@ -25,24 +40,24 @@ jruby-puppet: {
     # for more information.
 
     # (optional) path to puppet conf dir; if not specified, will use
-    # /etc/puppetlabs/puppet
-    server-conf-dir: /etc/puppetlabs/puppet
+    # <%= @puppet_agent_base_path %>
+    server-conf-dir: <%= @puppet_agent_base_path %>
 
     # (optional) path to puppet code dir; if not specified, will use
-    # /etc/puppetlabs/code
-    server-code-dir: /etc/puppetlabs/code
+    # <%= @code_path %>
+    server-code-dir: <%= @code_path %>
 
     # (optional) path to puppet var dir; if not specified, will use
-    # /opt/puppetlabs/server/data/puppetserver
-    server-var-dir: /opt/puppetlabs/server/data/puppetserver
+    # <%= @server_var_dir %>
+    server-var-dir: <%= @server_var_dir %>
 
     # (optional) path to puppet run dir; if not specified, will use
-    # /var/run/puppetlabs/puppetserver
-    server-run-dir: /var/run/puppetlabs/puppetserver
+    # <%= @server_run_dir %>
+    server-run-dir: <%= @server_run_dir %>
 
     # (optional) path to puppet log dir; if not specified, will use
-    # /var/log/puppetlabs/puppetserver
-    server-log-dir: /var/log/puppetlabs/puppetserver
+    # <%= @server_log_dir %>
+    server-log-dir: <%= @server_log_dir %>
 
     # (optional) maximum number of JRuby instances to allow
     #max-active-instances: 1
