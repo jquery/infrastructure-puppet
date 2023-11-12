@@ -1,9 +1,9 @@
 [server]
-vardir = /opt/puppetlabs/server/data/puppetserver
-logdir = /var/log/puppetlabs/puppetserver
-rundir = /var/run/puppetlabs/puppetserver
-pidfile = /var/run/puppetlabs/puppetserver/puppetserver.pid
-codedir = /etc/puppetlabs/code
+vardir = <%= @server_var_dir %>
+logdir = <%= @server_log_dir %>
+rundir = <%= @server_run_dir %>
+pidfile = <%= @server_run_dir %>/puppetserver.pid
+codedir = <%= @code_path %>
 environment = <%= @environment %>
 
 [master]

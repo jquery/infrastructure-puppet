@@ -1,13 +1,13 @@
 
 [global]
 # Store mq/db data in a custom directory
-vardir = /opt/puppetlabs/server/data/puppetdb
+vardir = <%= @var_path %>
 
 # Use an external logback config file
-logging-config = /etc/puppetlabs/puppetdb/logback.xml
+logging-config = <%= @config_path %>/logback.xml
 
 [puppetdb]
-certificate-allowlist = /etc/puppetlabs/puppetdb/cert-allowlist
+certificate-allowlist = <%= @config_path %>/cert-allowlist
 
 [command-processing]
 # How many command-processing threads to use, defaults to (CPUs / 2)

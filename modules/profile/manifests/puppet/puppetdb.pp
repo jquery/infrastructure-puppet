@@ -13,9 +13,18 @@ class profile::puppet::puppetdb (
     ensure => installed,
   }
 
-  $puppetservers = [$::facts['fqdn']]
+  $puppetservers = jqlib::resource_hosts('class', 'profile::puppet::server')
 
-  file { '/etc/puppetlabs/puppetdb/cert-allowlist':
+  $config_path = debian::codename() ? {
+    'bullseye' => '/etc/puppetlabs/puppetdb',
+    default    => '/etc/puppetdb',
+  }
+  $var_path = debian::codename() ? {
+    'bullseye' => '/opt/puppetlabs/server/data/puppetdb',
+    default    => '/var/lib/puppetdb',
+  }
+
+  file { "${config_path}/cert-allowlist":
     ensure  => file,
     mode    => '0444',
     content => "${puppetservers.join("\n")}\n",
@@ -23,7 +32,7 @@ class profile::puppet::puppetdb (
   }
 
   ['config.ini', 'database.ini'].each |String $file| {
-    file { "/etc/puppetlabs/puppetdb/conf.d/${file}":
+    file { "${config_path}/conf.d/${file}":
       ensure    => file,
       mode      => '0440',
       group     => 'puppetdb',

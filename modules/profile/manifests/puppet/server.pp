@@ -7,9 +7,44 @@ class profile::puppet::server (
 ) {
   include profile::puppet::common
 
+  $termini_package = debian::codename() ? {
+    'bullseye' => 'puppetdb-termini',
+    default    => 'puppet-terminus-puppetdb',
+  }
+
+  $server_config_path = debian::codename() ? {
+    'bullseye' => '/etc/puppetlabs/puppetserver',
+    default    => '/etc/puppet/puppetserver',
+  }
+
+  $server_var_dir = debian::codename() ? {
+    'bullseye' => '/opt/puppetlabs/server/data/puppetserver',
+    default    => '/var/lib/puppetserver',
+  }
+
+  $server_run_dir = debian::codename() ? {
+    'bullseye' => '/var/run/puppetlabs/puppetserver',
+    default    => '/run/puppetserver',
+  }
+
+  $server_log_dir = debian::codename() ? {
+    'bullseye' => '/var/log/puppetlabs/puppetserver',
+    default    => '/var/log/puppetserver',
+  }
+
+  $code_path = debian::codename() ? {
+    'bullseye' => '/etc/puppetlabs/code',
+    default    => '/etc/puppet/code',
+  }
+
+  $g10k_config_path = debian::codename() ? {
+    'bullseye' => '/etc/puppetlabs/g10k.yaml',
+    default    => '/etc/puppet/g10k.yaml',
+  }
+
   package { [
     'puppetserver',
-    'puppetdb-termini',
+    $termini_package,
     'g10k',
 
     # for the htpasswd tool
@@ -23,11 +58,11 @@ class profile::puppet::server (
   }
 
   exec { 'remove-old-code-dir':
-    command => '/usr/bin/mv /etc/puppetlabs/code /etc/puppetlabs/code-old',
-    creates => '/etc/puppetlabs/code-old',
+    command => "/usr/bin/mv ${code_path} ${code_path}-old",
+    creates => "${code_path}-old",
   }
 
-  file { '/etc/puppetlabs/code':
+  file { $code_path:
     ensure  => directory,
     owner   => 'gitpuppet',
     group   => 'gitpuppet',
@@ -41,10 +76,10 @@ class profile::puppet::server (
     ensure => directory,
   }
 
-  $g10k_deploy_base_path = '/etc/puppetlabs/code/environments'
+  $g10k_deploy_base_path = "${code_path}/environments"
   $private_repo_dir = '/srv/git/puppet/private'
 
-  file { '/etc/puppetlabs/g10k.yaml':
+  file { $g10k_config_path:
     ensure  => file,
     content => template('profile/puppet/server/g10k.yaml.erb'),
     owner   => 'root',
@@ -54,11 +89,11 @@ class profile::puppet::server (
   }
 
   exec { 'g10k':
-    command     => '/usr/bin/g10k -config /etc/puppetlabs/g10k.yaml',
+    command     => "/usr/bin/g10k -config ${g10k_config_path}",
     user        => 'gitpuppet',
     refreshonly => true,
     logoutput   => true,
-    require     => File['/etc/puppetlabs/code'],
+    require     => File[$code_path],
   }
 
   file { '/usr/local/bin/puppet-merge':
@@ -94,7 +129,10 @@ class profile::puppet::server (
     require => Exec['git-init-puppet-private'],
   }
 
-  file { '/etc/puppetlabs/hieradata':
+  file { [
+    '/etc/puppetlabs/hieradata',
+    '/etc/puppet/hieradata'
+  ]:
     ensure  => absent,
     recurse => true,
     force   => true,
@@ -115,7 +153,7 @@ class profile::puppet::server (
   Concat[$::profile::puppet::common::config_file] ~> Service['puppetserver']
 
   ['puppetserver.conf'].each |String $file| {
-    file { "/etc/puppetlabs/puppetserver/conf.d/${file}":
+    file { "${server_config_path}/conf.d/${file}":
       ensure  => file,
       mode    => '0440',
       group   => 'puppet',
@@ -124,14 +162,14 @@ class profile::puppet::server (
     }
   }
 
-  file { '/etc/puppetlabs/puppet/routes.yaml':
+  file { "${profile::puppet::common::config_path}/routes.yaml":
     ensure  => file,
     mode    => '0444',
     content => template('profile/puppet/server/routes.yaml.erb'),
     notify  => Service['puppetserver'],
   }
 
-  file { '/etc/puppetlabs/puppet/puppetdb.conf':
+  file { "${profile::puppet::common::config_path}/puppetdb.conf":
     ensure  => file,
     mode    => '0444',
     content => template('profile/puppet/server/puppetdb.conf.erb'),
@@ -195,7 +233,6 @@ class profile::puppet::server (
     group  => 'gitpuppet',
     mode   => '0550',
   }
-
 
   include profile::ssh::ca
 
