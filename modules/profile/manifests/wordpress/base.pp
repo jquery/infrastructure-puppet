@@ -39,7 +39,7 @@ class profile::wordpress::base (
 
   class { 'php::fpm':
     ini_values_extra => {
-      'memory_limit' => '512M',
+      'memory_limit' => '64M',
     },
   }
 

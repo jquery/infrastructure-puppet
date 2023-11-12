@@ -8,3 +8,9 @@ define( 'JQUERY_STAGING_FORMAT', '' );
 define( 'JQUERY_STAGING',        true );
 define( 'JQUERY_STAGING_FORMAT', 'stage.%s' );
 <%- end -%>
+
+// Raise limit to accommodate resource uploads from builder hosts
+// that run the "wordpress-deploy" Grunt task.
+if ( defined( 'XMLRPC_REQUEST' ) ) {
+  @ini_set( 'memory_limit', '512M' );
+}
