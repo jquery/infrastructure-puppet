@@ -70,11 +70,6 @@ node 'wpblogs-01.ops.jquery.net' {
 # Staging
 # -------
 
-# Debian 11 Bullseye
-node 'builder-04.stage.ops.jquery.net' {
-  role('docs::builder')
-}
-
 # Debian 12 Bookworm
 node 'builder-05.stage.ops.jquery.net' {
   role('docs::builder')
