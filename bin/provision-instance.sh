@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Script to install Puppet on new instances
 
 set -euo pipefail
