@@ -295,6 +295,9 @@ profile::testswarm::server::settings::user_agents:
   edge_118:
     browserFamily: Edge
     browserMajor: '118'
+  edge_119:
+    browserFamily: Edge
+    browserMajor: '119'
   opera_76:
     browserFamily: Opera
     browserMajor: '76'
@@ -376,6 +379,9 @@ profile::testswarm::server::settings::user_agents:
   opera_104:
     browserFamily: Opera
     browserMajor: '104'
+  opera_105:
+    browserFamily: Opera
+    browserMajor: '105'
   safari_5_1:
     browserFamily: Safari
     browserMajor: '5'
@@ -503,13 +509,13 @@ profile::testswarm::server::settings::browser_sets:
     - chrome_118
     - chrome_119
     #- android_12
-    - edge_117
     - edge_118
+    - edge_119
     - firefox_115
     - firefox_118
     - firefox_119
     - ie_11
-    - opera_104
+    - opera_105
     - safari_16
     - safari_17
     - iphone-ios_15
@@ -520,8 +526,8 @@ profile::testswarm::server::settings::browser_sets:
     - chrome_119
     #- android_12
     - edge_18
-    - edge_117
     - edge_118
+    - edge_119
     - firefox_48
     - firefox_60
     - firefox_78
@@ -533,7 +539,7 @@ profile::testswarm::server::settings::browser_sets:
     - ie_9
     - ie_10
     - ie_11
-    - opera_104
+    - opera_105
     - safari_16
     - safari_17
     - iphone-ios_8_3
@@ -551,15 +557,15 @@ profile::testswarm::server::settings::browser_sets:
     - chrome_119
     #- android_12
     - edge_18
-    - edge_117
     - edge_118
+    - edge_119
     - firefox_115
     - firefox_118
     - firefox_119
     - ie_9
     - ie_10
     - ie_11
-    - opera_104
+    - opera_105
     - safari_16
     - safari_17
     - iphone-ios_15
@@ -570,8 +576,8 @@ profile::testswarm::server::settings::browser_sets:
     - chrome_119
     #- android_12
     - edge_18
-    - edge_117
     - edge_118
+    - edge_119
     - firefox_48
     - firefox_60
     - firefox_78
@@ -586,7 +592,7 @@ profile::testswarm::server::settings::browser_sets:
     - ie_9
     - ie_10
     - ie_11
-    - opera_104
+    - opera_105
     - safari_5_1
     - safari_6
     - safari_8
@@ -613,25 +619,25 @@ profile::testswarm::server::settings::browser_sets:
     - chrome_118
     - chrome_119
     - edge_18
-    - edge_117
     - edge_118
+    - edge_119
     - firefox_118
     - firefox_119
     - ie_11
-    - opera_103
     - opera_104
+    - opera_105
     - safari_16
     - safari_17
   jquery-ui-future:
     - chrome_118
     - chrome_119
-    - edge_117
     - edge_118
+    - edge_119
     - firefox_118
     - firefox_119
     - ie_11
-    - opera_103
     - opera_104
+    - opera_105
     - safari_16
     - safari_17
   debug:
