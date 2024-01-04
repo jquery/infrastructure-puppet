@@ -4,69 +4,6 @@ profile::testswarm::browserstack::ensure: present
 profile::testswarm::server::cleanup_ensure: present
 
 profile::testswarm::server::settings::user_agents:
-  chrome_90:
-    browserFamily: Chrome
-    browserMajor: '90'
-  chrome_91:
-    browserFamily: Chrome
-    browserMajor: '91'
-  chrome_92:
-    browserFamily: Chrome
-    browserMajor: '92'
-  chrome_93:
-    browserFamily: Chrome
-    browserMajor: '93'
-  chrome_94:
-    browserFamily: Chrome
-    browserMajor: '94'
-  chrome_95:
-    browserFamily: Chrome
-    browserMajor: '95'
-  chrome_96:
-    browserFamily: Chrome
-    browserMajor: '96'
-  chrome_97:
-    browserFamily: Chrome
-    browserMajor: '97'
-  chrome_98:
-    browserFamily: Chrome
-    browserMajor: '98'
-  chrome_99:
-    browserFamily: Chrome
-    browserMajor: '99'
-  chrome_102:
-    browserFamily: Chrome
-    browserMajor: '102'
-  chrome_103:
-    browserFamily: Chrome
-    browserMajor: '103'
-  chrome_104:
-    browserFamily: Chrome
-    browserMajor: '104'
-  chrome_105:
-    browserFamily: Chrome
-    browserMajor: '105'
-  chrome_106:
-    browserFamily: Chrome
-    browserMajor: '106'
-  chrome_107:
-    browserFamily: Chrome
-    browserMajor: '107'
-  chrome_108:
-    browserFamily: Chrome
-    browserMajor: '108'
-  chrome_109:
-    browserFamily: Chrome
-    browserMajor: '109'
-  chrome_110:
-    browserFamily: Chrome
-    browserMajor: '110'
-  chrome_111:
-    browserFamily: Chrome
-    browserMajor: '111'
-  chrome_112:
-    browserFamily: Chrome
-    browserMajor: '112'
   chrome_113:
     browserFamily: Chrome
     browserMajor: '113'
@@ -100,78 +37,12 @@ profile::testswarm::server::settings::user_agents:
   firefox_78:
     browserFamily: Firefox
     browserMajor: '78'
-  firefox_88:
-    browserFamily: Firefox
-    browserMajor: '88'
-  firefox_89:
-    browserFamily: Firefox
-    browserMajor: '89'
-  firefox_90:
-    browserFamily: Firefox
-    browserMajor: '90'
   firefox_91:
     browserFamily: Firefox
     browserMajor: '91'
-  firefox_92:
-    browserFamily: Firefox
-    browserMajor: '92'
-  firefox_93:
-    browserFamily: Firefox
-    browserMajor: '93'
-  firefox_94:
-    browserFamily: Firefox
-    browserMajor: '94'
-  firefox_95:
-    browserFamily: Firefox
-    browserMajor: '95'
-  firefox_96:
-    browserFamily: Firefox
-    browserMajor: '96'
-  firefox_97:
-    browserFamily: Firefox
-    browserMajor: '97'
-  firefox_98:
-    browserFamily: Firefox
-    browserMajor: '98'
-  firefox_100:
-    browserFamily: Firefox
-    browserMajor: '100'
-  firefox_101:
-    browserFamily: Firefox
-    browserMajor: '101'
   firefox_102:
     browserFamily: Firefox
     browserMajor: '102'
-  firefox_103:
-    browserFamily: Firefox
-    browserMajor: '103'
-  firefox_104:
-    browserFamily: Firefox
-    browserMajor: '104'
-  firefox_105:
-    browserFamily: Firefox
-    browserMajor: '105'
-  firefox_106:
-    browserFamily: Firefox
-    browserMajor: '106'
-  firefox_107:
-    browserFamily: Firefox
-    browserMajor: '107'
-  firefox_108:
-    browserFamily: Firefox
-    browserMajor: '108'
-  firefox_109:
-    browserFamily: Firefox
-    browserMajor: '109'
-  firefox_110:
-    browserFamily: Firefox
-    browserMajor: '110'
-  firefox_111:
-    browserFamily: Firefox
-    browserMajor: '111'
-  firefox_112:
-    browserFamily: Firefox
-    browserMajor: '112'
   firefox_113:
     browserFamily: Firefox
     browserMajor: '113'
@@ -220,72 +91,6 @@ profile::testswarm::server::settings::user_agents:
   edge_18:
     browserFamily: Edge
     browserMajor: '18'
-  edge_90:
-    browserFamily: Edge
-    browserMajor: '90'
-  edge_91:
-    browserFamily: Edge
-    browserMajor: '91'
-  edge_92:
-    browserFamily: Edge
-    browserMajor: '92'
-  edge_93:
-    browserFamily: Edge
-    browserMajor: '93'
-  edge_94:
-    browserFamily: Edge
-    browserMajor: '94'
-  edge_95:
-    browserFamily: Edge
-    browserMajor: '95'
-  edge_96:
-    browserFamily: Edge
-    browserMajor: '96'
-  edge_97:
-    browserFamily: Edge
-    browserMajor: '97'
-  edge_98:
-    browserFamily: Edge
-    browserMajor: '98'
-  edge_99:
-    browserFamily: Edge
-    browserMajor: '99'
-  edge_101:
-    browserFamily: Edge
-    browserMajor: '101'
-  edge_102:
-    browserFamily: Edge
-    browserMajor: '102'
-  edge_103:
-    browserFamily: Edge
-    browserMajor: '103'
-  edge_104:
-    browserFamily: Edge
-    browserMajor: '104'
-  edge_105:
-    browserFamily: Edge
-    browserMajor: '105'
-  edge_106:
-    browserFamily: Edge
-    browserMajor: '106'
-  edge_107:
-    browserFamily: Edge
-    browserMajor: '107'
-  edge_108:
-    browserFamily: Edge
-    browserMajor: '108'
-  edge_109:
-    browserFamily: Edge
-    browserMajor: '109'
-  edge_110:
-    browserFamily: Edge
-    browserMajor: '110'
-  edge_111:
-    browserFamily: Edge
-    browserMajor: '111'
-  edge_112:
-    browserFamily: Edge
-    browserMajor: '112'
   edge_113:
     browserFamily: Edge
     browserMajor: '113'
@@ -310,66 +115,6 @@ profile::testswarm::server::settings::user_agents:
   edge_120:
     browserFamily: Edge
     browserMajor: '120'
-  opera_76:
-    browserFamily: Opera
-    browserMajor: '76'
-  opera_77:
-    browserFamily: Opera
-    browserMajor: '77'
-  opera_78:
-    browserFamily: Opera
-    browserMajor: '78'
-  opera_79:
-    browserFamily: Opera
-    browserMajor: '79'
-  opera_80:
-    browserFamily: Opera
-    browserMajor: '80'
-  opera_81:
-    browserFamily: Opera
-    browserMajor: '81'
-  opera_82:
-    browserFamily: Opera
-    browserMajor: '82'
-  opera_83:
-    browserFamily: Opera
-    browserMajor: '83'
-  opera_84:
-    browserFamily: Opera
-    browserMajor: '84'
-  opera_87:
-    browserFamily: Opera
-    browserMajor: '87'
-  opera_88:
-    browserFamily: Opera
-    browserMajor: '88'
-  opera_89:
-    browserFamily: Opera
-    browserMajor: '89'
-  opera_90:
-    browserFamily: Opera
-    browserMajor: '90'
-  opera_91:
-    browserFamily: Opera
-    browserMajor: '91'
-  opera_92:
-    browserFamily: Opera
-    browserMajor: '92'
-  opera_93:
-    browserFamily: Opera
-    browserMajor: '93'
-  opera_94:
-    browserFamily: Opera
-    browserMajor: '94'
-  opera_95:
-    browserFamily: Opera
-    browserMajor: '95'
-  opera_96:
-    browserFamily: Opera
-    browserMajor: '96'
-  opera_97:
-    browserFamily: Opera
-    browserMajor: '97'
   opera_98:
     browserFamily: Opera
     browserMajor: '98'
