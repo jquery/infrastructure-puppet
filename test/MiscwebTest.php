@@ -17,6 +17,7 @@ foreach ( [
   'http://ui.jquery.com/bugs/ticket/3484' => 'https://jqueryui.com/bugs/ticket/3484',
   'http://ui.jquery.com/latest/ui/jquery.effects.core.js' => 'https://jqueryui.com/latest/ui/jquery.effects.core.js',
   'http://wiki.jqueryui.com/Droppable' => 'https://jqueryui.pbworks.com/Droppable',
+  'http://docs.jquery.com/Core/each' => 'https://api.jquery.com/each/',
   'http://docs.jquery.com/UI/API/1.7.1/Datepicker' => 'https://api.jqueryui.com/datepicker/',
   'http://docs.jquery.com/QUnit/deepEqual' => 'https://api.qunitjs.com/deepEqual/',
   'http://docs.jquery.com/$' => 'https://api.jquery.com/jQuery/',
