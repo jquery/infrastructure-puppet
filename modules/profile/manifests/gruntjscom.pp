@@ -3,6 +3,7 @@ class profile::gruntjscom (
   String[1]           $tls_key_name   = lookup('profile::gruntjscom::tls_key_name'),
   Stdlib::Fqdn        $canonical_name = lookup('profile::gruntjscom::canonical_name'),
   Array[Stdlib::Fqdn] $aliases        = lookup('profile::gruntjscom::aliases'),
+  Boolean             $robots_deny    = lookup('profile::gruntjscom::robots_deny', {default_value => false}),
 ) {
   ensure_packages(['nodejs', 'npm'])
 
@@ -49,5 +50,19 @@ class profile::gruntjscom (
   nginx::site { 'gruntjscom':
     content => template('profile/gruntjscom/site.nginx.erb'),
     require => Letsencrypt::Certificate[$tls_key_name],
+  }
+
+  if $robots_deny {
+    file { '/srv/gruntjscom-robots':
+      ensure  => directory,
+      owner   => 'www-data',
+      group   => 'www-data',
+    }
+    file { '/srv/gruntjscom-robots/robots.txt':
+      ensure  => file,
+      owner   => 'www-data',
+      group   => 'www-data',
+      content => "User-Agent: *\nDisallow: /\n",
+    }
   }
 }

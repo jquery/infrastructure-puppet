@@ -21,6 +21,12 @@ server {
   location /.well-known/acme-challenge {
     root /var/www/letsencrypt/;
   }
+
+<%- if @robots_deny -%>
+  location = /robots.txt {
+    alias /srv/gruntjscom-robots/robots.txt;
+  }
+<%- end -%>
 }
 
 server {

@@ -1,2 +1,3 @@
 profile::gruntjscom::canonical_name: stage.gruntjs.com
 profile::gruntjscom::aliases: []
+profile::gruntjscom::robots_deny: true
