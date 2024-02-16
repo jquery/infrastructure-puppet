@@ -54,9 +54,9 @@ class profile::gruntjscom (
 
   if $robots_deny {
     file { '/srv/gruntjscom-robots':
-      ensure  => directory,
-      owner   => 'www-data',
-      group   => 'www-data',
+      ensure => directory,
+      owner  => 'www-data',
+      group  => 'www-data',
     }
     file { '/srv/gruntjscom-robots/robots.txt':
       ensure  => file,
