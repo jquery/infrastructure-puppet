@@ -26,8 +26,8 @@ profile::miscweb::sites:
     extra_config: |
       # Compatibility with http://feeds.feedburner.com/jQueryPodcastShowNotes
       rewrite ^/feed/?$ /feed/jQueryPodcastShowNotes.xml permanent;
-      rewrite ^/2010/10/22/ben-nadel/$ /2010/11/10/episode-39-jquery-mobile/ permanent;
-      rewrite ^/2010/11/10/jquery-mobile/$ /2010/10/22/episode-37-ben-nadel/ permanent;
+      rewrite ^/2010/10/22/ben-nadel/$ /2010/10/22/episode-37-ben-nadel/ permanent;
+      rewrite ^/2010/11/10/jquery-mobile/$ /2010/11/10/episode-39-jquery-mobile/ permanent;
   themeroller.jquerymobile.com:
     repository:
       name: jquery/themeroller.jquerymobile.com
