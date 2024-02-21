@@ -212,14 +212,6 @@ profile::miscweb::redirects:
     mode: prefix
     certificate: miscweb-a
   # ThemeRoller
-  themeroller.com:
-    target: https://jqueryui.com/themeroller/
-    mode: root
-    certificate: miscweb-a
-  www.themeroller.com:
-    target: https://jqueryui.com/themeroller/
-    mode: root
-    certificate: miscweb-a
   themeroller.net:
     target: https://jqueryui.com/themeroller/
     mode: root
