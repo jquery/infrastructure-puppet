@@ -413,7 +413,6 @@ docs_sites:
     repository:
       name: jquery/meetings.jquery.org
       branch: main
-      tag_format: *semver_tag
     certificate: wordpress
     active_theme: meetings.jquery.org
     enable_static_index: true
