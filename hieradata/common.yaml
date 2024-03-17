@@ -135,7 +135,6 @@ docs_sites:
     repository:
       name: jquery/brand.jquery.org
       branch: main
-      tag_format: *semver_tag
     certificate: wordpress
     active_theme: brand.jquery.org
     enable_static_index: true
