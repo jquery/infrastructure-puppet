@@ -14,12 +14,18 @@ endif
 
 export DEBUG=0
 
-.PHONY: lint test
+.PHONY: doc/wordpress.md build lint test
 
-all: lint
+all: build lint
+
+build: doc/wordpress.md
+
+doc/wordpress.md:
+	./bin/build_wordpress_md.sh
 
 lint:
 	puppet-lint --fail-on-warnings .
+	@ ./bin/build_wordpress_md.sh --verify
 
 test: test-codeorigin-prod-http test-codeorigin-prod-https test-codeorigin-next-http test-codeorigin-next-https test-codeorigin-stage test-contentorigin-prod test-miscweb test-wpdocs test-releases
 
@@ -42,7 +48,6 @@ test-codeorigin-next-https:
 test-codeorigin-stage:
 	@ php test/CodeoriginTest.php "https://codeorigin-02.stage.ops.jquery.net"
 	@ echo "✅ $@"
-
 
 test-contentorigin-prod:
 	@ php test/ContentoriginTest.php
