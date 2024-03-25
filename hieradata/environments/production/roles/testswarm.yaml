@@ -34,6 +34,9 @@ profile::testswarm::server::settings::user_agents:
   chrome_122:
     browserFamily: Chrome
     browserMajor: '122'
+  chrome_123:
+    browserFamily: Chrome
+    browserMajor: '123'
   firefox_48:
     browserFamily: Firefox
     browserMajor: '48'
@@ -79,6 +82,12 @@ profile::testswarm::server::settings::user_agents:
   firefox_122:
     browserFamily: Firefox
     browserMajor: '122'
+  firefox_123:
+    browserFamily: Firefox
+    browserMajor: '123'
+  firefox_124:
+    browserFamily: Firefox
+    browserMajor: '124'
   ie_6:
     browserFamily: IE
     browserMajor: '6'
@@ -127,6 +136,9 @@ profile::testswarm::server::settings::user_agents:
   edge_121:
     browserFamily: Edge
     browserMajor: '121'
+  edge_122:
+    browserFamily: Edge
+    browserMajor: '122'
   opera_98:
     browserFamily: Opera
     browserMajor: '98'
@@ -157,6 +169,9 @@ profile::testswarm::server::settings::user_agents:
   opera_107:
     browserFamily: Opera
     browserMajor: '107'
+  opera_108:
+    browserFamily: Opera
+    browserMajor: '108'
   safari_5_1:
     browserFamily: Safari
     browserMajor: '5'
@@ -276,40 +291,40 @@ profile::testswarm::server::settings::user_agents:
 
 profile::testswarm::server::settings::browser_sets:
   jquery:
-    - chrome_121
     - chrome_122
+    - chrome_123
     #- android_12
-    - edge_120
     - edge_121
+    - edge_122
     - firefox_115
-    - firefox_121
-    - firefox_122
+    - firefox_123
+    - firefox_124
     - ie_11
-    - opera_107
+    - opera_108
     - safari_16
     - safari_17
     - iphone-ios_15
     - iphone-ios_16
     - iphone-ios_17
   jquery-3:
-    - chrome_121
     - chrome_122
+    - chrome_123
     #- android_12
     - edge_18
-    - edge_120
     - edge_121
+    - edge_122
     - firefox_48
     - firefox_60
     - firefox_78
     - firefox_91
     - firefox_102
     - firefox_115
-    - firefox_121
-    - firefox_122
+    - firefox_123
+    - firefox_124
     - ie_9
     - ie_10
     - ie_11
-    - opera_107
+    - opera_108
     - safari_16
     - safari_17
     - iphone-ios_8_3
@@ -323,46 +338,46 @@ profile::testswarm::server::settings::browser_sets:
     - iphone-ios_16
     - iphone-ios_17
   jquery-color:
-    - chrome_121
     - chrome_122
+    - chrome_123
     #- android_12
     - edge_18
-    - edge_120
     - edge_121
+    - edge_122
     - firefox_115
-    - firefox_121
-    - firefox_122
+    - firefox_123
+    - firefox_124
     - ie_9
     - ie_10
     - ie_11
-    - opera_107
+    - opera_108
     - safari_16
     - safari_17
     - iphone-ios_15
     - iphone-ios_16
     - iphone-ios_17
   jquery-color-2:
-    - chrome_121
     - chrome_122
+    - chrome_123
     #- android_12
     - edge_18
-    - edge_120
     - edge_121
+    - edge_122
     - firefox_48
     - firefox_60
     - firefox_78
     - firefox_91
     - firefox_102
     - firefox_115
-    - firefox_121
-    - firefox_122
+    - firefox_123
+    - firefox_124
     - ie_6
     - ie_7
     - ie_8
     - ie_9
     - ie_10
     - ie_11
-    - opera_107
+    - opera_108
     - safari_5_1
     - safari_6
     - safari_8
@@ -386,28 +401,28 @@ profile::testswarm::server::settings::browser_sets:
     - iphone-ios_16
     - iphone-ios_17
   jquery-ui:
-    - chrome_121
     - chrome_122
+    - chrome_123
     - edge_18
-    - edge_120
     - edge_121
-    - firefox_121
-    - firefox_122
+    - edge_122
+    - firefox_123
+    - firefox_124
     - ie_11
-    - opera_106
     - opera_107
+    - opera_108
     - safari_16
     - safari_17
   jquery-ui-future:
-    - chrome_121
     - chrome_122
-    - edge_120
+    - chrome_123
     - edge_121
-    - firefox_121
-    - firefox_122
+    - edge_122
+    - firefox_123
+    - firefox_124
     - ie_11
-    - opera_106
     - opera_107
+    - opera_108
     - safari_16
     - safari_17
   debug:
