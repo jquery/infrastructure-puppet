@@ -48,7 +48,7 @@ older version had a different database schema.
 | https://brand.jquery.org/                | [`main` branch](https://github.com/jquery/brand.jquery.org/tree/main/) | https://stage.brand.jquery.org/
 | https://contribute.jquery.org/           | [semver tags](https://github.com/jquery/contribute.jquery.org/tree/main/) | https://stage.contribute.jquery.org/
 | https://jquery.com/                      | [semver tags](https://github.com/jquery/jquery.com/tree/main/) | https://stage.jquery.com/
-| https://jquery.org/                      | [semver tags](https://github.com/jquery/jquery.org/tree/main/) | https://stage.jquery.org/
+| https://jquery.org/                      | [`main` branch](https://github.com/jquery/jquery.org/tree/main/) | https://stage.jquery.org/
 | https://jquerymobile.com/                | [semver tags](https://github.com/jquery/jquerymobile.com/tree/main/) | https://stage.jquerymobile.com/
 | https://jqueryui.com/                    | [semver tags](https://github.com/jquery/jqueryui.com/tree/main/) | https://stage.jqueryui.com/
 | https://learn.jquery.com/                | [semver tags](https://github.com/jquery/learn.jquery.com/tree/main/) | https://stage.learn.jquery.com/
