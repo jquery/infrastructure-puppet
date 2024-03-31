@@ -228,3 +228,8 @@ profile::miscweb::redirects:
     target: https://jqueryui.com/themeroller/
     mode: root
     certificate: miscweb-a
+  # QUnit
+  api.qunitjs.com:
+    target: https://qunitjs.com
+    mode: prefix
+    certificate: miscweb-a
