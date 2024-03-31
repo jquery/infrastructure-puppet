@@ -1,0 +1,19 @@
+# https://github.com/github/octocatalog-diff/issues/261
+--- compilation_dir.rb	2024-03-30 18:11:27
++++ compilation_dir_patched.rb	2024-03-30 18:12:04
+@@ -66,12 +66,12 @@
+           value
+         end
+ 
+-        def traverse(a)
++        def traverse(a, &proc)
+           case a
+           when Array
+-            a.map { |v| traverse(v, &Proc.new) }
++            a.map { |v| traverse(v, &proc) }
+           when Hash
+-            traverse(a.values, &Proc.new)
++            traverse(a.values, &proc)
+           else
+             yield a
+           end
