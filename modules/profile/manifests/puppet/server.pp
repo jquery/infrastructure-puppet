@@ -195,7 +195,7 @@ class profile::puppet::server (
     ensure      => present,
     description => 'Remove old puppet reports',
     user        => 'root',
-    command     => "find ${server_var_dir}/reports/ -type f -name '*.yaml' -mtime +100 -exec rm -f {} \;",
+    command     => "find ${server_var_dir}/reports/ -type f -name '*.yaml' -mtime +21 -exec rm -f {} \;",
     interval    => ['OnCalendar=*-*-* 12:00:00'],
   }
 
