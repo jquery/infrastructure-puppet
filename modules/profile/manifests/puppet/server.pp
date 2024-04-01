@@ -190,6 +190,15 @@ class profile::puppet::server (
     enable => true,
   }
 
+  # Avoid running out of disk space (daily)
+  systemd::timer { 'puppet_report_cleanup':
+    ensure      => present,
+    description => 'Remove old puppet reports',
+    user        => 'root',
+    command     => "find ${server_var_dir}/reports/ -type f -name '*.yaml' -mtime +100 -exec rm -f {} \;",
+    interval    => ['OnCalendar=*-*-* 12:00:00'],
+  }
+
   nftables::allow { 'puppetserver':
     proto => 'tcp',
     dport => 8140,
