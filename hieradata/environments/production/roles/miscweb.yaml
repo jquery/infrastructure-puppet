@@ -121,7 +121,7 @@ profile::miscweb::redirects:
     mode: root
     certificate: miscweb-a
   events.jquery.com:
-    target: https://openjsf.org/
+    target: https://openjsf.org/events
     mode: root
     certificate: miscweb-a
   irc.jquery.com:
@@ -196,7 +196,7 @@ profile::miscweb::redirects:
     certificate: miscweb-a
   # jquery.org
   events.jquery.org:
-    target: https://openjsf.org/
+    target: https://openjsf.org/events
     mode: root
     certificate: miscweb-a
   meetups.jquery.org:
