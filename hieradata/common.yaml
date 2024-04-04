@@ -304,7 +304,6 @@ docs_sites:
     repository:
       name: jquery/jquerymobile.com
       branch: main
-      tag_format: *semver_tag
     certificate: wordpress
     active_theme: jquerymobile.com
     enable_static_index: true
