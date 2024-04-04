@@ -47,16 +47,16 @@ foreach ( [
 }
 
 foreach ( [
-  'http://jquery.com/discuss/' => 'https://forum.jquery.com/',
-  'http://jquery.com/discuss/2006-May/000804/' => 'https://www.mail-archive.com/discuss@jquery.com/',
-  'http://jquery.com/forum' => 'https://forum.jquery.com',
-  'http://jquery.com/plugins' => 'https://plugins.jquery.com',
-  'http://jquery.com/src' => 'https://code.jquery.com',
-  'http://jquery.com/ui' => 'https://jqueryui.com',
-  'http://jquery.com/view' => 'https://view.jquery.com',
+  'https://jquery.com/discuss/' => 'https://forum.jquery.com/',
+  'https://jquery.com/discuss/2006-May/000804/' => 'https://www.mail-archive.com/discuss@jquery.com/',
+  'https://jquery.com/forum' => 'https://forum.jquery.com',
+  'https://jquery.com/plugins' => 'https://plugins.jquery.com',
+  'https://jquery.com/src' => 'https://code.jquery.com',
+  'https://jquery.com/ui' => 'https://jqueryui.com',
+  'https://jquery.com/view' => 'https://view.jquery.com',
 
-  'http://api.jquery.com/api' => 'https://api.jquery.com/resources/api.xml',
-  'http://api.jquery.com/api/foo' => 'https://api.jquery.com/resources/api.xml',
+  'https://api.jquery.com/api' => 'https://api.jquery.com/resources/api.xml',
+  'https://api.jquery.com/api/foo' => 'https://api.jquery.com/resources/api.xml',
 
   'https://api.jqueryui.com/api' => 'https://api.jqueryui.com/resources/api.xml',
   'https://api.jqueryui.com/api/foo' => 'https://api.jqueryui.com/resources/api.xml',

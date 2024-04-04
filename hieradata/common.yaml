@@ -287,6 +287,12 @@ docs_sites:
           url: https://meetings.jquery.org
           mode: exact
       - match:
+          path: /feed
+          mode: prefix
+        target:
+          url: https://meetings.jquery.org/feed/
+          mode: exact
+      - match:
           path: /projects
           mode: prefix
         target:
