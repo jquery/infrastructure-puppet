@@ -9,6 +9,7 @@ $server = @$argv[1] ?: '';
 Unit::start();
 
 foreach ( [
+  'https://dev.jquery.com/ticket/7144' => 'https://bugs.jquery.com/ticket/7144',
   'http://dev.jqueryui.com/ticket/5462' => 'https://bugs.jqueryui.com/ticket/5462',
   'http://learn.jqueryui.com/something' => 'https://learn.jquery.com/jquery-ui/',
   'http://view.jquery.com/something' => 'https://releases.jquery.com/jquery/',
