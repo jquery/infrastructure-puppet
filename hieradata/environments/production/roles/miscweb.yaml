@@ -24,6 +24,8 @@ profile::miscweb::sites:
     webroot: /build_production
     notifier: true
     extra_config: |
+      # http://blog.jquery.com/2010/09/04/jquery-podcast-has-a-new-home/
+      rewrite ^/contact-us/$ /about/ permanent;
       # Compatibility with http://feeds.feedburner.com/jQueryPodcastShowNotes
       rewrite ^/feed/?$ /feed/jQueryPodcastShowNotes.xml permanent;
       rewrite ^/2010/10/22/ben-nadel/$ /2010/10/22/episode-37-ben-nadel/ permanent;
