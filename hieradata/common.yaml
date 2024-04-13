@@ -399,6 +399,15 @@ docs_sites:
           url: https://code.jquery.com
           mode: exact
         permanent: true
+      # http://blog.jquery.com/2008/05/05/jquery-ui-15b4-featuring-effects-and-a-new-home/
+      # http://ui.jquery.com/download_builder/
+      - match:
+          path: /download_builder
+          mode: prefix
+        target:
+          url: https://jqueryui.com/download/
+          mode: exact
+        permanent: true
   learn_jquery_com:
     host: learn.jquery.com
     site_name: jQuery Learning Center
