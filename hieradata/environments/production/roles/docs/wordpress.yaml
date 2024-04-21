@@ -1,6 +1,7 @@
 profile::wordpress::docs::admin_email: infrastructure-team@jquery.com
 profile::wordpress::docs::builder_email: infrastructure-team+builder@jquery.com
 profile::wordpress::docs::wordpress_version: ~
+profile::wordpress::docs::enable_object_cache: true
 
 profile::certbot::certificates:
   wordpress:
