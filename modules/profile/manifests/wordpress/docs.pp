@@ -137,7 +137,7 @@ class profile::wordpress::docs (
 
       file { "${dir}/wp-content/object-cache.php":
         ensure  => file,
-        source  => "file:///srv/wordpress/jquery-wp-content/plugins/memcached/object-cache.php",
+        source  => 'file:///srv/wordpress/jquery-wp-content/plugins/memcached/object-cache.php',
         require => [
           Exec["wp-download-${name}"],
           Package['memcached']

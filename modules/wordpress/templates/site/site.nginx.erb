@@ -22,6 +22,21 @@ server {
     deny all;
   }
 
+  # Avoid noise in PHP error logs from bots accessing includes
+  #
+  # > Uncaught Error: Call to undefined function __()
+  # > in /srv/wordpress/sites/jquery_com/wp-admin/includes/file.php
+  #
+  # https://core.trac.wordpress.org/ticket/9185
+  location ^~ /wp-includes/(.*).php {
+    access_log off;
+    deny all;
+  }
+  location ^~ /wp-admin/includes/ {
+    access_log off;
+    deny all;
+  }
+
   include /etc/nginx/wordpress-subsites/<%= @host %>.d/*.conf;
 
 <%- if @gilded_wordpress -%>
