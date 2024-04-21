@@ -9,6 +9,7 @@ class profile::wordpress::docs (
   String[1]            $wp_content_branch     = lookup('profile::wordpress::docs::wp_content_branch', {default_value => 'main'}),
   String               $append_title          = lookup('profile::wordpress::docs::append_title', {default_value => ''}),
   Boolean              $robots_txt_deny_all   = lookup('profile::wordpress::docs::robots_txt_deny_all', {default_value => false}),
+  Boolean              $enable_object_cache   = lookup('profile::wordpress::docs::enable_object_cache', {default_value => false}),
   String[1]            $builder_password_seed = lookup('docs_builder_password_seed'),
   String               $prepend_host          = lookup('docs_prepend_host', {default_value => ''}),
 ) {
@@ -129,6 +130,26 @@ class profile::wordpress::docs (
       ensure  => file,
       content => template('profile/wordpress/docs/jquery-config.php.erb'),
       require => Exec["wp-download-${name}"],
+    }
+
+    if $enable_object_cache {
+      ensure_packages(['memcached'])
+
+      file { "${dir}/wp-content/object-cache.php":
+        ensure  => file,
+        source  => "file:///srv/wordpress/jquery-wp-content/plugins/memcached/object-cache.php",
+        require => [
+          Exec["wp-download-${name}"],
+          Package['memcached']
+        ]
+      }
+    } else {
+      ensure_packages(['memcached'], { ensure => absent })
+
+      file { "${dir}/wp-content/memcached/object-cache.php":
+        ensure  => absent,
+        require => Exec["wp-download-${name}"]
+      }
     }
 
     if $site['redirects'] {

@@ -30,6 +30,7 @@ class profile::wordpress::base (
       'curl',
       { package => 'php-imagick' },
       'intl',
+      'memcache',
       'mbstring',
       'mysql',
       'xml',
