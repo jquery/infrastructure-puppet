@@ -8,6 +8,7 @@ profile::certbot::certificates:
       - themeroller.jquerymobile.com
       - bugs.jquery.com
       - bugs.jqueryui.com
+      - plugins.jquery.com
 profile::notifier::tls_key_name: miscweb
 profile::miscweb::default_certificate: miscweb
 
@@ -49,6 +50,11 @@ profile::miscweb::sites:
   bugs.jqueryui.com:
     repository:
       name: jquery/bugs.jqueryui.com
+      branch: gh-pages
+    notifier: true
+  plugins.jquery.com:
+    repository:
+      name: jquery/plugins.jquery.com-static
       branch: gh-pages
     notifier: true
 
