@@ -37,3 +37,10 @@ Static archives of a former Trac instances.
 Source code:
 * https://github.com/jquery/bugs.jquery.com/
 * https://github.com/jquery/bugs.jqueryui.com/
+
+## jQuery Plugins (archive)
+
+Static archive of the former jQuery Plugins site.
+
+Source code:
+* https://github.com/jquery/plugins.jquery.com-static
