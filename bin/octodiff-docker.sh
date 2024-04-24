@@ -8,11 +8,10 @@ echo 'Launching debian container...' && \
 echo 'Installing packages...' && \
 apt-get update -qq && \
 DEBIAN_FRONTEND=noninteractive DEBCONF_NOWARNINGS=yes apt-get install -y -qq git octocatalog-diff puppet-agent puppet-module-puppetlabs-sshkeys-core g10k > /dev/null && \
- \
 cd /infrastructure-puppet && \
-patch -u /usr/lib/ruby/vendor_ruby/octocatalog-diff/catalog-diff/filter/compilation_dir.rb bin/patches/octocatalogdiff_issue261_compilationdir.rb.patch &&
+patch -u /usr/lib/ruby/vendor_ruby/octocatalog-diff/catalog-diff/filter/compilation_dir.rb bin/patches/octocatalogdiff_issue261_compilationdir.rb.patch && \
 git config --global --add safe.directory /infrastructure-puppet && \
-g10k -puppetfile -quiet && \
+g10k -puppetfile -quiet -cachedir=/infrastructure-puppet/vendor_modules/.g10kcache && \
 echo && \
 read -p \"PuppetDB Username: \" username && \
 read -p \"PuppetDB Password: \" -s password && \
@@ -31,5 +30,4 @@ mkdir -p "$repo_dir/vendor_modules/.g10kcache"
 docker run --rm --interactive --tty \
   --mount type=bind,source="$repo_dir",target="/infrastructure-puppet",readonly \
   --mount type=bind,source="$repo_dir/vendor_modules",target="/infrastructure-puppet/vendor_modules" \
-  -e "g10k_cachedir=/infrastructure-puppet/vendor_modules/.g10kcache" \
-  --entrypoint /bin/bash debian:bookworm-slim -c "$script"
+  --entrypoint bash debian:bookworm-slim -c "$script"
