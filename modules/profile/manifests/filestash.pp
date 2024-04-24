@@ -37,10 +37,6 @@ class profile::filestash (
     }
   }
 
-  ssh::server::config { 'filestash':
-    source => 'puppet:///modules/profile/filestash/sshd.conf',
-  }
-
   $tls_config = nginx::tls_config()
 
   nginx::site { $::facts['networking']['fqdn']:
