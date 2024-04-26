@@ -28,6 +28,9 @@ profile::testswarm::server::settings::user_agents:
   chrome_123:
     browserFamily: Chrome
     browserMajor: '123'
+  chrome_124:
+    browserFamily: Chrome
+    browserMajor: '124'
   firefox_116:
     browserFamily: Firefox
     browserMajor: '116'
@@ -55,6 +58,9 @@ profile::testswarm::server::settings::user_agents:
   firefox_124:
     browserFamily: Firefox
     browserMajor: '124'
+  firefox_125:
+    browserFamily: Firefox
+    browserMajor: '125'
   ie_11:
     browserFamily: IE
     browserMajor: '11'
@@ -85,6 +91,12 @@ profile::testswarm::server::settings::user_agents:
   edge_122:
     browserFamily: Edge
     browserMajor: '122'
+  edge_123:
+    browserFamily: Edge
+    browserMajor: '123'
+  edge_124:
+    browserFamily: Edge
+    browserMajor: '124'
   opera_101:
     browserFamily: Opera
     browserMajor: '101'
@@ -109,6 +121,9 @@ profile::testswarm::server::settings::user_agents:
   opera_108:
     browserFamily: Opera
     browserMajor: '108'
+  opera_109:
+    browserFamily: Opera
+    browserMajor: '109'
   safari_16:
     browserFamily: Safari
     browserMajor: '16'
@@ -118,28 +133,28 @@ profile::testswarm::server::settings::user_agents:
 
 profile::testswarm::server::settings::browser_sets:
   jquery-ui:
-    - chrome_122
     - chrome_123
+    - chrome_124
     - edge_18
-    - edge_121
-    - edge_122
-    - firefox_123
+    - edge_123
+    - edge_124
     - firefox_124
+    - firefox_125
     - ie_11
-    - opera_107
     - opera_108
+    - opera_109
     - safari_16
     - safari_17
   jquery-ui-future:
-    - chrome_122
     - chrome_123
-    - edge_121
-    - edge_122
-    - firefox_123
+    - chrome_124
+    - edge_123
+    - edge_124
     - firefox_124
+    - firefox_125
     - ie_11
-    - opera_107
     - opera_108
+    - opera_109
     - safari_16
     - safari_17
   debug:
