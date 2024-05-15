@@ -29,6 +29,7 @@ Unit::testHttp( $server, '/jquery-3.0.0.js', [], [
 	'status' => '200',
 	'server' => 'nginx',
 	'content-type' => 'application/javascript; charset=utf-8',
+	'content-encoding' => 'gzip',
 	'content-length' => '263268',
 	'last-modified' => 'Fri, 18 Oct 1991 12:00:00 GMT',
 	'vary' => 'Accept-Encoding',
