@@ -26,7 +26,7 @@ Unit::testHttp( $server, '/', [], [
 // Static assets
 
 Unit::testHttp( $server, '/jquery-3.0.0.js', [
-	'accept-encoding' => 'gzip, deflate, br, zstd',
+	"Accept-Encoding: gzip, deflate, br, zstd",
 ], [
 	'status' => '200',
 	'server' => 'nginx',
