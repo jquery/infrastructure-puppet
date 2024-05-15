@@ -32,7 +32,7 @@ Unit::testHttp( $server, '/jquery-3.0.0.js', [
 	'server' => 'nginx',
 	'content-type' => 'application/javascript; charset=utf-8',
 	'content-encoding' => 'gzip',
-	'content-length' => '263268',
+	'content-length' => '77731',
 	'last-modified' => 'Fri, 18 Oct 1991 12:00:00 GMT',
 	'vary' => 'Accept-Encoding',
 	'etag' => '"28feccc0-40464"',
