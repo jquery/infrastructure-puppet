@@ -92,6 +92,36 @@ Unit::testHttp( $server, '/jquery-3.0.0.js', [
 	'accept-ranges' => 'bytes',
 ] );
 
+// Gzip Compression
+
+Unit::testHttp( $server, '/jquery-3.0.0.js', [
+	"Accept-Encoding: gzip, deflate, br, zstd",
+], [
+	'status' => '200',
+	'server' => 'nginx',
+	'content-type' => 'application/javascript; charset=utf-8',
+	'content-encoding' => 'gzip',
+	'last-modified' => 'Fri, 18 Oct 1991 12:00:00 GMT',
+	'vary' => 'Accept-Encoding',
+	'etag' => '"28feccc0-40464"',
+	'cache-control' => 'public, max-age=31536000, stale-while-revalidate=604800',
+	'access-control-allow-origin' => '*',
+] );
+
+Unit::testHttp( $server, '/qunit/qunit-2.0.0.css', [
+	"Accept-Encoding: gzip, deflate, br, zstd",
+], [
+	'status' => '200',
+	'server' => 'nginx',
+	'content-type' => 'text/css',
+	'content-encoding' => 'gzip',
+	'last-modified' => 'Fri, 18 Oct 1991 12:00:00 GMT',
+	'vary' => 'Accept-Encoding',
+	'etag' => '"28feccc0-1d20"',
+	'cache-control' => 'public, max-age=31536000, stale-while-revalidate=604800',
+	'access-control-allow-origin' => '*',
+] );
+
 // Renamed files
 
 Unit::testHttp( $server, '/jquery-git2.js', [], [
