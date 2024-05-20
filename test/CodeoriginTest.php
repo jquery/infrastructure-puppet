@@ -25,14 +25,11 @@ Unit::testHttp( $server, '/', [], [
 
 // Static assets
 
-Unit::testHttp( $server, '/jquery-3.0.0.js', [
-	"Accept-Encoding: gzip, deflate, br, zstd",
-], [
+Unit::testHttp( $server, '/jquery-3.0.0.js', [], [
 	'status' => '200',
 	'server' => 'nginx',
 	'content-type' => 'application/javascript; charset=utf-8',
-	'content-encoding' => 'gzip',
-	'content-length' => '77731',
+	'content-length' => '263268',
 	'last-modified' => 'Fri, 18 Oct 1991 12:00:00 GMT',
 	'vary' => 'Accept-Encoding',
 	'etag' => '"28feccc0-40464"',
@@ -93,6 +90,22 @@ Unit::testHttp( $server, '/jquery-3.0.0.js', [
 	'cache-control' => 'public, max-age=31536000, stale-while-revalidate=604800',
 	'access-control-allow-origin' => '*',
 	'accept-ranges' => 'bytes',
+] );
+
+// Gzip Compression
+
+Unit::testHttp( $server, '/jquery-3.0.0.js', [
+	"Accept-Encoding: gzip, deflate, br, zstd",
+], [
+	'status' => '200',
+	'server' => 'nginx',
+	'content-type' => 'application/javascript; charset=utf-8',
+	'content-encoding' => 'gzip',
+	'last-modified' => 'Fri, 18 Oct 1991 12:00:00 GMT',
+	'vary' => 'Accept-Encoding',
+	'etag' => '"28feccc0-40464"',
+	'cache-control' => 'public, max-age=31536000, stale-while-revalidate=604800',
+	'access-control-allow-origin' => '*',
 ] );
 
 // Renamed files
