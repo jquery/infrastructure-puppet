@@ -265,6 +265,15 @@ class profile::puppet::server (
 
   Ssh_authorized_key <<| tag == 'profile::puppet::server::puppet_sync' |>>
 
+  systemd::timer { 'pull-puppet-ca':
+    ensure      => $is_primary.bool2str('absent', 'present'),
+    user        => 'root',
+    description => 'rsync puppet CA files from the primary server',
+    # TODO: stop hardcoding path once fully on Debian 12
+    command     => "/usr/bin/rsync -avp --delete --chown puppet:puppet -e \"/usr/bin/ssh -i /etc/ssh/local_keys.d/puppet-sync\" ${primary_host}:/etc/puppetlabs/puppetserver/ca ${server_config_path}/ca",
+    interval    => ['OnCalendar=*-*-* *:4/5:00'],
+  }
+
   # Expose SSH keys so users can verify them
   file { '/srv/www':
     ensure => directory,
