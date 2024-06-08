@@ -7,6 +7,9 @@ class profile::puppet::server (
 ) {
   include profile::puppet::common
 
+  $primary_host = $profile::puppet::agent::ca_server
+  $is_primary = $primary_host == $facts['networking']['fqdn']
+
   $termini_package = debian::codename() ? {
     'bullseye' => 'puppetdb-termini',
     default    => 'puppet-terminus-puppetdb',
@@ -248,6 +251,19 @@ class profile::puppet::server (
   include profile::ssh::ca
 
   ssh::client::user_key { 'puppet-sync': }
+
+  if $facts['ssh_local_keys'] and $facts['ssh_local_keys']['puppet-sync'] {
+    $key = $facts['ssh_local_keys']['puppet-sync']
+    @@ssh_authorized_key { "puppet-sync-${facts['networking']['fqdn']}":
+      user    => 'root',
+      type    => $key.split(' ')[0],
+      key     => $key.split(' ')[1],
+      options => ['restrict'],
+      tag     => 'profile::puppet::server::puppet_sync',
+    }
+  }
+
+  Ssh_authorized_key <<| tag == 'profile::puppet::server::puppet_sync' |>>
 
   # Expose SSH keys so users can verify them
   file { '/srv/www':
