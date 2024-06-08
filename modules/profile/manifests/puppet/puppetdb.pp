@@ -14,6 +14,7 @@ class profile::puppet::puppetdb (
   }
 
   $puppetservers = jqlib::resource_hosts('class', 'profile::puppet::server')
+  $puppetservers_ips = $puppetservers.map |Stdlib::Fqdn $fqdn| { dnsquery::lookup($fqdn, true) }.flatten
 
   $config_path = debian::codename() ? {
     'bullseye' => '/etc/puppetlabs/puppetdb',
@@ -62,6 +63,12 @@ class profile::puppet::puppetdb (
     content   => "${nginx_htpassword_users.join("\n")}\n",
     require   => Package['nginx-full'],
     show_diff => false,
+  }
+
+  nftables::allow { 'puppetdb-clients':
+    proto => 'tcp',
+    dport => 8081,
+    saddr => $puppetservers_ips,
   }
 
   nftables::allow { 'puppetdb-external':
