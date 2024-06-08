@@ -178,6 +178,9 @@ class profile::puppet::server (
     notify  => Service['puppetserver'],
   }
 
+  $puppetservers = jqlib::resource_hosts('class', 'profile::puppet::server')
+  $puppetservers_notself = $puppetservers.filter |Stdlib::Fqdn $it| { $it != $facts['networking']['fqdn'] }
+
   file { "${profile::puppet::common::config_path}/puppetdb.conf":
     ensure  => file,
     mode    => '0444',

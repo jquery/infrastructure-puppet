@@ -1,2 +1,6 @@
 [main]
-server_urls = https://<%= @facts['fqdn'] %>:8081
+server_urls = https://<%= @facts['networking']['fqdn'] %>:8081
+<%- unless @puppetservers_notself.empty? -%>
+submit_only_server_urls = <%= @puppetservers_notself.map {|host| "https://#{host}:8081"}.join(',') %>
+command_broadcast = true
+<%- end -%>
