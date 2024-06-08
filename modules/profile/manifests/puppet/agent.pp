@@ -1,6 +1,7 @@
 # @summary configures the puppet agent
 class profile::puppet::agent (
   Stdlib::Fqdn $puppet_server = lookup('profile::puppet::agent::puppet_server'),
+  Stdlib::Fqdn $ca_server     = lookup('profile::puppet::agent::ca_server'),
 ) {
   include profile::puppet::common
 
