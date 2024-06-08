@@ -18,6 +18,9 @@ class profile::base (
   class { 'ssh::server':
     enable_ssh_ca => $enable_ssh_ca,
   }
+  class { 'ssh::client':
+    enable_ssh_ca => $enable_ssh_ca,
+  }
 
   class { 'users':
     accounts       => $accounts,
