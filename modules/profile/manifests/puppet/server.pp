@@ -247,6 +247,8 @@ class profile::puppet::server (
 
   include profile::ssh::ca
 
+  ssh::client::user_key { 'puppet-sync': }
+
   # Expose SSH keys so users can verify them
   file { '/srv/www':
     ensure => directory,

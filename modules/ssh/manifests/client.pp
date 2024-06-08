@@ -10,4 +10,11 @@ class ssh::client (
       mode    => '0444',
     }
   }
+
+  file { '/etc/ssh/local_keys.d':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0555',
+  }
 }
