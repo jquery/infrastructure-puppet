@@ -7,6 +7,10 @@ class profile::puppet::server (
 ) {
   include profile::puppet::common
 
+  stdlib::ensure_packages([
+    'rsync',
+  ])
+
   $primary_host = $profile::puppet::agent::ca_server
   $is_primary = $primary_host == $facts['networking']['fqdn']
 
