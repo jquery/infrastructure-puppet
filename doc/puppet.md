@@ -203,7 +203,7 @@ Alternatively, you can install octocatalog-diff yourself:
   ```
 * Provide your username and passwowrd via the environment:
   ```shell
-  export PUPPETDB_URL="https://username:password@puppet-03.ops.jquery.net:8100/"
+  export PUPPETDB_URL="https://username:password@puppet-04.ops.jquery.net:8100/"
   ```
 * Then, run `g10k` once on the jquery/infrastructure-puppet directory, and
   then you can use the`octocatalog-diff` command like above.

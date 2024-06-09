@@ -33,7 +33,7 @@ it.
 A [list] of all the host keys is also published, if you want tab
 completion.
 
-[list]: https://puppet-03.ops.jquery.net/known_hosts
+[list]: https://4.ops.jquery.net/known_hosts
 
 ## SSH configuration
 

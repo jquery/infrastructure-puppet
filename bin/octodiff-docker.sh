@@ -15,7 +15,7 @@ g10k -puppetfile -quiet -cachedir=/infrastructure-puppet/vendor_modules/.g10kcac
 echo && \
 read -p \"PuppetDB Username: \" username && \
 read -p \"PuppetDB Password: \" -s password && \
-export PUPPETDB_URL=\"https://\$username:\$password@puppet-03.ops.jquery.net:8100/\" && \
+export PUPPETDB_URL=\"https://\$username:\$password@puppet-04.ops.jquery.net:8100/\" && \
 echo -e \"\nThe octocatalog-diff command is now ready for use!\n\" && \
 /bin/bash;"
 
