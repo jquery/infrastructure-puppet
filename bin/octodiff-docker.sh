@@ -7,7 +7,7 @@ script=" \
 echo 'Launching debian container...' && \
 echo 'Installing packages...' && \
 apt-get update -qq && \
-DEBIAN_FRONTEND=noninteractive DEBCONF_NOWARNINGS=yes apt-get install -y -qq git octocatalog-diff puppet-agent puppet-module-puppetlabs-sshkeys-core g10k > /dev/null && \
+DEBIAN_FRONTEND=noninteractive DEBCONF_NOWARNINGS=yes apt-get install -y -qq git octocatalog-diff puppet-agent g10k > /dev/null && \
 cd /infrastructure-puppet && \
 patch -u /usr/lib/ruby/vendor_ruby/octocatalog-diff/catalog-diff/filter/compilation_dir.rb bin/patches/octocatalogdiff_issue261_compilationdir.rb.patch && \
 git config --global --add safe.directory /infrastructure-puppet && \

@@ -198,7 +198,6 @@ Alternatively, you can install octocatalog-diff yourself:
   ```
   git
   puppet-agent
-  puppet-module-puppetlabs-sshkeys-core
   g10k
   ```
 * Provide your username and passwowrd via the environment:
