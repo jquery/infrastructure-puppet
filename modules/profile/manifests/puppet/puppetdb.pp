@@ -25,6 +25,19 @@ class profile::puppet::puppetdb (
     default    => '/var/lib/puppetdb',
   }
 
+  $ssl_cert_path = debian::codename() ? {
+    'bullseye' => '/etc/puppetlabs/puppetdb/ssl/public.pem',
+    default    => "/var/lib/puppet/ssl/certs/${facts['networking']['fqdn']}.pem",
+  }
+  $ssl_key_path = debian::codename() ? {
+    'bullseye' => '/etc/puppetlabs/puppetdb/ssl/private.pem',
+    default    => "/var/lib/puppet/ssl/private_keys/${facts['networking']['fqdn']}.pem",
+  }
+  $ssl_ca_path = debian::codename() ? {
+    'bullseye' => '/etc/puppetlabs/puppetdb/ssl/ca.pem',
+    default    => '/etc/puppet/puppetserver/ca/ca_crt.pem',
+  }
+
   file { "${config_path}/cert-allowlist":
     ensure  => file,
     mode    => '0444',
