@@ -37,12 +37,12 @@ completion.
 
 ## SSH configuration
 
-A minimal SSH configuration (`~/.ssh/config by default`) snippet might
+A minimal SSH configuration (`~/.ssh/config` by default) snippet might
 look like something like this:
 
 ```
 Host *.ops.jquery.net
-  # Use a file with the host key (from above), or the full list of all
+  # Use a file with the CA key (from above), or the full list of all
   # the host keys. Don't trust any other keys.
   UserKnownHostsFile ~/.ssh/known_hosts.d/jquery
   StrictHostKeyChecking yes
