@@ -223,7 +223,7 @@ class profile::puppet::server (
   sudo::rule { 'notifier-g10k':
     target     => 'notifier',
     privileges => [
-      'ALL = (gitpuppet) NOPASSWD: /usr/bin/g10k -config /etc/puppetlabs/g10k.yaml',
+      "ALL = (gitpuppet) NOPASSWD: /usr/bin/g10k -config ${g10k_config_path}",
     ],
   }
 
