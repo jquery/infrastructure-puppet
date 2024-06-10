@@ -1,3 +1,5 @@
 profile::gruntjscom::canonical_name: stage.gruntjs.com
 profile::gruntjscom::aliases: []
 profile::gruntjscom::robots_deny: true
+
+profile::puppet::agent::puppet_server: puppet-04.ops.jquery.net
