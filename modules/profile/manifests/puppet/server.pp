@@ -265,7 +265,7 @@ class profile::puppet::server (
       user    => 'root',
       type    => $key.split(' ')[0],
       key     => $key.split(' ')[1],
-      options => ['restrict'],
+      options => ['restrict', ssh::client::from_restriction()],
       tag     => 'profile::puppet::server::puppet_sync',
     }
   }
