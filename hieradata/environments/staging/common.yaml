@@ -4,4 +4,3 @@ profile::wordpress::docs::append_title: ' (staging)'
 profile::certbot::email: infrastructure-team@jquery.com
 
 profile::puppet::agent::puppet_server: puppet-03.ops.jquery.net
-profile::puppet::agent::ca_server: puppet-03.ops.jquery.net
