@@ -10,7 +10,7 @@
 | [ESLint servers](./eslint.md) | -
 | [Grunt website](./grunt.md) | web server for gruntjs.com
 | [jQuery CDN](./cdn.md) | origin server for code.jquery.com
-| [Miscweb](./miscweb.md) | web server for various static sites and redirects
+| [Miscweb](./miscweb.md) | web server for various static sites, standalone PHP apps (jQuery Mobile ThemeRoller), and redirects.
 | [Monitoring](./monitoring.md) | -
 | [Search](./search.md) | Typesense instance, search suggestions for jQuery and QUnit doc sites
 | [WordPress sites](./wordpress.md) | web servers for doc sites and blogs at jquery.com, jqueryui.com, and jquerymobile.com.
@@ -20,6 +20,7 @@
 * [Access](./access.md), how to manage server access.
 * [Hosting](./hosting.md), how to create or upgrade servers.
 * [Puppet](./puppet.md), how to provision servers.
+* [Former services](./former-services.md), decommissioned servers.
 
 ## Google Drive
 
