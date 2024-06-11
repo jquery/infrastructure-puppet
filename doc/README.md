@@ -2,22 +2,24 @@
 
 ## Services
 
-| Service | Domains
+| Service | Description
 |--|--
-| [jQuery CDN](./cdn.md) | code.jquery.com
-| [WordPress sites](./wordpress.md) | jquery.com, jqueryui.com, jquerymobile.com
-| [Search](./search.md) | Typeahead search
-| [Grunt website](./grunt.md) | gruntjs.com
-| [ESLint servers](./eslint.md) | —
-| [Miscweb](./miscweb.md) | various static sites and redirects
+| [Backups](./backup.md) | Tarsnap, backups for WordPress blogs, contentorigin, and filestash.
+| [DNS management](./dns.md) | -
+| [Email forwarding](./email.md) | -
+| [ESLint servers](./eslint.md) | -
+| [Grunt website](./grunt.md) | web server for gruntjs.com
+| [jQuery CDN](./cdn.md) | origin server for code.jquery.com
+| [Miscweb](./miscweb.md) | web server for various static sites and redirects
+| [Monitoring](./monitoring.md) | -
+| [Search](./search.md) | Typesense instance, search suggestions for jQuery and QUnit doc sites
+| [WordPress sites](./wordpress.md) | web servers for doc sites and blogs at jquery.com, jqueryui.com, and jquerymobile.com.
 
-## Favorite pages
+## Process pages
 
-* [Backups](./backup.md)
-* [DNS](./dns.md)
-* [Hosting](./hosting.md)
-* [Monitoring](./monitoring.md)
-* [Puppet](./puppet.md)
+* [Access](./access.md), how to manage server access.
+* [Hosting](./hosting.md), how to create or upgrade servers.
+* [Puppet](./puppet.md), how to provision servers.
 
 ## Google Drive
 
