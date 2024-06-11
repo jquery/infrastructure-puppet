@@ -4,12 +4,12 @@
 
 | Service | Description
 |--|--
-| [Backups](./backup.md) | Tarsnap, backups for WordPress blogs, contentorigin, and filestash.
+| [Backups](./backup.md) | Tarsnap, backups for WordPress blogs, content.jquery.com, and filestash.
 | [DNS management](./dns.md) | -
 | [Email forwarding](./email.md) | -
 | [ESLint servers](./eslint.md) | -
 | [Grunt website](./grunt.md) | web server for gruntjs.com
-| [jQuery CDN](./cdn.md) | origin server for code.jquery.com
+| [jQuery CDN](./cdn.md) | origin server for code.jquery.com and content.jquery.com
 | [Miscweb](./miscweb.md) | web server for various static sites, standalone PHP apps (jQuery Mobile ThemeRoller), and redirects.
 | [Monitoring](./monitoring.md) | -
 | [Search](./search.md) | Typesense instance, search suggestions for jQuery and QUnit doc sites

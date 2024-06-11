@@ -70,6 +70,8 @@ The "code" service has the following notable configuration settings (last update
 
 This is a WordPress-based documentation site (see [wordpress.md](./wordpress.md)), similar to https://jquery.com and https://api.jquery.com and served from the same set of WordPress origin servers.
 
+The `releases.jquery.com` domain has additional Nginx configuration to proxy the `/git` directory from the `filestash` server.
+
 Notable differences:
 
 * fronted by same CDN provider as the jQuery CDN (unlike our other doc sites, which use Cloudflare).
