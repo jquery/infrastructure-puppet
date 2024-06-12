@@ -8,12 +8,14 @@
 | [DNS management](./dns.md) | Cloudflare | -
 | [Email forwarding](./email.md) | FordwardEmail.net | -
 | [ESLint servers](./eslint.md) | DigitalOcean | -
-| [Grunt website](./grunt.md) | DigitalOcean | - web server for gruntjs.com
-| [jQuery CDN](./cdn.md) | Fastly, DigitalOcean | origin server for code.jquery.com and content.jquery.com
+| [Grunt website](./grunt.md) | DigitalOcean | web server for gruntjs.com.
+| [jQuery CDN](./cdn.md) | Fastly, DigitalOcean | code.jquery.com, releases.jquery.com, and content.jquery.com.
 | [Miscweb](./miscweb.md) | DigitalOcean | web server for various static sites, standalone PHP apps, and redirects. Includes jQuery Mobile ThemeRoller.
 | [Monitoring](./monitoring.md) | StatusCake.com | -
 | [Search](./search.md) | DigitalOcean | self-hosted Typesense, search suggestions for jQuery and QUnit doc sites
-| [WordPress sites](./wordpress.md) | DigitalOcean | self-hosted WordPress for doc sites and blogs at jquery.com, jqueryui.com, and jquerymobile.com.
+| [WordPress sites](./wordpress.md) | DigitalOcean | self-hosted WordPress, doc sites and blogs at jquery.com, jqueryui.com, and jquerymobile.com.
+| Password management | 1Password | -
+| Chat | Gitter, Libera Chat | Our public Matrix-channels are hosted by Gitter/Element. IRC channel is hosted by LIbera Chat. https://jquery.com/support/
 
 ## Process pages
 
