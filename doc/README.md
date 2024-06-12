@@ -2,18 +2,18 @@
 
 ## Services
 
-| Service | Description
-|--|--
-| [Backups](./backup.md) | Tarsnap, backups for WordPress blogs, content.jquery.com, and filestash.
-| [DNS management](./dns.md) | -
-| [Email forwarding](./email.md) | -
-| [ESLint servers](./eslint.md) | -
-| [Grunt website](./grunt.md) | web server for gruntjs.com
-| [jQuery CDN](./cdn.md) | origin server for code.jquery.com and content.jquery.com
-| [Miscweb](./miscweb.md) | web server for various static sites, standalone PHP apps (jQuery Mobile ThemeRoller), and redirects.
-| [Monitoring](./monitoring.md) | -
-| [Search](./search.md) | Typesense instance, search suggestions for jQuery and QUnit doc sites
-| [WordPress sites](./wordpress.md) | web servers for doc sites and blogs at jquery.com, jqueryui.com, and jquerymobile.com.
+| Service | Vendor | Description
+|--|--|--
+| [Backups](./backup.md) | Tarsnap | backups for WordPress blogs, content.jquery.com, and filestash.
+| [DNS management](./dns.md) | Cloudflare | -
+| [Email forwarding](./email.md) | FordwardEmail.net | -
+| [ESLint servers](./eslint.md) | DigitalOcean | -
+| [Grunt website](./grunt.md) | DigitalOcean | - web server for gruntjs.com
+| [jQuery CDN](./cdn.md) | Fastly, DigitalOcean | origin server for code.jquery.com and content.jquery.com
+| [Miscweb](./miscweb.md) | DigitalOcean | web server for various static sites, standalone PHP apps, and redirects. Includes jQuery Mobile ThemeRoller.
+| [Monitoring](./monitoring.md) | StatusCake.com | -
+| [Search](./search.md) | DigitalOcean | self-hosted Typesense, search suggestions for jQuery and QUnit doc sites
+| [WordPress sites](./wordpress.md) | DigitalOcean | self-hosted WordPress for doc sites and blogs at jquery.com, jqueryui.com, and jquerymobile.com.
 
 ## Process pages
 
