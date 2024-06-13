@@ -160,7 +160,7 @@ class profile::puppet::server (
   Concat::Fragment <| target == $::profile::puppet::common::config_file |> ~> Service['puppetserver']
   Concat[$::profile::puppet::common::config_file] ~> Service['puppetserver']
 
-  ['puppetserver.conf'].each |String $file| {
+  ['auth.conf', 'puppetserver.conf'].each |String $file| {
     $puppet_agent_base_path = $profile::puppet::common::config_path
     file { "${server_config_path}/conf.d/${file}":
       ensure  => file,
