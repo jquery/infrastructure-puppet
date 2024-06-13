@@ -31,7 +31,7 @@ ssh root@"$INSTANCE" "$PUPPET" config --section agent set environment "$ENVIRONM
 ssh root@"$INSTANCE" "$PUPPET" agent -t || true
 
 REAL_CSR_FINGERPRINT=$(ssh root@"$INSTANCE" openssl req -in "$SSL_PATH"/certificate_requests/"$INSTANCE".pem -outform der | sha256sum | awk '{ print $1 }' | sed 's/\(..\)/\1:/g; s/:$//; s/./\U&/g;')
-SERVER_CSR_FINGERPRINT=$(ssh "$PUPPET_SERVER" sudo openssl req -in /etc/puppetlabs/puppet/ssl/ca/requests/"$INSTANCE".pem -outform der | sha256sum | awk '{ print $1 }' | sed 's/\(..\)/\1:/g; s/:$//; s/./\U&/g;')
+SERVER_CSR_FINGERPRINT=$(ssh "$PUPPET_SERVER" sudo openssl req -in /etc/puppet/puppetserver/ca/requests/"$INSTANCE".pem -outform der | sha256sum | awk '{ print $1 }' | sed 's/\(..\)/\1:/g; s/:$//; s/./\U&/g;')
 if [ "$REAL_CSR_FINGERPRINT" != "$SERVER_CSR_FINGERPRINT" ]; then
   echo "CSR fingerprint does not match!"
   exit 1

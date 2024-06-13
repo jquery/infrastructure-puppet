@@ -277,7 +277,7 @@ class profile::puppet::server (
     user        => 'root',
     description => 'rsync Puppet CA files from the primary server',
     # TODO: stop hardcoding path once fully on Debian 12
-    command     => "/usr/bin/rsync -avp --delete --chown puppet:puppet -e \"/usr/bin/ssh -i /etc/ssh/local_keys.d/puppet-sync\" ${primary_host}:/etc/puppetlabs/puppetserver/ca/ ${server_config_path}/ca/",
+    command     => "/usr/bin/rsync -avp --delete --chown puppet:puppet -e \"/usr/bin/ssh -i /etc/ssh/local_keys.d/puppet-sync\" ${primary_host}:/etc/puppet/puppetserver/ca/ ${server_config_path}/ca/",
     interval    => ['OnCalendar=*-*-* *:4/5:00'],
   }
 
