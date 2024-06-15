@@ -211,6 +211,10 @@ profile::miscweb::redirects:
     target: https://jquery.com/meetups/
     mode: root
     certificate: miscweb-a
+  swarm.jquery.org:
+    target: https://github.com/jquery/testswarm
+    mode: root
+    certificate: miscweb-a
   view.jquery.org:
     target: https://releases.jquery.com/jquery/
     mode: root
