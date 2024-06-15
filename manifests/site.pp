@@ -47,11 +47,6 @@ node 'puppet-04.ops.jquery.net' {
   role('puppet')
 }
 
-# 2 CPU, 4 GB mem, Debian 11 Bullseye, 80 GB disk
-node 'swarm-02.ops.jquery.net' {
-  role('testswarm')
-}
-
 # 2 CPU, 2 GB mem, Debian 11 Bullseye
 node 'search-02.ops.jquery.net' {
   role('search')

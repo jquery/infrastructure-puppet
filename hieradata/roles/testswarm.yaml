@@ -1,8 +1,0 @@
-profile::certbot::certificates:
-  testswarm:
-    domains:
-      - "%{::facts.fqdn}"
-
-profile::notifier::tls_key_name: testswarm
-
-profile::testswarm::server::tls_key_name: testswarm

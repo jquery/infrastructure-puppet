@@ -150,10 +150,6 @@ profile::miscweb::redirects:
     target: https://learn.jquery.com/
     mode: root
     certificate: miscweb-a
-  swarm.jquery.com:
-    target: https://swarm.jquery.org
-    mode: prefix
-    certificate: miscweb-a
   ui.jquery.com:
     target: https://jqueryui.com
     mode: prefix
