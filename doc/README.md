@@ -6,7 +6,7 @@
 |--|--|--
 | [Backups](./backup.md) | Tarsnap | backups for WordPress blogs, content.jquery.com, and filestash.
 | [DNS management](./dns.md) | Cloudflare | -
-| [Email forwarding](./email.md) | FordwardEmail.net | -
+| [Email forwarding](./email.md) | ForwardEmail.net | -
 | [ESLint servers](./eslint.md) | DigitalOcean | -
 | [Grunt website](./grunt.md) | DigitalOcean | web server for gruntjs.com.
 | [jQuery CDN](./cdn.md) | Fastly, DigitalOcean | code.jquery.com, releases.jquery.com, and content.jquery.com.
