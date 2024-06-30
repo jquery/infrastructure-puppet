@@ -36,6 +36,7 @@ Unit::testHttp( $server, '/jquery-3.0.0.js', [], [
 	'cache-control' => 'public, max-age=31536000, stale-while-revalidate=604800',
 	'access-control-allow-origin' => '*',
 	'accept-ranges' => 'bytes',
+	'cross-origin-resource-policy' => 'cross-origin',
 ] );
 
 Unit::testHttp( $server, '/qunit/qunit-2.0.0.css', [], [
@@ -49,6 +50,7 @@ Unit::testHttp( $server, '/qunit/qunit-2.0.0.css', [], [
 	'cache-control' => 'public, max-age=31536000, stale-while-revalidate=604800',
 	'access-control-allow-origin' => '*',
 	'accept-ranges' => 'bytes',
+	'cross-origin-resource-policy' => 'cross-origin',
 ] );
 
 Unit::testHttp( $server, '/ui/1.10.0/themes/base/images/ui-icons_222222_256x240.png', [], [
@@ -61,6 +63,7 @@ Unit::testHttp( $server, '/ui/1.10.0/themes/base/images/ui-icons_222222_256x240.
 	'cache-control' => 'public, max-age=31536000, stale-while-revalidate=604800',
 	'access-control-allow-origin' => '*',
 	'accept-ranges' => 'bytes',
+	'cross-origin-resource-policy' => 'cross-origin',
 ] );
 
 Unit::testHttp( $server, '/jquery-2.0.0.min.map', [], [
@@ -73,6 +76,7 @@ Unit::testHttp( $server, '/jquery-2.0.0.min.map', [], [
 	'cache-control' => 'public, max-age=31536000, stale-while-revalidate=604800',
 	'access-control-allow-origin' => '*',
 	'accept-ranges' => 'bytes',
+	'cross-origin-resource-policy' => 'cross-origin',
 ] );
 
 // Static asset
@@ -90,6 +94,7 @@ Unit::testHttp( $server, '/jquery-3.0.0.js', [
 	'cache-control' => 'public, max-age=31536000, stale-while-revalidate=604800',
 	'access-control-allow-origin' => '*',
 	'accept-ranges' => 'bytes',
+	'cross-origin-resource-policy' => 'cross-origin',
 ] );
 
 // Gzip Compression
@@ -106,6 +111,7 @@ Unit::testHttp( $server, '/jquery-3.0.0.js', [
 	'etag' => '"28feccc0-40464"',
 	'cache-control' => 'public, max-age=31536000, stale-while-revalidate=604800',
 	'access-control-allow-origin' => '*',
+	'cross-origin-resource-policy' => 'cross-origin',
 ] );
 
 Unit::testHttp( $server, '/qunit/qunit-2.0.0.css', [
@@ -120,6 +126,7 @@ Unit::testHttp( $server, '/qunit/qunit-2.0.0.css', [
 	'etag' => '"28feccc0-1d20"',
 	'cache-control' => 'public, max-age=31536000, stale-while-revalidate=604800',
 	'access-control-allow-origin' => '*',
+	'cross-origin-resource-policy' => 'cross-origin',
 ] );
 
 // Renamed files
