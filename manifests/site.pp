@@ -37,11 +37,6 @@ node 'miscweb-01.ops.jquery.net' {
   role('miscweb')
 }
 
-# 2 CPU, 4 GB mem, Debian 11 Bullseye
-node 'puppet-03.ops.jquery.net' {
-  role('puppet')
-}
-
 # 2 CPU, 4 GB mem, Debian 12 Bookworm
 node 'puppet-04.ops.jquery.net' {
   role('puppet')
