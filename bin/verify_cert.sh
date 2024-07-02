@@ -20,7 +20,7 @@ fi
 
 pemfilename="$1"
 keyfilename="${1%.pem}.key"
-cabundlefilename="${1%.pem}.ca-bundle"
+cabundlefilename="${1%.pem}_bundle.pem"
 if [ ! -f "$pemfilename" ]; then
   echo -e "Error: Could not find $pemfilename"
   exit 1
@@ -45,7 +45,7 @@ openssl verify -CAfile "$cabundlefilename" "$pemfilename"
 
 echo -e "\n${bold}Verify the public keys match (expect \"Keys match\"):${normal}"
 pemkey=`openssl x509 -noout -pubkey -in "$pemfilename"`
-pubkey=`openssl rsa -pubout -in "$keyfilename" 2>/dev/null`
+pubkey=`openssl ec -pubout -in "$keyfilename" 2>/dev/null`
 keydiff=`diff <(echo $pemkey) <(echo $pubkey)`
 
 if [ ${#keydiff} -eq 0 ]; then
