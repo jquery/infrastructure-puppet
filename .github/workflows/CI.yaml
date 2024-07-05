@@ -10,7 +10,7 @@ jobs:
     # Includes Ruby 2.7 and RubyGems 3.1
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Install puppet-lint
         run: |
