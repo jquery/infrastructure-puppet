@@ -9,7 +9,7 @@ We run two quite different types of WordPress installations:
   about 20 sites that are automatically provisioned from Git
   repositories using the [grunt-jquery-content] system.
 
-[jquery-wp-content]: https://github.com/jquery/grunt-jquery-content/
+[grunt-jquery-content]: https://github.com/jquery/grunt-jquery-content/
 
 All sites have their WordPress settings managed by Puppet, and all
 sites are powered by a locally running MariaDB instance, and backed
