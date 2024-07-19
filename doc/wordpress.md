@@ -45,6 +45,7 @@ older version had a different database schema.
 | https://api.jqueryui.com/1.10/           | [`1-10` branch](https://github.com/jquery/api.jqueryui.com/tree/1-10/) | https://stage.api.jqueryui.com/1.10/
 | https://api.jqueryui.com/1.11/           | [`1-11` branch](https://github.com/jquery/api.jqueryui.com/tree/1-11/) | https://stage.api.jqueryui.com/1.11/
 | https://api.jqueryui.com/1.12/           | [`1-12` branch](https://github.com/jquery/api.jqueryui.com/tree/1-12/) | https://stage.api.jqueryui.com/1.12/
+| https://api.jqueryui.com/1.13/           | [`1-13` branch](https://github.com/jquery/api.jqueryui.com/tree/1-13/) | https://stage.api.jqueryui.com/1.13/
 | https://brand.jquery.org/                | [`main` branch](https://github.com/jquery/brand.jquery.org/tree/main/) | https://stage.brand.jquery.org/
 | https://contribute.jquery.org/           | [`main` branch](https://github.com/jquery/contribute.jquery.org/tree/main/) | https://stage.contribute.jquery.org/
 | https://jquery.com/                      | [semver tags](https://github.com/jquery/jquery.com/tree/main/) | https://stage.jquery.com/

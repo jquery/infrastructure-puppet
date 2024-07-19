@@ -67,7 +67,7 @@ docs_sites:
     repository:
       name: jquery/api.jqueryui.com
       branch: main
-      tag_format: "^v?1\\.13\\.\\d+(-\\d+)?$"
+      tag_format: "^v?1\\.14\\.\\d+(-\\d+)?$"
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
@@ -122,10 +122,20 @@ docs_sites:
   api_jqueryui_com_1_12:
     host: api.jqueryui.com
     path: /1.12/
-    site_name: jQuery UI 1.11 API Documentation
+    site_name: jQuery UI 1.12 API Documentation
     repository:
       name: jquery/api.jqueryui.com
       branch: 1-12
+    certificate: wordpress
+    active_theme: api.jqueryui.com
+    enable_api_tweaks: true
+  api_jqueryui_com_1_13:
+    host: api.jqueryui.com
+    path: /1.13/
+    site_name: jQuery UI 1.13 API Documentation
+    repository:
+      name: jquery/api.jqueryui.com
+      branch: 1-13
     certificate: wordpress
     active_theme: api.jqueryui.com
     enable_api_tweaks: true
