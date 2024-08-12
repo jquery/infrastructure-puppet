@@ -51,6 +51,12 @@ server {
     include              /etc/nginx/fastcgi_params;
   }
 <%- end -%>
+
+  location / {
+
+    # Add Content Security Policy headers
+    add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' code.jquery.com; connect-src 'self'; img-src 'self'; style-src 'self'; report-to https://csp-report-api.openjs-foundation.workers.dev/";
+  }
 }
 
 # vim: ts=2 sw=2 et
