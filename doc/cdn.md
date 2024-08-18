@@ -32,6 +32,7 @@ The following are examples of mitigations and optimizations:
 * CDN: Gzip compression, 1-year unconditional browser caching, 7-day stale-while-revalidate.
 * CDN: Pull from origin using an encrypted connection (including for plain HTTP requests).
 * CDN: Enable strict SNI verification on the HTTPS/TLS connection to the origin.
+* CDN: Restrict Fastly Purge API to [require authentication](https://docs.fastly.com/en/guides/authenticating-api-purge-requests).
 * Origin: Debian Linux LTS with debian-security, unattended-upgrades, and basic firewalls.
 * Origin: Nginx, Certbox, and Node installed from upstream Debian (no custom apt repo, PPA, or unpackaged software).
 * Origin: Require webhook payloads from GitHub to carry an HMAC-verified signature, based on a secret token.
