@@ -12,6 +12,9 @@ server {
   error_log     /var/log/nginx/error.log crit;
   server_tokens off;
 
+  # Add Content Security Policy headers
+  add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' code.jquery.com; connect-src 'self'; img-src 'self'; style-src 'self'; report-to https://csp-report-api.openjs-foundation.workers.dev/";
+
   location / {
     proxy_pass http://localhost:<%= @backend_port %>;
     proxy_redirect off;
