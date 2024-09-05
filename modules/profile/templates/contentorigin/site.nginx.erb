@@ -14,7 +14,8 @@ server {
   server_tokens off;
 
   # Add Content Security Policy headers
-  add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' code.jquery.com; connect-src 'self'; img-src 'self'; style-src 'self'; report-to https://csp-report-api.openjs-foundation.workers.dev/";
+  add_header Reporting-Endpoints "csp-endpoint=\"https://csp-report-api.openjs-foundation.workers.dev/\""
+  add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' code.jquery.com; connect-src 'self'; img-src 'self'; style-src 'self'; report-to csp-endpoint";
 
   location / {
     root /srv/www/content.jquery.com;
