@@ -20,7 +20,7 @@ server {
     # Add Content Security Policy headers
     add_header Reporting-Endpoints "csp-endpoint=\"https://csp-report-api.openjs-foundation.workers.dev/\""
     # The SHAs are for inline GA scripts
-    add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' revive.bocoup.com www.google-analytics.com 'sha256-jl/4AZjT8o/P6SGURO7MWYC9FWxqz2COCD/1XBPchLU=' 'sha256-BpeEnlj1KCWLiGFbROjXPqTiovWDb243qYdjW2miRrc='; connect-src 'self'; img-src 'self'; style-src 'self' fonts.googleapis.com; report-to csp-endpoint;" always;
+    add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' revive.bocoup.com www.google-analytics.com 'sha256-jl/4AZjT8o/P6SGURO7MWYC9FWxqz2COCD/1XBPchLU=' 'sha256-BpeEnlj1KCWLiGFbROjXPqTiovWDb243qYdjW2miRrc='; connect-src 'self'; img-src 'self'; style-src 'self' fonts.googleapis.com; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint;" always;
   }
 
   location /.well-known/acme-challenge {
