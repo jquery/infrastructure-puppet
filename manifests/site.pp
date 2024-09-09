@@ -32,6 +32,11 @@ node 'gruntjs-02.ops.jquery.net' {
   role('gruntjscom')
 }
 
+# 1 CPU, 2 GB mem, Debian 12 Bookworm
+node 'gruntjs-03.ops.jquery.net' {
+  role('gruntjscom')
+}
+
 # 2 CPU, 2 GB mem, Debian 11 Bullseye
 node 'miscweb-01.ops.jquery.net' {
   role('miscweb')
@@ -77,6 +82,11 @@ node 'codeorigin-02.stage.ops.jquery.net' {
 
 # Debian 11 Bullseye
 node 'gruntjs-02.stage.ops.jquery.net' {
+  role('gruntjscom')
+}
+
+# Debian 12 Bookworm
+node 'gruntjs-03.stage.ops.jquery.net' {
   role('gruntjscom')
 }
 
