@@ -6,7 +6,7 @@ set -euo pipefail
 INSTANCE=$1
 ENVIRONMENT=$2
 
-PUPPET_SERVER=$(python3 -c "import sys, yaml; print(yaml.safe_load(sys.stdin)['profile::puppet::agent::puppet_server'])" < hieradata/environments/"$ENVIRONMENT"/common.yaml)
+PUPPET_SERVER=$(cat hieradata/environments/"$ENVIRONMENT"/common.yaml | fgrep puppet_server | cut -d' ' -f2)
 VERSION_CODENAME=$(source <(ssh root@"$INSTANCE" cat /etc/os-release); echo "$VERSION_CODENAME")
 
 PUPPET="puppet"
