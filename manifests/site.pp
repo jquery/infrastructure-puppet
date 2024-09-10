@@ -27,11 +27,6 @@ node 'filestash-01.ops.jquery.net' {
   role('docs::filestash')
 }
 
-# 1 CPU, 2 GB mem, Debian 11 Bullseye
-node 'gruntjs-02.ops.jquery.net' {
-  role('gruntjscom')
-}
-
 # 1 CPU, 2 GB mem, Debian 12 Bookworm
 node 'gruntjs-03.ops.jquery.net' {
   role('gruntjscom')
@@ -78,11 +73,6 @@ node 'builder-05.stage.ops.jquery.net' {
 # Debian 11 Bullseye
 node 'codeorigin-02.stage.ops.jquery.net' {
   role('codeorigin')
-}
-
-# Debian 11 Bullseye
-node 'gruntjs-02.stage.ops.jquery.net' {
-  role('gruntjscom')
 }
 
 # Debian 12 Bookworm
