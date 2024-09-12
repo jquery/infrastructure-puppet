@@ -19,7 +19,7 @@ server {
   root /srv/www/<%= @fqdn %><%= @site['webroot'] or '' %>;
 
   # Add Content Security Policy headers
-  add_header Reporting-Endpoints "csp-endpoint=\"https://csp-report-api.openjs-foundation.workers.dev/\""
+  add_header Reporting-Endpoints "csp-endpoint='https://csp-report-api.openjs-foundation.workers.dev/'";
   add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' code.jquery.com; connect-src 'self'; img-src 'self'; style-src 'self'; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint";
 
 <%- if @site['allow_php'] -%>
