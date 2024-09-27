@@ -20,7 +20,20 @@ server {
 
   # Add Content Security Policy headers
   add_header Reporting-Endpoints "csp-endpoint='https://csp-report-api.openjs-foundation.workers.dev/'";
-  add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' code.jquery.com; connect-src 'self'; img-src 'self'; style-src 'self'; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint";
+  # script-src: add 'wasm-unsafe-eval' for WebAssembly-driven search on
+  #   bugs.jquery.com, bugs.jqueryui.com, and plugins.jquery.com
+  # img-src: allow secure.gravatar.com images on plugins.jquery.com
+  # media-src: allow content.jquery.com media on podcast.jquery.com
+  add_header Content-Security-Policy-Report-Only "
+    default-src 'self';
+    script-src 'self' 'wasm-unsafe-eval' code.jquery.com;
+    connect-src 'self';
+    img-src 'self' secure.gravatar.com;
+    style-src 'self';
+    media-src 'self' content.jquery.com;
+    report-uri https://csp-report-api.openjs-foundation.workers.dev/;
+    report-to csp-endpoint
+  ";
 
 <%- if @site['allow_php'] -%>
   index index.php index.html;
