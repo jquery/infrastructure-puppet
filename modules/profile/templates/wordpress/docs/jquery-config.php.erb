@@ -14,3 +14,10 @@ define( 'JQUERY_STAGING_FORMAT', 'stage.%s' );
 if ( defined( 'XMLRPC_REQUEST' ) ) {
   @ini_set( 'memory_limit', '512M' );
 }
+
+<%- if @live_site == 'jquery.com' || @live_site == 'api.jquery.com' -%>
+define(
+  'JQUERY_BANNER',
+  'jQuery 4.0 is coming soon! Prepare by <a href="https://jquery.com/download/">upgrading</a> to the latest jQuery 3.x release. Learn more about our <a href="https://jquery.com/support/">version support</a>.'
+);
+<%- end -%>
