@@ -502,6 +502,8 @@ profile::base::accounts:
         key: AAAAC3NzaC1lZDI1NTE5AAAAICA7xmhroURmm3VVWoT3YS1UxiolOd2GDNLJDkqAv4/g
       - type: ssh-ed25519
         key: AAAAC3NzaC1lZDI1NTE5AAAAIEO3B2oqVHm9SkPyJEf/bcO11VqfyZCLH2ARpq4N+ioz
+      - type: ssh-ed25519
+        key: AAAAC3NzaC1lZDI1NTE5AAAAIDea+NfkxCrn0pdB32vjMKnYuzGzGV0kOUlkdtZdDcnr
 
 profile::base::groups:
   sudo:
