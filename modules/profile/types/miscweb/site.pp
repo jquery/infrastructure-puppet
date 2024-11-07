@@ -9,4 +9,5 @@ type Profile::Miscweb::Site = Struct[{
   allow_php    => Optional[Boolean],
   php_env      => Optional[Hash[String[1], String]],
   certificate  => Optional[String[1]],
+  csp_header   => Optional[String[1]],
 }]
