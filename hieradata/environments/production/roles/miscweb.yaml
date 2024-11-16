@@ -21,14 +21,7 @@ profile::miscweb::sites:
     # script-src: unsafe-eval for syntax highlighting on all pages
     # img-src: data: for inline SVGs
     # style-src|font-src: load fonts from Google Fonts
-    csp_header: |
-      default-src 'self';
-      script-src 'self' 'unsafe-eval';
-      img-src 'self' data:;
-      style-src 'self' fonts.googleapis.com;
-      font-src 'self' fonts.gstatic.com;
-      report-uri https://csp-report-api.openjs-foundation.workers.dev/;
-      report-to csp-endpoint
+    csp_header: default-src 'self'; script-src 'self' 'unsafe-eval'; img-src 'self' data:; style-src 'self' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint
   podcast.jquery.com:
     repository:
       name: jquery/podcast.jquery.com
@@ -55,12 +48,7 @@ profile::miscweb::sites:
       THEMEROLLER_ZIPDIR: /var/cache/themeroller-zip
     # style-src: lots of inline styles
     # img-src: data: for inline images
-    csp_header: |
-      default-src 'self';
-      style-src 'self' 'unsafe-inline';
-      img-src 'self' data:;
-      report-uri https://csp-report-api.openjs-foundation.workers.dev/;
-      report-to csp-endpoint
+    csp_header: default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint
   bugs.jquery.com:
     repository:
       name: jquery/bugs.jquery.com
