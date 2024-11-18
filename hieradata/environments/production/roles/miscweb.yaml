@@ -46,9 +46,10 @@ profile::miscweb::sites:
       }
     php_env:
       THEMEROLLER_ZIPDIR: /var/cache/themeroller-zip
-    # style-src: lots of inline styles
+    # style-src: unsafe-inline for inline styles
+    # script-src: unsafe-inline for inline scripts
     # img-src: data: for inline images
-    csp_header: default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint
+    csp_header: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint
   bugs.jquery.com:
     repository:
       name: jquery/bugs.jquery.com
