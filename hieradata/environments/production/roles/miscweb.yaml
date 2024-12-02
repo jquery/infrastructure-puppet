@@ -19,9 +19,15 @@ profile::miscweb::sites:
       branch: main
     allow_php: true
     # script-src: unsafe-eval for syntax highlighting on all pages
+    # script-src: unsafe-inline for popup page
+    # script-src: load scripts from code.jquery.com
     # img-src: data: for inline SVGs
+    # img-src: load images from code.jquery.com
     # style-src|font-src: load fonts from Google Fonts
-    csp_header: default-src 'self'; script-src 'self' 'unsafe-eval'; img-src 'self' data:; style-src 'self' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint
+    # style-src: load styles from code.jquery.com
+    # style-src: unsafe-inline for supports tests in
+    #   jQuery 1.7.3 and jQuery Mobile 1.3.0
+    csp_header: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' code.jquery.com; img-src 'self' code.jquery.com data:; style-src 'self' 'unsafe-inline' code.jquery.com fonts.googleapis.com; font-src 'self' fonts.gstatic.com; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint
   podcast.jquery.com:
     repository:
       name: jquery/podcast.jquery.com
