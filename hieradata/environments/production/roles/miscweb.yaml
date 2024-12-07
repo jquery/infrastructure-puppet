@@ -25,6 +25,7 @@ profile::miscweb::sites:
     # script-src: load scripts from cdn.jsdelivr.net
     # script-src: load script from gd.geobytes.com
     # connect-src: connect to maps.googleapis.com
+    # connect-src: fetch fonts from fonts.googleapis.com
     # img-src: data: for inline SVGs
     # img-src: load images from code.jquery.com
     # img-src: load images from maps.gstatic.com
@@ -34,7 +35,7 @@ profile::miscweb::sites:
     # style-src: load styles from cdn.jsdelivr.net
     # style-src: unsafe-inline for supports tests in
     #   jQuery 1.7.3 and jQuery Mobile 1.3.0
-    csp_header: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' gd.geobytes.com code.jquery.com maps.google.com cdn.jsdelivr.net; connect-src 'self' maps.googleapis.com; img-src 'self' code.jquery.com maps.gstatic.com maps.google.com data:; style-src 'self' 'unsafe-inline' code.jquery.com fonts.googleapis.com cdn.jsdelivr.net; font-src 'self' fonts.gstatic.com; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint
+    csp_header: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' gd.geobytes.com code.jquery.com maps.google.com cdn.jsdelivr.net; connect-src 'self' maps.googleapis.com fonts.googleapis.com; img-src 'self' code.jquery.com maps.gstatic.com maps.google.com data:; style-src 'self' 'unsafe-inline' code.jquery.com fonts.googleapis.com cdn.jsdelivr.net; font-src 'self' fonts.gstatic.com; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint
   podcast.jquery.com:
     repository:
       name: jquery/podcast.jquery.com

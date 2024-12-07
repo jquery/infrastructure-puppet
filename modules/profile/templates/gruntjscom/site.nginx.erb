@@ -21,7 +21,7 @@ server {
     add_header Reporting-Endpoints "csp-endpoint='https://csp-report-api.openjs-foundation.workers.dev/'";
     # script-src: add 'unsafe-eval' for the search functionality on gruntjs.com/plugins
     # Search will need to be reimplemented to remove this exception.
-    add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' 'unsafe-eval'; connect-src 'self'; img-src 'self'; style-src 'self'; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint" always;
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-eval'; connect-src 'self'; img-src 'self'; style-src 'self'; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint" always;
   }
 
   location /.well-known/acme-challenge {
