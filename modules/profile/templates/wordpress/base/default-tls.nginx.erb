@@ -14,12 +14,6 @@ server {
 
   server_tokens off;
 
-<%- if @csp_header -%>
-  # Add Content Security Policy headers
-  add_header Reporting-Endpoints "csp-endpoint='https://csp-report-api.openjs-foundation.workers.dev/'";
-  add_header Content-Security-Policy-Report-Only "<%= @csp_header %>" always;
-<%- end -%>
-
   location /.well-known/acme-challenge {
     root /var/www/letsencrypt/;
   }

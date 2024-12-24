@@ -5,11 +5,8 @@ class profile::wordpress::blogs (
   String[1]                        $db_password_seed  = lookup('profile::wordpress::blogs::db_password_seed'),
   Stdlib::Email                    $admin_email       = lookup('profile::wordpress::blogs::admin_email'),
   String[1]                        $admin_password    = lookup('profile::wordpress::blogs::admin_password'),
-  String[1]                        $csp_header        = lookup('profile::wordpress::blogs::csp_header'),
 ) {
-  class { 'profile::wordpress::base':
-    csp_header => $csp_header,
-  }
+  include profile::wordpress::base
 
   git::clone { 'blog.jquery.com-theme':
     path   => '/srv/wordpress/blog.jquery.com-theme',

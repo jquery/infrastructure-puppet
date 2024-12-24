@@ -5,7 +5,6 @@ profile::certbot::certificates:
 
 profile::wordpress::blogs::admin_email: infrastructure-team@jquery.com
 profile::wordpress::blogs::wordpress_version: ~
-profile::wordpress::blogs::csp_header: "default-src 'self'; script-src 'self' code.jquery.com; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint"
 profile::wordpress::blogs::sites:
   jquery:
     host: blog.jquery.com

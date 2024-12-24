@@ -3,7 +3,6 @@ class profile::wordpress::base (
   String[1]           $innodb_buffer_pool_size = lookup('profile::wordpress::base::mariadb_innodb_buffer_pool_size', {default_value => '512M'}),
   String[1]           $wordpress_cli_version   = lookup('profile::wordpress::base::wordpress_cli_version'),
   Optional[String[1]] $default_site_cert       = lookup('profile::wordpress::base::default_site_cert', {default_value => undef}),
-  Optional[String[1]] $csp_header              = undef,
 ) {
   file { '/srv/mariadb':
     ensure => directory,
