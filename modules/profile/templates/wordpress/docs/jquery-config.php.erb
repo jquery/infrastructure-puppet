@@ -20,4 +20,10 @@ define(
   'JQUERY_BANNER',
   'jQuery 4.0 is coming soon! Prepare by <a href="https://jquery.com/download/">upgrading</a> to the latest jQuery 3.x release. Learn more about our <a href="https://jquery.com/support/">version support</a>.'
 );
+<%- elsif @live_site == 'jquerymobile.com' || @live_site == 'api.jquerymobile.com' -%>
+define(
+  'JQUERY_BANNER',
+  'jQuery Mobile is no longer supported. Please see the <a href="https://blog.jquerymobile.com/2021/10/07/jquery-maintainers-continue-modernization-initiative-with-deprecation-of-jquery-mobile/">announcement blog post</a> for more information.'
+);
+define( 'JQUERY_BANNER_ALL_PAGES', true );
 <%- end -%>
