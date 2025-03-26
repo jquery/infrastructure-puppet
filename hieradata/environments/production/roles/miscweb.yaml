@@ -271,3 +271,7 @@ profile::miscweb::redirects:
     target: https://qunitjs.com
     mode: prefix
     certificate: miscweb-a
+  www.qunitjs.com:
+    target: https://qunitjs.com
+    mode: prefix
+    certificate: miscweb-a

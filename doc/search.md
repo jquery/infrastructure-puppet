@@ -46,7 +46,6 @@ A number of sites use an active rather than passive crawling, by
 pushing content directly to the Algolia API during website deployments.
 
 * https://qunitjs.com/
-* https://api.qunitjs.com/
 * https://qunitjs.github.io/jekyll-theme-amethyst/
 
 These use [jekyll-algolia]() during the CI job (GitHub Actions) that
@@ -71,7 +70,7 @@ and experienced some suboptimal aspects. These included:
 difficult upgrades (not yet committing to forward compatibility or
 automatic in-place upgrades), [opt-out telemetry](https://docs.meilisearch.com/learn/what_is_meilisearch/telemetry.html) instead of opt-in, no official Debian packages,
 non-trivial interactive setup, missing support for querying multiple
-indexes (e.g. qunitjs.com and api.qunitjs.com), and a not yet clear
+indexes (e.g. jquery.com and api.jquery.com), and a not yet clear
 future in terms of business model (Meilisearch Cloud was not
 yet in the picture, and the backend is not GPL licensed).
 
