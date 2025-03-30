@@ -2,7 +2,7 @@
 # https://puppet.com/docs/puppet/7/lang_node_definitions.html
 # https://puppet.com/docs/puppet/7/roles_and_profiles_example.html
 
-# PLEASE KEEP THIS FILE ALPHABETICALLY SORTED
+# Please keep this file alphabetically sorted!
 
 # Production
 # ----------
