@@ -1,13 +1,7 @@
 JAVA_BIN="/usr/bin/java"
 
 # Modify this if you'd like to change the memory allocation, enable JMX, etc
-#
-# * We use launchMechanism=vfork as of Marc 2025, because puppetserver suddenly became
-#   unable to execute the /bin/config-version.sh script without it.
-#   > Puppet Exception Cannot run program "/etc/puppet/code/environments/production/bin/config-version.sh" (in directory "."): error=0, Failed to exec spawn helper, exit value: 1.
-#   https://anton.dollmaier.name/2025/02/puppetserver-failed-to-exec-spawn-helper/
-#
-JAVA_ARGS="-Xms<%= @java_memory %> -Xmx<%= @java_memory %> -Djruby.logger.class=com.puppetlabs.jruby_utils.jruby.Slf4jLogger -Djdk.lang.Process.launchMechanism=vfork"
+JAVA_ARGS="-Xms<%= @java_memory %> -Xmx<%= @java_memory %> -Djruby.logger.class=com.puppetlabs.jruby_utils.jruby.Slf4jLogger"
 
 # Modify this as you would JAVA_ARGS but for non-service related subcommands
 JAVA_ARGS_CLI="${JAVA_ARGS_CLI:-}"
