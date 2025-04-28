@@ -12,12 +12,14 @@ Manage private aliases in the Premium Team account via <https://forwardemail.net
 
 ## Public aliases
 
-Public aliases are managed in DNS. Use these as emergency supplement, or as alternative if the paid account expires. The Forward Email service DNS uses it to create or extend aliases in addition to (not instead of) any private entries.
+Email alias destinations can also be configured publicly via DNS. We generally don't do this for privacy and anti-spam reasons, but this can be a useful fallback, e.g. in case of emergencies (if we can't log in to the Forward Email admin panel), or if the Premium account expires (since DNS is supported by Forward Email even on the Free tier).
+
+The Forward Email service queries our DNS records and automatically extends or creates aliases in addition to (not instead of) any private entries.
 
 * Edit the relevant `TXT` records in DNS (currently in Cloudflare for us, see [dns.md](./dns.md)).
 * See also <https://forwardemail.net/en/faq#dns-configuration-options>
 
-List public aliases:
+Query our public aliases (none as of Feb 2024):
 
 ```
 dig +noall +question +answer TXT jquery.com jquery.org qunitjs.com | grep -E "^;|forward-email=" | sed 's/^.*forward-email=//' | tr -d '"' | tr ',' '\n'
