@@ -31,11 +31,6 @@ class profile::wordpress::docs (
     require           => Git::Clone['jquery-wp-content'],
   }
 
-  file { '/srv/wordpress/docs-config-shared.php':
-    ensure => file,
-    source => 'puppet:///modules/profile/wordpress/docs/config.php',
-  }
-
   $sites.each |String[1] $name, Profile::Docs::Site $site| {
     $active_theme = $site['active_theme']
 
@@ -100,7 +95,6 @@ class profile::wordpress::docs (
       gilded_wordpress    => true,
       robots_txt_deny_all => $robots_txt_deny_all,
       config_files        => [
-        '/srv/wordpress/docs-config-shared.php',
         "${dir}/jquery-config.php",
       ],
       active_theme        => $active_theme,
