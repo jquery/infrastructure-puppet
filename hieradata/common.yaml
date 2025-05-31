@@ -521,6 +521,8 @@ profile::base::groups:
   gitpuppet:
     gid: 600
 
+profile::certbot::email: infrastructure-team@jquery.com
+
 profile::notifier::version: v4.0.1
 
 profile::puppet::agent::ca_server: puppet-04.ops.jquery.net
