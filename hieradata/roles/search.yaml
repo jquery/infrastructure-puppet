@@ -1,3 +1,9 @@
+# Overrides for any 'search' hosts
+# - /hierdata/common.yaml
+# - /hierdata/roles/search.yaml [THIS FILE]
+# - /hierdata/environments/*/common.yaml
+# - /hierdata/environments/*/roles/search.yaml [unused]
+
 profile::certbot::certificates:
   search:
     domains:

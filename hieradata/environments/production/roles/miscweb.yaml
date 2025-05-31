@@ -1,3 +1,9 @@
+# Overrides for production 'miscweb' hosts
+# - /hierdata/common.yaml
+# - /hierdata/roles/miscweb.yaml [unused]
+# - /hierdata/environments/production/common.yaml
+# - /hierdata/environments/production/roles/miscweb.yaml [THIS FILE]
+
 profile::certbot::certificates:
   miscweb:
     domains:

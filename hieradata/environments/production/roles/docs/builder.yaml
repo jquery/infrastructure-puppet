@@ -1,1 +1,7 @@
+# Overrides for production 'docs::builder' hosts
+# - /hierdata/common.yaml
+# - /hierdata/roles/docs/builder.yaml
+# - /hierdata/environments/production/common.yaml
+# - /hierdata/environments/production/roles/docs/builder.yaml [THIS FILE]
+
 profile::builder::tags_only: true

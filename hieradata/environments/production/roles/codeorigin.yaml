@@ -1,3 +1,9 @@
+# Overrides for production 'codeorigin' hosts
+# - /hierdata/common.yaml
+# - /hierdata/roles/codeorigin.yaml
+# - /hierdata/environments/production/common.yaml
+# - /hierdata/environments/production/roles/codeorigin.yaml [THIS FILE]
+
 profile::codeorigin::vhost_hostnames:
   - code.jquery.com
   - codeorigin.jquery.com

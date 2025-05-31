@@ -1,3 +1,9 @@
+# Overrides for staging 'gruntjscom' hosts
+# - /hierdata/common.yaml
+# - /hierdata/roles/gruntjscom.yaml
+# - /hierdata/environments/staging/common.yaml
+# - /hierdata/environments/staging/roles/gruntjscom.yaml [THIS FILE]
+
 profile::gruntjscom::canonical_name: stage.gruntjs.com
 profile::gruntjscom::aliases: []
 profile::gruntjscom::robots_deny: true

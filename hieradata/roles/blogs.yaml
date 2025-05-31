@@ -1,1 +1,7 @@
+# Overrides for any 'blogs' hosts (production AND staging)
+# - /hierdata/common.yaml
+# - /hierdata/roles/blogs.yaml [THIS FILE]
+# - /hierdata/environments/*/common.yaml
+# - /hierdata/environments/*/roles/blogs.yaml [unused]
+
 profile::wordpress::base::default_site_cert: blogs

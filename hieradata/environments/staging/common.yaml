@@ -1,3 +1,9 @@
+# Overrides for all staging hosts
+# - /hierdata/common.yaml
+# - /hierdata/roles/*.yaml
+# - /hierdata/environments/staging/common.yaml [THIS FILE]
+# - /hierdata/environments/staging/roles/*.yaml
+
 docs_prepend_host: 'stage.'
 profile::wordpress::docs::append_title: ' (staging)'
 

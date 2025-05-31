@@ -1,1 +1,7 @@
+# Overrides for staging 'docs::builder' hosts
+# - /hierdata/common.yaml
+# - /hierdata/roles/docs/builder.yaml
+# - /hierdata/environments/staging/common.yaml
+# - /hierdata/environments/staging/roles/docs/builder.yaml [THIS FILE]
+
 profile::builder::tags_only: false

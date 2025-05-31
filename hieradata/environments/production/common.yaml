@@ -1,3 +1,9 @@
+# Overrides for all production hosts
+# - /hierdata/common.yaml
+# - /hierdata/roles/*.yaml
+# - /hierdata/environments/production/common.yaml [THIS FILE]
+# - /hierdata/environments/production/roles/*.yaml
+
 profile::puppet::agent::puppet_server: puppet-04.ops.jquery.net
 
 profile::certbot::email: infrastructure-team@jquery.com

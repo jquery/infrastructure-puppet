@@ -1,7 +1,13 @@
-profile::notifier::tls_key_name: wordpress
-profile::wordpress::base::default_site_cert: wordpress
+# Overrides for any 'docs::wordpress' hosts (production AND staging)
+# - /hierdata/common.yaml
+# - /hierdata/roles/docs/wordpress.yaml [THIS FILE]
+# - /hierdata/environments/*/common.yaml
+# - /hierdata/environments/*/roles/docs/wordpress.yaml
 
 profile::certbot::certificates:
   wordpress:
     domains:
       - "%{::facts.fqdn}"
+
+profile::notifier::tls_key_name: wordpress
+profile::wordpress::base::default_site_cert: wordpress

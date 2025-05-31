@@ -1,3 +1,9 @@
+# Overrides for any 'blogs' hosts (production AND staging)
+# - /hierdata/common.yaml
+# - /hierdata/roles/docs/builder.yaml [THIS FILE]
+# - /hierdata/environments/*/common.yaml
+# - /hierdata/environments/*/roles/docs/builder.yaml
+
 profile::certbot::certificates:
   builder:
     domains:

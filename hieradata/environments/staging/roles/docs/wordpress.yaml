@@ -1,3 +1,9 @@
+# Overrides for staging 'docs::wordpress' hosts
+# - /hierdata/common.yaml
+# - /hierdata/roles/docs/wordpress.yaml
+# - /hierdata/environments/staging/common.yaml
+# - /hierdata/environments/staging/roles/docs/wordpress.yaml [THIS FILE]
+
 profile::wordpress::docs::admin_email: infrastructure-team@jquery.com
 profile::wordpress::docs::builder_email: infrastructure-team+builder@jquery.com
 profile::wordpress::docs::robots_txt_deny_all: true

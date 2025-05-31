@@ -1,1 +1,7 @@
+# Overrides for production 'contentorigin' hosts
+# - /hierdata/common.yaml
+# - /hierdata/roles/contentorigin.yaml
+# - /hierdata/environments/production/common.yaml
+# - /hierdata/environments/production/roles/contentorigin.yaml [THIS FILE]
+
 profile::contentorigin::server_name: content.jquery.com

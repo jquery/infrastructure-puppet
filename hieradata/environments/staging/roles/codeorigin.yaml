@@ -1,3 +1,9 @@
+# Overrides for staging 'codeorigin' hosts
+# - /hierdata/common.yaml
+# - /hierdata/roles/codeorigin.yaml
+# - /hierdata/environments/staging/common.yaml
+# - /hierdata/environments/staging/roles/codeorigin.yaml [THIS FILE]
+
 profile::codeorigin::vhost_hostnames:
   - code2.jquery.com
   - "%{::facts.fqdn}"

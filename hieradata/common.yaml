@@ -1,4 +1,11 @@
-# dummy key not used anywhere that can be used to define yaml tags
+# Default config for all hosts
+# - /hierdata/common.yaml [THIS FILE]
+# - /hierdata/roles/*.yaml
+# - /hierdata/environments/*/common.yaml
+# - /hierdata/environments/*/roles/*.yaml
+
+# We use 'dummy' to keep reusable yaml references.
+# These keys are not directly read anywhere.
 dummy:
   semver_tag: &semver_tag "^v?\\d+\\.\\d+\\.\\d+(-\\d+)?$"
 

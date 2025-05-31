@@ -1,3 +1,9 @@
+# Overrides for any 'gruntjscom' hosts (production AND staging)
+# - /hierdata/common.yaml
+# - /hierdata/roles/gruntjscom.yaml [THIS FILE]
+# - /hierdata/environments/*/common.yaml
+# - /hierdata/environments/*/roles/gruntjscom.yaml
+
 profile::certbot::certificates:
   gruntjscom:
     domains:

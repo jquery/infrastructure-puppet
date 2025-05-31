@@ -1,6 +1,12 @@
-profile::notifier::tls_key_name: codeorigin
+# Overrides for any 'codeorigin' hosts (production AND staging)
+# - /hierdata/common.yaml
+# - /hierdata/roles/codeorigin.yaml [THIS FILE]
+# - /hierdata/environments/*/common.yaml
+# - /hierdata/environments/*/roles/codeorigin.yaml
 
 profile::certbot::certificates:
   codeorigin:
     domains:
       - "%{::facts.fqdn}"
+
+profile::notifier::tls_key_name: codeorigin
