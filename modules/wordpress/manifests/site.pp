@@ -95,24 +95,13 @@ define wordpress::site (
     require => Exec["wp-create-config-${title}"],
   }
 
-  file_line { "wp-config-file-clean-${title}":
-    ensure            => absent,
-    path              => "${base_path}/wp-config.php",
-    after             => 'Add any custom values between',
-    match             => 'require \'[^\']*\';',
-    match_for_absence => true,
-    multiple          => true,
-    require           => Exec["wp-create-config-${title}"],
-    before            => Exec["wp-install-${title}"],
-  }
-
   ($config_files + ["${base_path}/jquery-config-base.php"]).each |Stdlib::Unixpath $path| {
     file_line { "wp-config-file-${title}-${path}":
       ensure  => present,
       path    => "${base_path}/wp-config.php",
       after   => 'Add any custom values between',
       line    => "require '${path}';",
-      require => [File_line["wp-config-file-clean-${title}"], File[$path]],
+      require => [Exec["wp-create-config-${title}"], File[$path]],
       before  => Exec["wp-install-${title}"],
     }
   }

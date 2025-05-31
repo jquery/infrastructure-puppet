@@ -477,6 +477,14 @@ profile::wordpress::blogs::sites:
     # compared to other blogs have
     permalink_structure: '/%year%/%monthnum%/%postname%/'
 
+profile::wordpress::docs::admin_email: infrastructure-team@jquery.com
+profile::wordpress::docs::builder_email: infrastructure-team+builder@jquery.com
+profile::wordpress::docs::wordpress_version: ~
+profile::wordpress::docs::enable_object_cache: true
+
+profile::wordpress::blogs::admin_email: infrastructure-team@jquery.com
+profile::wordpress::blogs::wordpress_version: ~
+
 profile::base::apt::security_supported_versions: [bullseye, bookworm]
 
 profile::base::accounts:

@@ -26,6 +26,9 @@ profile::wordpress::blogs::wordpress_version: ''
 profile::wordpress::docs::wordpress_version: ''
 ```
 
+Or to try in staging first, set the hiera key in
+`environments/staging/roles/docs/wordpress.yaml`.
+
 You might also need to restore the database from a backup if the
 older version had a different database schema.
 
