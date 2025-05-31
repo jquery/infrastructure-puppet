@@ -457,6 +457,26 @@ docs_sites:
       - path: /git/
         target: https://filestash-01.ops.jquery.net/
 
+profile::wordpress::blogs::sites:
+  jquery:
+    host: blog.jquery.com
+    site_name: Official jQuery Blog
+    active_theme: jquery.com
+    certificate: blogs
+  jquerymobile:
+    host: blog.jquerymobile.com
+    site_name: jQuery Mobile
+    active_theme: jquerymobile.com
+    certificate: blogs
+  jqueryui:
+    host: blog.jqueryui.com
+    site_name: jQuery UI Blog
+    active_theme: jqueryui.com
+    certificate: blogs
+    # for whatever reason, the jqueryui blog has a different URL structure
+    # compared to other blogs have
+    permalink_structure: '/%year%/%monthnum%/%postname%/'
+
 profile::base::apt::security_supported_versions: [bullseye, bookworm]
 
 profile::base::accounts:
