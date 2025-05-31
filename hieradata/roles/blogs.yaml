@@ -4,4 +4,9 @@
 # - /hierdata/environments/*/common.yaml
 # - /hierdata/environments/*/roles/blogs.yaml [unused]
 
+profile::certbot::certificates:
+  blogs:
+    domains:
+      - "%{::facts.fqdn}"
+
 profile::wordpress::base::default_site_cert: blogs
