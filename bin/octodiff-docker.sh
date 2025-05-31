@@ -19,12 +19,13 @@ export PUPPETDB_URL=\"https://\$username:\$password@puppet-04.ops.jquery.net:810
 echo -e \"\nThe octocatalog-diff command is now ready for use!\n\" && \
 /bin/bash;"
 
-# [g10k] Error: failed to create directory: vendor_modules/X
+# Fix "[g10k] Error: failed to create directory: vendor_modules/X"
 mkdir -p "$repo_dir/vendor_modules"
+
+# Fix:
 # [g10k] Error: Can't hardlink Forge module files over different devices
 # Failed to hardlink /tmp/g10k/forge/X to vendor_modules/X
 # Error: link /tmp/g10k/forge/X vendor_modules/X: invalid cross-device link
-
 mkdir -p "$repo_dir/vendor_modules/.g10kcache"
 
 docker run --rm --interactive --tty \

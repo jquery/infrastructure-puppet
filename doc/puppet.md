@@ -211,3 +211,36 @@ Alternatively, you can install octocatalog-diff yourself:
   $ g10k -puppetfile
   $ octocatalog-diff -n codeorigin-02.stage.ops.jquery.net
   ```
+
+### Troubleshooting: `bin/config-version.sh: ambiguous argument 'staging'`
+
+When using octocatalog-diff, you may encounter the following error:
+
+```
+Catalog failed: Error:
+  Execution of config_version command `/tmp/…/environments/staging/bin/config-version.sh staging` failed:
+
+  Execution of '/tmp/…/environments/staging/bin/config-version.sh staging' returned 128: fatal: ambiguous argument 'staging': unknown revision or path not in the working tree.
+
+  (OctocatalogDiff::Errors::CatalogError)
+```
+
+This can happen if your local clone does not have both a "production" and "staging". The [bin/config-version.sh](../../bin/config-version.sh) script uses `git log <puppet_environment>` to describe the latest commit, which requires both branches to exist.
+
+To remedy, run `git branch` and then create whichever is missing:
+
+```
+$ git branch
+* production
+
+$ git branch staging -t origin/staging
+```
+
+or
+
+```
+$ git branch
+* staging
+
+$ git branch production -t origin/production
+```
