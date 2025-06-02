@@ -45,6 +45,7 @@ class profile::wordpress::blogs (
         { name => $active_theme, path => "/srv/wordpress/jquery-wp-content/themes/${active_theme}", },
       ]
       $plugins = [
+        { name => 'disable-emojis', path => '/srv/wordpress/jquery-wp-content/plugins/disable-emojis/disable-emojis.php', single_file => true, },
         { name => 'jquery-actions', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-actions.php', single_file => true, },
         { name => 'jquery-filters', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-filters.php', single_file => true, },
       ]
