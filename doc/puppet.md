@@ -212,7 +212,7 @@ Alternatively, you can install octocatalog-diff yourself:
   $ octocatalog-diff -n codeorigin-02.stage.ops.jquery.net
   ```
 
-### Troubleshooting: `bin/config-version.sh: ambiguous argument 'staging'`
+### Troubleshooting: `bin/config-version.sh: fatal: bad revision 'production'`
 
 When using octocatalog-diff, you may encounter the following error:
 
@@ -220,7 +220,7 @@ When using octocatalog-diff, you may encounter the following error:
 Catalog failed: Error:
   Execution of config_version command `/tmp/…/environments/staging/bin/config-version.sh staging` failed:
 
-  Execution of '/tmp/…/environments/staging/bin/config-version.sh staging' returned 128: fatal: ambiguous argument 'staging': unknown revision or path not in the working tree.
+  Execution of '/tmp/…/environments/staging/bin/config-version.sh staging' returned 128: fatal: bad revision 'production' on node puppet-04.ops.jquery.net
 
   (OctocatalogDiff::Errors::CatalogError)
 ```
