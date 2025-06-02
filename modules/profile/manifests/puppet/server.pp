@@ -210,7 +210,7 @@ class profile::puppet::server (
   }
 
   $clients = jqlib::resource_hosts('class', 'profile::puppet::agent', true)
-  $client_ips = $puppetservers.map |Stdlib::Fqdn $fqdn| { dnsquery::lookup($fqdn, true) }.flatten
+  $client_ips = $clients.map |Stdlib::Fqdn $fqdn| { dnsquery::lookup($fqdn, true) }.flatten
 
   nftables::allow { 'puppetserver':
     proto => 'tcp',
