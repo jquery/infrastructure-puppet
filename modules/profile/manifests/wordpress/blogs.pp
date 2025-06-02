@@ -8,6 +8,22 @@ class profile::wordpress::blogs (
 ) {
   include profile::wordpress::base
 
+  git::clone { 'jquery-wp-content':
+    path   => '/srv/wordpress/jquery-wp-content',
+    remote => 'https://github.com/jquery/jquery-wp-content',
+    branch => 'main',
+    owner  => 'www-data',
+    group  => 'www-data',
+  }
+
+  notifier::git_update { 'jquery-wp-content':
+    github_repository => 'jquery/jquery-wp-content',
+    listen_for        => [{ branch => 'main' }],
+    local_path        => '/srv/wordpress/jquery-wp-content',
+    local_user        => 'www-data',
+    require           => Git::Clone['jquery-wp-content'],
+  }
+
   git::clone { 'blog.jquery.com-theme':
     path   => '/srv/wordpress/blog.jquery.com-theme',
     remote => 'https://github.com/jquery/blog.jquery.com-theme',
@@ -18,6 +34,26 @@ class profile::wordpress::blogs (
 
   $sites.each |String[1] $name, Hash $site| {
     $active_theme = $site['active_theme']
+
+    # Temporary while testing blogs on jquery-wp-content
+    # https://github.com/jquery/infrastructure-puppet/issues/17
+    if $name == 'jquerymobile' {
+      $themes = [
+        { name => 'jquery',      path => '/srv/wordpress/jquery-wp-content/themes/jquery', },
+        { name => $active_theme, path => "/srv/wordpress/jquery-wp-content/themes/${active_theme}", },
+      ]
+      $plugins = [
+        { name => 'jquery-actions', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-actions.php', single_file => true, },
+        { name => 'jquery-filters', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-filters.php', single_file => true, },
+      ]
+    } else {
+      $themes = [
+        { name => 'jquery',      path => '/srv/wordpress/blog.jquery.com-theme/jquery', },
+        { name => $active_theme, path => "/srv/wordpress/blog.jquery.com-theme/${active_theme}", },
+      ]
+      $plugins = []
+    }
+
     wordpress::site { $name:
       *                => $site,
       path             => '/',
@@ -25,10 +61,8 @@ class profile::wordpress::blogs (
       db_password_seed => $db_password_seed,
       admin_email      => $admin_email,
       admin_password   => $admin_password,
-      themes           => [
-        { name => 'jquery',      path => '/srv/wordpress/blog.jquery.com-theme/jquery', },
-        { name => $active_theme, path => "/srv/wordpress/blog.jquery.com-theme/${active_theme}", },
-      ],
+      themes           => $themes,
+      plugins          => $plugins,
       base_path        => "/srv/wordpress/sites/${name}",
     }
   }

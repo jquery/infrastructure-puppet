@@ -3,6 +3,7 @@ class role::blogs {
   include profile::base
 
   include profile::certbot
+  include profile::notifier
   include profile::tarsnap
 
   include profile::wordpress::blogs
