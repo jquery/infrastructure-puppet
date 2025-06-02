@@ -209,9 +209,13 @@ class profile::puppet::server (
     interval    => ['OnCalendar=*-*-* 12:00:00'],
   }
 
+  $clients = jqlib::resource_hosts('class', 'profile::puppet::agent', true)
+  $client_ips = $puppetservers.map |Stdlib::Fqdn $fqdn| { dnsquery::lookup($fqdn, true) }.flatten
+
   nftables::allow { 'puppetserver':
     proto => 'tcp',
     dport => 8140,
+    saddr => $client_ips,
   }
 
   notifier::run_command { 'puppet-public':

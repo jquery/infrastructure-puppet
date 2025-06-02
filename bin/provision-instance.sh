@@ -26,6 +26,8 @@ fi
 ssh root@"$INSTANCE" apt-get update
 ssh root@"$INSTANCE" apt-get -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" upgrade -y
 ssh root@"$INSTANCE" apt-get -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" install -y puppet-agent
+INSTANCE_IP=$(ssh root@"$INSTANCE" facter networking.ip)
+ssh "$PUPPET_SERVER" sudo nft add rule inet filter input tcp dport 8140 ip saddr "$INSTANCE_IP" ct state new accept
 ssh root@"$INSTANCE" "$PUPPET" config --section agent set server "$PUPPET_SERVER"
 ssh root@"$INSTANCE" "$PUPPET" config --section agent set environment "$ENVIRONMENT"
 ssh root@"$INSTANCE" "$PUPPET" agent -t || true
@@ -39,3 +41,4 @@ fi
 
 ssh "$PUPPET_SERVER" sudo puppetserver ca sign --certname "$INSTANCE"
 ssh root@"$INSTANCE" "$PUPPET" agent -t
+ssh "$PUPPET_SERVER" sudo run-puppet-agent
