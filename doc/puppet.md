@@ -19,7 +19,7 @@ Add the instance to `site.pp`, push the commit and then use the
 $ bin/provision-instance.sh codeorigin-02.stage.ops.jquery.net staging
 ```
 
-### Decomissioning new nodes
+### Decommissioning new nodes
 
 To decom a node, run the following script as your own user on the
 Puppet server:
