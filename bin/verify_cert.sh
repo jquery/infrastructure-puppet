@@ -8,9 +8,9 @@
 #
 # Usage: ./verify_certs.sh <path to star.jquery.com.pem>
 #
-#   certname.pem: This is the PEM file created from concatenating the .crt with the .ca-bundle
+#   certname.pem: This is the PEM file created from concatenating the .crt file with the _bundle.pem (or .ca-bundle) file.
 #   certname.key: This is the private key provided by the issuer
-#   certname.ca-bundle: These are the intermediate certs provided by the issuer
+#   certname_bundle.pem: These are the intermediate certs provided by the issuer
 #
 
 if [ "$#" -ne 1 ]; then
