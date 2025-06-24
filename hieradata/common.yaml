@@ -332,8 +332,13 @@ docs_sites:
     enable_static_index: true
     extra_config: |
       # http://jquerymobile.com/demos/1.0rc3/
-      # Importantly, don't match /demos/ which is a real page
-      rewrite ^/demos/(.+)\$ https://demos.jquerymobile.com/\$1 permanent;
+      # https://jquerymobile.com/demos/1.3.0-beta.1/docs/demos/panels/panel-nav-form.html
+      # Importantly, don't match https://jquerymobile.com/demos/ which is a real page.
+      #
+      # E.g. linked from
+      # https://blog.jquerymobile.com/2010/10/16/jquery-mobile-alpha-1-released/
+      # https://blog.jquerymobile.com/2013/02/20/jquery-mobile-1-3-0-released/
+      rewrite ^/demos/(.+)$ https://demos.jquerymobile.com/$1 permanent;
     redirects:
       # Page moved
       # http://jquerymobile.com/gbs/1.3/
@@ -353,19 +358,6 @@ docs_sites:
           mode: prefix
         target:
           url: https://jquerymobile.com/demos/
-          mode: exact
-        permanent: true
-      # Match URLs like https://jquerymobile.com/demos/1.3.0-beta.1/docs/demos/panels/panel-nav-form.html
-      # but not https://jquerymobile.com/demos/ which is a normal page.
-      #
-      # E.g. linked from
-      # https://blog.jquerymobile.com/2010/10/16/jquery-mobile-alpha-1-released/
-      # https://blog.jquerymobile.com/2013/02/20/jquery-mobile-1-3-0-released/
-      - match:
-          path: /demos/1
-          mode: prefix
-        target:
-          url: https://demos.jquerymobile.com/1
           mode: exact
         permanent: true
       - match:
