@@ -26,6 +26,7 @@ doc/wordpress.md:
 lint:
 	puppet-lint --fail-on-warnings .
 	@ ./bin/build_wordpress_md.sh --verify
+	@ php -l test/*.php
 
 test: test-codeorigin-prod-http test-codeorigin-prod-https test-codeorigin-next-http test-codeorigin-next-https test-codeorigin-stage test-contentorigin-prod test-miscweb test-wpdocs test-releases
 

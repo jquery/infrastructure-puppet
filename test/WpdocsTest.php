@@ -29,7 +29,7 @@ foreach ( [
   'https://jquerymobile.com/blog/feed' => 'https://blog.jquerymobile.com/feed',
   'https://jquerymobile.com/blog/feed/' => 'https://blog.jquerymobile.com/feed/',
   'https://jquerymobile.com/blog/2011/11/16/announcing-jquery-mobile-1-0/' => 'https://blog.jquerymobile.com/2011/11/16/announcing-jquery-mobile-1-0/',
-  'https://jquerymobile.com/demos/1.3.0-beta.1/docs/demos/panels/panel-nav-form.html' => 'https://demos.jquerymobile.com/1.3.0-beta.1/docs/demos/panels/panel-nav-form.html'
+  'https://jquerymobile.com/demos/1.3.0-beta.1/docs/demos/panels/panel-nav-form.html' => 'https://demos.jquerymobile.com/1.3.0-beta.1/docs/demos/panels/panel-nav-form.html',
 
   'https://jquery.org/feed/' => 'https://meetings.jquery.org/feed/',
 
