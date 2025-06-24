@@ -21,6 +21,7 @@ foreach ( [
   'https://jqueryui.com/latest/ui/jquery.effects.core.js' => 'https://code.jquery.com',
   'https://jqueryui.com/docs/Changelog/1.13.0' => 'https://jqueryui.com/changelog/1.13.0',
   'https://jqueryui.com/docs/Theming' => 'https://learn.jquery.com/jquery-ui/theming/',
+  'https://jqueryui.com/docs/Theming/x' => 'https://learn.jquery.com/jquery-ui/theming/',
   'https://jqueryui.com/docs/About' => 'https://jqueryui.com/About',
   'https://jqueryui.com/docs/dialog' => 'https://jqueryui.com/dialog',
   'https://jqueryui.com/bugs/ticket/3484' => 'https://bugs.jqueryui.com/ticket/3484',
@@ -28,6 +29,7 @@ foreach ( [
   'https://jquerymobile.com/blog/feed' => 'https://blog.jquerymobile.com/feed',
   'https://jquerymobile.com/blog/feed/' => 'https://blog.jquerymobile.com/feed/',
   'https://jquerymobile.com/blog/2011/11/16/announcing-jquery-mobile-1-0/' => 'https://blog.jquerymobile.com/2011/11/16/announcing-jquery-mobile-1-0/',
+  'https://jquerymobile.com/demos/1.3.0-beta.1/docs/demos/panels/panel-nav-form.html' => 'https://demos.jquerymobile.com/1.3.0-beta.1/docs/demos/panels/panel-nav-form.html'
 
   'https://jquery.org/feed/' => 'https://meetings.jquery.org/feed/',
 
