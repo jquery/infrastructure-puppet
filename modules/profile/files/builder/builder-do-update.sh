@@ -11,9 +11,7 @@ trap cleanup EXIT
 export NODE_ENV=production
 
 cd "$1"
-npm install
-npm update
-npm prune
+npm ci
 
 GRUNT="node_modules/.bin/grunt"
 SERVERS="$(cat /etc/builder-wordpress-hosts)"
