@@ -11,7 +11,11 @@ trap cleanup EXIT
 export NODE_ENV=production
 
 cd "$1"
-npm ci
+if [ -e 'package-lock.json' ] || [ -e 'npm-shrinkwrap.json' ]; then
+  npm ci
+else
+  npm install
+fi
 
 GRUNT="node_modules/.bin/grunt"
 SERVERS="$(cat /etc/builder-wordpress-hosts)"
