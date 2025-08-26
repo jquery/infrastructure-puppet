@@ -39,7 +39,7 @@ class profile::wordpress::blogs (
 
     # Temporary while testing blogs on jquery-wp-content
     # https://github.com/jquery/infrastructure-puppet/issues/17
-    if $name == 'jquerymobile' {
+    if $name == 'jquerymobile' || $name == 'jqueryui' {
       $themes = [
         { name => 'jquery',      path => '/srv/wordpress/jquery-wp-content/themes/jquery', },
         { name => $active_theme, path => "/srv/wordpress/jquery-wp-content/themes/${active_theme}", },
