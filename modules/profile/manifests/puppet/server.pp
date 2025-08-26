@@ -7,6 +7,28 @@ class profile::puppet::server (
 ) {
   include profile::puppet::common
 
+  # Prevent automatic Java updates, as this breaks Puppet until someone we
+  # manually restart the server with `sudo systemctl restart puppetserver`
+  #
+  # Example `run-puppet-agent` output:
+  # > Error 500 on SERVER: Server Error:
+  # > Exception while executing '/etc/puppet/code/environments/production/bin/config-version.sh':
+  # > Cannot run program (in directory "."): Failed to exec spawn helper
+  #
+  # Example `systemctl status puppetserver` output:
+  # > java: Incorrect Java version: 17.0.X
+  # > java: jspawnhelper version 17.0.Y
+  # > java: This command is not for general use and should only be run as the result of
+  # > java: ProcessBuilder.start() or Runtime.exec() in a java application
+  #
+  # https://github.com/jquery/infrastructure-puppet/issues/76
+  apt::conf { 'unattended-upgrades-exclude-java':
+    priority => 60,
+    # Use trailing '::' in apt.conf key, to append to potentially entries in other files
+    # https://linux.die.net/man/5/apt.conf
+    content  => 'Unattended-Upgrade::Package-Blacklist:: "openjdk-";',
+  }
+
   stdlib::ensure_packages([
     'rsync',
   ])
