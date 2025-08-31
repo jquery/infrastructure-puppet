@@ -25,6 +25,7 @@ foreach ( [
   'https://jqueryui.com/docs/About' => 'https://jqueryui.com/About',
   'https://jqueryui.com/docs/dialog' => 'https://jqueryui.com/dialog',
   'https://jqueryui.com/bugs/ticket/3484' => 'https://bugs.jqueryui.com/ticket/3484',
+  'https://jqueryui.com/themeroller/images/themeGallery/theme_90_sunny.png' => 'https://jqueryui.com/resources/images/themeGallery/theme_90_sunny.png',
 
   'https://jquerymobile.com/blog/feed' => 'https://blog.jquerymobile.com/feed',
   'https://jquerymobile.com/blog/feed/' => 'https://blog.jquerymobile.com/feed/',
