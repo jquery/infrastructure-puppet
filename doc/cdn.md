@@ -98,20 +98,19 @@ In 2018, jQuery CDN internally [transitioned from MaxCDN to Highwinds](https://w
 
 By 2021, our traffic had risen to [over 2 petabytes](https://blog.jquery.com/2021/06/17/jquery-project-updates-addressing-temporary-cdn-issues/) per month.
 
-In 2023, jQuery CDN [migrated](https://github.com/jquery/infrastructure-puppet/issues/30) from StackPath to Fastly.
+In January 2023, StackPath Highwinds metrics for the jQuery CDN are: 2.2 petabytes bandwidth, 57 billion web requests, averaging 21K req/s (16K-30K req/s) at 6.2Gbps (4.7-8.9Gbps).
+
+In September 2023, jQuery CDN [migrated](https://github.com/jquery/infrastructure-puppet/issues/30) from StackPath to Fastly.
+
+In December 2025, Fastly metrics for the jQuery CDN are: 2.7 petabytes bandwidth, 78 billion requests, averaging 29K/s ([traffic report](https://github.com/jquery/infrastructure-puppet/issues/81)).
 
 ### Latest statistics
 
-Traffic profile as of January 2023 ("code" and "releases" services combined):
+Traffic profile as of December 2025 ("code" and "releases" services combined):
 
-* Overall: 2.2 petabytes bandwidth per month, in response to 57 billion web requests.
-* 16K-30K req/s (mean: 21K req/s)
-* Bandwidth: 4.7-8.9Gbps (mean: 6.2Gbps)
-* Average response size: 39KB
-* Cache-hit ratio: >99.999%
-* Library size: 398MB ([codeorigin.git](https://github.com/jquery/codeorigin.jquery.com))
-* Geographic distribution (HTTPS): US-West (4 POPs): 24%, US-East (7 POPs): 19%, US-Central (3 POPs): 8%, Europe (11 POPs): 49%.
-* Geographic distribution (HTTP): US-West: 41%, US-East: 7%, US-Central: 4%, Europe: 48%.
+* Total: 2.7 petabytes bandwidth per month, in response to 78 billion web requests.
+* Requests per second: 29K req/s (26K-31K req/s)
+* Bandwidth: 8.08 Gbps (7.38-8.65 Gbps)
 
 jQuery is used by [73% of the top 100K websites](https://trends.builtwith.com/javascript/jQuery) according to BuiltWith as of June 2023. According to W3 Techs in July 2023, jQuery is used on [77% of the world's top 10 million websites](https://w3techs.com/technologies/details/js-jquery). jQuery is used on [94% of websites](https://w3techs.com/technologies/details/js-jquery) that use at least one known JavaScript library.
 
