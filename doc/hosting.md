@@ -34,4 +34,9 @@ Nodes managed by this Puppet repository are hosted at **DigitalOcean**.
   * For stage hosts, leave empty.
   * This is used by Monitoring Alerts that email us on prolonged high server load. We prefer the load-average metric over CPU-utilization, and unfortunately that means the alert threshold varies by CPU count (match the selected plan).
 
-Once created, follow [Puppet § Provisioning new nodes](./puppet.md).
+Once created:
+* Define the chosen hostname with the allocated IP in DNS
+  * Cloudflare Dashboard > jquery.net zone > DNS
+  * Create AAAA record
+  * Proxy status: Off
+* Follow [Puppet § Provisioning new nodes](./puppet.md).
