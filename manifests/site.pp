@@ -75,6 +75,11 @@ node 'codeorigin-02.stage.ops.jquery.net' {
   role('codeorigin')
 }
 
+# 2 CPU, 2 GB mem, Debian 12 Bookworm
+node 'codeorigin-03.stage.ops.jquery.net' {
+  role('codeorigin')
+}
+
 # Debian 12 Bookworm
 node 'gruntjs-03.stage.ops.jquery.net' {
   role('gruntjscom')
