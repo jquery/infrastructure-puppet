@@ -8,7 +8,6 @@ page in Fastly, this includes for example requests by cache response
 type (hit, miss, pass, synthetic, error), status code, object size,
 and HTTP version.
 
-
 There isn't a built-in way to review, e.g. a sampled web request log,
 but you can debug actual requests by setting up a logging endpoint
 under one of the "services" in your account. This endpiont then

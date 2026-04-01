@@ -54,9 +54,10 @@ For uptime monitoring, refer to [monitoring.md](./monitoring.md).
 The "code" service has the following notable configuration settings (last updated Oct 2023). See also [issue #30](https://github.com/jquery/infrastructure-puppet/issues/30).
 
 * Origins:
-  * Always TLS to origin.
-  * Verify cert.
-  * Enable SNI hostname.
+  * TLS to origin: Always.
+  * Verify cert: Yes.
+  * SNI hostname: Enabled.
+  * Shielding: Enabled (choose same region as origin, ref [hosting.md](./hosting.md)).
 * Headers
   * [Ignore query strings: req.url = req.url.path](https://docs.fastly.com/en/guides/making-query-strings-agnostic)
   * [Case-insensitive req.url](https://developer.fastly.com/reference/vcl/functions/strings/std-tolower/)
