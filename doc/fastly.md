@@ -45,11 +45,11 @@ For TLS versions, only the listed versions are supported.
 | Identifier (letter+kind) | Example hostname | Description | References
 |--|--|--|--
 | `j.sni` | `j.sni.global.fastly.net` | TLS 1.3 or TLS 1.2, HTTP/2 |[Enabling dualstack](https://www.fastly.com/documentation/guides/full-site-delivery/domains-and-origins/enabling-dualstack-connections/)
-| `k.sni` | `k.sni.global.fastly.net` | TLS 1.3 + 0RTT or TLS 1.2 + CBC, HTTP/3 | Like `t.sni` but with cipher suites in CBC mode for Windows 7 compat, [jquery/infrastructure-puppet#30](https://github.com/jquery/infrastructure-puppet/issues/30)
+| `k.sni` | `k.sni.global.fastly.net` | TLS 1.3+0RTT or TLS 1.2 + CBC, HTTP/3 | Like `t.sni` but with cipher suites in CBC mode for Windows 7 compat, [jquery/infrastructure-puppet#30](https://github.com/jquery/infrastructure-puppet/issues/30)
 | `m.sni` | `m.sni.global.fastly.net` | TLS 1.3 or TLS 1.2, HTTP/3 | HTTP/3 experiment?, [2022 Archive](https://docs-archive.fastly.com/snapshots/static/2022-05-31-guides-aio.pdf)
-| `n.sni` | `n.sni.global.fastly.net` | TLS 1.3 + 0RTT, HTTP/3 | HTTP/3 experiment?, [2022 Archive](https://docs-archive.fastly.com/snapshots/static/2022-05-31-guides-aio.pdf)
+| `n.sni` | `n.sni.global.fastly.net` | TLS 1.3+0RTT or TLS 1.2, HTTP/3 | HTTP/3 experiment?, [2022 Archive](https://docs-archive.fastly.com/snapshots/static/2022-05-31-guides-aio.pdf)
 | `s.sni` | `s.sni.global.fastly.net` | TLS 1.3 or TLS 1.2, HTTP/3 | ..
-| `t.sni` | `t.sni.global.fastly.net` | TLS 1.3 + 0RTT, HTTP/3 | [Your own certificates](https://www.fastly.com/documentation/guides/getting-started/domains/securing-domains/setting-up-tls-with-your-own-certificates/)
+| `t.sni` | `t.sni.global.fastly.net` | TLS 1.3+0RTT or TLS 1.2, HTTP/3 | [Your own certificates](https://www.fastly.com/documentation/guides/getting-started/domains/securing-domains/setting-up-tls-with-your-own-certificates/)
 
 The `ssl` kind letters seem to be interchangable with `shared`, so only one is shown:
 
