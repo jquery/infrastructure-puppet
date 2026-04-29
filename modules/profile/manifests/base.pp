@@ -12,6 +12,12 @@ class profile::base (
   include profile::base::digitalocean
   include profile::puppet::agent
 
+  class { 'kernel': }
+  kernel::module::disallow { [
+    # CVE-2026-31431
+    'algif_aead',
+  ]: }
+
   class { 'nftables': }
   class { 'sudo': }
 
