@@ -16,6 +16,10 @@ class profile::base (
   kernel::module::disallow { [
     # CVE-2026-31431
     'algif_aead',
+    # Dirty Frag (CVE pending)
+    'esp4',
+    'esp6',
+    'rxrpc',
   ]: }
 
   class { 'nftables': }
