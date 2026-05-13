@@ -42,22 +42,24 @@ When "HTTP/3" is listed, this includes "HTTP/1" and "HTTP/2" support.
 
 For TLS versions, only the listed versions are supported.
 
-| Identifier (letter+kind) | Example hostname | Description | References
-|--|--|--|--
-| `j.sni` | `j.sni.global.fastly.net` | TLS 1.3 or TLS 1.2, HTTP/2 |[Enabling dualstack](https://www.fastly.com/documentation/guides/full-site-delivery/domains-and-origins/enabling-dualstack-connections/)
-| `k.sni` | `k.sni.global.fastly.net` | TLS 1.3+0RTT or TLS 1.2 + CBC, HTTP/3 | Like `t.sni` but with cipher suites in CBC mode for Windows 7 compat, [jquery/infrastructure-puppet#30](https://github.com/jquery/infrastructure-puppet/issues/30)
-| `m.sni` | `m.sni.global.fastly.net` | TLS 1.3 or TLS 1.2, HTTP/3 | HTTP/3 experiment?, [2022 Archive](https://docs-archive.fastly.com/snapshots/static/2022-05-31-guides-aio.pdf)
-| `n.sni` | `n.sni.global.fastly.net` | TLS 1.3+0RTT or TLS 1.2, HTTP/3 | HTTP/3 experiment?, [2022 Archive](https://docs-archive.fastly.com/snapshots/static/2022-05-31-guides-aio.pdf)
-| `s.sni` | `s.sni.global.fastly.net` | TLS 1.3 or TLS 1.2, HTTP/3 | ..
-| `t.sni` | `t.sni.global.fastly.net` | TLS 1.3+0RTT or TLS 1.2, HTTP/3 | [Your own certificates](https://www.fastly.com/documentation/guides/getting-started/domains/securing-domains/setting-up-tls-with-your-own-certificates/)
+| Identifier | Example hostname | TLS | HTTP | Comment
+|--|--|--|--|--
+| `j.sni` | `j.sni.global.fastly.net` | TLS 1.2, TLS 1.3 | HTTP/2 |[Enabling dualstack](https://www.fastly.com/documentation/guides/full-site-delivery/domains-and-origins/enabling-dualstack-connections/)
+| `k.sni` | `k.sni.global.fastly.net` | TLS 1.2+CBC, TLS 1.3+0RTT | HTTP/2 | With legacy CBC ciphers for Windows 7 compat, [jquery/infrastructure-puppet#30](https://github.com/jquery/infrastructure-puppet/issues/30)
+| `m.sni` | `m.sni.global.fastly.net` | TLS 1.2, TLS 1.3 | HTTP/3 | HTTP/3 experiment?, [2022 Archive](https://docs-archive.fastly.com/snapshots/static/2022-05-31-guides-aio.pdf)
+| `n.sni` | `n.sni.global.fastly.net` | TLS 1.2, TLS 1.3+0RTT | HTTP/3 | HTTP/3 experiment?, [2022 Archive](https://docs-archive.fastly.com/snapshots/static/2022-05-31-guides-aio.pdf)
+| `o.sni` | `o.sni.global.fastly.net` | TLS 1.0-1.2+CBC, TLS 1.3 | HTTP/2 | ..
+| `r.sni` | `r.sni.global.fastly.net` | TLS 1.0-1.2+CBC, TLS 1.3+0RTT | HTTP/2 | With legacy CBC ciphers for Windows 7 compat, as well as legacy TLS 1.0 and TLS 1.1, [jquery/infrastructure-puppet#85](https://github.com/jquery/infrastructure-puppet/issues/85#issuecomment-4550525489)
+| `s.sni` | `s.sni.global.fastly.net` | TLS 1.2, TLS 1.3 | HTTP/3 | ..
+| `t.sni` | `t.sni.global.fastly.net` | TLS 1.2, TLS 1.3+0RTT | HTTP/3 | [Your own certificates](https://www.fastly.com/documentation/guides/getting-started/domains/securing-domains/setting-up-tls-with-your-own-certificates/)
 
 The `ssl` kind letters seem to be interchangable with `shared`, so only one is shown:
 
-| Identifier (letter+kind) | Example hostname | Description | References
-|--|--|--|--
-| `g.ssl` | `g.ssl.global.fastly.net` | Unknown (Shared SAN) | [Fastly blog: HTTP/2](https://www.fastly.com/blog/http2-now-general-availability)
-| `k.ssl` | `k.ssl.global.fastly.net` | Unknown (Shared SAN) | [Fastly blog: HTTP/2](https://www.fastly.com/blog/http2-now-general-availability)
-| `m.ssl` | `m.ssl.global.fastly.net` | TLS 1.2 only, HTTP/1 only (Shared SAN) | [2022 Archive](https://docs-archive.fastly.com/snapshots/static/2022-05-31-guides-aio.pdf), [TLS quick start](https://www.fastly.com/documentation/guides/getting-started/domains/securing-domains/tls-quick-start/)
+| Identifier | Example hostname | TLS | HTTP | Comment
+|--|--|--|--|--
+| `g.ssl` | `g.ssl.global.fastly.net` | .. | .. | Shared SAN? [Fastly blog: HTTP/2](https://www.fastly.com/blog/http2-now-general-availability)
+| `k.ssl` | `k.ssl.global.fastly.net` | .. | .. | Shared SAN? [Fastly blog: HTTP/2](https://www.fastly.com/blog/http2-now-general-availability)
+| `m.ssl` | `m.ssl.global.fastly.net` | TLS 1.2 only | HTTP/1 only | Shared SAN? [2022 Archive](https://docs-archive.fastly.com/snapshots/static/2022-05-31-guides-aio.pdf), [TLS quick start](https://www.fastly.com/documentation/guides/getting-started/domains/securing-domains/tls-quick-start/)
 
 Unless otherwise indicated, these are IPv4-only. There is a `dualstack.*` variant of all these which adds IPv6 support ([Fastly blog: IPv6](https://www.fastly.com/blog/ipv6-fastly)), [TLS quick start](https://www.fastly.com/documentation/guides/getting-started/domains/securing-domains/tls-quick-start/), [Enabling dualstack](https://www.fastly.com/documentation/guides/full-site-delivery/domains-and-origins/enabling-dualstack-connections/), [Working with CNAME](https://www.fastly.com/documentation/guides/getting-started/domains/working-with-domains/working-with-cname-records-and-your-dns-provider/)).
 
@@ -70,6 +72,7 @@ For example:
 * `dualstack.k.sni.global.fastly.net`
 * `dualstack.m.sni.global.fastly.net`
 * `dualstack.n.sni.global.fastly.net`
+* `dualstack.r.sni.global.fastly.net`
 * `dualstack.t.sni.global.fastly.net`
 * ...
 
