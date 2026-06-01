@@ -7,7 +7,7 @@ server {
 
   <%= @tls_config.join("\n  ") %>
 
-  server_name  <%= @fqdn %>;
+  server_name  <%= @facts['networking']['fqdn'] %>;
 
   access_log off;
   error_log  /var/log/nginx/error.log crit;
