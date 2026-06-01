@@ -16,7 +16,7 @@ executing `puppet agent -tv`.
 Add the instance to `site.pp`, push the commit and then use the
 `bin/provision-instance.sh` script on your local machine:
 ```shell-session
-$ bin/provision-instance.sh codeorigin-02.stage.ops.jquery.net staging
+$ bin/provision-instance.sh example-01.stage.ops.jquery.net staging
 ```
 
 ### Decommissioning new nodes
@@ -178,13 +178,13 @@ run `octocatalog-diff` commands like so:
 
 ```shell
 # staging
-octocatalog-diff -n codeorigin-02.stage.ops.jquery.net
+octocatalog-diff -n example-01.stage.ops.jquery.net
 
 # production
-octocatalog-diff --environment production -n codeorigin-02.ops.jquery.net
+octocatalog-diff --environment production -n example-01.ops.jquery.net
 
 # production (verbose)
-octocatalog-diff --environment production -n codeorigin-02.ops.jquery.net --display-detail-add
+octocatalog-diff --environment production -n example-01.ops.jquery.net --display-detail-add
 ```
 
 By default, `octocatalog-diff` will show the difference between the
@@ -209,7 +209,7 @@ Alternatively, you can install octocatalog-diff yourself:
   ```
   $ cd /path/to/jquery/infrastructure-puppet
   $ g10k -puppetfile
-  $ octocatalog-diff -n codeorigin-02.stage.ops.jquery.net
+  $ octocatalog-diff -n example-01.stage.ops.jquery.net
   ```
 
 ### Troubleshooting: `bin/config-version.sh: fatal: bad revision 'production'`

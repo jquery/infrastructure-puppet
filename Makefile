@@ -47,7 +47,7 @@ test-codeorigin-next-https:
 	@ echo "✅ $@"
 
 test-codeorigin-stage:
-	@ php test/CodeoriginTest.php "https://codeorigin-02.stage.ops.jquery.net"
+	@ php test/CodeoriginTest.php "https://codeorigin-04.stage.ops.jquery.net"
 	@ echo "✅ $@"
 
 test-contentorigin-prod:

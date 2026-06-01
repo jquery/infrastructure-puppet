@@ -43,7 +43,7 @@ The following are examples of mitigations and optimizations:
 
 ### Testing and monitoring
 
-The staging server at `https://codeorigin-02.stage.ops.jquery.net` can be used to validate server configuration changes before production deployment. For example, the equivalent of <https://code.jquery.com/color/jquery.color.svg-names-2.0.0.min.js> is also served from `https://codeorigin-02.stage.ops.jquery.net/color/jquery.color.svg-names-2.0.0.min.js`.
+The staging server (codeorigin-XX.stage.ops.jquery.net) can be used to validate server configuration changes before production deployment. For example, the equivalent of <https://code.jquery.com/color/jquery.color.svg-names-2.0.0.min.js> is also served from `https://codeorigin-XX.stage.ops.jquery.net/color/jquery.color.svg-names-2.0.0.min.js`.
 
 You can run [an automated test suite](https://github.com/jquery/codeorigin.jquery.com/tree/main/test) against either the production or staging server.
 
