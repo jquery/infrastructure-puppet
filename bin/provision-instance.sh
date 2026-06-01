@@ -32,7 +32,7 @@ INSTANCE_IP4=$(ssh root@"$INSTANCE" facter networking.ip)
 INSTANCE_IP6=$(ssh root@"$INSTANCE" facter networking.ip6)
 ssh "$PUPPET_SERVER" sudo nft add rule inet filter input tcp dport 8140 ip saddr "$INSTANCE_IP4" ct state new accept
 if [[ "$INSTANCE_IP6" != fe80* ]]; then
-  ssh "$PUPPET_SERVER" sudo nft add rule inet6 filter input tcp dport 8140 ip6 saddr "$INSTANCE_IP6" ct state new accept
+  ssh "$PUPPET_SERVER" sudo nft add rule inet filter input tcp dport 8140 ip6 saddr "$INSTANCE_IP6" ct state new accept
 fi
 
 ssh root@"$INSTANCE" "$PUPPET" config --section agent set server "$PUPPET_SERVER"
