@@ -80,11 +80,6 @@ node 'builder-05.stage.ops.jquery.net' {
   role('docs::builder')
 }
 
-# Debian 11 Bullseye
-node 'codeorigin-02.stage.ops.jquery.net' {
-  role('codeorigin')
-}
-
 # 2 CPU, 2 GB mem, Debian 12 Bookworm
 node 'codeorigin-04.stage.ops.jquery.net' {
   role('codeorigin')
