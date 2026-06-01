@@ -37,6 +37,6 @@ Nodes managed by this Puppet repository are hosted at **DigitalOcean**.
 Once created:
 * Define the chosen hostname with the allocated IP in DNS
   * Cloudflare Dashboard > jquery.net zone > DNS
-  * Create AAAA record
+  * Create A record
   * Proxy status: Off
 * Follow [Puppet § Provisioning new nodes](./puppet.md).
