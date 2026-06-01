@@ -50,16 +50,13 @@ function jq_req( $url, array $reqHeaders = [] ) {
 			return $len;
 		},
 	] );
-	try {
-		$ret = curl_exec( $ch );
-		if ( $ret === false ) {
-			throw new Exception( curl_error( $ch ) );
-		}
-		$resp['body'] = $ret;
-		return $resp;
-	} finally {
-		curl_close( $ch );
+
+	$ret = curl_exec( $ch );
+	if ( $ret === false ) {
+		throw new Exception( curl_error( $ch ) );
 	}
+	$resp['body'] = $ret;
+	return $resp;
 }
 
 /**
