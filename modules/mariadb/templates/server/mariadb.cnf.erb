@@ -18,7 +18,7 @@ local_infile            = 0
 skip-external-locking   = 1
 skip-name-resolve       = 1
 
-report_host             = <%= @facts['fqdn'] %>
+report_host             = <%= @facts['networking']['fqdn'] %>
 report_port             = <%= @bind_port %>
 
 character-set-server    = utf8mb4
