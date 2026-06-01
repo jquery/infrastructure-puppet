@@ -17,12 +17,12 @@ class ssh::server (
 
   $enabled_key_types.each |Ssh::KeyType $type| {
     if jqlib::has_puppetdb() {
-      @@sshkey { "${::fqdn}-${type}":
+      @@sshkey { "${facts['networking']['fqdn']}-${type}":
         ensure       => present,
-        name         => $::facts['networking']['fqdn'],
-        type         => $::ssh[$type]['type'],
-        key          => $::ssh[$type]['key'],
-        host_aliases => $host_names.filter |$it| { $it != $::facts['networking']['fqdn'] },
+        name         => $facts['networking']['fqdn'],
+        type         => $facts['ssh'][$type]['type'],
+        key          => $facts['ssh'][$type]['key'],
+        host_aliases => $host_names.filter |$it| { $it != $facts['networking']['fqdn'] },
       }
     }
 
