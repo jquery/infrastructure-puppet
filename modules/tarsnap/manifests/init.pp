@@ -41,7 +41,7 @@ class tarsnap () {
 
   file { '/etc/tarsnap.key':
     ensure    => file,
-    content   => jqlib::secret("tarsnap-keys/${::fqdn}.key"),
+    content   => jqlib::secret("tarsnap-keys/${facts['networking']['fqdn']}.key"),
     owner     => 'root',
     group     => 'root',
     mode      => '0440',
