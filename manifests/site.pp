@@ -17,6 +17,11 @@ node 'codeorigin-02.ops.jquery.net' {
   role('codeorigin')
 }
 
+# 2 CPU, 2 GB mem, Debian 12 Bookworm
+node 'codeorigin-04.ops.jquery.net' {
+  role('codeorigin')
+}
+
 # 2 CPU, 4 GB mem, Debian 11 Bullseye, 80 GB disk
 node 'contentorigin-02.ops.jquery.net' {
   role('contentorigin')
@@ -76,7 +81,7 @@ node 'codeorigin-02.stage.ops.jquery.net' {
 }
 
 # 2 CPU, 2 GB mem, Debian 12 Bookworm
-node 'codeorigin-03.stage.ops.jquery.net' {
+node 'codeorigin-04.stage.ops.jquery.net' {
   role('codeorigin')
 }
 
