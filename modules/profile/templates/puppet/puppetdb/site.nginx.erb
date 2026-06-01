@@ -11,7 +11,7 @@ server {
   auth_basic_user_file /etc/nginx/puppetdb.htpasswd;
 
   location /pdb/query/v4 {
-    proxy_pass https://<%= @facts['fqdn'] %>:8081/pdb/query/v4;
+    proxy_pass https://<%= @facts['networking']['fqdn'] %>:8081/pdb/query/v4;
     proxy_redirect off;
     proxy_buffering off;
 
@@ -23,7 +23,7 @@ server {
   }
 
   location /pdb/meta {
-    proxy_pass https://<%= @facts['fqdn'] %>:8081/pdb/meta;
+    proxy_pass https://<%= @facts['networking']['fqdn'] %>:8081/pdb/meta;
     proxy_redirect off;
     proxy_buffering off;
 
