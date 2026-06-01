@@ -26,8 +26,15 @@ fi
 ssh root@"$INSTANCE" apt-get update
 ssh root@"$INSTANCE" apt-get -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" upgrade -y
 ssh root@"$INSTANCE" apt-get -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" install -y puppet-agent
-INSTANCE_IP=$(ssh root@"$INSTANCE" facter networking.ip)
-ssh "$PUPPET_SERVER" sudo nft add rule inet filter input tcp dport 8140 ip saddr "$INSTANCE_IP" ct state new accept
+
+# temporarily poke firewall rules so this host can be provisioned
+INSTANCE_IP4=$(ssh root@"$INSTANCE" facter networking.ip)
+INSTANCE_IP6=$(ssh root@"$INSTANCE" facter networking.ip6)
+ssh "$PUPPET_SERVER" sudo nft add rule inet filter input tcp dport 8140 ip saddr "$INSTANCE_IP4" ct state new accept
+if [[ "$INSTANCE_IP6" != fe80* ]]; then
+  ssh "$PUPPET_SERVER" sudo nft add rule inet6 filter input tcp dport 8140 ip6 saddr "$INSTANCE_IP6" ct state new accept
+fi
+
 ssh root@"$INSTANCE" "$PUPPET" config --section agent set server "$PUPPET_SERVER"
 ssh root@"$INSTANCE" "$PUPPET" config --section agent set environment "$ENVIRONMENT"
 ssh root@"$INSTANCE" "$PUPPET" agent -t || true
@@ -41,4 +48,6 @@ fi
 
 ssh "$PUPPET_SERVER" sudo puppetserver ca sign --certname "$INSTANCE"
 ssh root@"$INSTANCE" "$PUPPET" agent -t
+
+# provision permanent firewall rules from data in PuppetDB
 ssh "$PUPPET_SERVER" sudo run-puppet-agent
