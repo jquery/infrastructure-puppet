@@ -7,7 +7,7 @@
 profile::certbot::certificates:
   wordpress:
     domains:
-      - "%{::facts.fqdn}"
+      - "%{::facts.networking.fqdn}"
 
 profile::notifier::tls_key_name: wordpress
 profile::wordpress::base::default_site_cert: wordpress

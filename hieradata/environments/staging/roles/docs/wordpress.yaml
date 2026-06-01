@@ -12,7 +12,7 @@ profile::tarsnap::enabled: false
 profile::certbot::certificates:
   wordpress:
     domains:
-      - "%{::facts.fqdn}"
+      - "%{::facts.networking.fqdn}"
       - stage.api.jquery.com
       - stage.api.jquerymobile.com
       - stage.api.jqueryui.com

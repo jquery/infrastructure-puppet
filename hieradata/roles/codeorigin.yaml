@@ -7,6 +7,6 @@
 profile::certbot::certificates:
   codeorigin:
     domains:
-      - "%{::facts.fqdn}"
+      - "%{::facts.networking.fqdn}"
 
 profile::notifier::tls_key_name: codeorigin

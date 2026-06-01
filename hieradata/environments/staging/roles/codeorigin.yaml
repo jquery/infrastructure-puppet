@@ -6,4 +6,4 @@
 
 profile::codeorigin::vhost_hostnames:
   - code2.jquery.com
-  - "%{::facts.fqdn}"
+  - "%{::facts.networking.fqdn}"

@@ -8,6 +8,6 @@ profile::certbot::certificates:
   search:
     domains:
       - typesense.jquery.com
-      - "%{::facts.fqdn}"
+      - "%{::facts.networking.fqdn}"
 
 profile::typesense::tls_key_name: search

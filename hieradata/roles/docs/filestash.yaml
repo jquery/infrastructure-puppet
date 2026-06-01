@@ -1,6 +1,6 @@
 profile::certbot::certificates:
   filestash:
     domains:
-      - "%{::facts.fqdn}"
+      - "%{::facts.networking.fqdn}"
 
 profile::filestash::certificate: filestash

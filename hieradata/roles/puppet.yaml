@@ -3,7 +3,7 @@ profile::base::enabled_groups: [gitpuppet]
 profile::certbot::certificates:
   puppet:
     domains:
-      - "%{::facts.fqdn}"
+      - "%{::facts.networking.fqdn}"
 
 profile::puppet::puppetdb::nginx_certificate_name: puppet
 profile::puppet::server::nginx_certificate_name: puppet

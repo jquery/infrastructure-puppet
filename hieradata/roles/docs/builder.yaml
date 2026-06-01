@@ -7,6 +7,6 @@
 profile::certbot::certificates:
   builder:
     domains:
-      - "%{::facts.fqdn}"
+      - "%{::facts.networking.fqdn}"
 
 profile::notifier::tls_key_name: builder
