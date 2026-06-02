@@ -111,7 +111,7 @@ Note that Typesense supports in-place upgrades that preserve and migrate the dat
 3. Follow [$ Add public search-only key](#add-public-search-only-key)
    * Grant access to the public key currently used on our websites. You can find this in this in [jquery-wp-content](https://github.com/jquery/jquery-wp-content/blob/main/sites.php) or in the jQuery Team vault.
 4. Crawl all the sites. For each of these repositories:
-   * change secret "TYPESENSE_HOST"
+   * change secret "TYPESENSE_HOST" to `search-XX.ops.jquery.net`
    * change secret "TYPESENSE_ADMIN_KEY"
    * run "typesense" workflow
    
