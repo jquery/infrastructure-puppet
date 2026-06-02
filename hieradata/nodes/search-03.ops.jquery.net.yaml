@@ -1,9 +1,2 @@
-profile::certbot::certificates:
-  search:
-    domains:
-      # Skip canonical host while setting up
-      # - typesense.jquery.com
-      - "%{::facts.networking.fqdn}"
-
 # https://github.com/jquery/infrastructure-puppet/issues/36
 # profile::typesense::api_key: "0.25.2"

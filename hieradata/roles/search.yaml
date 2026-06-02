@@ -7,7 +7,15 @@
 profile::certbot::certificates:
   search:
     domains:
-      - typesense.jquery.com
       - "%{::facts.networking.fqdn}"
+      # Keep canonical name commented out, because we serve it via CDN
+      # which has its own cert (and connects to origin via TLS using the FQDN).
+      # By not redundantly generating the canonical cert here as well,
+      # we ease provisioning new instances which otherwise requires removing it
+      # temporary during setup and then re-adding after switching traffic as
+      # otherwise certbot can't reach itself.
+      #
+      # Comment this out if we need to serve directly without CDN
+      # - typesense.jquery.com
 
 profile::typesense::tls_key_name: search
