@@ -1,7 +1,7 @@
 # @summary Install Typesense
 class typesense (
   String[1] $api_key,
-  String[1] $version = '0.24.0',
+  String[1] $version,
 ) {
 
   file { '/usr/share/typesense-dl':
