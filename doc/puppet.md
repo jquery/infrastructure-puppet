@@ -15,17 +15,22 @@ executing `puppet agent -tv`.
 
 Add the instance to `site.pp`, push the commit and then use the
 `bin/provision-instance.sh` script on your local machine:
+
 ```shell-session
 $ bin/provision-instance.sh example-01.stage.ops.jquery.net staging
 ```
 
-### Decommissioning new nodes
+### Decommissioning nodes
+
+_See also: [Hosting § Delete a node](./hosting.md)._
 
 To decom a node, run the following script as your own user on the
 Puppet server:
+
 ```shell-session
 $ jq-decom-instance FULL-HOSTNAME.ops.jquery.net
 ```
+
 Then remove references from `site.pp`, host-specific hiera files, etc.
 
 ## Conventions

@@ -40,3 +40,18 @@ Once created:
   * Create A record
   * Proxy status: Off
 * Follow [Puppet § Provisioning new nodes](./puppet.md).
+
+## Delete a node
+
+Prior to deleting a production node, it is recommended to first deprecate it:
+
+* Turn off the droplet in DigitalOcean.
+* Update or remove any GitHub webhooks that may point to this host.
+* Update or remove any references in Cloudflare DNS or Puppet to this host (apart from the definition in Puppet `site.pp` and DNS `jquery.net`).
+* Update or remove any references in Fastly service origins.
+
+Once ready to permanently delete a node:
+
+* Follow [Puppet § Decommissioning nodes](./puppet.md).
+* Delete the droplet in DigitalOcean.
+* Delete the record from the jquery.net zone in DNS.
