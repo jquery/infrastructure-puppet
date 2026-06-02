@@ -63,4 +63,20 @@ class typesense (
     content => template('typesense/server.ini.erb'),
     notify  => Service['typesense-server'],
   }
+
+  file { '/usr/local/bin/jq-typesense-create-admins':
+    ensure  => file,
+    content => template('jq-typesense-create-admins.sh.erb'),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0500',
+  }
+
+  file { '/usr/local/bin/jq-typesense-add-pubkey':
+    ensure  => file,
+    content => template('jq-typesense-add-pubkey.sh.erb'),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0500',
+  }
 }

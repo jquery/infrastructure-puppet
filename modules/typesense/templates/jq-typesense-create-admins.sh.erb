@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -euo pipefail
+
+TYPESENSE_BOOTSTRAP_KEY="<%= @api_key %>"
+
+echo ""
+echo "=== $(hostname) admin key jquery"
+
+curl --silent http://localhost:8108/keys \
+  -X POST \
+  -H "X-TYPESENSE-API-KEY: $TYPESENSE_BOOTSTRAP_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"description":"jQuery admin key.","actions": ["*"], "collections": ["jquery.*"]}' \
+  | jq -r .value
+
+echo ""
+echo "=== $(hostname) admin key qunit"
+
+curl --silent http://localhost:8108/keys \
+  -X POST \
+  -H "X-TYPESENSE-API-KEY: $TYPESENSE_BOOTSTRAP_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"description":"QUnit admin key.","actions": ["*"], "collections": ["qunit.*"]}' \
+  | jq -r .value
+
+echo ""
+echo "=== $(hostname) admin key amethyst"
+
+curl --silent http://localhost:8108/keys \
+  -X POST \
+  -H "X-TYPESENSE-API-KEY: $TYPESENSE_BOOTSTRAP_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"description":"Amethyst admin key.","actions": ["*"], "collections": ["amethyst.*"]}' \
+  | jq -r .value
+

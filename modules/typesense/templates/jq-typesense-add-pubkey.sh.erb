@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+
+TYPESENSE_PUB_SEARCH_KEY="$1"
+TYPESENSE_BOOTSTRAP_KEY="<%= @api_key %>"
+
+curl --silent http://localhost:8108/keys \
+  -X POST \
+  -H "X-TYPESENSE-API-KEY: $TYPESENSE_BOOTSTRAP_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"value":"'$TYPESENSE_PUB_SEARCH_KEY'","description":"Search-only key.","actions": ["documents:search"], "collections": ["*"]}'
