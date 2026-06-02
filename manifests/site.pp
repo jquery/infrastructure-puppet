@@ -57,6 +57,11 @@ node 'search-02.ops.jquery.net' {
   role('search')
 }
 
+# 2 CPU, 2 GB mem, Debian 12 Bookworm
+node 'search-03.ops.jquery.net' {
+  role('search')
+}
+
 # 4 CPU, 8 GB mem, Debian 12 Bookworm (NYC3)
 node 'wp-04.ops.jquery.net' {
   role('docs::wordpress')
