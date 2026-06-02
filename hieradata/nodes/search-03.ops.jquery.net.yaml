@@ -1,2 +1,2 @@
 # https://github.com/jquery/infrastructure-puppet/issues/36
-profile::typesense::version: "0.25.2"
+profile::typesense::version: "28.0"
