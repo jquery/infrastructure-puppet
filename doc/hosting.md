@@ -26,7 +26,7 @@ Nodes managed by this Puppet repository are hosted at **DigitalOcean**.
 * Additional options:
   * Enable "Monitoring" (free)
 * Advanced options:
-  * Disable "IPv6" (free)
+  * Enable "IPv6" (free)
 * Hostname: Refer to [dns.md](./dns.md)
   * Pick the next number within the given role and realm.
 * Tags:
