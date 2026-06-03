@@ -22,7 +22,7 @@ node 'codeorigin-04.ops.jquery.net' {
   role('codeorigin')
 }
 
-# 2 CPU, 4 GB mem, Debian 11 Bullseye, 80 GB disk
+# 2 CPU, 4 GB mem, Debian 11 Bullseye, 80 GB disk (+Backups)
 node 'contentorigin-02.ops.jquery.net' {
   role('contentorigin')
 }
@@ -47,7 +47,7 @@ node 'miscweb-02.ops.jquery.net' {
   role('miscweb')
 }
 
-# 2 CPU, 4 GB mem, Debian 12 Bookworm
+# 2 CPU, 4 GB mem, Debian 12 Bookworm (+Backups)
 node 'puppet-04.ops.jquery.net' {
   role('puppet')
 }
@@ -72,8 +72,13 @@ node 'wp-05.ops.jquery.net' {
   role('docs::wordpress')
 }
 
-# 1 CPU, 2 GB mem, Debian 11 Bullseye
+# 1 CPU, 2 GB mem, Debian 11 Bullseye (+Backups)
 node 'wpblogs-01.ops.jquery.net' {
+  role('blogs')
+}
+
+# 2 CPU, 2 GB mem, Debian 12 Bookworm (+Backups)
+node 'wpblogs-02.ops.jquery.net' {
   role('blogs')
 }
 
