@@ -104,13 +104,14 @@ or <https://github.com/jquery/api.jquery.com/>.
 Note that Typesense supports in-place upgrades that preserve and migrate the database automatically, so there is no need to set up a new server when updating Typesense itself. However, when performing routine Debiann upgrades, or if the server is lost for any reason, you can set up a new server as follows:
 
 1. Check health: `https://search-XX.ops.jquery.net/health`
-2. Follow [$ Generate admin keys](#generate-admin-keys)
-   * Generate a new admin key for `jquery.*` and add it to the jQuery Team vault.
-   * Generate a new admin key for `qunit.*` and add it to the jQuery Team vault.
-   * Generate a new admin key for `amethyst.*` and add it to the jQuery Team vault.
-3. Follow [$ Add public search-only key](#add-public-search-only-key)
-   * Grant access to the public key currently used on our websites. You can find this in this in [jquery-wp-content](https://github.com/jquery/jquery-wp-content/blob/main/sites.php) or in the jQuery Team vault.
-4. Crawl all the sites. For each of these repositories:
+2. Setup admins
+   * Run `sudo jq-typesense-create-admins` on the host
+   * Save the new admin passwords to the jQuery Team vault
+3. Add our current public key
+   * Get the current public key used on our websites. You can find this in this in [jquery-wp-content](https://github.com/jquery/jquery-wp-content/blob/main/sites.php) or in the jQuery Team vault.
+   * Run `sudo jq-typesense-add-pubkey "..."` to let this key query the new host.
+4. Crawl all the sites.
+   For each of these repositories:
    * change secret "TYPESENSE_HOST" to `search-XX.ops.jquery.net`
    * change secret "TYPESENSE_ADMIN_KEY"
    * run "typesense" workflow
