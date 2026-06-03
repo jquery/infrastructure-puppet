@@ -27,6 +27,7 @@ git -C "$TARSNAP_KEYS_BASE_PATH" add "$KEYFILE"
 if [ "$(id -un)" != "root" ]; then
   if ! git var GIT_AUTHOR_IDENT; then
     export GIT_AUTHOR_NAME="$(id -un)"
+    export GIT_COMMITTER_NAME="$(id -un)"
   fi
 fi
 
