@@ -34,12 +34,27 @@ Nodes managed by this Puppet repository are hosted at **DigitalOcean**.
   * For stage hosts, leave empty.
   * This is used by Monitoring Alerts that email us on prolonged high server load. We prefer the load-average metric over CPU-utilization, and unfortunately that means the alert threshold varies by CPU count (match the selected plan).
 
-Once created:
-* Define the chosen hostname with the allocated IP in DNS
-  * Cloudflare Dashboard > jquery.net zone > DNS
-  * Create A record
-  * Proxy status: Off
-* Follow [Puppet § Provisioning new nodes](./puppet.md).
+Once the droplet has been created:
+
+1. Define the chosen hostname with the allocated IP in DNS,
+   * Cloudflare Dashboard > jquery.net zone > DNS
+   * Create A record
+   * Proxy status: Off
+
+2. If the droplet may upload to Tarsnap (roles: wp, wpblogs, puppet, filestash, contentorigin)
+   then grant the host access to Tarsnap by running this command **from the Puppet server**. See also [Backup § Host management](./backup.md#host-management.md).
+
+   ```shell-session
+   puppet-00$ jq-tarsnap-keygen EXAMPLE.ops.jquery.net
+   ```
+
+   Without this, Puppet will fail as follows:
+   ```
+   Error: Could not retrieve catalog from remote server: Error 500 on SERVER: …
+   Could not find any files from /srv/git/puppet/private/files/tarsnap-keys/example-01.ops.jquery.net.key
+   ```
+
+3. Follow [Puppet § Provisioning new nodes](./puppet.md).
 
 ## Delete a node
 
