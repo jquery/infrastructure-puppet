@@ -26,8 +26,9 @@ server {
   # script-src: add 'wasm-unsafe-eval' for WebAssembly-driven search on
   #   bugs.jquery.com, bugs.jqueryui.com, and plugins.jquery.com
   # img-src: allow secure.gravatar.com images on plugins.jquery.com
+  # img-src: allow blog.jquery.com images on podcast.jquery.com
   # media-src: allow content.jquery.com media on podcast.jquery.com
-  add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' code.jquery.com; connect-src 'self'; img-src 'self' secure.gravatar.com; style-src 'self'; media-src 'self' content.jquery.com; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint";
+  add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' code.jquery.com; connect-src 'self'; img-src 'self' blog.jquery.com secure.gravatar.com; style-src 'self'; media-src 'self' content.jquery.com; report-uri https://csp-report-api.openjs-foundation.workers.dev/; report-to csp-endpoint";
 <%- end -%>
 
 <%- if @site['allow_php'] -%>
