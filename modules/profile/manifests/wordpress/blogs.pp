@@ -24,48 +24,15 @@ class profile::wordpress::blogs (
     require           => Git::Clone['jquery-wp-content'],
   }
 
-  git::clone { 'blog.jquery.com-theme':
-    path   => '/srv/wordpress/blog.jquery.com-theme',
-    remote => 'https://github.com/jquery/blog.jquery.com-theme',
-    branch => 'main',
-    owner  => 'www-data',
-    group  => 'www-data',
-  }
-
   $sites.each |String[1] $name, Hash $site| {
     $active_theme = $site['active_theme']
     $dir = "/srv/wordpress/sites/${name}"
     $host = $site['host']
 
-    # Temporary while testing blogs on jquery-wp-content
-    # https://github.com/jquery/infrastructure-puppet/issues/17
-    if $name == 'jquerymobile' or $name == 'jqueryui' or $name == 'jquery' {
-      $themes = [
-        { name => 'jquery',      path => '/srv/wordpress/jquery-wp-content/themes/jquery', },
-        { name => $active_theme, path => "/srv/wordpress/jquery-wp-content/themes/${active_theme}", },
-      ]
-      $plugins = [
-        { name => 'disable-emojis', path => '/srv/wordpress/jquery-wp-content/plugins/disable-emojis/disable-emojis.php', single_file => true, },
-        { name => 'jquery-actions', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-actions.php', single_file => true, },
-        { name => 'jquery-filters', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-filters.php', single_file => true, },
-      ]
-
-      file { "${dir}/jquery-config.php":
-        ensure  => file,
-        content => template('profile/wordpress/blogs/jquery-config.php.erb'),
-        require => Exec["wp-download-${name}"],
-      }
-
-      $config_files = [
-        "${dir}/jquery-config.php",
-      ]
-    } else {
-      $themes = [
-        { name => 'jquery',      path => '/srv/wordpress/blog.jquery.com-theme/jquery', },
-        { name => $active_theme, path => "/srv/wordpress/blog.jquery.com-theme/${active_theme}", },
-      ]
-      $plugins = []
-      $config_files = []
+    file { "${dir}/jquery-config.php":
+      ensure  => file,
+      content => template('profile/wordpress/blogs/jquery-config.php.erb'),
+      require => Exec["wp-download-${name}"],
     }
 
     wordpress::site { $name:
@@ -75,9 +42,18 @@ class profile::wordpress::blogs (
       db_password_seed => $db_password_seed,
       admin_email      => $admin_email,
       admin_password   => $admin_password,
-      config_files     => $config_files,
-      themes           => $themes,
-      plugins          => $plugins,
+      config_files     => [
+        "${dir}/jquery-config.php",
+      ],
+      themes           => [
+        { name => 'jquery',      path => '/srv/wordpress/jquery-wp-content/themes/jquery', },
+        { name => $active_theme, path => "/srv/wordpress/jquery-wp-content/themes/${active_theme}", },
+      ],
+      plugins          => [
+        { name => 'disable-emojis', path => '/srv/wordpress/jquery-wp-content/plugins/disable-emojis/disable-emojis.php', single_file => true, },
+        { name => 'jquery-actions', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-actions.php', single_file => true, },
+        { name => 'jquery-filters', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-filters.php', single_file => true, },
+      ],
       base_path        => $dir,
     }
   }
