@@ -22,6 +22,7 @@ foreach ( [
   'http://docs.jquery.com/UI/API/1.7.1/Datepicker' => 'https://api.jqueryui.com/datepicker/',
   'http://docs.jquery.com/QUnit/deepEqual' => 'https://api.qunitjs.com/deepEqual/',
   'http://docs.jquery.com/$' => 'https://api.jquery.com/jQuery/',
+  'https://api.qunitjs.com/deepEqual/' => 'https://qunitjs.com/deepEqual/',
 ] as $url => $expected ) {
   Unit::testHttp( $url, null, [], [
     'status' => '301',
