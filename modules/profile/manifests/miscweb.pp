@@ -3,6 +3,7 @@ class profile::miscweb (
   String[1]                                      $default_certificate = lookup('profile::miscweb::default_certificate'),
   Hash[Stdlib::Fqdn, Profile::Miscweb::Site]     $sites               = lookup('profile::miscweb::sites'),
   Hash[Stdlib::Fqdn, Profile::Miscweb::Redirect] $redirects           = lookup('profile::miscweb::redirects'),
+  String[1]                                      $fqdn_certificate    = lookup('profile::miscweb::fqdn_certificate'),
 ) {
   nftables::allow { 'miscweb-https':
     proto => 'tcp',
@@ -96,5 +97,18 @@ class profile::miscweb (
       content => template('profile/miscweb/redirect.nginx.erb'),
       require => Letsencrypt::Certificate[$certificate],
     }
+  }
+
+  # Ease host upgrades by defining a generic FQDN vhost over 443/HTTPS
+  # which we use in Fastly to connect to the origin by FQDN
+  # https://github.com/jquery/infrastructure-puppet/issues/87
+  $fqdn = $::facts['networking']['fqdn']
+  $redirect = {
+    'target' => 'https://jquery.com',
+    'mode' => 'root',
+  }
+  nginx::site { 'fqdn_redirect':
+    content => template('profile/miscweb/redirect.nginx.erb'),
+    require => Letsencrypt::Certificate[$fqdn_certificate],
   }
 }

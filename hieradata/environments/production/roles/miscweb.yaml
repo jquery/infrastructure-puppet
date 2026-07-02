@@ -18,6 +18,7 @@ profile::certbot::certificates:
       - bugs.jqueryui.com
       - plugins.jquery.com
 profile::notifier::tls_key_name: miscweb-fqdn
+profile::miscweb::fqdn_certificate: miscweb-fqdn
 profile::miscweb::default_certificate: miscweb-sites
 
 profile::miscweb::sites:
