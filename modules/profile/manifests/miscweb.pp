@@ -103,12 +103,13 @@ class profile::miscweb (
   # which we use in Fastly to connect to the origin by FQDN
   # https://github.com/jquery/infrastructure-puppet/issues/87
   $fqdn = $::facts['networking']['fqdn']
+  $certificate = $fqdn_certificate
   $redirect = {
     'target' => 'https://jquery.com',
     'mode' => 'root',
   }
   nginx::site { 'fqdn_redirect':
     content => template('profile/miscweb/redirect.nginx.erb'),
-    require => Letsencrypt::Certificate[$fqdn_certificate],
+    require => Letsencrypt::Certificate[$certificate],
   }
 }
