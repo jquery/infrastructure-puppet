@@ -76,7 +76,7 @@ class profile::builder (
     } + pick($site['builder_extra_settings'], {})
 
     file { "/srv/builder/${name}/config.json":
-      ensure  => absent,
+      ensure => absent,
     }
 
     file { "/srv/builder/${name}/config.js":
