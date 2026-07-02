@@ -1,0 +1,3 @@
+# Temporary override while migrating
+profile::certbot::certificates::miscweb-sites: []
+profile::miscweb::redirects: []
