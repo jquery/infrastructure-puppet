@@ -2,7 +2,7 @@
 class profile::typesense (
   String[1] $tls_key_name = lookup('profile::typesense::tls_key_name'),
   String[1] $api_key = lookup('profile::typesense::api_key'),
-  String[1] $version = lookup('profile::typesense::version', {default_value => '0.24.0'}),
+  String[1] $version = lookup('profile::typesense::version', {default_value => '28.0'}),
 ) {
   class { 'typesense':
     api_key => $api_key,
