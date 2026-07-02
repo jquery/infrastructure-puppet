@@ -17,7 +17,7 @@ class profile::certbot (
 
   $certificates.each |String[1] $name, Profile::Certbot::Certificate $data| {
     letsencrypt::certificate { $name:
-      *       => $data,
+      domains => $data['domains'],
       require => [Exec['nginx-default-site-reload'], Service['nftables']],
     }
   }

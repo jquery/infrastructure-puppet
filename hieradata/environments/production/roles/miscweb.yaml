@@ -5,9 +5,11 @@
 # - /hierdata/environments/production/roles/miscweb.yaml [THIS FILE]
 
 profile::certbot::certificates:
-  miscweb:
+  miscweb-fqdn:
     domains:
       - "%{::facts.networking.fqdn}"
+  miscweb-sites:
+    domains:
       - docs.jquery.com
       - podcast.jquery.com
       - demos.jquerymobile.com
@@ -15,8 +17,8 @@ profile::certbot::certificates:
       - bugs.jquery.com
       - bugs.jqueryui.com
       - plugins.jquery.com
-profile::notifier::tls_key_name: miscweb
-profile::miscweb::default_certificate: miscweb
+profile::notifier::tls_key_name: miscweb-fqdn
+profile::miscweb::default_certificate: miscweb-sites
 
 profile::miscweb::sites:
   demos.jquerymobile.com:
@@ -86,206 +88,219 @@ profile::miscweb::sites:
       branch: gh-pages
     notifier: true
 
+# Let's Encrypt allows 50 domains per cert.
+#
+# Once a cert spans 50 domains, assign further domains to a new group.
+# Certs are made automatically from this map, so to create a new group
+# simply start referring to a new group name here.
+#
+# Full groups: miscweb-redirects-a (48)
+#
+# Group for next domain: miscweb-redirects-b
 profile::miscweb::redirects:
   # css-chassis.com
   css-chassis.com:
     target: https://github.com/jquery/css-chassis
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   perf.css-chassis.com:
     target: https://github.com/jquery/css-chassis
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   view.css-chassis.com:
     target: https://github.com/jquery/css-chassis
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   www.css-chassis.com:
     target: https://github.com/jquery/css-chassis
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   # css-chassis.org
   css-chassis.org:
     target: https://github.com/jquery/css-chassis
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   www.css-chassis.org:
     target: https://github.com/jquery/css-chassis
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   # globalizejs.com
   globalizejs.com:
     target: https://github.com/globalizejs/globalize
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   www.globalizejs.com:
     target: https://github.com/globalizejs/globalize
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   # js.foundation
   js.foundation:
     target: https://openjsf.org
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   www.js.foundation:
     target: https://openjsf.org
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   cla.js.foundation:
     target: https://cla.openjsf.org
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   # jquery.com
   brand.jquery.com:
     target: https://brand.jquery.org
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   contribute.jquery.com:
     target: https://contribute.jquery.org
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   dev.jquery.com:
     target: https://bugs.jquery.com
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   download.jquery.com:
     target: https://jquery.com/download/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   download.jquerymobile.com:
     target: https://jquerymobile.com/download/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   events.jquery.com:
     target: https://openjsf.org/events
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   irc.jquery.com:
     target: https://irc.jquery.org/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   m.jquery.com:
     target: https://jquery.com
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   meetups.jquery.com:
     target: https://jquery.com/meetups/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   try.jquery.com:
     # "Try jQuery" is no more.
     # https://blog.jquery.com/2013/02/22/try-jquery-interactive-course/
     target: https://learn.jquery.com/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   ui.jquery.com:
     target: https://jqueryui.com
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   view.jquery.com:
     # Gitview was a file browser for release artefacts, superseded by the releases docsite.
     # https://github.com/jquery/infrastructure/issues/503
     target: https://releases.jquery.com/jquery/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   www.jquery.com:
     target: https://jquery.com
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   # jqueryui.com
   dev.jqueryui.com:
     target: https://bugs.jqueryui.com
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   learn.jqueryui.com:
     target: https://learn.jquery.com/jquery-ui/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   view.jqueryui.com:
     target: https://releases.jquery.com/ui/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   wiki.jqueryui.com:
     target: https://jqueryui.pbworks.com
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   www.jqueryui.com:
     target: https://jqueryui.com
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   # jquerymobile.com
   jquerymobile.net:
     target: https://jquerymobile.com
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   jquerymobile.org:
     target: https://jquerymobile.com
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   view.jquerymobile.com:
     target: https://releases.jquery.com/mobile/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   www.jquerymobile.com:
     target: https://jquerymobile.com
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   # jquery.org
   events.jquery.org:
     target: https://openjsf.org/events
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
+  m.jquery.org:
+    target: https://jquery.com
+    mode: root
+    certificate: miscweb-redirects-a
   meetups.jquery.org:
     target: https://jquery.com/meetups/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   swarm.jquery.com:
     target: https://github.com/jquery/testswarm
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   swarm.jquery.org:
     target: https://github.com/jquery/testswarm
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   view.jquery.org:
     target: https://releases.jquery.com/jquery/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   www.jquery.org:
     target: https://jquery.org
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   # ThemeRoller
   themeroller.net:
     target: https://jqueryui.com/themeroller/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   www.themeroller.net:
     target: https://jqueryui.com/themeroller/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   themeroller.org:
     target: https://jqueryui.com/themeroller/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   www.themeroller.org:
     target: https://jqueryui.com/themeroller/
     mode: root
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   # QUnit
   api.qunitjs.com:
     target: https://qunitjs.com
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   www.qunitjs.com:
     target: https://qunitjs.com
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   api.qunitjs.org:
     target: https://qunitjs.com
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
   qunitjs.org:
     target: https://qunitjs.com
     mode: prefix
-    certificate: miscweb-a
+    certificate: miscweb-redirects-a
