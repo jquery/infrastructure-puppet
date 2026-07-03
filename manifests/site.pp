@@ -12,11 +12,6 @@ node 'builder-02.ops.jquery.net' {
   role('docs::builder')
 }
 
-# 2 CPU, 2 GB mem, Debian 11 Bullseye
-node 'codeorigin-02.ops.jquery.net' {
-  role('codeorigin')
-}
-
 # 2 CPU, 2 GB mem, Debian 12 Bookworm
 node 'codeorigin-04.ops.jquery.net' {
   role('codeorigin')
@@ -39,11 +34,6 @@ node 'gruntjs-03.ops.jquery.net' {
 
 # 2 CPU, 2 GB mem, Debian 11 Bullseye
 node 'miscweb-01.ops.jquery.net' {
-  role('miscweb')
-}
-
-# 2 CPU, 2 GB mem, Debian 12 Bookworm
-node 'miscweb-02.ops.jquery.net' {
   role('miscweb')
 }
 
@@ -74,11 +64,6 @@ node 'wp-05.ops.jquery.net' {
 
 # 1 CPU, 2 GB mem, Debian 11 Bullseye (+Backups)
 node 'wpblogs-01.ops.jquery.net' {
-  role('blogs')
-}
-
-# 2 CPU, 2 GB mem, Debian 12 Bookworm (+Backups)
-node 'wpblogs-02.ops.jquery.net' {
   role('blogs')
 }
 
