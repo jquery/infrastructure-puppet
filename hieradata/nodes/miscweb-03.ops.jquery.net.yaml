@@ -1,6 +1,0 @@
-# Temporary override while migrating
-profile::certbot::certificates:
-  miscweb-fqdn:
-    domains:
-      - "%{::facts.networking.fqdn}"
-profile::miscweb::default_certificate: miscweb-fqdn
