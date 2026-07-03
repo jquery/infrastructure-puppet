@@ -5,6 +5,7 @@ class php (
   $version = debian::codename() ? {
     'bullseye' => '7.4',
     'bookworm' => '8.2',
+    'trixie'   => '8.4',
     default    => fail('php: unsupported debian version'),
   }
 
