@@ -4,4 +4,3 @@ profile::certbot::certificates:
     domains:
       - "%{::facts.networking.fqdn}"
 profile::miscweb::default_certificate: miscweb-fqdn
-profile::miscweb::redirects: {}
