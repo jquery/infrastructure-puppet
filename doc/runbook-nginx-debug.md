@@ -5,13 +5,13 @@
 Use `--connect-to` to bypass any CDN and test the origin directly.
 
 ```
-you@laptop$ curl -I 'https://view.jquery.com/bar' --connect-to '::miscweb-01.ops.jquery.net'
+you@laptop$ curl -I 'https://view.jquery.com/bar' --connect-to '::miscweb-redirects.svc.jquery.net'
 ```
 
 You can also do this from the origin itself over SSH
 
 ```
-krinkle@miscweb-01:~$ curl -v -I 'https://view.jquery.com/bar' --connect-to ::localhost
+krinkle@miscweb:~$ curl -v -I 'https://view.jquery.com/bar' --connect-to ::localhost
 ```
 
 ## Staging and testing

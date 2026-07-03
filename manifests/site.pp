@@ -32,11 +32,6 @@ node 'gruntjs-03.ops.jquery.net' {
   role('gruntjscom')
 }
 
-# 2 CPU, 2 GB mem, Debian 11 Bullseye
-node 'miscweb-01.ops.jquery.net' {
-  role('miscweb')
-}
-
 # 2 CPU, 2 GB mem, Debian 13 Trixie
 node 'miscweb-03.ops.jquery.net' {
   role('miscweb')
