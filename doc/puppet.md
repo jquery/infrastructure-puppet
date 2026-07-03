@@ -82,6 +82,13 @@ multiple profiles, use the shared part of the profile name (for example
 Private Hiera data is stored in `/srv/git/puppet/private/` on the
 Puppet server. For now, follow the instructions in `README` to edit.
 
+## Adding a new Debian version
+
+* Add codename to `type Debian::Codename` in `/modules/debian/types/codename.pp`
+* Add codename to `profile::base::apt::security_supported_versions` in `/hierdata/common/yaml`
+* Add version from https://packages.debian.org/stable/php to `/modules/php/manifests/init.pp`
+* Add version from https://packages.debian.org/stable/postgresql to `/modules/postgresql/manifests/init.pp`
+
 ## Managing user accounts
 
 ### Human users and groups

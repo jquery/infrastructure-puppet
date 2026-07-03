@@ -515,7 +515,7 @@ profile::wordpress::docs::enable_object_cache: true
 profile::wordpress::blogs::admin_email: infrastructure-team@jquery.com
 profile::wordpress::blogs::wordpress_version: ~
 
-profile::base::apt::security_supported_versions: [bullseye, bookworm]
+profile::base::apt::security_supported_versions: [bullseye, bookworm, trixie]
 
 profile::base::accounts:
   krinkle:

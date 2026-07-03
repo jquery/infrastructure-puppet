@@ -4,6 +4,8 @@ class postgresql () {
   $pg_version = debian::codename() ? {
     'bullseye' => '13',
     'bookworm' => '15',
+    'trixie'   => '17',
+    default    => fail('postgresql: unsupported debian version'),
   }
 
   ensure_packages([
