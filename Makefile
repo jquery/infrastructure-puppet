@@ -38,14 +38,6 @@ test-codeorigin-prod-https:
 	@ php test/CodeoriginTest.php "https://code.jquery.com"
 	@ echo "✅ $@"
 
-test-codeorigin-next-http:
-	@ php test/CodeoriginTest.php "http://codeorigin.jquery.com"
-	@ echo "✅ $@"
-
-test-codeorigin-next-https:
-	@ php test/CodeoriginTest.php "https://codeorigin.jquery.com"
-	@ echo "✅ $@"
-
 test-codeorigin-stage:
 	@ php test/CodeoriginTest.php "https://codeorigin-04.stage.ops.jquery.net"
 	@ echo "✅ $@"
