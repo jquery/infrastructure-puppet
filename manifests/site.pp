@@ -68,7 +68,7 @@ node 'wpblogs-01.ops.jquery.net' {
 }
 
 # 2 CPU, 2 GB mem, Debian 13 Trixie (+Backups)
-node 'wpblogs-02.ops.jquery.net' {
+node 'wpblogs-03.ops.jquery.net' {
   role('blogs')
 }
 
