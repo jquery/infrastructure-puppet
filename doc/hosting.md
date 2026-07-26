@@ -7,7 +7,7 @@ Nodes managed by this Puppet repository are hosted at **DigitalOcean**.
   * jQuery Infra Team members
   * LF IT via <https://support.linuxfoundation.org>
 
-## Create new node
+## Create a new node
 
 * Region:
   * Default: NYC3 (`nyc3-vpc-openjsf1`)
@@ -70,3 +70,105 @@ Once ready to permanently delete a node:
 * Follow [Puppet § Decommissioning nodes](./puppet.md).
 * Delete the droplet in DigitalOcean.
 * Delete the record from the jquery.net zone in DNS.
+
+## Migrating a node
+
+Before beginning a fleet-wide Debian upgrade, ensure [Puppet § Adding a new Debian version](./puppet.md#adding-a-new-debian-version) has been done for version in question. For an example ofa fleet-wide node migration, see https://github.com/jquery/infrastructure-puppet/issues/37.
+
+When adding nodes to webhooks:
+* set `https://FQDN_HERE:8333/` as the URL,
+* choose `application/json` as content type,
+* and use the secret from `puppet-04:/srv/git/puppet/private$ git grep webhook_secret` for production and staging respectively,
+* confirm in the GitHub UI that the `ping` payload was succesfully delivered
+
+### builder (docs::builder)
+
+* Follow [§ Create a new node](#create-a-new-node) for `builder-XX` and `builder-XX.stage`
+* Add new nodes to webhooks for the [jquery org](https://github.com/organizations/jquery/settings/hooks)
+
+At this point, any commits or tags in docsite repos notify both the new and old builder nodes, with both performing the same builds, and both racing to write pages to the wpdoc nodes. This should be fine as the updates are idempotent, however it is recommended to shutdown the old builder nodes at this point so that we excercise them fully and discover potential issues. These nodes are not user-facing and idle most of the time.
+
+After one or two docsites have succesfully used the new builder (see [wordpress.md](./wordpress.md)):
+
+* Remove old nodes from webhooks for the [jquery org](https://github.com/organizations/jquery/settings/hooks)
+* Follow [§ Delete a node](#delete-a-node) for the old nodes
+
+### codeorigin
+
+* Follow [§ Create a new node](#create-a-new-node) for `codeorigin-XX` and `codeorigin-XX.stage`
+* Add new nodes to webhooks for [jquery/codeorigin](https://github.com/jquery/codeorigin.jquery.com/settings/hooks)
+* Verify that [CodeoriginTest.php](../test/CodeoriginTest.php) passes for both of the new nodes
+* Change `test-codeorigin-stage` in [Makefile](../Makefile) to monitor the new stage node instead
+* Switch "code2" service in Fastly to the new stage node
+* Switch "code" service in Fastly to the new prod node
+* Remove old nodes from webhooks for [jquery/codeorigin](https://github.com/jquery/codeorigin.jquery.com/settings/hooks)
+* Shutdown the old nodes and **wait a few days** to ease recovery just in case
+* Follow [§ Delete a node](#delete-a-node) for the old nodes
+
+### contentorigin
+
+> [!WARNING]
+> TODO: Document this
+
+### filestash (docs::filestash)
+
+> [!WARNING]
+> TODO: Document this
+
+### gruntjs (gruntjscom)
+
+* Follow [§ Create a new node](#create-a-new-node) for `gruntjs-XX` and `gruntjs-XX.stage`
+* Add new nodes to webhooks for [gruntjs/gruntjs.com](https://github.com/gruntjs/gruntjs.com/settings/hooks)
+* Test that the websites work via the instance's own address, e.g. `https://gruntjs-XX.ops.jquery.net` and `https://gruntjs-XX.stage.ops.jquery.net`
+* Switch DNS for `stage.gruntjs.com`
+* Switch DNS for `gruntjs.com`, `www.gruntjs.com`, and `cdn.gruntjs.com`
+* Follow [§ Delete a node](#delete-a-node) for the old nodes
+* Remove old nodes from webhooks for [gruntjs/gruntjs.com](https://github.com/gruntjs/gruntjs.com/settings/hooks)
+
+### miscweb
+
+* Follow [§ Create a new node](#create-a-new-node) for `miscweb-XX`
+* Temporarily set the following overrides via a `/hieradata/nodes/` file. This disables certbot for the miscweb-sites and miscweb-redirects domains, which would otherwise fail (because those don't point here yet in DNS) and would prevent the server from provisioning succesfully.
+  ```yaml
+  profile::certbot::certificates:
+    miscweb-fqdn:
+      domains:
+        - "%{::facts.networking.fqdn}"
+  profile::miscweb::default_certificate: miscweb-fqdn
+  profile::miscweb::redirects: {}
+  ```
+* Add new node to webhooks for the [jquery org](https://github.com/organizations/jquery/settings/hooks)
+* Test that the instance responds over HTTPS with a redirect to jquery.com, e.g. `https://miscweb-XX.stage.ops.jquery.net`
+* Switch "miscweb" service in Fastly to the new node and test https://podcast.jquery.com responds fine
+* Switch miscweb-redirects and miscweb-sites traffic:
+  - Switch DNS for `miscweb-redirects.svc.jquery.net` and `miscweb-sites.svc.jquery.net` (HTTPS will fail until the next steps are complete)
+  - Remove `/hieradata/nodes/` file for the new miscweb node. Commit, push to staging+production, and `sudo run-puppet-agent` on the new miscweb node
+  - Test that redirects work fine by running `make test` in this repo
+  - Test that https://bugs.jquery.com/ticket/7144 and https://themeroller.jquerymobile.com/ respond fine
+* Remove old nodes from webhooks for the [jquery org](https://github.com/organizations/jquery/settings/hooks)
+* Follow [§ Delete a node](#delete-a-node) for the old nodeshooks)
+
+### puppet
+
+> [!WARNING]
+> TODO: Document the rest of this
+
+* Add new node to webhooks for [jquery/infrastructure-puppet](https://github.com/jquery/infrastructure-puppet/settings/hooks)
+* Remove old node from webhooks for [jquery/infrastructure-puppet](https://github.com/jquery/infrastructure-puppet/settings/hooks)
+
+### search
+
+* Follow [§ Create a new node](#create-a-new-node) for `search-XX`
+* Follow [Search § Setup a new server](./search.md#setup-a-new-server) and refer to [how we tested it](https://github.com/jquery/infrastructure-puppet/issues/37#issuecomment-4598860788)
+* Follow [§ Delete a node](#delete-a-node) for the old nodes
+
+### wp (docs::wordpress)
+
+> [!WARNING]
+> TODO: Document this
+
+### wpblogs (blogs)
+
+> [!WARNING]
+> TODO: Document this
+

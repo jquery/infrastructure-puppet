@@ -25,12 +25,10 @@ Examples of Tier-1 canonical domains of OpenJS projects that are hosted and/or m
 
 | Tier-1 canonical domains | Example
 |--|--
-| `.jquery.com` | https://api.jquery.com
-| `.jqueryui.com` | https://api.jqueryui.com
-| `.jquerymobile.com` | https://demos.jquerymobile.com
-| `.qunitjs.com` | https://qunitjs.com
-| `.jquery.org` | https://contribute.jquery.org
-| `.gruntjs.com` | https://gruntjs.com
 | `.eslint.org` | https://eslint.org
-| `.js.foundation` | https://js.foundation
-| `.openjsf.org` | https://cla.openjsf.org
+| `.gruntjs.com` | https://gruntjs.com
+| `.jquery.com` | https://api.jquery.com
+| `.jquery.org` | https://contribute.jquery.org
+| `.jquerymobile.com` | https://demos.jquerymobile.com
+| `.jqueryui.com` | https://api.jqueryui.com
+| `.qunitjs.com` | https://qunitjs.com
