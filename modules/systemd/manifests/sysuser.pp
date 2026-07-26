@@ -10,7 +10,8 @@ define systemd::sysuser (
   include systemd
 
   $safe_title = regsubst($title, '[\W_]', '-', 'G')
-  file { "/etc/sysusers.d/${safe_title}.conf":
+  $sysusers_file = "/etc/sysusers.d/${safe_title}.conf"
+  file { $sysusers_file:
     ensure  => stdlib::ensure($ensure, 'file'),
     source  => $source,
     content => $content,
@@ -18,5 +19,20 @@ define systemd::sysuser (
     group   => 'root',
     mode    => '0444',
     notify  => Service['systemd-sysusers'],
+  }
+
+  # Debian 11 Bullseye seems to monitor /etc/sysusers.d/ and do this automatically.
+  # Debian 12 Bookworm and later require a call to systemd-sysusers.
+  # https://github.com/jquery/infrastructure-puppet/issues/91
+  if debian::codename() != 'bullseye' {
+    if $ensure != 'absent' {
+      exec { "update-sysusers-${title}":
+          command  => "/bin/systemd-sysusers ${sysusers_file}",
+          path     => '/usr/bin:/usr/sbin:/bin',
+          provider => 'shell',
+          onlyif   => "test -n \"\$(systemd-sysusers --dry-run ${sysusers_file} 2>&1)\"",
+          user     => 'root',
+      }
+    }
   }
 }
