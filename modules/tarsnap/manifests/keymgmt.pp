@@ -5,9 +5,6 @@ class tarsnap::keymgmt (
   String[1]        $user,
   String[1]        $group,
 ) {
-  file { '/usr/local/sbin/jq-tarsnap-keygen':
-    ensure => absent,
-  }
 
   file { '/usr/local/bin/jq-tarsnap-keygen':
     ensure => file,
@@ -15,10 +12,6 @@ class tarsnap::keymgmt (
     owner  => $user,
     group  => $group,
     mode   => '0550',
-  }
-
-  file { '/etc/jq-tarsnap-keygen.sh':
-    ensure  => absent,
   }
 
   file { '/etc/jq-tarsnap-keymgmt-config.sh':
