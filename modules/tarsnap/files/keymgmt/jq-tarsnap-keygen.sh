@@ -2,7 +2,7 @@
 # Manages Tarsnap keys for jQuery machines
 
 set -euo pipefail
-. /etc/jq-tarsnap-keygen.sh
+. /etc/jq-tarsnap-keymgmt-config.sh
 
 INSTANCE=$1
 

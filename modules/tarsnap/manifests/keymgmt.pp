@@ -18,6 +18,10 @@ class tarsnap::keymgmt (
   }
 
   file { '/etc/jq-tarsnap-keygen.sh':
+    ensure  => absent,
+  }
+
+  file { '/etc/jq-tarsnap-keymgmt-config.sh':
     ensure  => file,
     content => template('tarsnap/keymgmt/config.sh'),
     owner   => $user,
