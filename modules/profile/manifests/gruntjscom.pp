@@ -2,7 +2,6 @@
 class profile::gruntjscom (
   String[1]           $tls_key_name   = lookup('profile::gruntjscom::tls_key_name'),
   Stdlib::Fqdn        $canonical_name = lookup('profile::gruntjscom::canonical_name'),
-  Array[Stdlib::Fqdn] $aliases        = lookup('profile::gruntjscom::aliases'),
   Boolean             $robots_deny    = lookup('profile::gruntjscom::robots_deny', {default_value => false}),
 ) {
   ensure_packages(['nodejs', 'npm'])
