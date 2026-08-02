@@ -143,6 +143,10 @@ profile::miscweb::redirects:
     target: https://gruntjs.com
     mode: prefix
     certificate: miscweb-redirects-b
+  # cdn.gruntjs.com previously served a subset of assets of the main site (e.g. logos and readme badges),
+  # but has since been merged into the main site.
+  # https://github.com/gruntjs/gruntjs.com/commit/e8e30fd250374ad7486b24862e6742868a0d38fc
+  # https://github.com/gruntjs/grunt-docs/commit/3f8ce6e615f7c866c63c030d32ee931ea181d66b
   cdn.gruntjs.com:
     target: https://gruntjs.com
     mode: prefix
