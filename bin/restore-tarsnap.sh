@@ -116,6 +116,7 @@ elif [ "$ACTION" == "restore" ]; then
   ssh root@"$DEST_INSTANCE" tarsnap -x -f "$ARCHIVE_NAME" --keyfile "$DEST_OLD_RO_KEY" -C "$DEST_EXTRACT_DIR"  --progress-bytes 1048576
 
   echo "... clean up read-only key"
+  ssh root@"$DEST_INSTANCE" "rm $(printf %q "$DEST_OLD_RO_KEY")"
   ssh "$PUPPET_SERVER" "sudo rm $(printf %q "$OLD_RO_KEY")"
 
   echo "Done!"
