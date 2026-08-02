@@ -11,13 +11,13 @@
  */
 
 require_once __DIR__ . '/Unit.php';
-$server = @$argv[1] ?: 'http://localhost:4000';
+$origin = @$argv[1] ?: 'http://localhost:4000';
 
 Unit::start();
 
 // Domain root
 
-Unit::testHttp( $server, '/', [], [
+Unit::testHttp( $origin, '/', [], [
 	'status' => '301',
 	'server' => 'nginx',
 	'location' => 'https://releases.jquery.com/',
@@ -25,7 +25,7 @@ Unit::testHttp( $server, '/', [], [
 
 // Static assets
 
-Unit::testHttp( $server, '/jquery-3.0.0.js', [], [
+Unit::testHttp( $origin, '/jquery-3.0.0.js', [], [
 	'status' => '200',
 	'server' => 'nginx',
 	'content-type' => 'application/javascript; charset=utf-8',
@@ -39,7 +39,7 @@ Unit::testHttp( $server, '/jquery-3.0.0.js', [], [
 	'cross-origin-resource-policy' => 'cross-origin',
 ] );
 
-Unit::testHttp( $server, '/qunit/qunit-2.0.0.css', [], [
+Unit::testHttp( $origin, '/qunit/qunit-2.0.0.css', [], [
 	'status' => '200',
 	'server' => 'nginx',
 	'content-type' => 'text/css',
@@ -53,7 +53,7 @@ Unit::testHttp( $server, '/qunit/qunit-2.0.0.css', [], [
 	'cross-origin-resource-policy' => 'cross-origin',
 ] );
 
-Unit::testHttp( $server, '/ui/1.10.0/themes/base/images/ui-icons_222222_256x240.png', [], [
+Unit::testHttp( $origin, '/ui/1.10.0/themes/base/images/ui-icons_222222_256x240.png', [], [
 	'status' => '200',
 	'server' => 'nginx',
 	'content-type' => 'image/png',
@@ -66,7 +66,7 @@ Unit::testHttp( $server, '/ui/1.10.0/themes/base/images/ui-icons_222222_256x240.
 	'cross-origin-resource-policy' => 'cross-origin',
 ] );
 
-Unit::testHttp( $server, '/jquery-2.0.0.min.map', [], [
+Unit::testHttp( $origin, '/jquery-2.0.0.min.map', [], [
 	'status' => '200',
 	'server' => 'nginx',
 	'content-type' => 'application/octet-stream',
@@ -81,7 +81,7 @@ Unit::testHttp( $server, '/jquery-2.0.0.min.map', [], [
 
 // Static asset
 
-Unit::testHttp( $server, '/jquery-3.0.0.js', [
+Unit::testHttp( $origin, '/jquery-3.0.0.js', [
 	"x-cdn-access: there-is-no-spoon"
 ], [
 	'status' => '200',
@@ -99,7 +99,7 @@ Unit::testHttp( $server, '/jquery-3.0.0.js', [
 
 // Gzip Compression
 
-Unit::testHttp( $server, '/jquery-3.0.0.js', [
+Unit::testHttp( $origin, '/jquery-3.0.0.js', [
 	"Accept-Encoding: gzip, deflate, br, zstd",
 ], [
 	'status' => '200',
@@ -114,7 +114,7 @@ Unit::testHttp( $server, '/jquery-3.0.0.js', [
 	'cross-origin-resource-policy' => 'cross-origin',
 ] );
 
-Unit::testHttp( $server, '/qunit/qunit-2.0.0.css', [
+Unit::testHttp( $origin, '/qunit/qunit-2.0.0.css', [
 	"Accept-Encoding: gzip, deflate, br, zstd",
 ], [
 	'status' => '200',
@@ -131,7 +131,7 @@ Unit::testHttp( $server, '/qunit/qunit-2.0.0.css', [
 
 // Renamed files
 
-Unit::testHttp( $server, '/jquery-git2.js', [], [
+Unit::testHttp( $origin, '/jquery-git2.js', [], [
 	'status' => '301',
 	'server' => 'nginx',
 	'location' => 'https://code.jquery.com/jquery-git.js',
@@ -139,7 +139,7 @@ Unit::testHttp( $server, '/jquery-git2.js', [], [
 
 // Moved to releases, WordPress page
 
-Unit::testHttp( $server, '/jquery/', [], [
+Unit::testHttp( $origin, '/jquery/', [], [
 	'status' => '301',
 	'server' => 'nginx',
 	'location' => 'https://releases.jquery.com/jquery/',
@@ -147,7 +147,7 @@ Unit::testHttp( $server, '/jquery/', [], [
 
 // Moved to releases, WordPress page without trailing slash
 
-Unit::testHttp( $server, '/jquery', [], [
+Unit::testHttp( $origin, '/jquery', [], [
 	'status' => '301',
 	'server' => 'nginx',
 	'location' => 'https://releases.jquery.com/jquery/',
@@ -155,7 +155,7 @@ Unit::testHttp( $server, '/jquery', [], [
 
 // Moved to releases, root -git file
 
-Unit::testHttp( $server, '/jquery-git.js', [], [
+Unit::testHttp( $origin, '/jquery-git.js', [], [
 	'status' => '301',
 	'server' => 'nginx',
 	'location' => 'https://releases.jquery.com/git/jquery-git.js',
@@ -163,19 +163,19 @@ Unit::testHttp( $server, '/jquery-git.js', [], [
 
 // Moved to releases, nested -git file
 
-Unit::testHttp( $server, '/color/jquery.color-git.min.js', [], [
+Unit::testHttp( $origin, '/color/jquery.color-git.min.js', [], [
 	'status' => '301',
 	'server' => 'nginx',
 	'location' => 'https://releases.jquery.com/git/color/jquery.color-git.min.js',
 ] );
 
-Unit::testHttp( $server, '/qunit/qunit-git.css', [], [
+Unit::testHttp( $origin, '/qunit/qunit-git.css', [], [
 	'status' => '301',
 	'server' => 'nginx',
 	'location' => 'https://releases.jquery.com/git/qunit/qunit-git.css',
 ] );
 
-Unit::testHttp( $server, '/mobile/git/jquery.mobile-git.min.map', [], [
+Unit::testHttp( $origin, '/mobile/git/jquery.mobile-git.min.map', [], [
 	'status' => '301',
 	'server' => 'nginx',
 	'location' => 'https://releases.jquery.com/git/mobile/git/jquery.mobile-git.min.map',
@@ -183,7 +183,7 @@ Unit::testHttp( $server, '/mobile/git/jquery.mobile-git.min.map', [], [
 
 // Moved to releases, any file under /mobile/git
 
-Unit::testHttp( $server, '/mobile/git/images/icons-png/power-black.png', [], [
+Unit::testHttp( $origin, '/mobile/git/images/icons-png/power-black.png', [], [
 	'status' => '301',
 	'server' => 'nginx',
 	'location' => 'https://releases.jquery.com/git/mobile/git/images/icons-png/power-black.png',
@@ -191,7 +191,7 @@ Unit::testHttp( $server, '/mobile/git/images/icons-png/power-black.png', [], [
 
 // Moved to releases, any file under /git (new-style URL)
 
-Unit::testHttp( $server, '/git/qunit/qunit-git.css', [], [
+Unit::testHttp( $origin, '/git/qunit/qunit-git.css', [], [
 	'status' => '301',
 	'server' => 'nginx',
 	'location' => 'https://releases.jquery.com/git/qunit/qunit-git.css',
