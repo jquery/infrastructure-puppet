@@ -117,6 +117,14 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 
   bin/restore-tarsnap.sh restore contentorigin-OLD.ops.jquery.net contentorigin-SOME_DATE contentorigin-XX.example.net
   ```
+* Move /var/www into place:
+  ```sh
+  rmdir /srv/www/content.jquery.com
+
+  cd /root/restored_from_tarsnap/OLD_NODE__contentorigin_SOME_DATE/srv/www
+  sudo mv -Tn content.jquery.com /srv/www/content.jquery.com
+  sudo mv -Tn static.jquery.com /srv/www/static.jquery.com
+  ```
 * Verify that these tests now pass:
   ```sh
   php tests/ContentoriginTest.php contentorigin-XX.ops.jquery.net
@@ -212,9 +220,9 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
   sudo rm -rf /srv/wordpress/sites/jquerymobile/wp-content/uploads
 
   cd /root/restored_from_tarsnap/OLD_NODE__wordpress_SOME_DATE/var/wordpress/sites
-  sudo mv jquery/wp-content/uploads /srv/wordpress/sites/jquery/wp-content/uploads
-  sudo mv jqueryui/wp-content/uploads /srv/wordpress/sites/jqueryui/wp-content/uploads
-  sudo mv jquerymobile/wp-content/uploads /srv/wordpress/sites/jquerymobile/wp-content/uploads
+  sudo mv -Tn jquery/wp-content/uploads /srv/wordpress/sites/jquery/wp-content/uploads
+  sudo mv -Tn jqueryui/wp-content/uploads /srv/wordpress/sites/jqueryui/wp-content/uploads
+  sudo mv -Tn jquerymobile/wp-content/uploads /srv/wordpress/sites/jquerymobile/wp-content/uploads
   ```
 * Import the databases.
   ```sh
