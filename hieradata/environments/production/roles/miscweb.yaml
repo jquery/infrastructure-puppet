@@ -134,6 +134,11 @@ profile::miscweb::redirects:
     target: https://github.com/globalizejs/globalize
     mode: root
     certificate: miscweb-redirects-a
+  # gruntjs.com
+  stage.gruntjs.com:
+    target: https://gruntjs.com
+    mode: prefix
+    certificate: miscweb-redirects-b
   # js.foundation
   js.foundation:
     target: https://openjsf.org
