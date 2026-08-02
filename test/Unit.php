@@ -99,12 +99,17 @@ class Unit {
 	}
 
 	/**
+	 * testHttp( 'http://something.test/foo', null );
+	 * testHttp( null, 'http://something.test/foo' );
 	 * testHttp( 'https://example.org', '/foo' );
 	 * testHttp( 'example.org', 'http://something.test/foo' );
-	 * testHttp( 'http://something.test/foo', null );
 	 *
-	 * @param string $server Origin, hostname (if path is full URL), or full URL (if path is null)
-	 * @param string|null $path
+	 * @param string|null $server One of:
+	 *  - Full URL (if $path is null),
+	 *  - null (if $path is full URL)
+	 *  - Connection host override (if $path is full URL),
+	 *  - Origin (if $path is URL path),
+	 * @param string|null $path Full URL or URL path
 	 * @param string[] $reqHeaders
 	 * @param array<string,string> $expectHeaders
 	 * @param string[] $expectBodyLines
@@ -113,6 +118,11 @@ class Unit {
 		if ( $path === null ) {
 			$message = $server;
 			$parts = parse_url( $server );
+			$server = $parts['scheme'] . '://' . $parts['host'];
+			$path = $parts['path'] . ( ( $parts['query'] ?? '' ) !== '' ? '?' . $parts['query'] : '' );
+		} elseif ( $server === null ) {
+			$message = $path;
+			$parts = parse_url( $path );
 			$server = $parts['scheme'] . '://' . $parts['host'];
 			$path = $parts['path'] . ( ( $parts['query'] ?? '' ) !== '' ? '?' . $parts['query'] : '' );
 		} elseif ( !str_starts_with( $path, '/' ) ) {

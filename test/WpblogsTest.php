@@ -8,7 +8,7 @@
  */
 
 require_once __DIR__ . '/Unit.php';
-$server = $argv[1] ?? 'wpblogs-01.ops.jquery.net';
+$server = $argv[1] ?? null;
 
 Unit::start();
 
@@ -30,5 +30,29 @@ Unit::testHttp( $server, 'https://blog.jquerymobile.com/2011/11/16/announcing-jq
     'When we first launched this site'
   ]
 );
+
+foreach ( [
+  'https://blog.jquery.com/wp-content/uploads/2006/04/jQuery-Map.png',
+  'https://blog.jqueryui.com/wp-content/uploads/2010/06/contextmenu.png',
+  'https://blog.jqueryui.com/wp-content/uploads/2010/11/spinner-currency-demo.png',
+  'https://blog.jquerymobile.com/wp-content/uploads/2012/01/jqm-transitions-loader.png',
+  'https://blog.jquerymobile.com/wp-content/uploads/2012/02/flow2-264x300.png',
+  'https://blog.jquerymobile.com/wp-content/uploads/2012/02/flow2.png',
+] as $url ) {
+  Unit::testHttp( $url, null, [], [
+    'status' => '200',
+    'content-type' => 'image/png',
+  ] );
+}
+foreach ( [
+  'https://blog.jquery.com/wp-content/uploads/2026/01/jquery-reunion-group-edited-1024x771.jpeg',
+  'https://blog.jquery.com/wp-content/uploads/2026/01/jquery-reunion-group-edited.jpeg',
+] as $url ) {
+  Unit::testHttp( $url, null, [], [
+    'status' => '200',
+    'content-type' => 'image/jpeg',
+  ] );
+}
+
 
 Unit::end();
