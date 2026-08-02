@@ -107,8 +107,23 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 
 ### contentorigin
 
-> [!WARNING]
-> TODO: Document this
+* Follow [§ Create a new node](#create-a-new-node) for `contentorigin-XX`
+* Restore the latest `wordpress` and `mariadb` archives from Tarsnap to the new node,
+  by running the `bin/restore-tarsnap.sh` script in this repo from your machine.
+
+  ```sh
+  bin/restore-tarsnap.sh list contentorigin-OLD.ops.jquery.net
+  # ...
+
+  bin/restore-tarsnap.sh restore contentorigin-OLD.ops.jquery.net contentorigin-SOME_DATE contentorigin-XX.example.net
+  ```
+* Verify that these tests now pass:
+  ```sh
+  php tests/ContentoriginTest.php contentorigin-XX.ops.jquery.net
+  ```
+* Switch "content" service in Fastly to the new node and test https://content.jquery.com responds fine
+* Shutdown the old nodes and **wait a few days** to preserve prior backups and ease recovery just in case
+* Follow [§ Delete a node](#delete-a-node) for the old node
 
 ### filestash (docs::filestash)
 
@@ -146,7 +161,7 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
   - Test that redirects work fine by running `make test` in this repo
   - Test that https://bugs.jquery.com/ticket/7144 and https://themeroller.jquerymobile.com/ respond fine
 * Remove old nodes from webhooks for the [jquery org](https://github.com/organizations/jquery/settings/hooks)
-* Follow [§ Delete a node](#delete-a-node) for the old nodeshooks)
+* Follow [§ Delete a node](#delete-a-node) for the old node
 
 ### puppet
 
