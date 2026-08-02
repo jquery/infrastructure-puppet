@@ -132,13 +132,12 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 
 ### gruntjs (gruntjscom)
 
-* Follow [§ Create a new node](#create-a-new-node) for `gruntjs-XX` and `gruntjs-XX.stage`
-* Add new nodes to webhooks for [gruntjs/gruntjs.com](https://github.com/gruntjs/gruntjs.com/settings/hooks)
-* Test that the websites work via the instance's own address, e.g. `https://gruntjs-XX.ops.jquery.net` and `https://gruntjs-XX.stage.ops.jquery.net`
-* Switch DNS for `stage.gruntjs.com`
+* Follow [§ Create a new node](#create-a-new-node) for `gruntjs-XX`
+* Add new node to webhooks for [gruntjs/gruntjs.com](https://github.com/gruntjs/gruntjs.com/settings/hooks)
+* Test that the website works via the instance's own address, e.g. `https://gruntjs-XX.ops.jquery.net`
 * Switch DNS for `gruntjs.com`, `www.gruntjs.com`, and `cdn.gruntjs.com`
-* Follow [§ Delete a node](#delete-a-node) for the old nodes
-* Remove old nodes from webhooks for [gruntjs/gruntjs.com](https://github.com/gruntjs/gruntjs.com/settings/hooks)
+* Follow [§ Delete a node](#delete-a-node) for the old node
+* Remove old node from webhooks for [gruntjs/gruntjs.com](https://github.com/gruntjs/gruntjs.com/settings/hooks)
 
 ### miscweb
 

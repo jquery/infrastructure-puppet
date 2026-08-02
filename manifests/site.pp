@@ -91,11 +91,6 @@ node 'codeorigin-04.stage.ops.jquery.net' {
 }
 
 # Debian 12 Bookworm
-node 'gruntjs-03.stage.ops.jquery.net' {
-  role('gruntjscom')
-}
-
-# Debian 12 Bookworm
 node 'wp-03.stage.ops.jquery.net' {
   role('docs::wordpress')
 }

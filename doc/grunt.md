@@ -1,7 +1,6 @@
 # Grunt website
 
 * https://gruntjs.com/
-* https://stage.gruntjs.com/
 
 ## Control flow
 
