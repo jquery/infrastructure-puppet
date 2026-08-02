@@ -104,11 +104,12 @@ class Unit {
 	 * testHttp( 'http://something.test/foo', null );
 	 *
 	 * @param string $server Origin, hostname (if path is full URL), or full URL (if path is null)
-	 * @param string $path|null
-	 * @param string $reqHeaders
-	 * @param string $expectHeaders
+	 * @param string|null $path
+	 * @param string[] $reqHeaders
+	 * @param array<string,string> $expectHeaders
+	 * @param string[] $expectBodyLines
 	 */
-	public static function testHttp( $server, $path, array $reqHeaders, array $expectHeaders ) {
+	public static function testHttp( $server, $path, array $reqHeaders, array $expectHeaders, array $expectBodyLines = [] ) {
 		if ( $path === null ) {
 			$message = $server;
 			$parts = parse_url( $server );
@@ -139,6 +140,13 @@ class Unit {
 
 				self::test( "GET $message > header $key", @$resp['headers'][$key], $val );
 			}
+			$actualLines = [];
+			foreach ( $expectBodyLines as $line ) {
+				if ( str_contains( $resp['body'], $line ) ) {
+					$actualLines[] = $line;
+				}
+			}
+			self::test( "GET $message > body", $actualLines, $expectBodyLines );
 		} catch ( Exception $e ) {
 			self::test( "GET $message > error", $e->getMessage(), null );
 		}
