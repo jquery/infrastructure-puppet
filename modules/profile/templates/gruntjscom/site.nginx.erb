@@ -6,6 +6,11 @@ server {
   ssl_certificate_key /etc/letsencrypt/live/<%= @tls_key_name %>/privkey.pem;
   <%= @tls_config.join("\n  ") %>
 
+  # Aliases is for the cdn.gruntjs.com canonical domain that we serve as-is without redirect.
+  # This previously served a subset of assets of the main site (e.g. logos and readme badges),
+  # but has since been merged into the main site.
+  # https://github.com/gruntjs/gruntjs.com/commit/e8e30fd250374ad7486b24862e6742868a0d38fc
+  # https://github.com/gruntjs/grunt-docs/commit/3f8ce6e615f7c866c63c030d32ee931ea181d66b
   server_name <%= @canonical_name %> <%= @aliases.join(' ') %> <%= @facts['networking']['fqdn'] %>;
 
   access_log    off;
@@ -35,6 +40,8 @@ server {
 <%- end -%>
 }
 
+# Any other domains that point to this server are redirected to the canonical name.
+# This includes: www.gruntjs.com
 server {
   listen 443 ssl default_server;
   listen [::]:443 ssl default_server;
