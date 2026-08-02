@@ -169,6 +169,55 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 
 ### wpblogs (blogs)
 
-> [!WARNING]
-> TODO: Document this
+* Follow [§ Create a new node](#create-a-new-node) for `wpblogs-XX`
+* Once the new node is provisioned, verify each site is working:
+  ```sh
+  curl -i https://wpblogs-XX.ops.jquery.net -H 'Host: blog.jquery.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
+  curl -i https://wpblogs-XX.ops.jquery.net -H 'Host: blog.jqueryui.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
+  curl -i https://wpblogs-XX.ops.jquery.net -H 'Host: blog.jquerymobile.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
+  # HTTP/1.1 200 OK
+  # <title>Official jQuery Blog</title>
+  # …
+  # <title>jQuery UI Blog</title>
+  # …
+  # <title>jQuery Mobile Blog</title>
+  ```
+* Restore the latest `wordpress` and `mariadb` archives from Tarsnap to the new node,
+  by running the `bin/restore-tarsnap.sh` script in this repo from your machine.
 
+  ```sh
+  bin/restore-tarsnap.sh list wpblogs-OLD.example.net
+  # ...
+
+  bin/restore-tarsnap.sh restore wpblogs-OLD.example.net wordpress-SOME_DATE wpblogs-XX.example.net
+  ```
+* Move wp-content archive into place for each site (the `rm` is needed because WordPress creates empty directories for several recent years and months).
+  ```sh
+  sudo rm -rf /srv/wordpress/sites/jquery/wp-content/uploads
+  sudo rm -rf /srv/wordpress/sites/jqueryui/wp-content/uploads
+  sudo rm -rf /srv/wordpress/sites/jquerymobile/wp-content/uploads
+
+  cd /root/restored_from_tarsnap/OLD_NODE__wordpress_SOME_DATE/var/wordpress/sites
+  sudo mv jquery/wp-content/uploads /srv/wordpress/sites/jquery/wp-content/uploads
+  sudo mv jqueryui/wp-content/uploads /srv/wordpress/sites/jqueryui/wp-content/uploads
+  sudo mv jquerymobile/wp-content/uploads /srv/wordpress/sites/jquerymobile/wp-content/uploads
+  ```
+* Import the databases.
+  ```sh
+  cd /root/restored_from_tarsnap/OLD_NODE__mariadb_SOME_DATE/var/lib/backup/mariadb
+  sudo mysql wordpress_jquery < wordpress_jquery.sql;
+  sudo mysql wordpress_jqueryui < wordpress_jqueryui.sql;
+  sudo mysql wordpress_jquerymobile < wordpress_jquerymobile.sql;
+  ```
+* Tests for specific old posts should now pass:
+  ```sh
+  php tests/WpblogsTest.php wpblogs-XX.ops.jquery.net
+  ```
+* Switch DNS for:
+  - `blog.jquery.com`
+  - `blog.jqueryui.com`
+  - `blog.jquerymobile.com`
+* Log into wp-admin in your browser on one of the sites to
+  verify that user accounts work fine, and there are no warnings/errors reported there.
+* Shutdown the old node and **wait a few days** to ease recovery just in case
+* Follow [§ Delete a node](#delete-a-node) for the old node
