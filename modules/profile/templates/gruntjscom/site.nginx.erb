@@ -27,12 +27,6 @@ server {
   location /.well-known/acme-challenge {
     root /var/www/letsencrypt/;
   }
-
-<%- if @robots_deny -%>
-  location = /robots.txt {
-    alias /srv/gruntjscom-robots/robots.txt;
-  }
-<%- end -%>
 }
 
 # Any other domains that point to this server are redirected to the canonical name.
