@@ -32,11 +32,6 @@ node 'filestash-01.ops.jquery.net' {
   role('docs::filestash')
 }
 
-# 1 CPU, 2 GB mem, Debian 12 Bookworm
-node 'gruntjs-03.ops.jquery.net' {
-  role('gruntjscom')
-}
-
 # 2 CPU, 2 GB mem, Debian 13 Trixie
 node 'gruntjs-04.ops.jquery.net' {
   role('gruntjscom')
