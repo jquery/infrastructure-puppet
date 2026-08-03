@@ -9,5 +9,6 @@ profile::certbot::certificates:
     domains:
       - "%{::facts.networking.fqdn}"
 
+profile::gruntjscom::canonical_name: gruntjs.com
 profile::gruntjscom::tls_key_name: gruntjscom
 profile::notifier::tls_key_name: gruntjscom
