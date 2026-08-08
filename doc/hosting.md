@@ -192,6 +192,7 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 ### wpblogs (blogs)
 
 * Follow [§ Create a new node](#create-a-new-node) for `wpblogs-XX`
+* Add new node to webhooks for [jquery/infrastructure-puppet](https://github.com/jquery/infrastructure-puppet/settings/hooks)
 * Once the new node is provisioned, verify each site is working:
   ```sh
   curl -i https://wpblogs-XX.ops.jquery.net -H 'Host: blog.jquery.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
@@ -242,4 +243,5 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 * Log into wp-admin in your browser on one of the sites to
   verify that user accounts work fine, and there are no warnings/errors reported there.
 * Shutdown the old node and **wait a few days** to ease recovery just in case
+* Remove old nodes from webhooks for the [jquery org](https://github.com/organizations/jquery/settings/hooks)
 * Follow [§ Delete a node](#delete-a-node) for the old node
