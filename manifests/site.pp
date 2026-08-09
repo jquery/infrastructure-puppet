@@ -17,11 +17,6 @@ node 'codeorigin-04.ops.jquery.net' {
   role('codeorigin')
 }
 
-# 2 CPU, 4 GB mem, Debian 11 Bullseye, 80 GB disk (+Backups)
-node 'contentorigin-02.ops.jquery.net' {
-  role('contentorigin')
-}
-
 # 2 CPU, 4 GB mem, Debian 13 Trixie, 80 GB disk (+Backups)
 node 'contentorigin-03.ops.jquery.net' {
   role('contentorigin')
