@@ -85,11 +85,6 @@ node 'codeorigin-04.stage.ops.jquery.net' {
   role('codeorigin')
 }
 
-# Debian 12 Bookworm
-node 'wp-03.stage.ops.jquery.net' {
-  role('docs::wordpress')
-}
-
 # 2 CPU, 2 GB mem, Debian 13 Trixie
 node 'wp-04.stage.ops.jquery.net' {
   role('docs::wordpress')
