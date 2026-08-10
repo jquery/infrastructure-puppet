@@ -39,8 +39,16 @@ class profile::wordpress::base (
   }
 
   class { 'php::fpm':
-    ini_values_extra => {
+    ini_values_extra       => {
       'memory_limit' => '64M',
+    },
+    ini_admin_values_extra => {
+      # Building api.jquery.com involves HTTP POST requests with 10-12MB bodies
+      # https://github.com/jquery/infrastructure-puppet/issues/91
+      #
+      # Default: 8M
+      'post_max_size'       => '32M',
+      'upload_max_filesize' => '32M',
     },
   }
 
