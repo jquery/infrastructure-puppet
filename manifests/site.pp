@@ -57,11 +57,6 @@ node 'wp-05.ops.jquery.net' {
   role('docs::wordpress')
 }
 
-# 1 CPU, 2 GB mem, Debian 11 Bullseye (+Backups)
-node 'wpblogs-01.ops.jquery.net' {
-  role('blogs')
-}
-
 # 2 CPU, 2 GB mem, Debian 13 Trixie (+Backups)
 node 'wpblogs-03.ops.jquery.net' {
   role('blogs')
