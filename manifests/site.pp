@@ -57,6 +57,16 @@ node 'wp-05.ops.jquery.net' {
   role('docs::wordpress')
 }
 
+# 4 CPU, 8 GB mem, Debian 13 Trixie (NYC3)
+node 'wp-06.ops.jquery.net' {
+  role('docs::wordpress')
+}
+
+# 4 CPU, 8 GB mem, Debian 13 Trixie (SFO3)
+node 'wp-07.ops.jquery.net' {
+  role('docs::wordpress')
+}
+
 # 2 CPU, 2 GB mem, Debian 13 Trixie (+Backups)
 node 'wpblogs-03.ops.jquery.net' {
   role('blogs')
@@ -77,5 +87,10 @@ node 'codeorigin-04.stage.ops.jquery.net' {
 
 # Debian 12 Bookworm
 node 'wp-03.stage.ops.jquery.net' {
+  role('docs::wordpress')
+}
+
+# 2 CPU, 2 GB mem, Debian 13 Trixie
+node 'wp-04.stage.ops.jquery.net' {
   role('docs::wordpress')
 }
