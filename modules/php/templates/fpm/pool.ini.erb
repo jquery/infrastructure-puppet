@@ -17,6 +17,9 @@ pm.max_spare_servers = 8
 ; Enabling catch_workers_output sends errors to /var/log/phpX-fpm.log
 catch_workers_output = yes
 
-<%- @ini_values.each do |key, value| -%>
+<%- @ini_admin_values.each do |key, value| -%>
 php_admin_value[<%= key %>]=<%= value %>
+<%- end -%>
+<%- @ini_values.each do |key, value| -%>
+php_value[<%= key %>]=<%= value %>
 <%- end -%>

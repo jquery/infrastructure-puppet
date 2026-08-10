@@ -1,17 +1,21 @@
 # @summary installs a php-fpm service
 class php::fpm (
   Hash[String[1], String] $ini_values_extra = {},
+  Hash[String[1], String] $ini_admin_values_extra = {},
 ) {
   include php
 
   $version = $::php::version
   $ini_values = merge({
-    'expose_php'      => 'On',
     # Enable deprecation warnings
     # Will be redundant on PHP 8.0+
     # https://www.php.net/manual/en/errorfunc.configuration.php#ini.error-reporting
     'error_reporting' => 'E_ALL',
   }, $ini_values_extra)
+
+  $ini_admin_values = merge({
+    'expose_php'      => 'On',
+  }, $ini_admin_values_extra)
 
   ensure_packages([
     "php${version}-fpm",
