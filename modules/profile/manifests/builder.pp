@@ -43,7 +43,7 @@ class profile::builder (
 
   file { '/etc/builder-wordpress-hosts':
     ensure  => file,
-    content => $wordpress_hosts.join("\n"),
+    content => "${wordpress_hosts.join("\n")}\n",
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
