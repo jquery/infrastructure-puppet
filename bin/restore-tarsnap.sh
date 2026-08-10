@@ -49,7 +49,7 @@ EOF
 }
 
 fatalerr() {
-  printf %s "$1" 1>&2
+  printf "%s\n" "$1" 1>&2
   exit 1
 }
 
@@ -71,7 +71,7 @@ OLD_RO_KEY="/srv/git/puppet/private/files/tarsnap-keys/$OLD_INSTANCE.tmp_readonl
 
 if [ "$ACTION" == "list" ]; then
   if ssh "$PUPPET_SERVER" "sudo test ! -e $(printf %q "$OLD_MASTER_KEY")"; then
-    fatalerr "Could not find $OLD_KEYFILE on $PUPPET_SERVER"
+    fatalerr "Could not find $OLD_MASTER_KEY on $PUPPET_SERVER"
   fi
 
   echo "... retrieve list of archives (this may take a few minutes)"
