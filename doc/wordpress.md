@@ -77,7 +77,7 @@ management) is handled by Puppet.
 5. The `wp` hosts contain several standalone WordPress installations (Nginx, php-fpm, MariaDB). Our themes and plugins are managed in the [jquery-wp-content.git](https://github.com/jquery/jquery-wp-content) repository. Changes to jquery-wp-content are automatically deployed on every main branch commit, to both production and staging wp hosts.
 6. The CDN for most doc sites is Cloudflare, except for releases.jquery.com which is behind Fastly (matching code.jquery.com). See also [cdn.md](./cdn.md).
 
-### Debugging builder notifier
+### Debug notifier
 
 To check for any system problems with the notifier that receives webhooks, or the shell script that builds and deploys the site, ssh to a builder host, and run the following command:
 
@@ -107,6 +107,16 @@ $ sudo -u builder builder-do-update /srv/builder/jquerymobile_com/
 # …
 # Running "wordpress-sync" task
 # …
+```
+
+### Troubleshoot: Page not found
+
+If during the initial Puppet run, the wp-cli command fails while setting the `permalink_structure` option, it might be in a state where it is correctly saved to the database, but did not manage to flush the rewrite rules. Thus, the pages all exist, and the home page and category page show list them, but then visiting the link shows a "Page found found" error.
+
+To flush the rewrite rules en-mass, run this:
+
+```sh
+$ for site_conf in $(ls /srv/wordpress/sites/{*,*/**}/wp-config.php); do /usr/local/bin/wp --path=$(dirname "$site_conf") rewrite flush; done
 ```
 
 ## Blog sites

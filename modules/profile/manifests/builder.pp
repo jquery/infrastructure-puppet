@@ -41,6 +41,14 @@ class profile::builder (
     mode   => '0555',
   }
 
+  file { '/usr/local/bin/builder-rebuild-all':
+    ensure => file,
+    source => 'puppet:///modules/profile/builder/builder-rebuild-all.sh',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0555',
+  }
+
   file { '/etc/builder-wordpress-hosts':
     ensure  => file,
     content => "${wordpress_hosts.join("\n")}\n",

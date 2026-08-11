@@ -75,33 +75,36 @@ Once ready to permanently delete a node:
 
 Before beginning a fleet-wide Debian upgrade, ensure [Puppet § Adding a new Debian version](./puppet.md#adding-a-new-debian-version) has been done for version in question. For an example ofa fleet-wide node migration, see https://github.com/jquery/infrastructure-puppet/issues/37.
 
-When adding nodes to webhooks:
+### Register a webhook
+
+When adding nodes to webhooks, whether org-wide or a single repo:
+
 * set `https://FQDN_HERE:8333/` as the URL,
 * choose `application/json` as content type,
-* and use the secret from `puppet-04:/srv/git/puppet/private$ git grep webhook_secret` for production and staging respectively,
+* and use the secret from `ssh puppet-04.ops.jquery.net git -C /srv/git/puppet/private grep webhook_secret` for production or staging respectively,
 * confirm in the GitHub UI that the `ping` payload was succesfully delivered
 
-### builder (docs::builder)
+### builder
 
 * Follow [§ Create a new node](#create-a-new-node) for `builder-XX` and `builder-XX.stage`
-* Add new nodes to webhooks for the [jquery org](https://github.com/organizations/jquery/settings/hooks)
+* Follow [§ Register a webhook](#register-a-webhook) for the new nodes at [org-wide jquery webhooks](https://github.com/organizations/jquery/settings/hooks)
 
-At this point, any commits or tags in docsite repos notify both the new and old builder nodes, with both performing the same builds, and both racing to write pages to the wpdoc nodes. This should be fine as the updates are idempotent, however it is recommended to shutdown the old builder nodes at this point so that we excercise them fully and discover potential issues. These nodes are not user-facing and idle most of the time.
+At this point, any commits or tags in docsite repos notify both the new and old builder nodes, with both performing the same builds, and both racing to write pages to the wpdocs nodes. This should be fine as the updates are idempotent, however it is recommended to shutdown the old builder nodes at this point so that we excercise them fully and discover potential issues. These nodes are not user-facing and idle most of the time.
 
 After one or two docsites have succesfully used the new builder (see [wordpress.md](./wordpress.md)):
 
-* Remove old nodes from webhooks for the [jquery org](https://github.com/organizations/jquery/settings/hooks)
+* Remove old nodes from [jquery org-wide webhooks](https://github.com/organizations/jquery/settings/hooks)
 * Follow [§ Delete a node](#delete-a-node) for the old nodes
 
 ### codeorigin
 
 * Follow [§ Create a new node](#create-a-new-node) for `codeorigin-XX` and `codeorigin-XX.stage`
-* Add new nodes to webhooks for [jquery/codeorigin](https://github.com/jquery/codeorigin.jquery.com/settings/hooks)
+* Follow [§ Register a webhook](#register-a-webhook) for the new node at [jquery/codeorigin](https://github.com/jquery/codeorigin.jquery.com/settings/hooks)
 * Verify that [CodeoriginTest.php](../test/CodeoriginTest.php) passes for both of the new nodes
 * Change `test-codeorigin-stage` in [Makefile](../Makefile) to monitor the new stage node instead
 * Switch "code2" service in Fastly to the new stage node
 * Switch "code" service in Fastly to the new prod node
-* Remove old nodes from webhooks for [jquery/codeorigin](https://github.com/jquery/codeorigin.jquery.com/settings/hooks)
+* Remove old nodes from [jquery/codeorigin webhooks](https://github.com/jquery/codeorigin.jquery.com/settings/hooks)
 * Shutdown the old nodes and **wait a few days** to ease recovery just in case
 * Follow [§ Delete a node](#delete-a-node) for the old nodes
 
@@ -141,11 +144,11 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 ### gruntjs (gruntjscom)
 
 * Follow [§ Create a new node](#create-a-new-node) for `gruntjs-XX`
-* Add new node to webhooks for [gruntjs/gruntjs.com](https://github.com/gruntjs/gruntjs.com/settings/hooks)
+* Follow [§ Register a webhook](#register-a-webhook) for the new node at [gruntjs/gruntjs.com webhooks](https://github.com/gruntjs/gruntjs.com/settings/hooks)
 * Test that the website works via the instance's own address, e.g. `https://gruntjs-XX.ops.jquery.net`
 * Switch DNS for `gruntjs.com`
 * Follow [§ Delete a node](#delete-a-node) for the old node
-* Remove old node from webhooks for [gruntjs/gruntjs.com](https://github.com/gruntjs/gruntjs.com/settings/hooks)
+* Remove old node from [gruntjs/gruntjs.com webhooks](https://github.com/gruntjs/gruntjs.com/settings/hooks)
 
 ### miscweb
 
@@ -159,15 +162,15 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
   profile::miscweb::default_certificate: miscweb-fqdn
   profile::miscweb::redirects: {}
   ```
-* Add new node to webhooks for the [jquery org](https://github.com/organizations/jquery/settings/hooks)
-* Test that the instance responds over HTTPS with a redirect to jquery.com, e.g. `https://miscweb-XX.stage.ops.jquery.net`
+* Follow [§ Register a webhook](#register-a-webhook) for the new node at [org-wide jquery webhooks](https://github.com/organizations/jquery/settings/hooks)
+* Test that the instance responds over HTTPS with a redirect to jquery.com, e.g. `https://miscweb-XX.ops.jquery.net`
 * Switch "miscweb" service in Fastly to the new node and test https://podcast.jquery.com responds fine
 * Switch miscweb-redirects and miscweb-sites traffic:
   - Switch DNS for `miscweb-redirects.svc.jquery.net` and `miscweb-sites.svc.jquery.net` (HTTPS will fail until the next steps are complete)
   - Remove `/hieradata/nodes/` file for the new miscweb node. Commit, push to staging+production, and `sudo run-puppet-agent` on the new miscweb node
   - Test that redirects work fine by running `make test` in this repo
   - Test that https://bugs.jquery.com/ticket/7144 and https://themeroller.jquerymobile.com/ respond fine
-* Remove old nodes from webhooks for the [jquery org](https://github.com/organizations/jquery/settings/hooks)
+* Remove old node from [jquery org-wide webhooks](https://github.com/organizations/jquery/settings/hooks)
 * Follow [§ Delete a node](#delete-a-node) for the old node
 
 ### puppet
@@ -175,8 +178,8 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 > [!WARNING]
 > TODO: Document the rest of this
 
-* Add new node to webhooks for [jquery/infrastructure-puppet](https://github.com/jquery/infrastructure-puppet/settings/hooks)
-* Remove old node from webhooks for [jquery/infrastructure-puppet](https://github.com/jquery/infrastructure-puppet/settings/hooks)
+* Follow [§ Register a webhook](#register-a-webhook) for the new node at [jquery/infrastructure-puppet webhooks](https://github.com/jquery/infrastructure-puppet/settings/hooks)
+* Remove old node from [jquery/infrastructure-puppet webhooks](https://github.com/jquery/infrastructure-puppet/settings/hooks)
 
 ### search
 
@@ -184,15 +187,59 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 * Follow [Search § Setup a new server](./search.md#setup-a-new-server) and refer to [how we tested it](https://github.com/jquery/infrastructure-puppet/issues/37#issuecomment-4598860788)
 * Follow [§ Delete a node](#delete-a-node) for the old nodes
 
-### wp (docs::wordpress)
+### wpdocs
 
-> [!WARNING]
-> TODO: Document this
+Staging:
+* Follow [§ Create a new node](#create-a-new-node) for `wp-XX.stage`, follow special cases including:
+  * run `jq-tarsnap-keygen` for each of the new node names, before provisioning with Puppet.
+* Switch DNS for `wpdocs-stage.svc.jquery.net`. This is done first instead of last, as otherwise the instance cannot acquire the [staging certificates](../hieradata/environments/staging/roles/docs/wordpress.yaml). For production we proxy via Cloudflare and require only a FQDN certificate.
+* NOTE: Puppet automatically adds updates [builder nodes](#builder) to include all wpdocs hosts in the current environment (i.e. staging or production). This means the builder logs may temporarily contain errors if it tried to push content to a new node before it was ready. 
+* Follow [§ Register a webhook](#register-a-webhook) for the new node at [org-wide jquery webhooks](https://github.com/organizations/jquery/settings/hooks).
+* Once provisioned, check that https://stage.jquery.com/ and https://stage.api.jqueryui.com/1.13/ look identical to their production counterparts, except having no content yet.
+* ssh to a **staging** builder:
+  * Confirm `cat /etc/builder-wordpress-hosts` contains the new wp-XX.stage host.
+  * Run `builder-rebuild-all` and wait for it to finish (~20min).
+    For any failing site, you can iterate with [WordPress § Manual build](./wordpress.md#manual-build). When you push a commit, it will automatically start a build, which you can follow via [WordPress § Debug notifier](./wordpress.md#debug-notifier) instead.
+  * Spot-check a few staging sites and confirm that they look the same as their production counterparts:
+    * https://stage.jquery.com/
+    * https://stage.api.jquery.com/
+    * https://stage.api.jqueryui.com/1.13/
+    * https://stage.api.jquerymobile.com/
+* Remove old node from [jquery org-wide webhooks](https://github.com/organizations/jquery/settings/hooks)
+* Follow [§ Delete a node](#delete-a-node) for the old node
 
-### wpblogs (blogs)
+Production:
+* Follow [§ Create a new node](#create-a-new-node) for two `wp-XX` instances, follow special cases including:
+  * **create the second wp-XX instance in the SFO3 region** instead of the default NYC3 region.
+  * run `jq-tarsnap-keygen` for each of the new node names, before provisioning with Puppet.
+* Once provisioned, ssh to each of the new wp hosts and confirm that these requests respond with HTTP 200, and the expected title.
+  ```sh
+  curl -si https://$(hostname -f) -H 'Host: jquery.com' | head -n 25
+  curl -si https://$(hostname -f) -H 'Host: jqueryui.com' | head -n 25
+  # HTTP/1.1 200 OK
+  # …
+  # <title>jQuery</title>
+  # …
+  # <title>jQuery UI</title>
+  ``` 
+* ssh to a **production** builder:
+  * Confirm `cat /etc/builder-wordpress-hosts` contains both of the new wp-XX hosts.
+  * Run `builder-rebuild-all` and wait for it to finish (~20min).
+    * If any issues come up, fix those first. You can iterate on a single site with [WordPress § Manual build](./wordpress.md#manual-build). When you push a commit to the site's repo (and a semver tag for sites that require this), the webhook automatically starts a build. You can follow use [WordPress § Debug notifier](./wordpress.md#debug-notifier) to follow this.
+    * Once all issues are fixed, re-run `builder-rebuild-all`
+* Switch DNS for https://api.jquerymobile.com/ and confirm that it looks the same as before.
+   Wait for and confirm that it is a response from a new server by comparing the `X-Powered-By: PHP` version in browser devtools.
+* Switch DNS for all sites listed at [WordPress § Doc sites](./wordpress.md#doc-sites).
+  We assign `*.jquery.com` to the first node,
+  and assign all others to the second node.
+* Shutdown the old nodes and **wait a few days** to preserve prior backups and ease recovery just in case
+* Remove old node from [jquery org-wide webhooks](https://github.com/organizations/jquery/settings/hooks)
+* Follow [§ Delete a node](#delete-a-node) for the old node
+
+### wpblogs
 
 * Follow [§ Create a new node](#create-a-new-node) for `wpblogs-XX`
-* Add new node to webhooks for [jquery/infrastructure-puppet](https://github.com/jquery/infrastructure-puppet/settings/hooks)
+* Follow [§ Register a webhook](#register-a-webhook) for the new node at [org-wide jquery webhooks](https://github.com/organizations/jquery/settings/hooks)
 * Once the new node is provisioned, verify each site is working:
   ```sh
   curl -i https://wpblogs-XX.ops.jquery.net -H 'Host: blog.jquery.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
@@ -243,5 +290,5 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 * Log into wp-admin in your browser on one of the sites to
   verify that user accounts work fine, and there are no warnings/errors reported there.
 * Shutdown the old node and **wait a few days** to ease recovery just in case
-* Remove old nodes from webhooks for the [jquery org](https://github.com/organizations/jquery/settings/hooks)
+* Remove old nodes from [jquery org-wide webhooks](https://github.com/organizations/jquery/settings/hooks)
 * Follow [§ Delete a node](#delete-a-node) for the old node
