@@ -85,7 +85,7 @@ node 'codeorigin-04.stage.ops.jquery.net' {
   role('codeorigin')
 }
 
-# 2 CPU, 2 GB mem, Debian 13 Trixie
+# 2 CPU, 4 GB mem, Debian 13 Trixie
 node 'wp-04.stage.ops.jquery.net' {
   role('docs::wordpress')
 }

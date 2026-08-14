@@ -43,12 +43,16 @@ class profile::wordpress::base (
       'memory_limit' => '64M',
     },
     ini_admin_values_extra => {
+      # Default of 128M is insufficient to fit all WordPress sites
+      # Ref https://github.com/jquery/infrastructure-puppet/issues/109
+      'opcache.memory_consumption' => '512M',
+
       # Building api.jquery.com involves HTTP POST requests with 10-12MB bodies
       # https://github.com/jquery/infrastructure-puppet/issues/91
       #
       # Default: 8M
-      'post_max_size'       => '32M',
-      'upload_max_filesize' => '32M',
+      'post_max_size'              => '32M',
+      'upload_max_filesize'        => '32M',
     },
   }
 
