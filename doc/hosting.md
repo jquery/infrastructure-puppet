@@ -102,7 +102,7 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 * Follow [§ Register a webhook](#register-a-webhook) for the new node at [jquery/codeorigin](https://github.com/jquery/codeorigin.jquery.com/settings/hooks)
 * Verify that [CodeoriginTest.php](../test/CodeoriginTest.php) passes for both of the new nodes
 * Change `test-codeorigin-stage` in [Makefile](../Makefile) to monitor the new stage node instead
-* Switch "code2" service in Fastly to the new stage node
+* Switch "code2" service in Fastly to the new prod node
 * Switch "code" service in Fastly to the new prod node
 * Remove old nodes from [jquery/codeorigin webhooks](https://github.com/jquery/codeorigin.jquery.com/settings/hooks)
 * Shutdown the old nodes and **wait a few days** to ease recovery just in case
