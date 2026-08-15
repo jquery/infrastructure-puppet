@@ -7,7 +7,7 @@ function jqlib::pdb_hosts2ips (
     .join(' or ')
 
   $pql = @("PQL")
-  facts[certname] {
+  facts[value] {
     name = 'networking'
     and (${certname_filter})
   }
@@ -17,7 +17,7 @@ function jqlib::pdb_hosts2ips (
     $ret = []
   } else {
     $ret = jqlib::puppetdb_query($pql)
-      .map |Hash $host| { [$host['ip'], $host['ip6']] }
+      .map |Hash $host| { [$host['value']['ip'], $host['value']['ip6']] }
       .flatten
       .filter |$x| { $x =~ NotUndef and $x !~ /^fe80/ }
       .unique
