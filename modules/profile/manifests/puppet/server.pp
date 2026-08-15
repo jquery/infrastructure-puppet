@@ -231,8 +231,8 @@ class profile::puppet::server (
     interval    => ['OnCalendar=*-*-* 12:00:00'],
   }
 
-  $clients = jqlib::resource_hosts('class', 'profile::puppet::agent', true)
-  $client_ips = $clients.map |Stdlib::Fqdn $fqdn| { dnsquery::lookup($fqdn, true) }.flatten
+  $client_ips = jqlib::resource_hosts('class', 'profile::puppet::agent', true)
+    .jqlib::pdb_hosts2ips()
 
   nftables::allow { 'puppetserver':
     proto => 'tcp',

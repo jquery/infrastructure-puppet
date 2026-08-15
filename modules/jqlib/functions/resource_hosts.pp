@@ -3,7 +3,7 @@ function jqlib::resource_hosts (
   String[1]           $resource_type,
   Optional[String[1]] $resource_title   = undef,
   Boolean             $all_environments = false,
-) >> Array[Stdlib::Host] {
+) >> Array[Stdlib::Fqdn] {
   $title_query = $resource_title ? {
     undef   => '',
     default => "and title = \"${jqlib::format_puppet_title($resource_title)}\"",

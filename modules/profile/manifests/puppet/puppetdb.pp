@@ -14,7 +14,7 @@ class profile::puppet::puppetdb (
   }
 
   $puppetservers = jqlib::resource_hosts('class', 'profile::puppet::server')
-  $puppetservers_ips = $puppetservers.map |Stdlib::Fqdn $fqdn| { dnsquery::lookup($fqdn, true) }.flatten
+  $puppetservers_ips = $puppetservers.jqlib::pdb_hosts2ips()
 
   $config_path = debian::codename() ? {
     'bullseye' => '/etc/puppetlabs/puppetdb',
