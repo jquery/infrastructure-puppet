@@ -17,6 +17,11 @@ node 'codeorigin-04.ops.jquery.net' {
   role('codeorigin')
 }
 
+# 2 CPU, 2 GB mem, Debian 13 Trixie
+node 'codeorigin-05.ops.jquery.net' {
+  role('codeorigin')
+}
+
 # 2 CPU, 4 GB mem, Debian 13 Trixie, 80 GB disk (+Backups)
 node 'contentorigin-03.ops.jquery.net' {
   role('contentorigin')
@@ -82,6 +87,11 @@ node 'builder-05.stage.ops.jquery.net' {
 
 # 2 CPU, 2 GB mem, Debian 12 Bookworm
 node 'codeorigin-04.stage.ops.jquery.net' {
+  role('codeorigin')
+}
+
+# 2 CPU, 2 GB mem, Debian 13 Trixie
+node 'codeorigin-05.stage.ops.jquery.net' {
   role('codeorigin')
 }
 
