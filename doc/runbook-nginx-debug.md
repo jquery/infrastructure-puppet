@@ -36,7 +36,7 @@ Sometimes iterating through the staging branch is tedious, or there might not be
    ```
 3. Perform your test against HTTP localhost using `curl` and a Host header. Remember that on the staging server, the hostnames have a `stage.` prefix in the URL hostname:
   ```
-  curl -I 'https://view.jquery.com/bar' --connect-to '::wp-05.ops.jquery.net'
+  curl -I 'https://view.jquery.com/bar' --connect-to ::miscweb-redirects.svc.jquery.net
   ```
 
 Beware that Puppet will run every 30 minutes and may overwrite your changes while you're live hacking.

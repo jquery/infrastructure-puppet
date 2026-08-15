@@ -190,28 +190,30 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 ### wpdocs
 
 Staging:
-* Follow [§ Create a new node](#create-a-new-node) for `wp-XX.stage`, follow special cases including:
-  * run `jq-tarsnap-keygen` for each of the new node names, before provisioning with Puppet.
-* Switch DNS for `wpdocs-stage.svc.jquery.net`. This is done first instead of last, as otherwise the instance cannot acquire the [staging certificates](../hieradata/environments/staging/roles/docs/wordpress.yaml). For production we proxy via Cloudflare and require only a FQDN certificate.
-* NOTE: Puppet automatically adds updates [builder nodes](#builder) to include all wpdocs hosts in the current environment (i.e. staging or production). This means the builder logs may temporarily contain errors if it tried to push content to a new node before it was ready. 
+* Follow [§ Create a new node](#create-a-new-node) for `wp-XX.stage`,
+  including the special step to run `jq-tarsnap-keygen` before provisioning with Puppet.
+* Switch DNS for `wpdocs-stage.svc.jquery.net`. This is done first instead of last, as otherwise the instance cannot acquire [TLS certificates](../hieradata/environments/staging/roles/docs/wordpress.yaml). For production we proxy via Cloudflare or Fastly and require only a FQDN certificate on the origin.
+* NOTE: Puppet automatically updates [builder nodes](#builder) to be aware of all wpdocs hosts. This means the builder logs is expected to temporarily contain errors if it tries to push content to a new node before it was ready.
 * Follow [§ Register a webhook](#register-a-webhook) for the new node at [org-wide jquery webhooks](https://github.com/organizations/jquery/settings/hooks).
-* Once provisioned, check that https://stage.jquery.com/ and https://stage.api.jqueryui.com/1.13/ look identical to their production counterparts, except having no content yet.
+* Once provisioned, check that https://stage.api.jquery.com/ renders OK (albeit empty, with no pages yet).
 * ssh to a **staging** builder:
   * Confirm `cat /etc/builder-wordpress-hosts` contains the new wp-XX.stage host.
   * Run `builder-rebuild-all` and wait for it to finish (~20min).
-    For any failing site, you can iterate with [WordPress § Manual build](./wordpress.md#manual-build). When you push a commit, it will automatically start a build, which you can follow via [WordPress § Debug notifier](./wordpress.md#debug-notifier) instead.
-  * Spot-check a few staging sites and confirm that they look the same as their production counterparts:
+    If any issues come up, fix those first. You can iterate on a single site with [WordPress § Manual build](./wordpress.md#manual-build). When you push a commit to the site's repo, the webhook automatically starts a build. You can follow use [WordPress § Debug notifier](./wordpress.md#debug-notifier) to follow this.
+  * Spot-check these staging sites and confirm that they look the same as their production counterparts:
     * https://stage.jquery.com/
     * https://stage.api.jquery.com/
     * https://stage.api.jqueryui.com/1.13/
     * https://stage.api.jquerymobile.com/
+    * https://stage.releases.jquery.com/
+    * https://stage.releases.jquery.com/git/jquery-git.js
 * Remove old node from [jquery org-wide webhooks](https://github.com/organizations/jquery/settings/hooks)
 * Follow [§ Delete a node](#delete-a-node) for the old node
 
 Production:
-* Follow [§ Create a new node](#create-a-new-node) for two `wp-XX` instances, follow special cases including:
+* Follow [§ Create a new node](#create-a-new-node) for two `wp-XX` instances, including these special steps:
   * **create the second wp-XX instance in the SFO3 region** instead of the default NYC3 region.
-  * run `jq-tarsnap-keygen` for each of the new node names, before provisioning with Puppet.
+  * run `jq-tarsnap-keygen` for both new node names, before provisioning with Puppet.
 * Once provisioned, ssh to each of the new wp hosts and confirm that these requests respond with HTTP 200, and the expected title.
   ```sh
   curl -si https://$(hostname -f) -H 'Host: jquery.com' | head -n 25
@@ -221,17 +223,27 @@ Production:
   # <title>jQuery</title>
   # …
   # <title>jQuery UI</title>
-  ``` 
+  ```
 * ssh to a **production** builder:
   * Confirm `cat /etc/builder-wordpress-hosts` contains both of the new wp-XX hosts.
   * Run `builder-rebuild-all` and wait for it to finish (~20min).
     * If any issues come up, fix those first. You can iterate on a single site with [WordPress § Manual build](./wordpress.md#manual-build). When you push a commit to the site's repo (and a semver tag for sites that require this), the webhook automatically starts a build. You can follow use [WordPress § Debug notifier](./wordpress.md#debug-notifier) to follow this.
     * Once all issues are fixed, re-run `builder-rebuild-all`
 * Switch DNS for https://api.jquerymobile.com/ and confirm that it looks the same as before.
-   Wait for and confirm that it is a response from a new server by comparing the `X-Powered-By: PHP` version in browser devtools.
+   Wait for and confirm that it is a response from a new server by comparing the `X-Powered-By: PHP/X.Y.Z` version in browser devtools.
 * Switch DNS for all sites listed at [WordPress § Doc sites](./wordpress.md#doc-sites).
-  We assign `*.jquery.com` to the first node,
-  and assign all others to the second node.
+  We assign `*.jquery.com` to the first node (NYC),
+  and assign all others to the second node (SFO).
+* Switch "releases" service in Fastly and change both origins to the new hosts.
+  Take care to update all mentions of the hostname in the origin settings (origin name, origin address, expected cert, expected SNI).
+  Browse around https://releases.jquery.com until you see a response with the newer `X-Powered-By: PHP/X.Y.Z` version in broser devtools. If this doesn't happen, perhaps check the origin? See also [Runbook: Nginx debugging](./runbook-nginx-debug.md).
+  ```sh
+  curl -si https://wp-XX.ops.jquery.net/jquery/ -H 'Host: releases.jquery.com' | head -n25
+  # HTTP/1.1 200 OK
+  # …
+  # <title>jQuery Core &#8211; All Versions | jQuery CDN</title>
+  # …
+  ```
 * Shutdown the old nodes and **wait a few days** to preserve prior backups and ease recovery just in case
 * Remove old node from [jquery org-wide webhooks](https://github.com/organizations/jquery/settings/hooks)
 * Follow [§ Delete a node](#delete-a-node) for the old node
