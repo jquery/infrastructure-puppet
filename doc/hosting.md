@@ -138,8 +138,38 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 
 ### filestash (docs::filestash)
 
-> [!WARNING]
-> TODO: Document this
+* Follow [§ Create a new node](#create-a-new-node) for `filestash-XX`
+* Restore the latest `filestash` archive from Tarsnap to the new node,
+  by running the `bin/restore-tarsnap.sh` script in this repo from your machine.
+
+  ```sh
+  bin/restore-tarsnap.sh list filestash-OLD.ops.jquery.net
+  # ...
+
+  bin/restore-tarsnap.sh restore filestash-OLD.ops.jquery.net filestash-SOME_DATE filestash-XX.example.net
+  ```
+* Move /var/www into place:
+  ```sh
+  cd /root/restored_from_tarsnap/OLD_NODE__filestash_SOME_DATE
+
+  sudo rmdir /srv/filestash/data/* /srv/filestash/data
+  sudo mv -Tn srv/filestash/data /srv/filestash/data
+  ```
+* Verify that these tests now pass:
+  ```sh
+  php tests/FilestashTest.php https://filestash-XX.ops.jquery.net
+  ```
+* Switch `docs_sites::releases_jquery_com::proxies[0]::target` in `hieradata/common.yaml`" to the new node
+* For each of these repositories ([search](https://github.com/search?q=org%3Ajquery+FILESTASH_SERVER&type=code))
+  * jquery-ui: [repo settings](https://github.com/jquery/jquery-ui/settings/secrets/actions), [workflow](https://github.com/jquery/jquery-ui/actions/workflows/filestash.yml)
+  * jquery-migrate: [repo settings](https://github.com/jquery/jquery-migrate/settings/secrets/actions), [workflow](https://github.com/jquery/jquery-migrate/actions/workflows/filestash.yml)
+  * jquery: [repo settings](https://github.com/jquery/jquery/settings/secrets/actions), [workflow](https://github.com/jquery/jquery/actions/workflows/filestash.yml)
+
+  Do:
+  * change secret "FILESTASH_SERVER" to filestash-XX.ops.jquery.net
+  * run "filestash" workflow
+* Shutdown the old node and **wait a few days** to ease recovery just in case
+* Follow [§ Delete a node](#delete-a-node) for the old node
 
 ### gruntjs (gruntjscom)
 

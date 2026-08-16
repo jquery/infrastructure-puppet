@@ -485,7 +485,7 @@ docs_sites:
     enable_static_index: true
     proxies:
       - path: /git/
-        target: https://filestash-01.ops.jquery.net/
+        target: https://filestash-02.ops.jquery.net/
 
 profile::wordpress::blogs::sites:
   jquery:
