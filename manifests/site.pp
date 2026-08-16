@@ -47,11 +47,6 @@ node 'puppet-04.ops.jquery.net' {
   role('puppet')
 }
 
-# 2 CPU, 2 GB mem, Debian 12 Bookworm
-node 'search-03.ops.jquery.net' {
-  role('search')
-}
-
 # 2 CPU, 2 GB mem, Debian 13 Trixie
 node 'search-04.ops.jquery.net' {
   role('search')

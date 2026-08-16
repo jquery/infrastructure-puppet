@@ -185,7 +185,7 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 
 * Follow [§ Create a new node](#create-a-new-node) for `search-XX`
 * Follow [Search § Setup a new server](./search.md#setup-a-new-server) and refer to [how we tested it](https://github.com/jquery/infrastructure-puppet/issues/37#issuecomment-4598860788)
-* Follow [§ Delete a node](#delete-a-node) for the old nodes
+* Follow [§ Delete a node](#delete-a-node) for the old node
 
 ### wpdocs
 
