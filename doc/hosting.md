@@ -45,7 +45,7 @@ Once the droplet has been created:
    then grant the host access to Tarsnap by running this command **from the Puppet server**. See also [Backup § Host management](./backup.md#host-management.md).
 
    ```shell-session
-   puppet-00$ jq-tarsnap-keygen EXAMPLE.ops.jquery.net
+   puppet-XX$ jq-tarsnap-keygen EXAMPLE.ops.jquery.net
    ```
 
    Without this, Puppet will fail as follows:

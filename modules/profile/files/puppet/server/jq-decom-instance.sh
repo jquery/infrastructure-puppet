@@ -12,7 +12,7 @@ echo "=== Cleaning up $INSTANCE"
 
 if [ -f "$TARSNAP_KEYFILE" ]; then
   # Git already infers a default author email (username@hostname), extend this author name as well
-  # Avoid "fatal: empty ident name (for <example@puppet-00.test>) not allowed"
+  # Avoid "fatal: empty ident name (for <example@puppet-XX.test>) not allowed"
   if [ "$(id -un)" != "root" ]; then
     if ! git var GIT_AUTHOR_IDENT 2>/dev/null; then
       export GIT_AUTHOR_NAME="$(id -un)"

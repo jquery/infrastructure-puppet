@@ -232,7 +232,7 @@ When using octocatalog-diff, you may encounter the following error:
 Catalog failed: Error:
   Execution of config_version command `/tmp/…/environments/staging/bin/config-version.sh staging` failed:
 
-  Execution of '/tmp/…/environments/staging/bin/config-version.sh staging' returned 128: fatal: bad revision 'production' on node puppet-04.ops.jquery.net
+  Execution of '/tmp/…/environments/staging/bin/config-version.sh staging' returned 128: fatal: bad revision 'production' on node puppet-XX.ops.jquery.net
 
   (OctocatalogDiff::Errors::CatalogError)
 ```
