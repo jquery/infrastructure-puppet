@@ -16,29 +16,7 @@ class profile::puppet::puppetdb (
   $puppetservers = jqlib::resource_hosts('class', 'profile::puppet::server')
   $puppetservers_ips = $puppetservers.jqlib::pdb_hosts2ips()
 
-  $config_path = debian::codename() ? {
-    'bullseye' => '/etc/puppetlabs/puppetdb',
-    default    => '/etc/puppetdb',
-  }
-  $var_path = debian::codename() ? {
-    'bullseye' => '/opt/puppetlabs/server/data/puppetdb',
-    default    => '/var/lib/puppetdb',
-  }
-
-  $ssl_cert_path = debian::codename() ? {
-    'bullseye' => '/etc/puppetlabs/puppetdb/ssl/public.pem',
-    default    => "/var/lib/puppet/ssl/certs/${facts['networking']['fqdn']}.pem",
-  }
-  $ssl_key_path = debian::codename() ? {
-    'bullseye' => '/etc/puppetlabs/puppetdb/ssl/private.pem',
-    default    => "/var/lib/puppet/ssl/private_keys/${facts['networking']['fqdn']}.pem",
-  }
-  $ssl_ca_path = debian::codename() ? {
-    'bullseye' => '/etc/puppetlabs/puppetdb/ssl/ca.pem',
-    default    => '/etc/puppet/puppetserver/ca/ca_crt.pem',
-  }
-
-  file { "${config_path}/cert-allowlist":
+  file { '/etc/puppetdb/cert-allowlist':
     ensure  => file,
     mode    => '0444',
     content => "${puppetservers.join("\n")}\n",
@@ -46,7 +24,7 @@ class profile::puppet::puppetdb (
   }
 
   ['config.ini', 'database.ini'].each |String $file| {
-    file { "${config_path}/conf.d/${file}":
+    file { "/etc/puppetdb/conf.d/${file}":
       ensure    => file,
       mode      => '0440',
       group     => 'puppetdb',

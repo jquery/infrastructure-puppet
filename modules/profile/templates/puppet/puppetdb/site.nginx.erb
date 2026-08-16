@@ -15,9 +15,9 @@ server {
     proxy_redirect off;
     proxy_buffering off;
 
-    proxy_ssl_certificate <%= @ssl_cert_path %>;
-    proxy_ssl_certificate_key <%= @ssl_key_path %>;
-    proxy_ssl_trusted_certificate <%= @ssl_ca_path %>;
+    proxy_ssl_certificate /var/lib/puppet/ssl/certs/<%= @facts['networking']['fqdn'] %>.pem;
+    proxy_ssl_certificate_key /var/lib/puppet/ssl/private_keys/<%= @facts['networking']['fqdn'] %>.pem;
+    proxy_ssl_trusted_certificate /etc/puppet/puppetserver/ca/ca_crt.pem;
     proxy_ssl_verify on;
     proxy_ssl_protocols TLSv1.3;
   }
@@ -27,9 +27,9 @@ server {
     proxy_redirect off;
     proxy_buffering off;
 
-    proxy_ssl_certificate <%= @ssl_cert_path %>;
-    proxy_ssl_certificate_key <%= @ssl_key_path %>;
-    proxy_ssl_trusted_certificate <%= @ssl_ca_path %>;
+    proxy_ssl_certificate /var/lib/puppet/ssl/certs/<%= @facts['networking']['fqdn'] %>.pem;
+    proxy_ssl_certificate_key /var/lib/puppet/ssl/private_keys/<%= @facts['networking']['fqdn'] %>.pem;
+    proxy_ssl_trusted_certificate /etc/puppet/puppetserver/ca/ca_crt.pem;
     proxy_ssl_verify on;
     proxy_ssl_protocols TLSv1.3;
   }

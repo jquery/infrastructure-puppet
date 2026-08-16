@@ -10,13 +10,13 @@ class profile::puppet::agent (
   }
 
   concat::fragment { 'puppet-config-agent':
-    target  => $::profile::puppet::common::config_file,
+    target  => $profile::puppet::common::config_file,
     order   => '10',
     content => template('profile/puppet/agent/puppet.conf.erb'),
   }
 
-  Concat::Fragment <| target == $::profile::puppet::common::config_file |> ~> Service['puppet']
-  Concat[$::profile::puppet::common::config_file] ~> Service['puppet']
+  Concat::Fragment <| target == $profile::puppet::common::config_file |> ~> Service['puppet']
+  Concat[$profile::puppet::common::config_file] ~> Service['puppet']
 
   service { 'puppet':
     ensure => running,

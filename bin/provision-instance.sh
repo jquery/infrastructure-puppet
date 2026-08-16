@@ -9,20 +9,6 @@ ENVIRONMENT=$2
 PUPPET_SERVER=$(cat hieradata/environments/"$ENVIRONMENT"/common.yaml | fgrep puppet_server | cut -d' ' -f2)
 VERSION_CODENAME=$(source <(ssh root@"$INSTANCE" cat /etc/os-release); echo "$VERSION_CODENAME")
 
-PUPPET="puppet"
-SSL_PATH="/var/lib/puppet/ssl"
-
-if [ "$VERSION_CODENAME" == "bullseye" ]; then
-  PUPPET="/opt/puppetlabs/bin/puppet"
-  SSL_PATH="/etc/puppetlabs/puppet/ssl"
-
-  # https://wiki.debian.org/DebianRepository/UseThirdParty, not needed when Bookworm is out
-  ssh root@"$INSTANCE" mkdir -p /etc/apt/keyrings
-
-  ssh root@"$INSTANCE" curl -o /etc/apt/keyrings/puppet.gpg https://apt.puppet.com/keyring.gpg
-  ssh root@"$INSTANCE" '. /etc/os-release && echo "deb [signed-by=/etc/apt/keyrings/puppet.gpg] https://apt.puppet.com $VERSION_CODENAME puppet7" > /etc/apt/sources.list.d/puppet.list'
-fi
-
 ssh root@"$INSTANCE" apt-get update
 ssh root@"$INSTANCE" apt-get -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" upgrade -y
 ssh root@"$INSTANCE" apt-get -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" install -y puppet-agent
@@ -35,11 +21,11 @@ if [[ "$INSTANCE_IP6" != fe80* ]]; then
   ssh "$PUPPET_SERVER" sudo nft add rule inet filter input tcp dport 8140 ip6 saddr "$INSTANCE_IP6" ct state new accept
 fi
 
-ssh root@"$INSTANCE" "$PUPPET" config --section agent set server "$PUPPET_SERVER"
-ssh root@"$INSTANCE" "$PUPPET" config --section agent set environment "$ENVIRONMENT"
-ssh root@"$INSTANCE" "$PUPPET" agent -t || true
+ssh root@"$INSTANCE" puppet config --section agent set server "$PUPPET_SERVER"
+ssh root@"$INSTANCE" puppet config --section agent set environment "$ENVIRONMENT"
+ssh root@"$INSTANCE" puppet agent -t || true
 
-REAL_CSR_FINGERPRINT=$(ssh root@"$INSTANCE" openssl req -in "$SSL_PATH"/certificate_requests/"$INSTANCE".pem -outform der | sha256sum | awk '{ print $1 }' | sed 's/\(..\)/\1:/g; s/:$//; s/./\U&/g;')
+REAL_CSR_FINGERPRINT=$(ssh root@"$INSTANCE" openssl req -in /var/lib/puppet/ssl/certificate_requests/"$INSTANCE".pem -outform der | sha256sum | awk '{ print $1 }' | sed 's/\(..\)/\1:/g; s/:$//; s/./\U&/g;')
 SERVER_CSR_FINGERPRINT=$(ssh "$PUPPET_SERVER" sudo openssl req -in /etc/puppet/puppetserver/ca/requests/"$INSTANCE".pem -outform der | sha256sum | awk '{ print $1 }' | sed 's/\(..\)/\1:/g; s/:$//; s/./\U&/g;')
 if [ "$REAL_CSR_FINGERPRINT" != "$SERVER_CSR_FINGERPRINT" ]; then
   echo "CSR fingerprint does not match!"
@@ -47,7 +33,7 @@ if [ "$REAL_CSR_FINGERPRINT" != "$SERVER_CSR_FINGERPRINT" ]; then
 fi
 
 ssh "$PUPPET_SERVER" sudo puppetserver ca sign --certname "$INSTANCE"
-ssh root@"$INSTANCE" "$PUPPET" agent -t
+ssh root@"$INSTANCE" puppet agent -t
 
 # provision permanent firewall rules from data in PuppetDB
 ssh "$PUPPET_SERVER" sudo run-puppet-agent

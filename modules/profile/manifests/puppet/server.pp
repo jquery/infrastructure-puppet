@@ -36,44 +36,17 @@ class profile::puppet::server (
   $primary_host = $profile::puppet::agent::ca_server
   $is_primary = $primary_host == $facts['networking']['fqdn']
 
-  $termini_package = debian::codename() ? {
-    'bullseye' => 'puppetdb-termini',
-    default    => 'puppet-terminus-puppetdb',
-  }
+  $server_config_path = '/etc/puppet/puppetserver'
+  $server_var_dir = '/var/lib/puppetserver'
+  $server_run_dir = '/run/puppetserver'
+  $server_log_dir = '/var/log/puppetserver'
 
-  $server_config_path = debian::codename() ? {
-    'bullseye' => '/etc/puppetlabs/puppetserver',
-    default    => '/etc/puppet/puppetserver',
-  }
-
-  $server_var_dir = debian::codename() ? {
-    'bullseye' => '/opt/puppetlabs/server/data/puppetserver',
-    default    => '/var/lib/puppetserver',
-  }
-
-  $server_run_dir = debian::codename() ? {
-    'bullseye' => '/var/run/puppetlabs/puppetserver',
-    default    => '/run/puppetserver',
-  }
-
-  $server_log_dir = debian::codename() ? {
-    'bullseye' => '/var/log/puppetlabs/puppetserver',
-    default    => '/var/log/puppetserver',
-  }
-
-  $code_path = debian::codename() ? {
-    'bullseye' => '/etc/puppetlabs/code',
-    default    => '/etc/puppet/code',
-  }
-
-  $g10k_config_path = debian::codename() ? {
-    'bullseye' => '/etc/puppetlabs/g10k.yaml',
-    default    => '/etc/puppet/g10k.yaml',
-  }
+  $code_path = '/etc/puppet/code'
+  $g10k_config_path = '/etc/puppet/g10k.yaml'
 
   package { [
     'puppetserver',
-    $termini_package,
+    'puppet-terminus-puppetdb',
     'g10k',
 
     # for the htpasswd tool
@@ -174,16 +147,15 @@ class profile::puppet::server (
   }
 
   concat::fragment { 'puppet-config-server':
-    target  => $::profile::puppet::common::config_file,
+    target  => $profile::puppet::common::config_file,
     order   => '20',
     content => template('profile/puppet/server/puppet.conf.erb'),
   }
 
-  Concat::Fragment <| target == $::profile::puppet::common::config_file |> ~> Service['puppetserver']
-  Concat[$::profile::puppet::common::config_file] ~> Service['puppetserver']
+  Concat::Fragment <| target == $profile::puppet::common::config_file |> ~> Service['puppetserver']
+  Concat[$profile::puppet::common::config_file] ~> Service['puppetserver']
 
   ['auth.conf', 'puppetserver.conf'].each |String $file| {
-    $puppet_agent_base_path = $profile::puppet::common::config_path
     file { "${server_config_path}/conf.d/${file}":
       ensure  => file,
       mode    => '0440',
@@ -193,7 +165,7 @@ class profile::puppet::server (
     }
   }
 
-  file { "${profile::puppet::common::config_path}/routes.yaml":
+  file { '/etc/puppet/routes.yaml':
     ensure  => file,
     mode    => '0444',
     content => template('profile/puppet/server/routes.yaml.erb'),
@@ -203,7 +175,7 @@ class profile::puppet::server (
   $puppetservers = jqlib::resource_hosts('class', 'profile::puppet::server')
   $puppetservers_notself = $puppetservers.filter |Stdlib::Fqdn $it| { $it != $facts['networking']['fqdn'] }
 
-  file { "${profile::puppet::common::config_path}/puppetdb.conf":
+  file { '/etc/puppet/puppetdb.conf':
     ensure  => file,
     mode    => '0444',
     content => template('profile/puppet/server/puppetdb.conf.erb'),
@@ -302,8 +274,7 @@ class profile::puppet::server (
     ensure      => $is_primary.bool2str('absent', 'present'),
     user        => 'root',
     description => 'rsync Puppet CA files from the primary server',
-    # TODO: stop hardcoding path once fully on Debian 12
-    command     => "/usr/bin/rsync -avp --delete --chown puppet:puppet -e \"/usr/bin/ssh -i /etc/ssh/local_keys.d/puppet-sync\" ${primary_host}:/etc/puppet/puppetserver/ca/ ${server_config_path}/ca/",
+    command     => "/usr/bin/rsync -avp --delete --chown puppet:puppet -e \"/usr/bin/ssh -i /etc/ssh/local_keys.d/puppet-sync\" ${primary_host}:${server_config_path}/ca/ ${server_config_path}/ca/",
     interval    => ['OnCalendar=*-*-* *:4/5:00'],
   }
 
