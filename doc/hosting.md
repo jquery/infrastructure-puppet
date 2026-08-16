@@ -89,7 +89,7 @@ When adding nodes to webhooks, whether org-wide or a single repo:
 * Follow [§ Create a new node](#create-a-new-node) for `builder-XX` and `builder-XX.stage`
 * Follow [§ Register a webhook](#register-a-webhook) for the new nodes at [org-wide jquery webhooks](https://github.com/organizations/jquery/settings/hooks)
 
-At this point, any commits or tags in docsite repos notify both the new and old builder nodes, with both performing the same builds, and both racing to write pages to the wpdocs nodes. This should be fine as the updates are idempotent, however it is recommended to shutdown the old builder nodes at this point so that we excercise them fully and discover potential issues. These nodes are not user-facing and idle most of the time.
+At this point, any commits or tags in docsite repos notify both the new and old builder nodes, with both performing the same builds, and both racing to write pages to the wpdocs nodes. This should be fine as the updates are idempotent, however it is recommended to shutdown the old builder nodes at this point so that we excercise the new ones fully and discover any potential issues soon. These nodes are not user-facing and are idle most of the time.
 
 After one or two docsites have succesfully used the new builder (see [wordpress.md](./wordpress.md)):
 
