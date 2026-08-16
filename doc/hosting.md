@@ -209,6 +209,18 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 > TODO: Untested
 
 * Follow [§ Create a new node](#create-a-new-node) for `puppet-XX`
+
+  The new puppetserver will by default defer to the old primary puppetserver
+  for its CA database and for its private Git repo. The following actions, if
+  performed during the migration period, must be performed on the old puppetserver,
+  and not on the new one:
+  - editing hierdata YAML in the private Git repo
+  - running command like `jq-tarsnap-keygen` or `jq-decom-instance`
+
+  The CA database and private Git repo are synced every 5 minutes via rsync
+  from the primary puppetserver to any other puppetserver nodes.
+  This is controlled by the `ca_server` setting.
+
 * Follow [§ Register a webhook](#register-a-webhook) for the new node at [jquery/infrastructure-puppet webhooks](https://github.com/jquery/infrastructure-puppet/settings/hooks)
 * Switch references to the puppet server in `bin/octodiff-docker.sh` (PUPPETDB_URL) and anything in `doc/*`. ([example](https://github.com/jquery/infrastructure-puppet/commit/aa18d5e798c47494860ee6b3c69e4cc0e3fa24bf))
 * Switch `puppet_server` on one staging node to follow the new puppet server, via hieradata for an existing staging role or staging host ([example](https://github.com/jquery/infrastructure-puppet/commit/ebc50ab3a0753c48ce50c790cf14a54de0c0ee41))
