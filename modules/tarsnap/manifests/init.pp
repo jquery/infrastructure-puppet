@@ -15,7 +15,7 @@ class tarsnap () {
     pin      => 150,
   }
 
-  ensure_packages([
+  stdlib::ensure_packages([
     'tarsnap',
     'tarsnap-archive-keyring'
   ], {

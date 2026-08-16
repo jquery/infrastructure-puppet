@@ -51,7 +51,7 @@ class profile::base::apt (
     content  => 'Dpkg::Options:: "--force-confold";',
   }
 
-  ensure_packages(['unattended-upgrades'])
+  stdlib::ensure_packages(['unattended-upgrades'])
 
   apt::conf { 'auto-upgrades':
     priority => '20',

@@ -5,7 +5,7 @@ class notifier (
   String[1] $webhook_secret,
   String[1] $version,
 ) {
-  ensure_packages(['nodejs', 'npm'])
+  stdlib::ensure_packages(['nodejs', 'npm'])
 
   $base_path = '/usr/local/share/notifier'
 

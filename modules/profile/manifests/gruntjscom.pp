@@ -3,7 +3,7 @@ class profile::gruntjscom (
   String[1]           $tls_key_name   = lookup('profile::gruntjscom::tls_key_name'),
   Stdlib::Fqdn        $canonical_name = lookup('profile::gruntjscom::canonical_name'),
 ) {
-  ensure_packages(['nodejs', 'npm'])
+  stdlib::ensure_packages(['nodejs', 'npm'])
 
   $backend_port = 5678
   $base_path = '/srv/gruntjscom'

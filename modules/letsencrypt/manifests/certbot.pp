@@ -3,7 +3,7 @@
 class letsencrypt::certbot (
   Stdlib::Email $email,
 ) {
-  ensure_packages([
+  stdlib::ensure_packages([
     'certbot',
     'python3-cryptography',
   ])

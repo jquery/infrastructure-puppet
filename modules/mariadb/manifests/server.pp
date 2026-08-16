@@ -13,7 +13,7 @@ class mariadb::server (
   Stdlib::Port        $bind_port               = 3306,
   Integer             $max_connections         = 128,
 ) {
-  ensure_packages([
+  stdlib::ensure_packages([
     'mariadb-server',
   ])
 

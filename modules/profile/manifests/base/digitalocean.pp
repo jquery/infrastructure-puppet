@@ -9,7 +9,7 @@ class profile::base::digitalocean () {
     pin      => 150,
   }
 
-  ensure_packages([
+  stdlib::ensure_packages([
     'droplet-agent',
     'droplet-agent-keyring'
   ], {

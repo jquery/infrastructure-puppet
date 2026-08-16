@@ -42,7 +42,7 @@ class php::fpm (
   $config_pool_user_merged = merge({
   }, $config_pool_user)
 
-  ensure_packages([
+  stdlib::ensure_packages([
     "php${version}-fpm",
   ])
 

@@ -3,7 +3,7 @@ class profile::filestash (
   String[1]             $certificate = lookup('profile::filestash::certificate'),
   Array[Users::Ssh_key] $deploy_keys = lookup('profile::filestash::deploy_keys', {default_value => []}),
 ) {
-  ensure_packages([
+  stdlib::ensure_packages([
     'rsync',
   ])
 

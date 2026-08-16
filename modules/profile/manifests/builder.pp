@@ -7,7 +7,7 @@ class profile::builder (
 ) {
   $wordpress_hosts = jqlib::resource_hosts('class', 'profile::wordpress::docs')
 
-  ensure_packages([
+  stdlib::ensure_packages([
     'nodejs',
     'npm',
 

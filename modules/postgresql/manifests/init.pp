@@ -7,7 +7,7 @@ class postgresql () {
     default    => fail('postgresql: unsupported debian version'),
   }
 
-  ensure_packages([
+  stdlib::ensure_packages([
     "postgresql-${pg_version}",
   ])
 

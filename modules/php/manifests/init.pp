@@ -8,12 +8,12 @@ class php (
     default    => fail('php: unsupported debian version'),
   }
 
-  ensure_packages([
+  stdlib::ensure_packages([
     "php${version}-common",
     "php${version}-cli",
   ])
 
-  ensure_packages(
+  stdlib::ensure_packages(
     $extensions.map |Php::Extension $ext| {
       if $ext =~ String[1] {
         "php${version}-${ext}"

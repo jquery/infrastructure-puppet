@@ -39,7 +39,7 @@ class profile::base (
   }
 
   # useful packages to install everywhere
-  ensure_packages([
+  stdlib::ensure_packages([
     'curl',
     'git',
     'jq',

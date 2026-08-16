@@ -127,7 +127,7 @@ class profile::wordpress::docs (
     }
 
     if $enable_object_cache {
-      ensure_packages(['memcached'])
+      stdlib::ensure_packages(['memcached'])
 
       file { "${dir}/wp-content/object-cache.php":
         ensure  => file,
@@ -138,7 +138,7 @@ class profile::wordpress::docs (
         ]
       }
     } else {
-      ensure_packages(['memcached'], { ensure => absent })
+      stdlib::ensure_packages(['memcached'], { ensure => absent })
 
       file { "${dir}/wp-content/memcached/object-cache.php":
         ensure  => absent,
