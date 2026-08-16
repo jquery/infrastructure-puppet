@@ -19,11 +19,11 @@ krinkle@miscweb:~$ curl -v -I 'https://view.jquery.com/bar' --connect-to ::local
 For nginx changes to WordPress hosts, you can use staging:
 
 * Push edits to `staging` branch.
-* SSH to a stage host (e.g. **wp-03.stage**.ops) and run `sudo run-puppet-agent` there.
+* SSH to a stage host (**wp-XX.stage**.ops) and run `sudo run-puppet-agent` there.
   * If there are errors, especially the `Nginx[refresh]` line, then stop and fix the patch.
   * To get more details on the error, use `sudo service nginx configtest` and `sudo nginx -t`.
 * Once happy, forward to `production`.
-* Apply on relevant prod (e.g. wp-05 for jqueryui, wp-04 for jquery) by running `sudo run-puppet-agent` there and confirming the behaviour afterwards. Use local curl (example below) instead of the public Clouflare-cached URL if caching might be at play.
+* Apply on a prod host (**wp-XX**.ops) and run `sudo run-puppet-agent` there and confirming the behaviour afterwards. Use local curl (example below) instead of the public Clouflare-cached URL if caching might be at play.
 
 ## Live hacking
 
