@@ -7,11 +7,6 @@
 # Production
 # ----------
 
-# 2 CPU, 2 GB mem, Debian 12 Bookworm
-node 'builder-02.ops.jquery.net' {
-  role('docs::builder')
-}
-
 # 2 CPU, 2 GB mem, Debian 13 Trixie
 node 'builder-03.ops.jquery.net' {
   role('docs::builder')
@@ -55,16 +50,6 @@ node 'puppet-04.ops.jquery.net' {
 # 2 CPU, 2 GB mem, Debian 12 Bookworm
 node 'search-03.ops.jquery.net' {
   role('search')
-}
-
-# 4 CPU, 8 GB mem, Debian 12 Bookworm (NYC3)
-node 'wp-04.ops.jquery.net' {
-  role('docs::wordpress')
-}
-
-# 4 CPU, 8 GB mem, Debian 12 Bookworm (SFO3)
-node 'wp-05.ops.jquery.net' {
-  role('docs::wordpress')
 }
 
 # 4 CPU, 8 GB mem, Debian 13 Trixie (NYC3)
