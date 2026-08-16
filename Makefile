@@ -28,7 +28,7 @@ lint:
 	@ ./bin/build_wordpress_md.sh --verify
 	@ php -l test/*.php
 
-test: test-codeorigin-prod-http test-codeorigin-prod-https test-codeorigin-stage test-contentorigin-prod test-miscweb test-wpblogs test-wpdocs test-releases
+test: test-codeorigin-prod-http test-codeorigin-prod-https test-codeorigin-stage test-contentorigin-prod test-filestash test-miscweb test-wpblogs test-wpdocs test-releases
 
 test-codeorigin-prod-http:
 	@ php test/CodeoriginTest.php "http://code.jquery.com"
@@ -44,6 +44,10 @@ test-codeorigin-stage:
 
 test-contentorigin-prod:
 	@ php test/ContentoriginTest.php
+	@ echo "✅ $@"
+
+test-filestash:
+	@ php test/FilestashTest.php
 	@ echo "✅ $@"
 
 test-miscweb:

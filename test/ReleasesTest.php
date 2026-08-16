@@ -9,7 +9,7 @@ Unit::start();
 
 Unit::testHttp( 'https://releases.jquery.com/git/jquery-git.js', null, [], [
 	'status' => '200',
-	'content-type' => 'application/javascript',
+	'content-type' => 'application/javascript; charset=utf-8',
 	'vary' => 'Accept-Encoding',
 	'cache-control' => 'max-age=300, public',
 	'access-control-allow-origin' => '*',
