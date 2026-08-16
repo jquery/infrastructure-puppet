@@ -1,3 +1,11 @@
+#
+# Selection order:
+# * location =        # exact
+# * location ^~       # longest prefix (priority)
+# * location ~ or ~*  # first regex match (~* is case-insensitive)
+# * location /        # longest prefix (fallback)
+#
+# Ref https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms#how-nginx-chooses-which-location-to-use-to-handle-requests
 server {
   listen 443 ssl;
   listen [::]:443 ssl;
@@ -16,37 +24,6 @@ server {
   log_not_found off;
   server_tokens off;
 
-  # Prevent hidden "dotfiles" from being served
-  location ~ /\. {
-    access_log off;
-    deny all;
-  }
-
-  # Avoid noise in PHP error logs from bots accessing includes
-  #
-  # > Uncaught Error: Call to undefined function __()
-  # > in /srv/wordpress/sites/jquery_com/wp-admin/includes/file.php
-  #
-  # https://core.trac.wordpress.org/ticket/9185
-  location ^~ /wp-includes/(.*).php {
-    access_log off;
-    deny all;
-  }
-  location ^~ /wp-admin/includes/ {
-    access_log off;
-    deny all;
-  }
-
-  include /etc/nginx/wordpress-subsites/<%= @host %>.d/*.conf;
-
-<%- if @gilded_wordpress -%>
-  # Avoid matching /resources/ itself as that can be a real page
-  # https://jquerymobile.com/resources/
-  location ~ ^/resources/(?<name>.+) {
-    alias <%= @base_path %>/gw-resources/<%= @host %>/$name;
-  }
-<%- end -%>
-
   location = /favicon.ico {
     access_log off;
     try_files /wp-content/themes/<%= @active_theme %>/i/favicon.ico /wp-content/themes/jquery/i/favicon.ico;
@@ -57,12 +34,46 @@ server {
     try_files $uri /wp-content/themes/<%= @active_theme %>/robots.txt;
   }
 
-  location ~* \.(css|gif|ico|jpeg|jpg|js|png)$ {
-    expires 24h;
+  # Avoid noise in PHP error logs from bots accessing includes
+  #
+  # > Error: Call to undefined function
+  # > in /srv/wordpress/sites/jquery_com/wp-admin/includes/file.php
+  #
+  # https://core.trac.wordpress.org/ticket/9185
+  location ^~ /wp-admin/includes/ {
+    access_log off;
+    deny all;
   }
 
-  location / {
-    try_files $uri $uri/ /index.php$is_args$args;
+  include /etc/nginx/wordpress-subsites/<%= @host %>.d/*.conf;
+
+  # Prevent hidden "dotfiles" from being served
+  location ~ /\. {
+    access_log off;
+    deny all;
+  }
+
+  # Avoid noise in PHP error logs from bots accessing includes
+  #
+  # > Error: Call to undefined function
+  # > in /srv/wordpress/sites/jquerymobile/wp-includes/customize/class-wp-customize-cropped-image-control.php
+  #
+  # NOTE: Must not deny /wp-includes/ by prefix because WordPress serves JS/CSS from here.
+  location ~ /wp-includes/(.*).php {
+    access_log off;
+    deny all;
+  }
+
+<%- if @gilded_wordpress -%>
+  # Avoid matching /resources/ itself as that can be a real page
+  # https://jquerymobile.com/resources/
+  location ~ ^/resources/(?<name>.+) {
+    alias <%= @base_path %>/gw-resources/<%= @host %>/$name;
+  }
+<%- end -%>
+
+  location ~* \.(css|gif|ico|jpeg|jpg|js|png)$ {
+    expires 24h;
   }
 
   location ~ \.php$ {
@@ -71,5 +82,9 @@ server {
     fastcgi_pass         unix:/run/php/php<%= @php_fpm_version %>-fpm.sock;
     fastcgi_param        SCRIPT_FILENAME $request_filename;
     include              /etc/nginx/fastcgi_params;
+  }
+
+  location / {
+    try_files $uri $uri/ /index.php$is_args$args;
   }
 }
