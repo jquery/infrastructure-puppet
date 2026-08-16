@@ -132,10 +132,7 @@ class profile::puppet::server (
     require => Exec['git-init-puppet-private'],
   }
 
-  file { [
-    '/etc/puppetlabs/hieradata',
-    '/etc/puppet/hieradata'
-  ]:
+  file { '/etc/puppet/hieradata':
     ensure  => absent,
     recurse => true,
     force   => true,
