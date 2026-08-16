@@ -25,6 +25,9 @@ server {
 
     add_header Cache-Control public;
     add_header Access-Control-Allow-Origin "*";
+
+    # Applies to charset_types (mainly for JS and CSS)
+    charset utf-8;
   }
 
   location /.well-known/acme-challenge {
