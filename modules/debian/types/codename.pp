@@ -1,2 +1,2 @@
 # @summary supported debian version codename
-type Debian::Codename = Enum['bullseye', 'bookworm', 'trixie']
+type Debian::Codename = Enum['bookworm', 'trixie']
