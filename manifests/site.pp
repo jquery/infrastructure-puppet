@@ -52,6 +52,11 @@ node 'search-03.ops.jquery.net' {
   role('search')
 }
 
+# 2 CPU, 2 GB mem, Debian 13 Trixie
+node 'search-04.ops.jquery.net' {
+  role('search')
+}
+
 # 4 CPU, 8 GB mem, Debian 13 Trixie (NYC3)
 node 'wp-06.ops.jquery.net' {
   role('docs::wordpress')
