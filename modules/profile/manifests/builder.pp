@@ -28,9 +28,10 @@ class profile::builder (
 
   # npm cache in builder user home directory
   file { '/srv/builder/.npm':
-    ensure => directory,
-    owner  => 'builder',
-    group  => 'builder',
+    ensure  => directory,
+    owner   => 'builder',
+    group   => 'builder',
+    require => [Systemd::Sysuser['builder'], Service['systemd-sysusers']]
   }
 
   file { '/usr/local/bin/builder-do-update':
@@ -64,7 +65,7 @@ class profile::builder (
       branch  => $site['repository']['branch'],
       owner   => 'builder',
       group   => 'builder',
-      require => Service['systemd-sysusers'],
+      require => [Systemd::Sysuser['builder'], Service['systemd-sysusers']]
     }
 
     $path = pick($site['path'], '/')
