@@ -28,6 +28,11 @@ node 'contentorigin-03.ops.jquery.net' {
 }
 
 # 2 CPU, 2 GB mem, Debian 12 Bookworm
+node 'filestash-02.ops.jquery.net' {
+  role('docs::filestash')
+}
+
+# 2 CPU, 2 GB mem, Debian 13 Trixie
 node 'filestash-01.ops.jquery.net' {
   role('docs::filestash')
 }
