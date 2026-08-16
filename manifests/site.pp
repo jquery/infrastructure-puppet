@@ -85,11 +85,6 @@ node 'wpblogs-03.ops.jquery.net' {
 # Staging
 # -------
 
-# Debian 12 Bookworm
-node 'builder-05.stage.ops.jquery.net' {
-  role('docs::builder')
-}
-
 # 1 CPU, 2 GB mem, Debian 13 Trixie
 node 'builder-06.stage.ops.jquery.net' {
   role('docs::builder')
