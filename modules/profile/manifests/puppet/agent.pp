@@ -9,6 +9,11 @@ class profile::puppet::agent (
     ensure => installed,
   }
 
+  stdlib::ensure_packages([
+    # needed for the ssh_ca_host_certificate custom fact
+    'ruby-net-ssh',
+  ])
+
   concat::fragment { 'puppet-config-agent':
     target  => $profile::puppet::common::config_file,
     order   => '10',
