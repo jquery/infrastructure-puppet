@@ -206,10 +206,20 @@ After one or two docsites have succesfully used the new builder (see [wordpress.
 ### puppet
 
 > [!WARNING]
-> TODO: Document the rest of this
+> TODO: Untested
 
+* Follow [§ Create a new node](#create-a-new-node) for `puppet-XX`
 * Follow [§ Register a webhook](#register-a-webhook) for the new node at [jquery/infrastructure-puppet webhooks](https://github.com/jquery/infrastructure-puppet/settings/hooks)
+* Switch references to the puppet server in `bin/octodiff-docker.sh` (PUPPETDB_URL) and anything in `doc/*`. ([example](https://github.com/jquery/infrastructure-puppet/commit/aa18d5e798c47494860ee6b3c69e4cc0e3fa24bf))
+* Switch `puppet_server` on one staging node to follow the new puppet server, via hieradata for an existing staging role or staging host ([example](https://github.com/jquery/infrastructure-puppet/commit/ebc50ab3a0753c48ce50c790cf14a54de0c0ee41))
+  Then ssh to that node and confirm `sudo run-puppet-agent` completes without errors.
+* Switch `puppet_server` on all staging nodes. ([example](https://github.com/jquery/infrastructure-puppet/commit/f96ee05deee64c931303bbcc22ba7f65b5607be9))
+* Switch `puppet_server` on all production nodes, and switch `ca_server` for all nodes at this time. ([example](https://github.com/jquery/infrastructure-puppet/commit/b3dd49556e67d83cb09072fa46ac18f51b848fd7))
+  Then ssh to a production node and confirm `sudo run-puppet-agent` completes without errors.
+  Then ssh to the new puppet server and confirm `sudo run-puppet-agent` completes on itself without errors.
+* Shutdown the old puppet server and **wait a few days** to preserve prior backups and ease recovery just in case
 * Remove old node from [jquery/infrastructure-puppet webhooks](https://github.com/jquery/infrastructure-puppet/settings/hooks)
+* Follow [§ Delete a node](#delete-a-node) for the old node
 
 ### search
 
