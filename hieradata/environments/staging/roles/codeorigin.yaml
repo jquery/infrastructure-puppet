@@ -8,4 +8,4 @@ profile::codeorigin::vhost_hostnames:
   - code2.jquery.com
   - "%{::facts.networking.fqdn}"
 
-profile::puppet::agent::puppet_server: puppet-05.ops.jquery.net
+profile::puppet::agent::puppet_server: puppet-04.ops.jquery.net
