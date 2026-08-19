@@ -13,6 +13,15 @@ class profile::puppet::puppetdb (
     ensure => installed,
   }
 
+  systemd::sysuser { 'puppetdb-group':
+    # Ensure the puppetdb user is in the puppet group so that it can read
+    # certificates from /var/lib/puppet/ssl/ to serve the PuppetDB HTTPS interface
+    # over TLS to other Puppet servers.
+    content => 'm puppetdb puppet',
+    require => Package['puppet-agent', 'puppetdb'],
+    before  => Service['puppetdb'],
+  }
+
   $puppetservers = jqlib::resource_hosts('class', 'profile::puppet::server')
   $puppetservers_ips = $puppetservers.jqlib::pdb_hosts2ips()
 
