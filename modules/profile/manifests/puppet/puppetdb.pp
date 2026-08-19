@@ -23,7 +23,7 @@ class profile::puppet::puppetdb (
     notify  => Service['puppetdb'],
   }
 
-  ['config.ini', 'database.ini'].each |String $file| {
+  ['config.ini', 'database.ini', 'jetty.ini'].each |String $file| {
     file { "/etc/puppetdb/conf.d/${file}":
       ensure    => file,
       mode      => '0440',

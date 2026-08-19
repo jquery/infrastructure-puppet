@@ -1,0 +1,8 @@
+[jetty]
+port = 8080
+access-log-config = /etc/puppetdb/request-logging.xml
+ssl-host=0.0.0.0
+ssl-port=8081
+ssl-key=/var/lib/puppet/ssl/private_keys/<%= @facts['networking']['fqdn'] %>.pem
+ssl-cert=/var/lib/puppet/ssl/certs/<%= @facts['networking']['fqdn'] %>.pem
+ssl-ca-cert=/etc/puppet/puppetserver/ca/ca_crt.pem
