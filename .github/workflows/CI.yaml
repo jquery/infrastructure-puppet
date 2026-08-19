@@ -14,6 +14,6 @@ jobs:
 
       - name: Install puppet-lint
         run: |
-          sudo gem install puppet-lint -v '~> 2'
+          sudo gem install puppet-lint -v '~> 5'
 
       - run: make lint

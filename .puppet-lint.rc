@@ -1,3 +1,7 @@
 # See also `puppet-lint --list-checks`
 #
 --no-140chars-check
+#
+# As of puppetlabs/apt 11.3.2
+# ./vendor_modules/apt/manifests/auth.pp - WARNING: defined type not documented on line 23 (check: documentation)
+--no-documentation

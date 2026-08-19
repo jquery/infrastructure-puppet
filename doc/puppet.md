@@ -158,11 +158,11 @@ resource.
 
 ## Linting
 
-See also <http://puppet-lint.com/checks/> and <https://github.com/rodjek/puppet-lint/>.
+See also <http://puppet-lint.com/checks/> and <https://github.com/puppetlabs/puppet-lint>.
 
 Install:
 ```
-$ gem install puppet-lint -v '~> 2'
+$ gem install puppet-lint -v '~> 5'
 ```
 
 Run linter:
