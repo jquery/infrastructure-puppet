@@ -8,7 +8,7 @@ function jqlib::resource_hosts (
     undef   => '',
     default => "and title = \"${jqlib::format_puppet_title($resource_title)}\"",
   }
-  $environment_query = $all_environments.bool2str('', "and environment = \"${::facts['environment']}\"")
+  $environment_query = $all_environments.bool2str('', "and environment = \"${environment}\"")
 
   $pql = @("PQL")
   resources[certname] {
