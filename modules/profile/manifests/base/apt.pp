@@ -8,13 +8,8 @@ class profile::base::apt (
       'sources.list.d' => true,
       'preferences'    => true,
       'preferences.d'  => true,
+      'keyrings'       => true,
     },
-  }
-
-  file { '/etc/apt/keyrings':
-    ensure  => directory,
-    purge   => true,
-    recurse => true,
   }
 
   $codename = debian::codename()
