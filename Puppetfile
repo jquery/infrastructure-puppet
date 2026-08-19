@@ -5,10 +5,10 @@
 
 moduledir 'vendor_modules'
 
-mod 'puppetlabs/sshkeys_core', '2.5.0'
+mod 'puppetlabs/sshkeys_core', '2.5.1'
 
-mod 'puppetlabs/stdlib', '9.6.0'
-mod 'puppetlabs/apt', '9.4.0'
-mod 'puppetlabs/concat', '9.0.2'
+mod 'puppetlabs/stdlib', '9.7.0'
+mod 'puppetlabs/apt', '11.3.2'
+mod 'puppetlabs/concat', '9.1.0'
 
 mod 'puppet/dnsquery', '5.1.0'
