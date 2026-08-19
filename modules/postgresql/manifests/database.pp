@@ -13,6 +13,7 @@ define postgresql::database (
       command => "/usr/bin/createdb --owner ${owner} ${title}",
       unless  => $db_exists,
       user    => 'postgres',
+      require => Postgresql::User[$owner],
     }
   } else {
     exec { "postgresql-db-drop-${title}":

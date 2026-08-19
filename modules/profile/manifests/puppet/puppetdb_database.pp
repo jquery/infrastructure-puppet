@@ -4,11 +4,6 @@ class profile::puppet::puppetdb_database (
 ) {
   class { 'postgresql': }
 
-  postgresql::extension { 'puppetdb-pg_trgm':
-    extension => 'pg_trgm',
-    database  => 'puppetdb',
-  }
-
   postgresql::user { 'puppetdb':
     password  => $postgresql_password,
     hba_entry => 'host puppetdb puppetdb 127.0.0.1/32 md5',
@@ -16,5 +11,10 @@ class profile::puppet::puppetdb_database (
 
   postgresql::database { 'puppetdb':
     owner => 'puppetdb',
+  }
+
+  postgresql::extension { 'puppetdb-pg_trgm':
+    extension => 'pg_trgm',
+    database  => 'puppetdb',
   }
 }

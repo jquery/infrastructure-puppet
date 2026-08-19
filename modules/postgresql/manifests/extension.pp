@@ -10,5 +10,6 @@ define postgresql::extension (
     command => "/usr/bin/psql ${database} -c \"CREATE EXTENSION ${extension};\"",
     unless  => $ext_exists,
     user    => 'postgres',
+    require => Postgresql::Database[$database],
   }
 }
