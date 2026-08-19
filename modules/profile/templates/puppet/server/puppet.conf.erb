@@ -5,6 +5,8 @@ rundir = <%= @server_run_dir %>
 pidfile = <%= @server_run_dir %>/puppetserver.pid
 codedir = <%= @code_path %>
 environment = <%= @environment %>
+strict_variables = true
+strict = error
 
 [master]
 storeconfigs = true
