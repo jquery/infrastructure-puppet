@@ -81,7 +81,7 @@ When adding nodes to webhooks, whether org-wide or a single repo:
 
 * set `https://FQDN_HERE:8333/` as the URL,
 * choose `application/json` as content type,
-* and use the secret from `ssh puppet-04.ops.jquery.net git -C /srv/git/puppet/private grep webhook_secret` for production or staging respectively,
+* and use the secret from `ssh puppet-05.ops.jquery.net git -C /srv/git/puppet/private grep webhook_secret` for production or staging respectively,
 * confirm in the GitHub UI that the `ping` payload was succesfully delivered
 
 ### builder

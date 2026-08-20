@@ -49,7 +49,7 @@ Use the below command to download this key, along with fingerprints for
 all our servers, which provides tab completion on the `ssh` command.
 
 ```sh
-curl https://puppet-04.ops.jquery.net/known_hosts | tee ~/.ssh/known_hosts.d/jquery
+curl https://puppet-05.ops.jquery.net/known_hosts | tee ~/.ssh/known_hosts.d/jquery
 ```
 
 Alternatively, you can copy the above `@cert-authority` line to your
