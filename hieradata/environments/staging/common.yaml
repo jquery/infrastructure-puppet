@@ -7,4 +7,4 @@
 docs_prepend_host: 'stage.'
 profile::wordpress::docs::append_title: ' (staging)'
 
-profile::puppet::agent::puppet_server: puppet-04.ops.jquery.net
+profile::puppet::agent::puppet_server: puppet-05.ops.jquery.net
