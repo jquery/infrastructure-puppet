@@ -43,6 +43,7 @@ class profile::puppet::server (
 
   $code_path = '/etc/puppet/code'
   $g10k_config_path = '/etc/puppet/g10k.yaml'
+  $g10k_cachedir = '/var/cache/g10k'
 
   package { [
     'puppetserver',
@@ -71,6 +72,12 @@ class profile::puppet::server (
     require => Exec['remove-old-code-dir'],
   }
 
+  file { $g10k_cachedir:
+    ensure => directory,
+    owner  => 'gitpuppet',
+    group  => 'gitpuppet',
+  }
+
   file { [
     '/srv/git',
     '/srv/git/puppet',
@@ -87,6 +94,7 @@ class profile::puppet::server (
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
+    require => File[$g10k_cachedir],
     notify  => Exec['g10k'],
   }
 
@@ -137,10 +145,6 @@ class profile::puppet::server (
     recurse => true,
     force   => true,
     purge   => true,
-  }
-
-  systemd::tmpfile { 'g10k-cache':
-    content => 'd /tmp/g10k 2775 gitpuppet gitpuppet',
   }
 
   concat::fragment { 'puppet-config-server':
