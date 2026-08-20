@@ -4,4 +4,4 @@
 # - /hierdata/environments/production/common.yaml [THIS FILE]
 # - /hierdata/environments/production/roles/*.yaml
 
-profile::puppet::agent::puppet_server: puppet-04.ops.jquery.net
+profile::puppet::agent::puppet_server: puppet-05.ops.jquery.net
