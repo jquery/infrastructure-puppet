@@ -581,7 +581,7 @@ profile::base::groups:
 
 profile::certbot::email: infrastructure-team@jquery.com
 
-profile::notifier::version: v4.0.1
+profile::notifier::version: v4.1.0
 
 profile::puppet::agent::ca_server: puppet-05.ops.jquery.net
 
