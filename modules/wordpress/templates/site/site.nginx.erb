@@ -24,6 +24,15 @@ server {
   log_not_found off;
   server_tokens off;
 
+<%- if @allow_only_ips -%>
+<% raise 'allow_only_ips must be non-empty' unless !@allow_only_ips.empty? %>
+  allow 127.0.0.1;
+<% @allow_only_ips.each do |ip| %>
+  allow <%= ip %>;
+<% end %>
+  deny all;
+<%- end -%>
+
   location = /favicon.ico {
     access_log off;
     try_files /wp-content/themes/<%= @active_theme %>/i/favicon.ico /wp-content/themes/jquery/i/favicon.ico;

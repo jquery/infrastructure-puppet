@@ -14,11 +14,15 @@ repo_dir="$(realpath "$(dirname "$0")/..")"
 #
 # Pin exact octocatalog-diff version to easily apply the patch
 # from https://github.com/github/octocatalog-diff/issues/261
+#
+# curl:
+# Required for jqlib::cloudflare_ips()
+#
 script=" \
 echo 'Launching debian container...' && \
 echo 'Installing packages...' && \
 apt-get update -qq && \
-DEBIAN_FRONTEND=noninteractive DEBCONF_NOWARNINGS=yes apt-get install -y -qq git puppet-agent g10k ruby-dev cmake pkg-config libgit2-dev libzstd-dev > /dev/null && \
+DEBIAN_FRONTEND=noninteractive DEBCONF_NOWARNINGS=yes apt-get install -y -qq git puppet-agent g10k ruby-dev cmake pkg-config libgit2-dev libzstd-dev curl > /dev/null && \
 echo 'Installing octocatalog-diff...' && \
 gem install -q --silent octocatalog-diff -v 2.3.1 && \
 cd /infrastructure-puppet && \

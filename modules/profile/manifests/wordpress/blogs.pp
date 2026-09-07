@@ -1,10 +1,11 @@
 # @summary various blog sites
 class profile::wordpress::blogs (
-  Profile::Wordpress::Blogs::Sites $sites             = lookup('profile::wordpress::blogs::sites'),
-  Optional[String[1]]              $wordpress_version = lookup('profile::wordpress::blogs::wordpress_version'),
-  String[1]                        $db_password_seed  = lookup('profile::wordpress::blogs::db_password_seed'),
-  Stdlib::Email                    $admin_email       = lookup('profile::wordpress::blogs::admin_email'),
-  String[1]                        $admin_password    = lookup('profile::wordpress::blogs::admin_password'),
+  Profile::Wordpress::Blogs::Sites $sites               = lookup('profile::wordpress::blogs::sites'),
+  Optional[String[1]]              $wordpress_version   = lookup('profile::wordpress::blogs::wordpress_version'),
+  String[1]                        $db_password_seed    = lookup('profile::wordpress::blogs::db_password_seed'),
+  Stdlib::Email                    $admin_email         = lookup('profile::wordpress::blogs::admin_email'),
+  String[1]                        $admin_password      = lookup('profile::wordpress::blogs::admin_password'),
+  Boolean                          $deny_external_traffic = lookup('profile::wordpress::blogs::deny_external_traffic', {default_value => false}),
 ) {
   include profile::wordpress::base
 
@@ -22,6 +23,12 @@ class profile::wordpress::blogs (
     local_path        => '/srv/wordpress/jquery-wp-content',
     local_user        => 'www-data',
     require           => Git::Clone['jquery-wp-content'],
+  }
+
+  if $deny_external_traffic {
+    $allow_only_ips = jqlib::cloudflare_ips()
+  } else {
+    $allow_only_ips = undef
   }
 
   $sites.each |String[1] $name, Hash $site| {
@@ -42,6 +49,7 @@ class profile::wordpress::blogs (
       db_password_seed => $db_password_seed,
       admin_email      => $admin_email,
       admin_password   => $admin_password,
+      allow_only_ips   => $allow_only_ips,
       config_files     => [
         "${dir}/jquery-config.php",
       ],

@@ -9,6 +9,7 @@ class profile::wordpress::docs (
   String[1]            $wp_content_branch     = lookup('profile::wordpress::docs::wp_content_branch', {default_value => 'main'}),
   String               $append_title          = lookup('profile::wordpress::docs::append_title', {default_value => ''}),
   Boolean              $robots_txt_deny_all   = lookup('profile::wordpress::docs::robots_txt_deny_all', {default_value => false}),
+  Boolean              $deny_external_traffic = lookup('profile::wordpress::docs::deny_external_traffic', {default_value => false}),
   Boolean              $enable_object_cache   = lookup('profile::wordpress::docs::enable_object_cache', {default_value => false}),
   String[1]            $builder_password_seed = lookup('docs_builder_password_seed'),
   String               $prepend_host          = lookup('docs_prepend_host', {default_value => ''}),
@@ -29,6 +30,15 @@ class profile::wordpress::docs (
     local_path        => '/srv/wordpress/jquery-wp-content',
     local_user        => 'www-data',
     require           => Git::Clone['jquery-wp-content'],
+  }
+
+  if $deny_external_traffic {
+    # Always requests from within our cluster, especially builder-XX nodes.
+    $allow_only_ips =
+      jqlib::resource_hosts('class', 'profile::puppet::agent', true).jqlib::pdb_hosts2ips()
+      + jqlib::cloudflare_ips()
+  } else {
+    $allow_only_ips = undef
   }
 
   $sites.each |String[1] $name, Profile::Docs::Site $site| {
@@ -94,6 +104,7 @@ class profile::wordpress::docs (
       permalink_structure => '/%postname%/',
       gilded_wordpress    => true,
       robots_txt_deny_all => $robots_txt_deny_all,
+      allow_only_ips      => $allow_only_ips,
       config_files        => [
         "${dir}/jquery-config.php",
       ],

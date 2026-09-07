@@ -21,6 +21,9 @@ define wordpress::site (
   String[1]                 $permalink_structure = '/%year%/%monthnum%/%day%/%postname%/',
   Boolean                   $robots_txt_deny_all = false,
   Boolean                   $gilded_wordpress    = false,
+  Optional[
+    Array[Stdlib::IP::Address]
+  ]                         $allow_only_ips      = undef,
   Stdlib::Unixpath          $webroot             = $base_path,
 ) {
   mariadb::database { "wordpress_${title}": }
