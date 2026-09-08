@@ -5,7 +5,9 @@
 # - /hierdata/environments/staging/roles/docs/wordpress.yaml [THIS FILE]
 
 profile::wordpress::docs::robots_txt_deny_all: true
-profile::wordpress::docs::deny_external_traffic: true
+# Staging hosts are exposed directly because Cloudflare does not
+# cover certs for sub-subdomains like stage.api.jquery.com.
+profile::wordpress::docs::deny_external_traffic: false
 profile::wordpress::docs::wordpress_version: ~
 
 profile::tarsnap::enabled: false

@@ -11,3 +11,4 @@ profile::certbot::certificates:
 
 profile::notifier::tls_key_name: blogs
 profile::wordpress::base::default_site_cert: blogs
+profile::wordpress::docs::deny_external_traffic: true
