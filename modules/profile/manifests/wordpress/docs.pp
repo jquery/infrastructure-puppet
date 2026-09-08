@@ -33,10 +33,11 @@ class profile::wordpress::docs (
   }
 
   if $deny_external_traffic {
-    # Always requests from within our cluster, especially builder-XX nodes.
-    $allow_only_ips =
-      jqlib::resource_hosts('class', 'profile::puppet::agent', true).jqlib::pdb_hosts2ips()
+    # Always allow requests from within our cluster, especially builder-XX nodes.
+    $allow_only_ips = (
+      jqlib::resource_hosts('class', 'profile::puppet::agent').jqlib::pdb_hosts2ips()
       + jqlib::cloudflare_ips()
+    )
   } else {
     $allow_only_ips = undef
   }

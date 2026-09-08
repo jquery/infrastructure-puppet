@@ -25,11 +25,11 @@ server {
   server_tokens off;
 
 <%- if @allow_only_ips -%>
-<% raise 'allow_only_ips must be non-empty' unless !@allow_only_ips.empty? %>
+<%- raise 'allow_only_ips must be non-empty' unless !@allow_only_ips.empty? -%>
   allow 127.0.0.1;
-<% @allow_only_ips.each do |ip| %>
+<%- @allow_only_ips.each do |ip| -%>
   allow <%= ip %>;
-<% end %>
+<%- end -%>
   deny all;
 <%- end -%>
 

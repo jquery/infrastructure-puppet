@@ -16,11 +16,10 @@ Puppet::Functions.create_function(:'jqlib::cloudflare_ips') do
         'https://www.cloudflare.com/ips-v6/',
       ]
       ranges = urls.flat_map do |url|
-        output = Facter::Core::Execution.execute(
-          "/usr/bin/curl --fail --silent --show-error --location --retry 3 #{url}",
-          on_fail: nil
+        output = Puppet::Util::Execution.execute(
+          ['/usr/bin/curl', '--fail', '--silent', '--show-error', '--location', '--retry', '3', url],
+          failonfail: true
         )
-        raise Puppet::Error, "Failed to fetch IPs from #{url}" if output.nil?
         output.lines.map(&:strip).reject(&:empty?)
       end.uniq
 
