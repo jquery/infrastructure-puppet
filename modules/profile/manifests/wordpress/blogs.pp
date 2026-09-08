@@ -30,6 +30,7 @@ class profile::wordpress::blogs (
       jqlib::resource_hosts('class', 'profile::puppet::agent').jqlib::pdb_hosts2ips()
       + jqlib::fastly_ips()
       + jqlib::cloudflare_ips()
+    )
   } else {
     $allow_only_ips = undef
   }
