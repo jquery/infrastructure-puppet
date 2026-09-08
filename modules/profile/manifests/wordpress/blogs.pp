@@ -26,7 +26,10 @@ class profile::wordpress::blogs (
   }
 
   if $deny_external_traffic {
-    $allow_only_ips = jqlib::cloudflare_ips()
+    $allow_only_ips = (
+      jqlib::resource_hosts('class', 'profile::puppet::agent').jqlib::pdb_hosts2ips()
+      + jqlib::fastly_ips()
+      + jqlib::cloudflare_ips()
   } else {
     $allow_only_ips = undef
   }
