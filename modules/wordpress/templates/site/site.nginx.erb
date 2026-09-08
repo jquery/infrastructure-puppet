@@ -91,6 +91,26 @@ server {
     fastcgi_pass         unix:/run/php/php<%= @php_fpm_version %>-fpm.sock;
     fastcgi_param        SCRIPT_FILENAME $request_filename;
     include              /etc/nginx/fastcgi_params;
+    # Set REMOTE_ADDR to the value of the CF-Connecting-IP header
+    #
+    # For use by the limit-login-attempts plugin, which rate limits by REMOTE_ADDR.
+    #
+    # We intentionally don't use limit_login_client_type=LIMIT_LOGIN_PROXY_ADDR
+    # or X-Forwarded-For. Cloudflare does add the X-Forwarded-For with the real
+    # IP on incoming requests, but, it also preserves a fake X-Forwarded-For by
+    # end-users, in which case it merely appends the real IP. The plugin should
+    # arguably take the last item in a multi-value X-Forwarded-For header, but
+    # doesn't. It rejects it (limit_login_get_address > filter_var) and falls
+    # back to LIMIT_LOGIN_DIRECT_ADDR (which uses REMOTE_ADDR), and thus
+    # attribute the rate limit to a Cloudflare internal IP, which would either
+    # be tighter (shared with other users) or broader (load balanced) and that's
+    # hard to reason about. Use CF-Connecting-IP instead.
+    #
+    # https://developers.cloudflare.com/support/troubleshooting/restoring-visitor-ips/restoring-original-visitor-ips/
+    #
+    # https://github.com/jquery/infrastructure/issues/572
+    #
+    fastcgi_param        REMOTE_ADDR $http_cf_connecting_ip if_not_empty;
   }
 
   location / {
