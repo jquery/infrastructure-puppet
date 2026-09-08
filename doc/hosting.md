@@ -306,9 +306,10 @@ Production:
 * Follow [§ Register a webhook](#register-a-webhook) for the new node at [org-wide jquery webhooks](https://github.com/organizations/jquery/settings/hooks)
 * Once the new node is provisioned, verify each site is working:
   ```sh
-  curl -i https://wpblogs-XX.ops.jquery.net -H 'Host: blog.jquery.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
-  curl -i https://wpblogs-XX.ops.jquery.net -H 'Host: blog.jqueryui.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
-  curl -i https://wpblogs-XX.ops.jquery.net -H 'Host: blog.jquerymobile.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
+  ssh wpblogs-XX.ops.jquery.net
+  curl -i "https://$(hostname -f)" -H 'Host: blog.jquery.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
+  curl -i "https://$(hostname -f)" -H 'Host: blog.jqueryui.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
+  curl -i "https://$(hostname -f)" -H 'Host: blog.jquerymobile.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
   # HTTP/1.1 200 OK
   # <title>Official jQuery Blog</title>
   # …
@@ -343,9 +344,18 @@ Production:
   sudo mysql wordpress_jqueryui < wordpress_jqueryui.sql;
   sudo mysql wordpress_jquerymobile < wordpress_jquerymobile.sql;
   ```
-* Tests for specific old posts should now pass:
+* Test that the sites are still working.
   ```sh
-  php tests/WpblogsTest.php wpblogs-XX.ops.jquery.net
+  ssh wpblogs-XX.ops.jquery.net
+  curl -i "https://$(hostname -f)" -H 'Host: blog.jquery.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
+  curl -i "https://$(hostname -f)" -H 'Host: blog.jqueryui.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
+  curl -i "https://$(hostname -f)" -H 'Host: blog.jquerymobile.com' -s | grep -iE 'HTTP/|server:|powered-by:|<title'
+  # HTTP/1.1 200 OK
+  # <title>Official jQuery Blog</title>
+  # …
+  # <title>jQuery UI Blog</title>
+  # …
+  # <title>jQuery Mobile Blog</title>
   ```
 * Switch DNS for:
   - `blog.jquery.com`

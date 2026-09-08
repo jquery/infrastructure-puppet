@@ -3,8 +3,6 @@
  * Usage:
  *
  *     $ php test/WpblogsTest.php
- *
- *     $ php test/WpblogsTest.php wpblogs-XX.ops.jquery.net
  */
 
 require_once __DIR__ . '/Unit.php';
