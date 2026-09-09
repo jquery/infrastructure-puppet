@@ -33,6 +33,23 @@ server {
   deny all;
 <%- end -%>
 
+  # Increase fastcgi buffer size because all HTTP response headers
+  # are required to fit in the first chunk (fastcgi_buffer_size)
+  # or else nginx responds with HTTP 502 Bad Gateway.
+  #
+  # When WordPress sets login cookies it can easily set 3k of Set-Cookie
+  # headers which along with the rest makes this crash.
+  # Ref https://wordpress.org/plugins/limit-login-attempts/
+  # Ref https://github.com/jquery/infrastructure/issues/572
+  #
+  # Defaults from https://nginx.org/en/docs/http/ngx_http_fastcgi_module.html
+  # - fastcgi_buffer_size: 4k (getconf PAGESIZE)
+  # - fastcgi_buffers: 8 4k
+  # - fastcgi_busy_buffers_size: 8k
+  fastcgi_buffer_size 16k;
+  fastcgi_buffers 8 16k;
+  fastcgi_busy_buffers_size 32k;
+
   location = /favicon.ico {
     access_log off;
     try_files /wp-content/themes/<%= @active_theme %>/i/favicon.ico /wp-content/themes/jquery/i/favicon.ico;
