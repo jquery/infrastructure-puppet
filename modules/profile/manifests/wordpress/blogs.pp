@@ -64,6 +64,7 @@ class profile::wordpress::blogs (
       plugins          => [
         { name => 'disable-emojis', path => '/srv/wordpress/jquery-wp-content/plugins/disable-emojis/disable-emojis.php', single_file => true, },
         { name => 'two-factor', path => '/srv/wordpress/jquery-wp-content/plugins/two-factor', single_file => false, },
+        { name => 'limit-login-attempts', path => '/srv/wordpress/jquery-wp-content/plugins/limit-login-attempts', single_file => false, },
         { name => 'jquery-actions', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-actions.php', single_file => true, },
         { name => 'jquery-filters', path => '/srv/wordpress/jquery-wp-content/plugins/jquery-filters.php', single_file => true, },
       ],
