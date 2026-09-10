@@ -41,7 +41,7 @@ Once the droplet has been created:
    * Create A record
    * Proxy status: Off
 
-2. If the droplet may upload to Tarsnap (roles: wp, wpblogs, puppet, filestash, contentorigin)
+2. If the droplet may upload to Tarsnap (roles: contentorigin, filestash, puppet, wp, wpblogs)
    then grant the host access to Tarsnap by running this command **from the Puppet server**. See also [Backup § Host management](./backup.md#host-management.md).
 
    ```shell-session
