@@ -13,6 +13,8 @@ class profile::puppet::puppetdb (
     ensure => installed,
   }
 
+  stdlib::ensure_packages(['fail2ban'])
+
   systemd::sysuser { 'puppetdb-group':
     # Ensure the puppetdb user is in the puppet group so that it can read
     # certificates from /var/lib/puppet/ssl/ to serve the PuppetDB HTTPS interface
@@ -48,6 +50,11 @@ class profile::puppet::puppetdb (
     enable => true,
   }
 
+  service { 'fail2ban':
+    ensure => running,
+    enable => true,
+  }
+
   # expose an authenticated version of the puppetdb api,
   # so that octocatalog-diff can be used locally with facts loaded from puppetdb
   $tls_config = nginx::tls_config()
@@ -63,6 +70,25 @@ class profile::puppet::puppetdb (
     content   => "${nginx_htpassword_users.join("\n")}\n",
     require   => Package['nginx-full'],
     show_diff => false,
+  }
+
+  # SECURITY: Prevent unlimited brute forcing
+  # https://github.com/jquery/infrastructure/issues/574
+  #
+  # Related config to be aware of:
+  # - /etc/fail2ban/jail.conf
+  #   [DEFAULT]
+  #   bantime  = 10m
+  #   findtime = 10m
+  #   maxretry = 5
+  # - /etc/fail2ban/jail.d/defaults-debian.conf
+  file { '/etc/fail2ban/jail.d/puppetdb.conf':
+    ensure => file,
+    source => 'puppet:///modules/profile/puppet/puppetdb/fail2ban-jail-puppetdb.conf',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    notify => Service['fail2ban'],
   }
 
   nftables::allow { 'puppetdb-clients':
