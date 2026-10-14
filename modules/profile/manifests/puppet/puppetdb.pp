@@ -72,7 +72,7 @@ class profile::puppet::puppetdb (
     show_diff => false,
   }
 
-  # SECURITY: Prevent unlimited brute forcing
+  # SECURITY: Limit brute forcing of PuppetDB
   # https://github.com/jquery/infrastructure/issues/574
   #
   # Related config to be aware of:

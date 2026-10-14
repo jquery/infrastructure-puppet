@@ -45,5 +45,11 @@ class profile::base (
     'jq',
     'molly-guard',
     'tmux',
+    # SECURITY: Limit brute forcing of SSH
+    # https://github.com/jquery/infrastructure/issues/576
+    #
+    # By default /etc/fail2ban/jail.conf allows 5 attempts per 10 minutes,
+    # followed by a 10min ban.
+    'fail2ban',
   ])
 }
