@@ -67,7 +67,7 @@ class php::fpm (
   }
 
   service { "php${version}-fpm":
-    ensure => running,
-    enable => true,
+    ensure => stopped,
+    enable => false,
   }
 }
