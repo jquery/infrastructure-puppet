@@ -27,6 +27,12 @@ class profile::filestash (
     require => Systemd::Sysuser['filestash'],
   }
 
+  user { 'filestash':
+    home           => '/srv/filestash',
+    purge_ssh_keys => true,
+    require        => Systemd::Sysuser['filestash'],
+  }
+
   $deploy_keys.each |Integer $i, Users::Ssh_key $key| {
     ssh_authorized_key { "filestash_${i}":
       user    => 'filestash',
